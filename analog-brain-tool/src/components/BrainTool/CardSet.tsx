@@ -40,7 +40,7 @@ const CardSetComponent: FC<CardSetProps> = ({ set }) => {
   return (
     <div className="py-6">
       {set.cards.map((card) => (
-        <div key={card.id} className="flex flex-col relative mb-4">
+        <div key={card.id} className="flex flex-col relative mb-14">
           <Card card={card} handleSelectCard={handleSelectCard} />
           {card.id == currentCardId && <CardSelector key={`${card.id}-selector`} />}
         </div>
