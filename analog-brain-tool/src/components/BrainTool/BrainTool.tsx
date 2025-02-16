@@ -32,7 +32,8 @@ const BrainTool = () => {
           })}
         </select>
       </div>
-      <CardSet set={selectedCardSet}></CardSet>
+      {/* recreate the component on set change */}
+      <CardSet key={selectedCardSet.title} set={selectedCardSet}></CardSet>
     </>
   );
 };

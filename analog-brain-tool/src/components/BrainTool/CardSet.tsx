@@ -1,4 +1,4 @@
-import { FC, useState } from 'react';
+import { FC, useContext, useEffect, useState } from 'react';
 import ICardSet from '../../interfaces/ICardSet';
 import Card from './Card';
 import CardSelector from './CardSelector';
@@ -10,10 +10,26 @@ interface CardSetProps {
 }
 
 const CardSetComponent: FC<CardSetProps> = ({ set }) => {
-  const [currentCardId, setCurrentCardId] = useState<string>(set.cards[0].id);
+  const brainContext = useContext(BrainContext);
+  const [currentCardId, setCurrentCardId] = useState<CardId>(set.cards[0].id);
+  useEffect(() => {
+    brainContext.selectCard(set.cards[0].id);
+  }, [set.cards]); // Empty dependency array -> runs only once when the component mounts
 
-  function handleSelectCard(event: React.MouseEvent<HTMLElement, MouseEvent>, id: string, scrollTo: boolean) {
+  const handleClickPrevious = (event: React.MouseEvent<HTMLElement, MouseEvent>) => {
+    brainContext.popPreviousCard(); // pop current card
+    const previousId = brainContext.getPreviousCard();
+    if (previousId) handleSelectCard(event, previousId, true, false);
+  };
+
+  function handleSelectCard(
+    event: React.MouseEvent<HTMLElement, MouseEvent>,
+    id: CardId,
+    scrollTo: boolean,
+    pushHistory: boolean,
+  ) {
     event.stopPropagation(); // don't click on the whole card if we're clicking on a specific card item
+    if (pushHistory) brainContext.selectCard(id);
 
     if (id) {
       const element = document.getElementById(id);
@@ -44,7 +60,9 @@ const CardSetComponent: FC<CardSetProps> = ({ set }) => {
       {set.cards.map((card) => (
         <div key={card.id} className="flex flex-col relative mb-14">
           <Card card={card} handleSelectCard={handleSelectCard} />
-          {card.id == currentCardId && <CardSelector key={`${card.id}-selector`} />}
+          {card.id == currentCardId && (
+            <CardSelector key={`${card.id}-selector`} handleClickPrevious={handleClickPrevious} />
+          )}
         </div>
       ))}
     </div>
