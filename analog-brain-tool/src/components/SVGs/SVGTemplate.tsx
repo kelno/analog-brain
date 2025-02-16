@@ -11,7 +11,6 @@ const SVGTemplate: React.FC<SVGTemplateProps> = ({ alt, draw, width = 24, height
     <svg
       role="graphics-symbol"
       aria-label={alt}
-      aria-labelledby={alt}
       version="1.1"
       id="Icons"
       xmlns="http://www.w3.org/2000/svg"

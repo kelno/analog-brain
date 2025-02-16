@@ -17,7 +17,7 @@ const CardSelectorButton: React.FC<PropsWithChildren<CardSelectorButtonProps>> =
       onClick={disabled ? undefined : onClick}
       className={`${disabled ? 'cursor-default' : 'cursor-pointer'} rounded-b-2xl border-2 p-2 ${className}`}
     >
-      <div className={`${disabled ? 'opacity-50' : null}`}>{children}</div>
+      <div className={`${disabled ? 'opacity-50' : ''}`}>{children}</div>
     </button>
   );
 };

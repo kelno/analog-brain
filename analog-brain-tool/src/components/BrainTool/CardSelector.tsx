@@ -37,7 +37,8 @@ const CardSelector: FC<CardSelectorProps> = ({ extraClassName, handleClickPrevio
           <LeftArrowSVG alt="previous" />
         </CardSelectorButton>
         <CardSelectorButton onClick={handleClickBackToTop} className={`${bordercolor}`}>
-          <UpArrowSVG alt="Back to top" />
+          <UpArrowSVG alt="Back-To-Top" />{' '}
+          {/*Seems having a space causes issue on firefox, related to aria-label*/}
         </CardSelectorButton>
         <CardSelectorButton onClick={handleClickShare} className={`${bordercolor}`}>
           <ShareButtonSVG alt="share" />
