@@ -12,9 +12,9 @@
         "url": "http://localhost:4000",
         "pathMappings": [
           {
-            "url": "http://localhost:4000/src",
+            "url": "http://localhost:4000/analog-brain/src",
             "path": "${workspaceFolder}/analog-brain-tool/src"
-          }
+          },
         ]
       }
     ]

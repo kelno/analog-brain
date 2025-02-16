@@ -2,6 +2,8 @@ import { FC, useState } from 'react';
 import ICardSet from '../../interfaces/ICardSet';
 import Card from './Card';
 import CardSelector from './CardSelector';
+import BrainContext from '../../store/BrainContext';
+import { CardId } from '../../interfaces/ICard';
 
 interface CardSetProps {
   set: ICardSet;

@@ -1,11 +1,13 @@
+export type CardId = string;
+
 export interface ICardItem {
   text: string;
-  nextCardId?: string; // Optional reference to a card id
+  nextCardId?: CardId; // Optional reference to a card id
   link?: string;
 }
 
 export default interface ICard {
-  id: string;
+  id: CardId;
   title: string;
   items: ICardItem[];
 }
