@@ -26,9 +26,9 @@ const CardSelector: FC<CardSelectorProps> = ({ extraClassName, handleClickPrevio
       key="fixed"
       className={`${
         extraClassName ? extraClassName + ' ' : ''
-      } rounded-2xl ${bordercolor} z-50 absolute inset-0 border-2 transition-all duration-200 ease-in-out`}
+      } rounded-2xl ${bordercolor} z-1 absolute inset-0 border-2 pointer-events-none`}
     >
-      <div className="absolute top-full right-4 flex gap-2">
+      <div className="absolute top-full right-4 flex gap-2 pointer-events-auto">
         <CardSelectorButton
           disabled={brainContext.getCardHistorySize() <= 1}
           onClick={handleClickPrevious}

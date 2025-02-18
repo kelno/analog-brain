@@ -6,6 +6,11 @@ export interface BrainContextState {
   cardHistory: Stack<CardId>;
 }
 
+/*
+What's handled here:
+Card history - Not saved between refresh
+
+*/
 export class BrainContextData extends ContextData<BrainContextState> {
   public _cardHistory: Stack<CardId>;
 
