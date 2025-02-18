@@ -3,12 +3,7 @@ import ICard, { CardId } from '../../interfaces/ICard';
 
 interface CardProps extends RefAttributes<HTMLDivElement> {
   card: ICard;
-  handleSelectCard: (
-    event: React.MouseEvent<HTMLElement, MouseEvent>,
-    id: CardId,
-    scrollTo: boolean,
-    pushHistory: boolean,
-  ) => void;
+  handleSelectCard: (id: CardId, scrollTo: boolean, pushHistory: boolean) => void;
 }
 
 const Card: FC<CardProps> = ({ card, handleSelectCard, ref }) => {
@@ -17,7 +12,7 @@ const Card: FC<CardProps> = ({ card, handleSelectCard, ref }) => {
       ref={ref}
       className="flex-1 p-4 border rounded-2xl shadow-md"
       id={card.id}
-      onClick={(e) => handleSelectCard(e, card.id, false, true)}
+      onClick={() => handleSelectCard(card.id, false, true)}
     >
       <div className="float-right text-xs">{card.id}</div>
       <h2 className="text-xl font-bold">{card.title}</h2>
@@ -26,7 +21,7 @@ const Card: FC<CardProps> = ({ card, handleSelectCard, ref }) => {
           <li
             key={index}
             className={`ml-1 ${carditem.nextCardId ? 'cursor-pointer' : ''}`} // Add cursor-pointer if there is a nextCardId
-            onClick={(e) => carditem.nextCardId && handleSelectCard(e, carditem.nextCardId, true, true)} // Makes the whole line clickable
+            onClick={() => carditem.nextCardId && handleSelectCard(carditem.nextCardId, true, true)} // Makes the whole line clickable
           >
             {carditem.text}
             {carditem.nextCardId && (

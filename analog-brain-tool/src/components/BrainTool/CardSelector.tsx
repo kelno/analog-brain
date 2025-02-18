@@ -7,15 +7,17 @@ import BrainContext from '../../store/BrainContext';
 
 interface CardSelectorProps {
   extraClassName?: string;
-  handleClickPrevious: (event: React.MouseEvent<HTMLElement, MouseEvent>) => void;
+  handleClickPrevious: () => void;
+  handleClickBackToTop: () => void;
 }
 
-const CardSelector: FC<CardSelectorProps> = ({ extraClassName, handleClickPrevious }) => {
+const CardSelector: FC<CardSelectorProps> = ({
+  extraClassName,
+  handleClickPrevious,
+  handleClickBackToTop,
+}) => {
   const brainContext = useContext(BrainContext);
 
-  const handleClickBackToTop = () => {
-    alert('Button clicked!');
-  };
   const handleClickShare = () => {
     alert('Button clicked!');
   };
@@ -31,12 +33,21 @@ const CardSelector: FC<CardSelectorProps> = ({ extraClassName, handleClickPrevio
       <div className="absolute top-full right-4 flex gap-2 pointer-events-auto">
         <CardSelectorButton
           disabled={brainContext.getCardHistorySize() <= 1}
-          onClick={handleClickPrevious}
+          onClick={(e) => {
+            e.stopPropagation(); // don't click on the whole card if we're clicking on a specific card item
+            handleClickPrevious();
+          }}
           className={`${bordercolor}`}
         >
           <LeftArrowSVG alt="previous" />
         </CardSelectorButton>
-        <CardSelectorButton onClick={handleClickBackToTop} className={`${bordercolor}`}>
+        <CardSelectorButton
+          onClick={(e) => {
+            e.stopPropagation(); // don't click on the whole card if we're clicking on a specific card item
+            handleClickBackToTop();
+          }}
+          className={`${bordercolor}`}
+        >
           <UpArrowSVG alt="Back-To-Top" />{' '}
           {/*Seems having a space causes issue on firefox, related to aria-label*/}
         </CardSelectorButton>

@@ -45,6 +45,11 @@ export class BrainContextData extends ContextData<BrainContextState> {
     console.debug(this._cardHistory);
   }
 
+  public clearHistory() {
+    this._cardHistory.clear();
+    this.saveState();
+  }
+
   public getCardHistorySize(): number {
     return this._cardHistory.size();
   }

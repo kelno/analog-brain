@@ -10,25 +10,20 @@ interface CardSetProps {
 }
 
 const CardSetComponent: FC<CardSetProps> = ({ set }) => {
+  const firstCardId = set.cards[0].id;
   const brainContext = useContext(BrainContext);
-  const [currentCardId, setCurrentCardId] = useState<CardId>(set.cards[0].id);
+  const [currentCardId, setCurrentCardId] = useState(firstCardId);
   useEffect(() => {
     brainContext.selectCard(set.cards[0].id);
   }, [set.cards]); // Empty dependency array -> runs only once when the component mounts
 
-  const handleClickPrevious = (event: React.MouseEvent<HTMLElement, MouseEvent>) => {
+  const handleClickPrevious = () => {
     brainContext.popPreviousCard(); // pop current card
     const previousId = brainContext.getPreviousCard();
-    if (previousId) handleSelectCard(event, previousId, true, false);
+    if (previousId) handleSelectCard(previousId, true, false);
   };
 
-  function handleSelectCard(
-    event: React.MouseEvent<HTMLElement, MouseEvent>,
-    id: CardId,
-    scrollTo: boolean,
-    pushHistory: boolean,
-  ) {
-    event.stopPropagation(); // don't click on the whole card if we're clicking on a specific card item
+  function handleSelectCard(id: CardId, scrollTo: boolean, pushHistory: boolean) {
     if (pushHistory) brainContext.selectCard(id);
 
     if (id) {
@@ -46,6 +41,11 @@ const CardSetComponent: FC<CardSetProps> = ({ set }) => {
     }
   }
 
+  function handleClickBackToTop() {
+    brainContext.clearHistory();
+    handleSelectCard(firstCardId, true, true);
+  }
+
   const hasDuplicateCardIds = (set: ICardSet): boolean => {
     const ids = set.cards.map((card) => card.id);
     return new Set(ids).size !== ids.length;
@@ -61,7 +61,11 @@ const CardSetComponent: FC<CardSetProps> = ({ set }) => {
         <div key={card.id} className="flex flex-col relative mb-14">
           <Card card={card} handleSelectCard={handleSelectCard} />
           {card.id == currentCardId && (
-            <CardSelector key={`${card.id}-selector`} handleClickPrevious={handleClickPrevious} />
+            <CardSelector
+              key={`${card.id}-selector`}
+              handleClickPrevious={handleClickPrevious}
+              handleClickBackToTop={handleClickBackToTop}
+            />
           )}
         </div>
       ))}
