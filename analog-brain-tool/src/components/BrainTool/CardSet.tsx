@@ -65,6 +65,7 @@ const CardSetComponent: FC<CardSetProps> = ({ set }) => {
               key={`${card.id}-selector`}
               handleClickPrevious={handleClickPrevious}
               handleClickBackToTop={handleClickBackToTop}
+              disableBackToTop={firstCardId === card.id}
             />
           )}
         </div>

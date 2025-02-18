@@ -21,7 +21,10 @@ const Card: FC<CardProps> = ({ card, handleSelectCard, ref }) => {
           <li
             key={index}
             className={`ml-1 ${carditem.nextCardId ? 'cursor-pointer' : ''}`} // Add cursor-pointer if there is a nextCardId
-            onClick={() => carditem.nextCardId && handleSelectCard(carditem.nextCardId, true, true)} // Makes the whole line clickable
+            onClick={(e) => {
+              e.stopPropagation(); // don't click on the whole card if we're clicking on a specific card item
+              if (carditem.nextCardId) handleSelectCard(carditem.nextCardId, true, true);
+            }}
           >
             {carditem.text}
             {carditem.nextCardId && (
