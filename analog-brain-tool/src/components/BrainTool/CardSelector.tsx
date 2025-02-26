@@ -4,6 +4,8 @@ import UpArrowSVG from '../SVGs/UpArrowSVG';
 import CardSelectorButton from './CardSelectorButton';
 import ShareButtonSVG from '../SVGs/ShareButtonSVG';
 import BrainContext from '../../store/BrainContext';
+import useShare from '../../hooks/useShare';
+import { Strings } from '../../constants/strings';
 
 interface CardSelectorProps {
   extraClassName?: string;
@@ -20,8 +22,13 @@ const CardSelector: FC<CardSelectorProps> = ({
 }) => {
   const brainContext = useContext(BrainContext);
 
-  const handleClickShare = () => {
-    alert('Button clicked!');
+  const getShareURL = () => {
+    return window.location.href;
+  };
+
+  const { share } = useShare();
+  const handleShare = () => {
+    share(getShareURL(), Strings.shareTitle, Strings.shareDescription);
   };
 
   const bordercolor = 'border-amber-300';
@@ -59,7 +66,13 @@ const CardSelector: FC<CardSelectorProps> = ({
         </CardSelectorButton>
 
         {/*Share Button*/}
-        <CardSelectorButton onClick={handleClickShare} className={`${bordercolor}`}>
+        <CardSelectorButton
+          onClick={(e) => {
+            e.stopPropagation(); // don't click on the whole card if we're clicking on a specific card item
+            handleShare();
+          }}
+          className={`${bordercolor}`}
+        >
           <ShareButtonSVG alt="share" />
         </CardSelectorButton>
       </div>

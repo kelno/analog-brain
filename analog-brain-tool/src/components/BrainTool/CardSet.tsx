@@ -4,18 +4,21 @@ import Card from './Card';
 import CardSelector from './CardSelector';
 import BrainContext from '../../store/BrainContext';
 import { CardId } from '../../interfaces/ICard';
+import UrlManager from '../../utils/UrlManager';
 
 interface CardSetProps {
   set: ICardSet;
 }
 
 const CardSetComponent: FC<CardSetProps> = ({ set }) => {
-  const firstCardId = set.cards[0].id;
+  const firstCardId = UrlManager.getCurrentCard(set.title) ?? set.cards[0].id;
   const brainContext = useContext(BrainContext);
   const [currentCardId, setCurrentCardId] = useState(firstCardId);
+
+  // not working
   useEffect(() => {
-    brainContext.selectCard(set.cards[0].id);
-  }, [set.cards]); // Empty dependency array -> runs only once when the component mounts
+    UrlManager.clearCurrentCard();
+  }, [set.title]); // runs every time the set changes
 
   const handleClickPrevious = () => {
     brainContext.popPreviousCard(); // pop current card
@@ -23,18 +26,20 @@ const CardSetComponent: FC<CardSetProps> = ({ set }) => {
     if (previousId) handleSelectCard(previousId, true, false);
   };
 
-  function handleSelectCard(id: CardId, scrollTo: boolean, pushHistory: boolean) {
-    if (pushHistory) brainContext.selectCard(id);
+  function handleSelectCard(cardId: CardId, scrollTo: boolean, pushHistory: boolean) {
+    if (pushHistory) brainContext.selectCard(cardId);
+    UrlManager.setCurrentCard(cardId);
 
-    if (id) {
-      const element = document.getElementById(id);
+    if (cardId) {
+      const element = document.getElementById(cardId);
       if (element) {
         if (scrollTo) element.scrollIntoView({ behavior: 'smooth' });
 
-        setCurrentCardId(id);
-        console.debug('Selected card ' + id);
+        setCurrentCardId(cardId);
+        window.location.hash = cardId;
+        console.debug('Selected card ' + cardId);
       } else {
-        console.debug(`Element with id '${id}' not found`);
+        console.debug(`Element with id '${cardId}' not found`);
       }
     } else {
       console.debug('No id provided');

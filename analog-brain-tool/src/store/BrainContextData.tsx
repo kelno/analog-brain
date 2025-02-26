@@ -12,7 +12,7 @@ Card history - Not saved between refresh
 
 */
 export class BrainContextData extends ContextData<BrainContextState> {
-  public _cardHistory: Stack<CardId>;
+  public _cardHistory: Stack<CardId>; // the top is the current card
 
   public get cardHistory() {
     return this._cardHistory;
@@ -31,6 +31,14 @@ export class BrainContextData extends ContextData<BrainContextState> {
   constructor(brainState: BrainContextState, setBrainState: (brainState: BrainContextState) => void) {
     super();
     this._cardHistory = new Stack<CardId>();
+
+    {
+      // if the URL has a hash, use it to initialize our current card
+      const hash = window.location.hash.slice(1); // Remove the `#` from the hash
+      if (hash) {
+        this._cardHistory.push(hash);
+      }
+    }
 
     this.loadState(brainState);
     this.setState = setBrainState;

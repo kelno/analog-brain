@@ -16,6 +16,12 @@
             "path": "${workspaceFolder}/analog-brain-tool/src"
           },
         ]
+      },
+      {
+        "name": "Chrome",
+        "type": "chrome",
+        "request": "launch",
+        "url": "http://localhost:4000",
       }
     ]
 }

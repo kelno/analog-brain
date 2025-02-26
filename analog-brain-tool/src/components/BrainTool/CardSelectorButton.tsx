@@ -1,7 +1,7 @@
 import { PropsWithChildren } from 'react';
 
 interface CardSelectorButtonProps {
-  onClick: (event: React.MouseEvent<HTMLElement, MouseEvent>) => void;
+  onClick?: (event: React.MouseEvent<HTMLElement, MouseEvent>) => void;
   disabled?: boolean;
   className?: string;
 }

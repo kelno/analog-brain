@@ -6,6 +6,7 @@ import HowTo from './components/HowTo';
 import Intro from './components/Intro';
 import Outro from './components/Outro';
 import Section from './components/Section';
+import { Toaster } from 'sonner';
 import BrainContextProvider from './store/BrainContextProvider';
 
 function App() {
@@ -13,6 +14,7 @@ function App() {
     <BrainContextProvider>
       <div className="bg-white text-slate-900 dark:text-white dark:bg-slate-900 min-h-screen leading-relaxed">
         <div className="px-2 max-w-200 mx-auto">
+          <Toaster position="bottom-right" />
           <h1 className="text-4xl text-center">The Analog Brain</h1>
 
           <Section id="intro" title="Introduction to the Analog Brain">
