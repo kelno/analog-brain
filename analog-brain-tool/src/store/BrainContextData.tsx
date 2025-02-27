@@ -1,6 +1,7 @@
 import ContextData from './ContextData';
 import { Stack } from '@datastructures-js/stack';
 import { CardId } from '../interfaces/ICard';
+import UrlManager from '../utils/UrlManager';
 
 export interface BrainContextState {
   cardHistory: Stack<CardId>;
@@ -44,16 +45,18 @@ export class BrainContextData extends ContextData<BrainContextState> {
     this.setState = setBrainState;
   }
 
-  public selectCard(cardId: CardId) {
-    if (this._cardHistory.peek() == cardId) return;
+  public selectCard(cardId: CardId, pushHistory: boolean) {
+    UrlManager.setCurrentCard(cardId);
 
-    this._cardHistory.push(cardId);
-    this.saveState();
-    console.debug('Pushed card ' + cardId + ' to history');
-    console.debug(this._cardHistory);
+    if (pushHistory && this._cardHistory.peek() != cardId) {
+      this._cardHistory.push(cardId);
+      this.saveState();
+      console.debug('Pushed card ' + cardId + ' to history');
+      console.debug(this._cardHistory);
+    }
   }
 
-  public clearHistory() {
+  public clearCardHistory() {
     this._cardHistory.clear();
     this.saveState();
   }
@@ -62,17 +65,19 @@ export class BrainContextData extends ContextData<BrainContextState> {
     return this._cardHistory.size();
   }
 
-  public getPreviousCard(): CardId | null {
+  public getCurrentCard(): CardId | null {
     if (this._cardHistory.isEmpty()) return null;
     else return this._cardHistory.peek();
   }
 
-  public popPreviousCard(): CardId | null {
+  // return previous card
+  public popCurrentCard(): CardId | null {
     if (this._cardHistory.isEmpty()) return null;
     else {
-      const cardId = this._cardHistory.pop();
+      this._cardHistory.pop();
       this.saveState();
-      return cardId;
+      if (this._cardHistory.isEmpty()) return null;
+      else return this._cardHistory.peek();
     }
   }
 }

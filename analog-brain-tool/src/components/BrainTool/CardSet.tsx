@@ -1,34 +1,26 @@
-import { FC, useContext, useEffect, useState } from 'react';
+import { FC, useContext, useState } from 'react';
 import ICardSet from '../../interfaces/ICardSet';
 import Card from './Card';
 import CardSelector from './CardSelector';
 import BrainContext from '../../store/BrainContext';
 import { CardId } from '../../interfaces/ICard';
-import UrlManager from '../../utils/UrlManager';
 
 interface CardSetProps {
   set: ICardSet;
 }
 
 const CardSetComponent: FC<CardSetProps> = ({ set }) => {
-  const firstCardId = UrlManager.getCurrentCard(set.title) ?? set.cards[0].id;
   const brainContext = useContext(BrainContext);
+  const firstCardId = brainContext.getCurrentCard() ?? set.cards[0].id;
   const [currentCardId, setCurrentCardId] = useState(firstCardId);
 
-  // not working
-  useEffect(() => {
-    UrlManager.clearCurrentCard();
-  }, [set.title]); // runs every time the set changes
-
   const handleClickPrevious = () => {
-    brainContext.popPreviousCard(); // pop current card
-    const previousId = brainContext.getPreviousCard();
+    const previousId = brainContext.popCurrentCard(); // pop current card
     if (previousId) handleSelectCard(previousId, true, false);
   };
 
   function handleSelectCard(cardId: CardId, scrollTo: boolean, pushHistory: boolean) {
-    if (pushHistory) brainContext.selectCard(cardId);
-    UrlManager.setCurrentCard(cardId);
+    brainContext.selectCard(cardId, pushHistory);
 
     if (cardId) {
       const element = document.getElementById(cardId);
@@ -47,7 +39,7 @@ const CardSetComponent: FC<CardSetProps> = ({ set }) => {
   }
 
   function handleClickBackToTop() {
-    brainContext.clearHistory();
+    brainContext.clearCardHistory();
     handleSelectCard(firstCardId, true, true);
   }
 

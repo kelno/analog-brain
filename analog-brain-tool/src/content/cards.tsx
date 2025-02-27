@@ -1,6 +1,7 @@
 import ICardSet from '../interfaces/ICardSet';
 
 export const analogBrainCards: ICardSet = {
+  id: 'original_analog_brain',
   title: 'Analog Brain', // also used as id
   cards: [
     {
@@ -824,6 +825,7 @@ export const analogBrainCards: ICardSet = {
 };
 
 export const analogBrainCardsFrench: ICardSet = {
+  id: 'original_analog_brain_fr',
   title: 'Analog Brain (Français)',
   cards: [
     {
