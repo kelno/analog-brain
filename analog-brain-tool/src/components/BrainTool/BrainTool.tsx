@@ -8,7 +8,6 @@ const BrainTool = () => {
 
   const handleSelectSet = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const title: string = event.target.value;
-    console.debug('Selected set: ' + title);
 
     const set = availableSets.find((set) => set.title === title);
     if (set === undefined) {
@@ -20,6 +19,8 @@ const BrainTool = () => {
   };
 
   const cardSet = brainContext.currentSet;
+  console.debug('Rendering BrainTool with cardSet:');
+  console.debug(cardSet);
 
   return (
     <>

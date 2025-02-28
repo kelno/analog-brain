@@ -10,12 +10,14 @@ interface CardSetProps {
   cardSet: ICardSet;
 }
 
-const CardSetComponent: FC<CardSetProps> = ({ cardSet }) => {
+const CardSet: FC<CardSetProps> = ({ cardSet }) => {
   const brainContext = useContext(BrainContext);
 
   const firstCardId = cardSet.cards[0].id;
 
-  console.debug('Card set rendering with current card id ' + brainContext.currentCard);
+  console.debug(
+    'CardSet: Rendering (' + cardSet.title + ') with current card id ' + brainContext.currentCard,
+  );
 
   if (!DataValidator.validateCardSet(cardSet))
     return (
@@ -69,4 +71,4 @@ const CardSetComponent: FC<CardSetProps> = ({ cardSet }) => {
   );
 };
 
-export default CardSetComponent;
+export default CardSet;
