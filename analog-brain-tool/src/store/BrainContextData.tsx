@@ -45,8 +45,6 @@ export class BrainContextData {
       console.debug('Pushed card ' + cardId + ' to history');
       console.debug(this.state.cardHistory);
     }
-
-    this.refreshURL();
   }
 
   public get hasCardHistory(): boolean {
@@ -80,7 +78,6 @@ export class BrainContextData {
 
     const newCardHistory = new Stack<CardId>([newSet.cards[0].id]);
     this.setState({ ...this.state, set: setId, cardHistory: newCardHistory });
-    this.refreshURL();
   }
 
   public get currentSet(): ICardSet | undefined {
@@ -100,12 +97,9 @@ export class BrainContextData {
     console.debug('Set language ' + lang);
     this.state.lang = lang;
     this.setState({ ...this.state });
-    this.refreshURL();
   }
 
-  public refreshURL() {
-    UrlManager.selectSet(this.state.set);
-    UrlManager.selectCurrentCard(this.currentCard);
-    UrlManager.selectLanguage(this.state.lang);
+  public getShareURLParams() {
+    return UrlManager.getShareURLParams(this.state.set, this.currentCard, this.state.lang);
   }
 }

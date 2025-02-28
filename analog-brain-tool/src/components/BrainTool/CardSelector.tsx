@@ -23,7 +23,8 @@ const CardSelector: FC<CardSelectorProps> = ({
   const brainContext = useContext(BrainContext);
 
   const getShareURL = () => {
-    return window.location.href;
+    const params = brainContext.getShareURLParams();
+    return `${window.location.href}?${params}`;
   };
 
   const { share } = useShare();

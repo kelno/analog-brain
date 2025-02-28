@@ -16,12 +16,14 @@ const BrainContextProvider: React.FC<{ children: ReactNode }> = ({ children }) =
   // default to first set and first card in it
   const defaultSet = getSetFromURL() ?? availableSets[0];
   const defaultCardId = UrlManager.getCurrentCard() ?? defaultSet.cards[0].id;
-  const defaultLang = 'en';
+  const defaultLang = 'en'; // dummy for now
+
+  UrlManager.clearURLParams();
 
   const [brainState, setBrainState] = useState<BrainContextState>({
     cardHistory: new Stack<CardId>([defaultCardId]),
     set: defaultSet.id,
-    lang: defaultLang, // dummy for now
+    lang: defaultLang,
   });
   const brainContext: BrainContextData = new BrainContextData(brainState, setBrainState);
 
