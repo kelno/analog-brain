@@ -19,7 +19,7 @@ export class UrlManager {
     params.set(UrlParams.SET, set);
     params.set(UrlParams.LANG, lang);
     params.set(UrlParams.CARD, card);
-    return params.toString();
+    return params.toString() + '#' + card; // hash as a simple way to scroll to shared card
   }
 
   public static getCurrentCard(): string | null {
