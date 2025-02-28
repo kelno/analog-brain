@@ -1,9 +1,10 @@
-import { useState } from 'react';
+import { useContext } from 'react';
 import { availableSets } from '../../content/cards';
 import CardSet from './CardSet';
+import BrainContext from '../../store/BrainContext';
 
 const BrainTool = () => {
-  const [selectedCardSet, setSelectedCardSet] = useState(availableSets[0]);
+  const brainContext = useContext(BrainContext);
 
   const handleSelectSet = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const title: string = event.target.value;
@@ -15,8 +16,10 @@ const BrainTool = () => {
       return;
     }
 
-    setSelectedCardSet(set);
+    brainContext.selectSet(set.id);
   };
+
+  const cardSet = brainContext.currentSet;
 
   return (
     <>
@@ -32,8 +35,7 @@ const BrainTool = () => {
           })}
         </select>
       </div>
-      {/* recreate the component on set change */}
-      <CardSet key={selectedCardSet.title} set={selectedCardSet}></CardSet>
+      {cardSet && <CardSet cardSet={cardSet}></CardSet>}
     </>
   );
 };

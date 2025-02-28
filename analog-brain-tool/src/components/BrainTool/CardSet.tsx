@@ -1,18 +1,26 @@
-import { FC, useContext, useState } from 'react';
+import { FC, useContext } from 'react';
 import ICardSet from '../../interfaces/ICardSet';
 import Card from './Card';
 import CardSelector from './CardSelector';
 import BrainContext from '../../store/BrainContext';
 import { CardId } from '../../interfaces/ICard';
+import DataValidator from '../../utils/DataValidator';
 
 interface CardSetProps {
-  set: ICardSet;
+  cardSet: ICardSet;
 }
 
-const CardSetComponent: FC<CardSetProps> = ({ set }) => {
+const CardSetComponent: FC<CardSetProps> = ({ cardSet }) => {
   const brainContext = useContext(BrainContext);
-  const firstCardId = brainContext.getCurrentCard() ?? set.cards[0].id;
-  const [currentCardId, setCurrentCardId] = useState(firstCardId);
+
+  const firstCardId = cardSet.cards[0].id;
+
+  console.debug('Card set rendering with current card id ' + brainContext.currentCard);
+
+  if (!DataValidator.validateCardSet(cardSet))
+    return (
+      <div className="py-6">Found invalid data within the card set. Check console for more information.</div>
+    );
 
   const handleClickPrevious = () => {
     const previousId = brainContext.popCurrentCard(); // pop current card
@@ -27,7 +35,6 @@ const CardSetComponent: FC<CardSetProps> = ({ set }) => {
       if (element) {
         if (scrollTo) element.scrollIntoView({ behavior: 'smooth' });
 
-        setCurrentCardId(cardId);
         window.location.hash = cardId;
         console.debug('Selected card ' + cardId);
       } else {
@@ -39,25 +46,16 @@ const CardSetComponent: FC<CardSetProps> = ({ set }) => {
   }
 
   function handleClickBackToTop() {
-    brainContext.clearCardHistory();
+    brainContext.resetHistory();
     handleSelectCard(firstCardId, true, true);
-  }
-
-  const hasDuplicateCardIds = (set: ICardSet): boolean => {
-    const ids = set.cards.map((card) => card.id);
-    return new Set(ids).size !== ids.length;
-  };
-  if (hasDuplicateCardIds(set)) {
-    console.error('Duplicate card IDs found!');
-    console.error(set.cards);
   }
 
   return (
     <div className="py-6">
-      {set.cards.map((card) => (
+      {cardSet.cards.map((card) => (
         <div key={card.id} className="flex flex-col relative mb-14">
           <Card card={card} handleSelectCard={handleSelectCard} />
-          {card.id == currentCardId && (
+          {card.id == brainContext.currentCard && (
             <CardSelector
               key={`${card.id}-selector`}
               handleClickPrevious={handleClickPrevious}

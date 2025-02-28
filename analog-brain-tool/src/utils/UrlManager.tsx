@@ -1,4 +1,5 @@
 import { CardId } from '../interfaces/ICard';
+import { SetId } from '../interfaces/ICardSet';
 
 enum UrlParams {
   SET = 'set',
@@ -10,37 +11,44 @@ enum UrlParams {
 URL is only used for sharing and is not used as state storage after initial load.
 */
 export class UrlManager {
-  static UrlParams = UrlParams; // Attach the enum as a static property
+  public static UrlParams = UrlParams; // Attach the enum as a static property
 
-  static getParam(paramName: string): string | null {
+  public static getCurrentCard(): string | null {
+    return UrlManager.getParam(UrlParams.CARD);
+  }
+
+  public static selectCurrentCard(cardId: CardId): void {
+    this.setParam(UrlParams.CARD, cardId);
+  }
+
+  public static clearCurrentCard(): void {
+    history.replaceState(null, '', ``);
+  }
+
+  public static getCardSet(): SetId | null {
+    return UrlManager.getParam(UrlParams.SET);
+  }
+
+  public static selectSet(setId: SetId): void {
+    this.setParam(UrlParams.SET, setId);
+  }
+
+  public static getLanguage(): string | null {
+    return UrlManager.getParam(UrlParams.LANG);
+  }
+
+  public static selectLanguage(lang: string): void {
+    this.setParam(UrlParams.LANG, lang);
+  }
+
+  /* Generic functions */
+
+  public static getParam(paramName: string): string | null {
     const params = new URLSearchParams(window.location.search);
     return params.get(paramName);
   }
 
-  static setCurrentCard(cardId: CardId): void {
-    this.setParam(UrlParams.CARD, cardId);
-  }
-
-  static clearCurrentCard(): void {
-    history.replaceState(null, '', ``);
-  }
-
-  static getCardSet(): string | null {
-    return UrlManager.getParam(UrlParams.SET);
-  }
-  static selectSet(setId: string): void {
-    this.setParam(UrlParams.SET, setId);
-  }
-
-  static getLanguage(): string | null {
-    return UrlManager.getParam(UrlParams.LANG);
-  }
-
-  static selectLanguage(lang: string): void {
-    this.setParam(UrlParams.LANG, lang);
-  }
-
-  private static setParam(paramName: string, paramValue: string): void {
+  public static setParam(paramName: string, paramValue: string): void {
     const url = new URL(window.location.href);
     const params = new URLSearchParams(url.search);
 
@@ -49,10 +57,6 @@ export class UrlManager {
 
     // Update the URL without reloading the page
     window.history.pushState({}, '', `${url.pathname}?${params.toString()}`);
-  }
-
-  static getCurrentCard(): string | null {
-    return UrlManager.getParam(UrlParams.CARD);
   }
 }
 

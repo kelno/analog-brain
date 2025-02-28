@@ -42,7 +42,7 @@ const CardSelector: FC<CardSelectorProps> = ({
       <div className="absolute top-full right-4 flex gap-2 pointer-events-auto">
         {/*Previous Button*/}
         <CardSelectorButton
-          disabled={brainContext.getCardHistorySize() <= 1}
+          disabled={brainContext.hasCardHistory === false}
           onClick={(e) => {
             e.stopPropagation(); // don't click on the whole card if we're clicking on a specific card item
             handleClickPrevious();
