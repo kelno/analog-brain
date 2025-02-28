@@ -35,9 +35,8 @@ const CardSet: FC<CardSetProps> = ({ cardSet }) => {
     if (cardId) {
       const element = document.getElementById(cardId);
       if (element) {
-        if (scrollTo) element.scrollIntoView({ behavior: 'smooth' });
+        if (scrollTo) element.scrollIntoView({ behavior: 'smooth', block: 'center' });
 
-        window.location.hash = cardId;
         console.debug('Selected card ' + cardId);
       } else {
         console.debug(`Element with id '${cardId}' not found`);
