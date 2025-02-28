@@ -42,7 +42,7 @@ const CardSet: FC<CardSetProps> = ({ cardSet }) => {
         console.debug(`Element with id '${cardId}' not found`);
       }
     } else {
-      console.debug('No id provided');
+      console.error('handleSelectCard: No id provided');
     }
   }
 
