@@ -3,6 +3,7 @@ import { CardId } from '../interfaces/ICard';
 import UrlManager from '../utils/UrlManager';
 import ICardSet, { SetId } from '../interfaces/ICardSet';
 import Helpers from '../utils/Helpers';
+import { i18n } from 'i18next';
 
 export interface BrainContextState {
   cardHistory: Stack<CardId>; // the top is the current card
@@ -15,10 +16,16 @@ export type LangId = string;
 export class BrainContextData {
   private state: BrainContextState;
   private setState: (state: BrainContextState) => void;
+  private i18n: i18n;
 
-  constructor(brainState: BrainContextState, setBrainState: (brainState: BrainContextState) => void) {
+  constructor(
+    brainState: BrainContextState,
+    setBrainState: (brainState: BrainContextState) => void,
+    i18n: i18n,
+  ) {
     this.state = brainState;
     this.setState = setBrainState;
+    this.i18n = i18n;
   }
 
   // properly triggers state update for the card history
@@ -96,6 +103,7 @@ export class BrainContextData {
   public setLanguage(lang: LangId) {
     console.debug('Set language ' + lang);
     this.state.lang = lang;
+    this.i18n.changeLanguage(lang);
     this.setState({ ...this.state });
   }
 

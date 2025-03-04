@@ -6,8 +6,11 @@ import { Stack } from '@datastructures-js/stack';
 import { CardId } from '../interfaces/ICard';
 import UrlManager from '../utils/UrlManager';
 import Helpers from '../utils/Helpers';
+import { useTranslation } from 'react-i18next';
 
 const BrainContextProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
+  const { i18n } = useTranslation();
+
   const getSetFromURL = () => {
     const urlCardSet = UrlManager.getCardSet();
     if (urlCardSet) return Helpers.getSetById(urlCardSet);
@@ -25,7 +28,7 @@ const BrainContextProvider: React.FC<{ children: ReactNode }> = ({ children }) =
     set: defaultSet.id,
     lang: defaultLang,
   });
-  const brainContext: BrainContextData = new BrainContextData(brainState, setBrainState);
+  const brainContext: BrainContextData = new BrainContextData(brainState, setBrainState, i18n);
 
   return <BrainContext.Provider value={brainContext}>{children}</BrainContext.Provider>;
 };
