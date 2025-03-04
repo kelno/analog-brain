@@ -7,11 +7,11 @@ const BrainTool = () => {
   const brainContext = useContext(BrainContext);
 
   const handleSelectSet = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    const title: string = event.target.value;
+    const id: string = event.target.value;
 
-    const set = availableSets.find((set) => set.title === title);
+    const set = availableSets.find((set) => set.id === id);
     if (set === undefined) {
-      console.error('Could not find set with title ' + title);
+      console.error('BrainTool: Could not find set with id ' + id);
       return;
     }
 
@@ -19,17 +19,23 @@ const BrainTool = () => {
   };
 
   const cardSet = brainContext.currentSet;
-  console.debug('Rendering BrainTool with cardSet:');
-  console.debug(cardSet);
+  // console.debug('BrainTool: Rendering BrainTool with cardSet:');
+  // console.debug(cardSet);
+
+  const currentSetId = cardSet?.id;
 
   return (
     <>
       <div>
         <span>Card set: </span>
-        <select onChange={handleSelectSet} className="my-4 p-1 border rounded bg-white dark:bg-slate-900">
+        <select
+          onChange={handleSelectSet}
+          defaultValue={currentSetId}
+          className="my-4 p-1 border rounded bg-white dark:bg-slate-900"
+        >
           {Object.values(availableSets).map((set) => {
             return (
-              <option key={set.title} value={set.title}>
+              <option key={set.title} value={set.id}>
                 {set.title}
               </option>
             );
