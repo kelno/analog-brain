@@ -2,9 +2,11 @@ import { useContext } from 'react';
 import { availableSets } from '../../content/cards';
 import CardSet from './CardSet';
 import BrainContext from '../../store/BrainContext';
+import { useTranslation } from 'react-i18next';
 
 const BrainTool = () => {
   const brainContext = useContext(BrainContext);
+  const { t } = useTranslation();
 
   const handleSelectSet = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const id: string = event.target.value;
@@ -27,7 +29,7 @@ const BrainTool = () => {
   return (
     <>
       <div>
-        <span>Card set: </span>
+        <span>{t('tool.cardset')}: </span>
         <select
           onChange={handleSelectSet}
           defaultValue={currentSetId}

@@ -25,15 +25,15 @@ function App() {
             <Intro />
           </Section>
 
-          <Section id="howto" title="How to use the Analog Brain">
+          <Section id="howto" title={t('howto.title')}>
             <HowTo />
           </Section>
 
-          <Section id="tool" title="The Tool - Start here">
+          <Section id="tool" title={t('tool.title')}>
             <BrainTool />
           </Section>
 
-          <Section id="outro" title="About">
+          <Section id="outro" title={t('about.title')}>
             <Outro />
           </Section>
         </BrainContextProvider>
