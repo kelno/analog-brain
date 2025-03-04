@@ -1,4 +1,4 @@
-import { useState, ReactNode } from 'react';
+import { useState, ReactNode, useEffect } from 'react';
 import { BrainContextData, BrainContextState } from './BrainContextData';
 import BrainContext from './BrainContext';
 import { availableSets } from '../content/cards';
@@ -20,14 +20,19 @@ const BrainContextProvider: React.FC<{ children: ReactNode }> = ({ children }) =
   const defaultSet = getSetFromURL() ?? availableSets[0];
   const urlCard = UrlManager.getCurrentCard();
   const defaultCardId = urlCard ?? defaultSet.cards[0].id;
-  const defaultLang = 'en'; // dummy for now
+  const lang = UrlManager.getLanguage() ?? i18n.language; // else let i18n pick default
+
+  // handle setting langague from URL. Weird place to do it maybe.
+  useEffect(() => {
+    i18n.changeLanguage(lang);
+  }, [i18n, lang]);
 
   UrlManager.clearURLParams();
 
   const [brainState, setBrainState] = useState<BrainContextState>({
     cardHistory: new Stack<CardId>([defaultCardId]),
     set: defaultSet.id,
-    lang: defaultLang,
+    lang: lang,
     urlCard: urlCard,
   });
   const brainContext: BrainContextData = new BrainContextData(brainState, setBrainState, i18n);
