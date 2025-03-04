@@ -11,8 +11,7 @@ import { useTranslation } from 'react-i18next';
 import LanguageSwitcher from './components/LanguageSwitcher';
 
 function App() {
-  const { t, i18n } = useTranslation();
-  console.debug('Current language: ' + i18n.language);
+  const { t } = useTranslation();
 
   return (
     <div className="bg-white text-slate-900 dark:text-white dark:bg-slate-900 min-h-screen leading-relaxed">
@@ -22,7 +21,7 @@ function App() {
           <LanguageSwitcher />
           <h1 className="text-4xl text-center">{t('title')}</h1>
 
-          <Section id="intro" title="Introduction to the Analog Brain">
+          <Section id="intro" title={t('intro.title')}>
             <Intro />
           </Section>
 
