@@ -19,7 +19,8 @@ export class UrlManager {
     params.set(UrlParams.SET, set);
     params.set(UrlParams.LANG, lang);
     params.set(UrlParams.CARD, card);
-    return params.toString() + '#' + card; // hash as a simple way to scroll to shared card
+
+    return params.toString();
   }
 
   public static getCurrentCard(): string | null {
@@ -42,8 +43,6 @@ export class UrlManager {
   // Without page reload
   public static clearURLParams() {
     const newUrl = window.location.origin + window.location.pathname;
-
-    // Replace the current history entry
     window.history.replaceState({}, document.title, newUrl);
   }
 }

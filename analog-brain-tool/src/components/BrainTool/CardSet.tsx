@@ -1,4 +1,4 @@
-import { FC, useContext } from 'react';
+import { FC, useContext, useEffect } from 'react';
 import ICardSet from '../../interfaces/ICardSet';
 import Card from './Card';
 import CardSelector from './CardSelector';
@@ -19,10 +19,23 @@ const CardSet: FC<CardSetProps> = ({ cardSet }) => {
     'CardSet: Rendering (' + cardSet.title + ') with current card id ' + brainContext.currentCard,
   );
 
+  // handle scrolling to the right card if we're loading a shared URL
+  useEffect(() => {
+    const cardId = brainContext.popGoToCardFromURL();
+    if (cardId) {
+      scrollToCard(cardId);
+    }
+  }, [brainContext]); // runs only once
+
   if (!DataValidator.validateCardSet(cardSet))
     return (
       <div className="py-6">Found invalid data within the card set. Check console for more information.</div>
     );
+
+  function scrollToCard(cardId: CardId) {
+    const element = document.getElementById(cardId);
+    if (element) element.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
 
   const handleClickPrevious = () => {
     const previousId = brainContext.popCurrentCard(); // pop current card
@@ -33,14 +46,7 @@ const CardSet: FC<CardSetProps> = ({ cardSet }) => {
     brainContext.selectCard(cardId, pushHistory);
 
     if (cardId) {
-      const element = document.getElementById(cardId);
-      if (element) {
-        if (scrollTo) element.scrollIntoView({ behavior: 'smooth', block: 'center' });
-
-        console.debug('Selected card ' + cardId);
-      } else {
-        console.debug(`Element with id '${cardId}' not found`);
-      }
+      if (scrollTo) scrollToCard(cardId);
     } else {
       console.error('handleSelectCard: No id provided');
     }

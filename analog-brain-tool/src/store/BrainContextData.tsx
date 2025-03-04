@@ -9,6 +9,7 @@ export interface BrainContextState {
   cardHistory: Stack<CardId>; // the top is the current card
   set: SetId;
   lang: LangId;
+  urlCard: string | null; // card shared from URL
 }
 
 export type LangId = string;
@@ -105,6 +106,15 @@ export class BrainContextData {
     this.state.lang = lang;
     this.i18n.changeLanguage(lang);
     this.setState({ ...this.state });
+  }
+
+  public popGoToCardFromURL(): CardId | undefined {
+    if (this.state.urlCard != null) {
+      const card = this.state.urlCard;
+      this.state.urlCard = null;
+      this.setState({ ...this.state });
+      return card;
+    } else return undefined;
   }
 
   public getShareURLParams() {
