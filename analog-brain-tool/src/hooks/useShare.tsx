@@ -1,13 +1,16 @@
+import { useTranslation } from 'react-i18next';
 import { toast } from 'sonner';
 
 const useShare = () => {
+  const { t } = useTranslation();
+
   const copy = async (text: string) => {
     try {
       await navigator.clipboard.writeText(text);
-      toast.success(`Successfully copied ${text} to clipboard`);
+      toast.success(t('toast.share.success'));
     } catch (error) {
       console.error('Error copying to clipboard:', error);
-      toast.error('Error copying to clipboard');
+      toast.error(t('toast.share.errors.generic', { error }));
     }
   };
 
@@ -22,12 +25,12 @@ const useShare = () => {
         console.log('Successfully shared');
       } catch (error) {
         console.error('Error sharing:', error);
-        toast.error('Error sharing');
+        toast.error(t('toast.share.errors.generic', { error }));
         copy(url);
       }
     } else {
       console.error('Web Share API not supported');
-      toast.error('Web Share API not supported');
+      toast.error(t('toast.share.errors.WebAPI'));
       copy(url);
     }
   };

@@ -14,5 +14,15 @@
   },
   "about": {
     "title": "About"
+  },
+  "toast": {
+    "noCardSetsForLang" : "No available card sets for language {lang}", 
+    "share" : {
+      "success" : "URL copied to clipboard",
+      "errors" : {
+        "generic" : "Error copying to clipboard: {error}",
+        "WebAPI" : "Web Share API not supported"
+      }
+    }
   }
 }

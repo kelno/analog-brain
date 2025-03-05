@@ -2,14 +2,14 @@ import { Stack } from '@datastructures-js/stack';
 import { CardId } from '../interfaces/ICard';
 import UrlManager from '../utils/UrlManager';
 import ICardSet, { SetId } from '../interfaces/ICardSet';
-import Helpers from '../utils/Helpers';
 import { i18n } from 'i18next';
+import { getDefaultSetForLanguage, getSetById } from '../content/cards';
 
 export interface BrainContextState {
   cardHistory: Stack<CardId>; // the top is the current card
   set: SetId;
   lang: LangId;
-  urlCard: string | null; // card shared from URL
+  scrollToCard: string | null; // CardSet component will try to scroll to this when loading the set.
 }
 
 export type LangId = string;
@@ -76,21 +76,29 @@ export class BrainContextData {
     this.saveCardHistory();
   }
 
+  private _selectSet(newSet: ICardSet, scrollToFirst: boolean) {
+    console.debug('BrainContext: Selected set with id ' + newSet.id + ' (' + newSet.title + ')');
+
+    const firstCardId = newSet.cards[0].id;
+    const newCardHistory = new Stack<CardId>([firstCardId]);
+
+    if (scrollToFirst) this.state.scrollToCard = firstCardId;
+
+    this.setState({ ...this.state, set: newSet.id, cardHistory: newCardHistory });
+  }
+
   public selectSet(setId: SetId) {
-    const newSet = Helpers.getSetById(setId);
+    const newSet = getSetById(this.language, setId);
     if (!newSet) {
       console.error('Failed to select set with id + ' + setId);
       return;
     }
-    console.debug('BrainContext: Selected set with id ' + setId + ' (' + newSet.title + ')');
-
-    const newCardHistory = new Stack<CardId>([newSet.cards[0].id]);
-    this.setState({ ...this.state, set: setId, cardHistory: newCardHistory });
+    this._selectSet(newSet, false);
   }
 
   public get currentSet(): ICardSet | undefined {
     console.debug('BrainContext: get currentSet from selected ' + this.state.set);
-    return Helpers.getSetById(this.state.set);
+    return getSetById(this.language, this.state.set);
   }
 
   public get currentSetId(): SetId {
@@ -101,17 +109,29 @@ export class BrainContextData {
     return this.state.lang;
   }
 
-  public setLanguage(lang: LangId) {
-    console.debug('Set language ' + lang);
+  // returns success
+  public setLanguage(lang: LangId): boolean {
+    const defaultSet = getDefaultSetForLanguage(lang);
+    if (defaultSet === undefined) {
+      console.error(`Can't switch language. No available default set for chosen lang ${lang}`);
+      return false;
+    }
+
+    console.debug('BrainContext: Set language ' + lang);
     this.state.lang = lang;
     this.i18n.changeLanguage(lang);
-    this.setState({ ...this.state });
+
+    this._selectSet(defaultSet, true);
+
+    // already saved by _selectSet call
+    // this.setState({ ...this.state });
+    return true;
   }
 
-  public popGoToCardFromURL(): CardId | undefined {
-    if (this.state.urlCard != null) {
-      const card = this.state.urlCard;
-      this.state.urlCard = null;
+  public popScrollToCard(): CardId | undefined {
+    if (this.state.scrollToCard != null) {
+      const card = this.state.scrollToCard;
+      this.state.scrollToCard = null;
       this.setState({ ...this.state });
       return card;
     } else return undefined;

@@ -21,7 +21,7 @@ const CardSet: FC<CardSetProps> = ({ cardSet }) => {
 
   // handle scrolling to the right card if we're loading a shared URL
   useEffect(() => {
-    const cardId = brainContext.popGoToCardFromURL();
+    const cardId = brainContext.popScrollToCard();
     if (cardId) {
       scrollToCard(cardId);
     }
