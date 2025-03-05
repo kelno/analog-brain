@@ -12,8 +12,15 @@ const BrainContextProvider: React.FC<{ children: ReactNode }> = ({ children }) =
 
   const getSetFromURL = (lang: LangId) => {
     const urlCardSetId = UrlManager.getCardSet();
-    if (urlCardSetId) return CardSetHelpers.getSetById(lang, urlCardSetId);
-    else return undefined;
+    if (urlCardSetId) {
+      const set = CardSetHelpers.getSetById(lang, urlCardSetId);
+      if (!set) {
+        console.error(
+          `Trying to load set ${urlCardSetId} from URL but couldn't find it for language ${lang}`,
+        );
+      }
+      return set;
+    } else return undefined;
   };
   // default to first set and first card in it
   let lang = UrlManager.getLanguage() ?? i18n.language; // else let i18n pick default
