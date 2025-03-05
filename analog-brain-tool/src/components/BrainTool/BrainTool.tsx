@@ -1,16 +1,16 @@
 import { useContext } from 'react';
-import { getAvailableSets } from '../../content/cards';
 import CardSet from './CardSet';
 import BrainContext from '../../store/BrainContext';
 import { useTranslation } from 'react-i18next';
 import { toast } from 'sonner';
+import CardSetHelpers from '../../utils/CardSetHelpers';
 
 const BrainTool = () => {
   const brainContext = useContext(BrainContext);
   const { t } = useTranslation();
 
   const lang = brainContext.language;
-  const availableSets = getAvailableSets(lang);
+  const availableSets = CardSetHelpers.getAvailableSets(lang);
   if (!availableSets) {
     console.error('No available card sets for language ' + lang);
     toast.error(t('toast.noCardSetsForLang', { lang }));

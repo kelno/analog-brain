@@ -1,4 +1,4 @@
-import ICardSet, { SetId } from '../interfaces/ICardSet';
+import ICardSet from '../interfaces/ICardSet';
 import { LangId } from '../store/BrainContextData';
 import DataValidator from '../utils/DataValidator';
 
@@ -1677,7 +1677,7 @@ export const analogBrainCardsFrench: ICardSet = {
 // not validated yet
 const allAvailableSets: ICardSet[] = [analogBrainCards, analogBrainCardsFrench];
 
-const availableSetsPerLanguage: Record<LangId, ICardSet[]> = allAvailableSets.reduce((acc, set) => {
+export const availableSetsPerLanguage: Record<LangId, ICardSet[]> = allAvailableSets.reduce((acc, set) => {
   if (!DataValidator.validateCardSet(set)) {
     throw Error(`Invalid card set in database: ${set.title} (id: ${set.id})`);
   }
@@ -1687,17 +1687,3 @@ const availableSetsPerLanguage: Record<LangId, ICardSet[]> = allAvailableSets.re
   acc[set.lang].push(set);
   return acc;
 }, {} as Record<LangId, ICardSet[]>);
-
-// Returned sets have been validated by DataValidator
-export function getAvailableSets(lang: LangId): ICardSet[] | undefined {
-  return availableSetsPerLanguage[lang];
-}
-
-export function getSetById(lang: LangId, id: SetId) {
-  return getAvailableSets(lang)?.find((set) => set.id === id);
-}
-
-// Returned set has been validated by DataValidator
-export function getDefaultSetForLanguage(lang: LangId): ICardSet | undefined {
-  return getAvailableSets(lang)?.[0];
-}

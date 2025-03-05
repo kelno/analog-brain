@@ -3,7 +3,7 @@ import { CardId } from '../interfaces/ICard';
 import UrlManager from '../utils/UrlManager';
 import ICardSet, { SetId } from '../interfaces/ICardSet';
 import { i18n } from 'i18next';
-import { getDefaultSetForLanguage, getSetById } from '../content/cards';
+import CardSetHelpers from '../utils/CardSetHelpers';
 
 export interface BrainContextState {
   cardHistory: Stack<CardId>; // the top is the current card
@@ -88,7 +88,7 @@ export class BrainContextData {
   }
 
   public selectSet(setId: SetId) {
-    const newSet = getSetById(this.language, setId);
+    const newSet = CardSetHelpers.getSetById(this.language, setId);
     if (!newSet) {
       console.error('Failed to select set with id + ' + setId);
       return;
@@ -98,7 +98,7 @@ export class BrainContextData {
 
   public get currentSet(): ICardSet | undefined {
     console.debug('BrainContext: get currentSet from selected ' + this.state.set);
-    return getSetById(this.language, this.state.set);
+    return CardSetHelpers.getSetById(this.language, this.state.set);
   }
 
   public get currentSetId(): SetId {
@@ -111,7 +111,7 @@ export class BrainContextData {
 
   // returns success
   public setLanguage(lang: LangId): boolean {
-    const defaultSet = getDefaultSetForLanguage(lang);
+    const defaultSet = CardSetHelpers.getDefaultSetForLanguage(lang);
     if (defaultSet === undefined) {
       console.error(`Can't switch language. No available default set for chosen lang ${lang}`);
       return false;

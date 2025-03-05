@@ -1,27 +1,27 @@
 import { useState, ReactNode, useEffect } from 'react';
 import { BrainContextData, BrainContextState, LangId } from './BrainContextData';
 import BrainContext from './BrainContext';
-import { getAvailableSets, getDefaultSetForLanguage } from '../content/cards';
 import { Stack } from '@datastructures-js/stack';
 import { CardId } from '../interfaces/ICard';
 import UrlManager from '../utils/UrlManager';
 import { useTranslation } from 'react-i18next';
+import CardSetHelpers from '../utils/CardSetHelpers';
 
 const BrainContextProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const { i18n } = useTranslation();
 
   const getSetFromURL = (lang: LangId) => {
     const urlCardSetId = UrlManager.getCardSet();
-    if (urlCardSetId) return getAvailableSets(lang)?.find((set) => set.id === urlCardSetId);
+    if (urlCardSetId) return CardSetHelpers.getSetById(lang, urlCardSetId);
     else return undefined;
   };
   // default to first set and first card in it
   let lang = UrlManager.getLanguage() ?? i18n.language; // else let i18n pick default
-  if (getDefaultSetForLanguage(lang) === undefined) {
+  if (CardSetHelpers.getDefaultSetForLanguage(lang) === undefined) {
     console.error(`No available sets for chosen lang ${lang}. Defaulting to english.`);
     lang = 'en';
   }
-  const defaultSetForLanguage = getDefaultSetForLanguage(lang);
+  const defaultSetForLanguage = CardSetHelpers.getDefaultSetForLanguage(lang);
   if (!defaultSetForLanguage) {
     throw new Error(`No available sets for lang ${lang}`);
   }
