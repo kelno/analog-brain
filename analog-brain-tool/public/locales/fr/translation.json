@@ -9,10 +9,20 @@
     "title": "Comment utiliser le Cerveau Analogique"
   },
   "tool": {
-    "title" : "L'outil - Démarrer ici",
-    "cardset": "Set de cartes"
+    "title": "L'outil - Commencez ici",
+    "cardset": "Jeu de cartes"
   },
   "about": {
-    "title": "A propos"
-  } 
+    "title": "À propos"
+  },
+  "toast": {
+    "noCardSetsForLang": "Aucun jeu de cartes disponible pour la langue {lang}",
+    "share": {
+      "success": "URL copiée dans le presse-papiers",
+      "errors": {
+        "generic": "Erreur lors de la copie dans le presse-papiers : {error}",
+        "WebAPI": "L'API Web Share n'est pas supportée"
+      }
+    }
+  }
 }

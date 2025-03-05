@@ -32,8 +32,9 @@ const BrainContextProvider: React.FC<{ children: ReactNode }> = ({ children }) =
   if (!defaultSetForLanguage) {
     throw new Error(`No available sets for lang ${lang}`);
   }
-  const defaultSet = getSetFromURL(lang) ?? defaultSetForLanguage;
-  const urlCard = UrlManager.getCurrentCard();
+  const setFromURL = getSetFromURL(lang);
+  const defaultSet = setFromURL ?? defaultSetForLanguage;
+  const urlCard = setFromURL ? UrlManager.getCurrentCard() : null;
   const defaultCardId = urlCard ?? defaultSet.cards[0].id;
 
   // handle setting langague from URL. Weird place to do it maybe.
