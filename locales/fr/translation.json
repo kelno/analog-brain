@@ -4,5 +4,15 @@
   "intro": {
     "title": "Introduction au Cerveau Analogique",
     "content": "Cet outil est conçu pour surmonter votre dysfonctionnement exécutif en vous posant des questions et en vous guidant vers une réponse utile.\n\nOui, c'est pour le TDAH ! Oui, c'est pour l'autisme ! Oui, c'est pour le TCC ! Oui, c'est pour TOUTE personne qui souhaite de l'aide avec ses fonctions exécutives !\n\nParfois (souvent) (tout le temps), j'ai envie de faire quelque chose, mais je ne sais pas quoi. Ou, je me sens bizarre, mais je n'arrive pas à comprendre pourquoi ou quoi faire pour y remédier. Le TDAH, le dysfonctionnement exécutif, ce que je ressens, et la phase de la lune peuvent tous rendre très difficile pour moi de penser à une solution au problème, ou même de savoir quel est le problème. Et bien que les médicaments et un sommeil régulier aident certainement, pour le meilleur ou pour le pire, mon cerveau n'est tout simplement pas câblé pour ça.\n\nAlors, j'ai décidé d'externaliser mon cerveau.\n\nJe n'ai pas trouvé d'application qui faisait ce que je voulais ou qui était suffisamment personnalisable pour que je puisse m'en contenter. J'ai donc construit un cerveau externe analogique pour penser à ma place. À l'origine, c'était un cahier, et j'ai partagé des extraits sur Tumblr. Cela a eu un énorme succès, alors j'ai commencé à chercher comment créer une page web ou une application pour que d'autres personnes puissent l'utiliser.\n\nAvertissement : Ceci ne constitue pas un conseil médical et je ne suis pas un professionnel de la santé. Consultez toujours votre propre médecin avant de suivre un conseil trouvé sur Internet. Utilisez à vos risques et périls, etc."
-  }
+  },
+   "howto": {
+    "title": "Comment utiliser le Cerveau Analogique"
+  },
+  "tool": {
+    "title" : "L'outil - Démarrer ici",
+    "cardset": "Set de cartes"
+  },
+  "about": {
+    "title": "A propos"
+  } 
 }

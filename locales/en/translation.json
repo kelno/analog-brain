@@ -4,5 +4,25 @@
   "intro": {
     "title": "Introduction to the Analog Brain",
     "content": "This tool is designed to overcome your executive dysfunction by asking you questions and leading you to a helpful answer.\n\nYes, it's for ADHD! Yes, it's for Autism! Yes, it's for TBI! Yes, it's for ANYONE who would like help with executive function!\n\nSometimes (lots of times) (all the time), I have the urge to do a thing but I don't know what. Or, I feel weird, but can't figure out why or what to do to fix it. ADHD, executive dysfunction, how I feel, and the phase of the moon can all make it really hard for me to think of a solution to the issue, or even know what the issue IS. And while meds and regular sleep certainly help, for better or for worse my brain just isn't wired for this.\n\nSo, I decided to outsource my brain.\n\nI couldn't find an app that did what I wanted or was customizable enough for me to fake it. Therefore I built an analog external brain to do my thinking for me. Originally it was a notebook, and I shared excerpts on Tumblr. It got a huge response, so I started trying to figure out how to make a webpage or app for other people to use.\n\nCYA Disclaimer: This is not medical advice and I am not a medical professional. Always check with your own medical provider before taking any advice from the internet. Use at your own risk, etc etc."
+  },
+  "howto": {
+    "title": "How to use the Analog Brain"
+  },
+  "tool": {
+    "title" : "The Tool - Start here",
+    "cardset": "Card set"
+  },
+  "about": {
+    "title": "About"
+  },
+  "toast": {
+    "noCardSetsForLang" : "No available card sets for language {lang}", 
+    "share" : {
+      "success" : "URL copied to clipboard",
+      "errors" : {
+        "generic" : "Error copying to clipboard: {error}",
+        "WebAPI" : "Web Share API not supported"
+      }
+    }
   }
 }
