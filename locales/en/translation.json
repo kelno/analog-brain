@@ -18,6 +18,8 @@
   "toast": {
     "noCardSetsForLang" : "No available card sets for language {lang}", 
     "share" : {
+      "title": "The Analog Brain Tool",
+      "description": "Overcome your executive dysfunction",
       "success" : "URL copied to clipboard",
       "errors" : {
         "generic" : "Error copying to clipboard: {error}",
