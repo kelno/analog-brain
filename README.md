@@ -3,6 +3,9 @@
 Reimagination of the "The ADHD Analog Brain", from https://adhdanalogbrain.blogspot.com/  
 Implemented in React Typescript.
 
+# Handling Card Sets
+Just add or modify files in src/cardSets/content
+
 # Development Setup
 
 ```bash

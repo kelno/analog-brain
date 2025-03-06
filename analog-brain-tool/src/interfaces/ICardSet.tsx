@@ -7,5 +7,6 @@ export default interface ICardSet {
   id: SetId;
   title: string;
   lang: LangId;
+  isDefaultForLanguage: boolean;
   cards: ICard[];
 }
