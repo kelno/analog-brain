@@ -8,8 +8,8 @@ import { Toaster } from 'sonner';
 import BrainContextProvider from './store/BrainContextProvider';
 import './i18n';
 import { useTranslation } from 'react-i18next';
-import LanguageSwitcher from './components/LanguageSwitcher';
 import ErrorBoundary from './components/ErrorBoundary';
+import Header from './components/Header/Header';
 
 function App() {
   const { t } = useTranslation();
@@ -17,11 +17,10 @@ function App() {
   return (
     <ErrorBoundary>
       <div className="bg-white text-slate-900 dark:text-white dark:bg-slate-900 min-h-screen leading-relaxed">
-        <div className="px-2 max-w-200 mx-auto">
-          <Toaster position="bottom-right" />
-          <BrainContextProvider>
-            <LanguageSwitcher />
-            <h1 className="text-4xl text-center">{t('title')}</h1>
+        <BrainContextProvider>
+          <Header />
+          <div className="px-2 max-w-200 mx-auto mt-header pt-2">
+            <Toaster position="bottom-right" />
 
             <Section id="intro" title={t('intro.title')}>
               <Intro />
@@ -38,8 +37,8 @@ function App() {
             <Section id="outro" title={t('about.title')}>
               <Outro />
             </Section>
-          </BrainContextProvider>
-        </div>
+          </div>
+        </BrainContextProvider>
       </div>
     </ErrorBoundary>
   );
