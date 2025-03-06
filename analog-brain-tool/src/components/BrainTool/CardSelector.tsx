@@ -5,7 +5,7 @@ import CardSelectorButton from './CardSelectorButton';
 import ShareButtonSVG from '../SVGs/ShareButtonSVG';
 import BrainContext from '../../store/BrainContext';
 import useShare from '../../hooks/useShare';
-import { Strings } from '../../constants/strings';
+import { useTranslation } from 'react-i18next';
 
 interface CardSelectorProps {
   extraClassName?: string;
@@ -21,6 +21,7 @@ const CardSelector: FC<CardSelectorProps> = ({
   disableBackToTop,
 }) => {
   const brainContext = useContext(BrainContext);
+  const { t } = useTranslation();
 
   const getShareURL = () => {
     const params = brainContext.getShareURLParams();
@@ -29,7 +30,7 @@ const CardSelector: FC<CardSelectorProps> = ({
 
   const { share } = useShare();
   const handleShare = () => {
-    share(getShareURL(), Strings.shareTitle, Strings.shareDescription);
+    share(getShareURL(), t('share.title'), t('share.description'));
   };
 
   const bordercolor = 'border-amber-300';
