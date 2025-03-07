@@ -1,7 +1,25 @@
 @import 'tailwindcss';
 
-@custom-variant dark (&:where(.dark, .dark *));
+@custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
 
 @theme {
   --spacing-header: 70px;
+
+  --color-brain-bg: var(--theme-color-brain-bg);
+  --color-brain-text: var(--theme-color-brain-text);
+  --color-brain-secondary: var(--theme-color-brain-secondary);
+}
+
+@layer base {
+  :root {
+    --theme-color-brain-bg: theme('colors.white');
+    --theme-color-brain-text: theme('colors.slate.900');
+    --theme-color-brain-secondary: theme('colors.amber-600');
+  }
+
+  [data-theme='dark'] {
+    --theme-color-brain-bg: theme('colors.slate.900');
+    --theme-color-brain-text: theme('colors.white');
+    --theme-color-brain-secondary: theme('colors.yellow-200');
+  }
 }

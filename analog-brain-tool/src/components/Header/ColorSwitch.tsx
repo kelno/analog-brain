@@ -38,11 +38,8 @@ const ColorSwitch: React.FC = () => {
   }, []);
 
   function setLightMode(mode: LightMode) {
-    if (mode === LightMode.DARK) {
-      document.documentElement.classList.add('dark');
-    } else {
-      document.documentElement.classList.remove('dark');
-    }
+    /* This works with `@custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));` */
+    document.documentElement.setAttribute('data-theme', mode);
   }
 
   const handleChange = (checked: boolean) => {

@@ -10,7 +10,7 @@ const Card: FC<CardProps> = ({ card, handleSelectCard, ref }) => {
   return (
     <div
       ref={ref}
-      className="flex-1 p-4 border rounded-2xl shadow-md"
+      className="flex-1 p-4 border rounded-2xl shadow-md "
       id={card.id}
       onClick={() => handleSelectCard(card.id, false, true)}
     >

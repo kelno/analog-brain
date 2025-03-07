@@ -22,7 +22,7 @@ const LanguageSwitcher: React.FC = () => {
     <div className="relative">
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="text-white p-2 border-2 border-yellow-200 rounded-2xl shadow-lg hover:bg-slate-700 transition-colors"
+        className=" px-4 py-2 border-2 border-brain-secondary rounded-2xl shadow-lg hover:bg-brain-secondary"
       >
         {currentFlag}
       </button>

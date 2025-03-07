@@ -25,7 +25,7 @@ function App() {
 
   return (
     <ErrorBoundary>
-      <div className="bg-white text-slate-900 dark:text-white dark:bg-slate-900 min-h-screen leading-relaxed">
+      <div className="bg-brain-bg text-brain-text min-h-screen leading-relaxed">
         <BrainContextProvider>
           <Header />
           <div className="px-2 max-w-250 mx-auto mt-header pt-2">

@@ -9,7 +9,7 @@ type SectionProps = React.HTMLAttributes<HTMLDivElement> & {
 function Section({ children, title, ...props }: PropsWithChildren<SectionProps>) {
   return (
     <section {...props} className="mt-8">
-      <h2 className="text-3xl text-amber-600 dark:text-yellow-200">{title}</h2>
+      <h2 className="text-3xl text-brain-secondary">{title}</h2>
       <div>{children}</div>
     </section>
   );
