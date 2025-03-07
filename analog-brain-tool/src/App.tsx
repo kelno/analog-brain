@@ -28,7 +28,7 @@ function App() {
       <div className="bg-white text-slate-900 dark:text-white dark:bg-slate-900 min-h-screen leading-relaxed">
         <BrainContextProvider>
           <Header />
-          <div className="px-2 max-w-200 mx-auto mt-header pt-2">
+          <div className="px-2 max-w-250 mx-auto mt-header pt-2">
             <Toaster position="bottom-right" />
 
             <Section id="intro" title={t('intro.title')}>

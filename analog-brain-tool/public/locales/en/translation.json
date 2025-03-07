@@ -27,5 +27,8 @@
         "WebAPI" : "Web Share API not supported"
       }
     }
+  },
+  "label": {
+    "lightModeSwitch": "Light/Dark Mode Switch"
   }
 }
