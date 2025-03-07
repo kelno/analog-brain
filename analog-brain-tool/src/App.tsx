@@ -10,9 +10,18 @@ import './i18n';
 import { useTranslation } from 'react-i18next';
 import ErrorBoundary from './components/ErrorBoundary';
 import Header from './components/Header/Header';
+import { useEffect } from 'react';
 
 function App() {
   const { t } = useTranslation();
+
+  const setPageTitle = () => {
+    document.title = t(`pageTitle`);
+  };
+
+  useEffect(() => {
+    setPageTitle();
+  });
 
   return (
     <ErrorBoundary>

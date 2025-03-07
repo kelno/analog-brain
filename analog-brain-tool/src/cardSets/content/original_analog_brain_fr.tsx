@@ -2,7 +2,7 @@ import ICardSet from '../../interfaces/ICardSet';
 
 const analogBrainCardsFrench: ICardSet = {
   id: 'original_analog_brain_fr',
-  title: 'Analog Brain (Français)',
+  title: 'Original Analog Brain (Français)',
   lang: 'fr',
   isDefaultForLanguage: true,
   cards: [
