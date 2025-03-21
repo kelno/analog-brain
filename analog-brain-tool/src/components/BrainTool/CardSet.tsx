@@ -1,7 +1,7 @@
-import { FC, useContext, useEffect } from 'react';
+import { FC, useContext } from 'react';
 import ICardSet from '../../interfaces/ICardSet';
 import Card from './Card';
-import CardSelector from './CardSelector';
+import CardNavigation from './CardNavigation';
 import BrainContext from '../../store/BrainContext';
 import { CardId } from '../../interfaces/ICard';
 import DataValidator from '../../utils/DataValidator';
@@ -11,67 +11,62 @@ interface CardSetProps {
 }
 
 const CardSet: FC<CardSetProps> = ({ cardSet }) => {
-  const brainContext = useContext(BrainContext);
+  const context = useContext(BrainContext);
 
-  const firstCardId = cardSet.cards[0].id;
-
-  console.debug(
-    'CardSet: Rendering (' + cardSet.title + ') with current card id ' + brainContext.currentCard,
-  );
-
-  // handle scrolling to the right card if we're loading a shared URL
-  useEffect(() => {
-    const cardId = brainContext.popScrollToCard();
-    if (cardId) {
-      scrollToCard(cardId);
-    }
-  }, [brainContext]); // runs only once
+  const previousCardId = context.getPreviousCard();
 
   if (!DataValidator.validateCardSet(cardSet))
     return (
       <div className="py-6">Found invalid data within the card set. Check console for more information.</div>
     );
 
-  function scrollToCard(cardId: CardId) {
-    const element = document.getElementById(cardId);
-    if (element) element.scrollIntoView({ behavior: 'smooth', block: 'center' });
-  }
-
-  const handleClickPrevious = () => {
-    const previousId = brainContext.popCurrentCard(); // pop current card
-    if (previousId) handleSelectCard(previousId, true, false);
+  const handleClickCard = (cardId: CardId, isPrevious: boolean) => {
+    console.log('click');
+    if (isPrevious) context.popCurrentCard();
+    else context.selectCard(cardId, true);
   };
 
-  function handleSelectCard(cardId: CardId, scrollTo: boolean, pushHistory: boolean) {
-    brainContext.selectCard(cardId, pushHistory);
+  const handleClickPrevious = () => {
+    console.log('Click previous');
+    context.popCurrentCard();
+  };
 
-    if (cardId) {
-      if (scrollTo) scrollToCard(cardId);
-    } else {
-      console.error('handleSelectCard: No id provided');
-    }
-  }
+  const handleClickBackToTop = () => {
+    context.resetHistory();
+  };
 
-  function handleClickBackToTop() {
-    brainContext.resetHistory();
-    handleSelectCard(firstCardId, true, true);
-  }
+  const currentCardData = cardSet.cards.find((card) => card.id === context.currentCard);
+  const previousCardData = cardSet.cards.find((card) => card.id === previousCardId);
+
+  if (!currentCardData) return <></>;
 
   return (
-    <div className="py-6">
-      {cardSet.cards.map((card) => (
-        <div key={card.id} className="flex flex-col relative mb-14">
-          <Card card={card} handleSelectCard={handleSelectCard} />
-          {card.id == brainContext.currentCard && (
-            <CardSelector
-              key={`${card.id}-selector`}
-              handleClickPrevious={handleClickPrevious}
-              handleClickBackToTop={handleClickBackToTop}
-              disableBackToTop={firstCardId === card.id}
-            />
-          )}
+    <div
+      className="mx-8 py-20 mt-[var(--previous-card-offset-y)] flex flex-col-reverse"
+      style={{ height: 'calc(100vh - var(--spacing-header))' }}
+    >
+      <div className="flex-none">
+        <div className="flex justify-center py-4">
+          <CardNavigation
+            handleClickPrevious={handleClickPrevious}
+            handleClickBackToTop={handleClickBackToTop}
+            disableBackToTop={currentCardData.id === cardSet.cards[0].id}
+          />
         </div>
-      ))}
+      </div>
+      <div className="relative flex-col flex-auto">
+        {previousCardData && (
+          <div
+            id="previousCard"
+            className="absolute transform -translate-x-6 -translate-y-[var(--previous-card-offset-y)] opacity-50 w-full h-full"
+          >
+            <Card card={previousCardData} handleClickCard={handleClickCard} isPrevious />
+          </div>
+        )}
+        <div id="currentCard" className="relative z-10 w-full h-full">
+          <Card card={currentCardData} handleClickCard={handleClickCard} />
+        </div>
+      </div>
     </div>
   );
 };

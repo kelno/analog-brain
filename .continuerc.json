@@ -1,0 +1,4 @@
+/* This is project-specific prompt to give to Continue LLMs */
+{
+"systemMessage": "Here is some context information: it's a React Typescript built with Vite and tailwind. This is a website about giving a decision tree to help with decision paralysis. Every tree is a 'card set', cards being a some text information and optionally choices (links to other cards) Also a big feature is that it's focused on accessibility, the website should be usable by as many people as possible. It should also be responsive."
+}

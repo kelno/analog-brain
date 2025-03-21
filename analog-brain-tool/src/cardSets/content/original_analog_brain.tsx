@@ -9,6 +9,7 @@ const analogBrainCards: ICardSet = {
     {
       id: '0-1',
       title: 'Do you know what you want?',
+      text: 'Sample text',
       items: [
         { text: 'Yes', nextCardId: '0-2' },
         { text: 'No', nextCardId: '0-3' },

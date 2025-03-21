@@ -48,7 +48,6 @@ const BrainContextProvider: React.FC<{ children: ReactNode }> = ({ children }) =
     cardHistory: new Stack<CardId>([defaultCardId]),
     set: defaultSet.id,
     lang: lang,
-    scrollToCard: urlCard,
   });
   const brainContext: BrainContextData = new BrainContextData(brainState, setBrainState, i18n);
 

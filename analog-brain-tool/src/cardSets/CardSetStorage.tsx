@@ -24,7 +24,7 @@ export const availableSetsPerLanguage: Readonly<Record<LangId, Readonly<ICardSet
       // Check if a default set already exists for this language
       const existingDefault = acc[set.lang].find((s) => s.isDefaultForLanguage);
       if (existingDefault) {
-        throw Error(`Multiple default sets found for language: ${set.lang}`);
+        console.error(`Multiple default sets found for language: ${set.lang}`);
       }
       acc[set.lang].unshift(set);
     } else {

@@ -3,7 +3,8 @@
 @custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
 
 @theme {
-  --spacing-header: 70px;
+  --spacing-header: 60px;
+  --previous-card-offset-y: 3rem; /* 12 * 0.25rem = 3rem */
 
   --color-brain-bg: var(--theme-color-brain-bg);
   --color-brain-text: var(--theme-color-brain-text);

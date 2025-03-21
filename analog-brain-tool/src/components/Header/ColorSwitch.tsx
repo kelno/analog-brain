@@ -4,6 +4,8 @@ import Switch from 'react-switch';
 
 // Doc for the react-switch API https://www.npmjs.com/package/react-switch
 
+// look here for a pretty example to look at: https://help.kagi.com/kagi/
+
 enum LightMode {
   LIGHT = 'light',
   DARK = 'dark',
