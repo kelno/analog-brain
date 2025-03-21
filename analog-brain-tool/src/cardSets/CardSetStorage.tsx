@@ -1,53 +1,84 @@
+import { useState, useEffect } from 'react';
 import ICardSet, { SetId } from '../interfaces/ICardSet';
 import { LangId } from '../store/BrainContextData';
 import DataValidator from '../utils/DataValidator';
+import { useSettings } from '../hooks/useSettings';
+import { toast } from 'sonner';
 
-// gather card sets from content dir
-const modules = import.meta.glob('./content/*.tsx', { eager: true });
-const cardSets: ICardSet[] = Object.values(modules).map(
-  (module) => (module as { default: ICardSet }).default,
-);
+export const useCardSetStorage = () => {
+  const { indexUrl } = useSettings();
+  const [loadingUrl, setLoadingUrl] = useState('');
+  const [loadedURL, setLoadedURL] = useState('');
+  const [availableSetsPerLanguage, setAvailableSetsPerLanguage] = useState<
+    Record<LangId, Readonly<ICardSet[]>>
+  >({});
 
-// first one for each language is the default set
-// It can be any set with isDefaultForLanguage
-export const availableSetsPerLanguage: Readonly<Record<LangId, Readonly<ICardSet[]>>> = cardSets.reduce(
-  (acc, set) => {
-    if (!DataValidator.validateCardSet(set)) {
-      throw Error(`Invalid card set in database: ${set.title} (id: ${set.id})`);
-    }
-    if (!acc[set.lang]) {
-      acc[set.lang] = []; // Initialize array if not present
-    }
-
-    // If the set is the default for its language
-    if (set.isDefaultForLanguage) {
-      // Check if a default set already exists for this language
-      const existingDefault = acc[set.lang].find((s) => s.isDefaultForLanguage);
-      if (existingDefault) {
-        console.error(`Multiple default sets found for language: ${set.lang}`);
+  const loadCardSets = async () => {
+    console.debug(`Loading card sets from ${indexUrl}`);
+    try {
+      const response = await fetch(indexUrl);
+      if (!response.ok) {
+        throw new Error(`Failed to fetch index file, with response ${response}`);
       }
-      acc[set.lang].unshift(set);
-    } else {
-      acc[set.lang].push(set);
+
+      const indexData = await response.json();
+      const cardSets: ICardSet[] = [];
+
+      // Get the base URL from the index file location
+      const baseUrl = indexUrl.substring(0, indexUrl.lastIndexOf('/') + 1);
+
+      for (const fileName of indexData.files) {
+        try {
+          const response = await fetch(`${baseUrl}${fileName}`);
+          if (!response.ok) {
+            throw new Error(`Failed to fetch card set ${fileName}`);
+          }
+          const cardSet = (await response.json()) as ICardSet;
+          if (!DataValidator.validateCardSet(cardSet)) {
+            console.error(`Invalid card set in database: ${cardSet.title} (id: ${cardSet.id})`);
+          }
+          cardSets.push(cardSet);
+        } catch (error) {
+          console.error(`Error loading card set ${fileName}: ${error}`);
+        }
+      }
+
+      const newSets = cardSets.reduce((acc, set) => {
+        if (!acc[set.lang]) acc[set.lang] = [];
+        if (set.isDefaultForLanguage) acc[set.lang].unshift(set);
+        else acc[set.lang].push(set);
+        return acc;
+      }, {} as Record<LangId, ICardSet[]>);
+
+      setAvailableSetsPerLanguage(newSets);
+    } catch (error) {
+      setAvailableSetsPerLanguage({});
+      console.error(`Error loading card sets from URL ${indexUrl}: ${error}`);
+      toast.error(`Error loading card sets from URL ${indexUrl}`);
     }
+    setLoadedURL(indexUrl);
+  };
 
-    return acc;
-  },
-  {} as Record<LangId, ICardSet[]>,
-);
+  useEffect(() => {
+    if (loadingUrl !== indexUrl && indexUrl !== loadedURL) {
+      setLoadingUrl(indexUrl);
+      loadCardSets();
+    }
+  }, [indexUrl, loadingUrl, loadedURL]);
 
-export default class CardSetStorage {
-  // Returned sets have been validated by DataValidator
-  public static getAvailableSets(lang: LangId): Readonly<ICardSet[]> | undefined {
-    return availableSetsPerLanguage[lang];
-  }
-
-  public static getSetById(lang: LangId, id: SetId) {
-    return this.getAvailableSets(lang)?.find((set) => set.id === id);
-  }
-
-  // Returned set has been validated by DataValidator
-  public static getDefaultSetForLanguage(lang: LangId): ICardSet | undefined {
-    return this.getAvailableSets(lang)?.[0];
-  }
-}
+  return {
+    get loadedURL(): string {
+      return loadedURL;
+    },
+    getAvailableSets: (lang: LangId): Readonly<ICardSet[]> | undefined => {
+      return availableSetsPerLanguage[lang];
+    },
+    getSetById: (lang: LangId, id: SetId): ICardSet | undefined => {
+      return availableSetsPerLanguage[lang]?.find((set) => set.id === id);
+    },
+    getDefaultSetForLanguage: (lang: LangId): ICardSet | undefined => {
+      return availableSetsPerLanguage[lang]?.[0];
+    },
+    getAvailableSetsPerLanguage: () => availableSetsPerLanguage,
+  };
+};

@@ -1,20 +1,19 @@
 import React, { useState } from 'react';
-import { useContext } from 'react';
-import BrainContext from '../../store/BrainContext';
-import getAvailableLanguages from '../../language/availableLanguages';
 import languagesInfos from '../../language/languageInfo';
+import { useBrainContext } from '../../hooks/useBrainContext';
+import { useAvailableLanguages } from '../../hooks/useAvailableLanguages';
 
 const LanguageSwitcher: React.FC = () => {
-  const brainContext = useContext(BrainContext);
+  const brainContext = useBrainContext();
   const [isOpen, setIsOpen] = useState(false);
 
-  const changeLanguage = (lng: string) => {
-    brainContext.setLanguage(lng);
+  const changeLanguage = async (lng: string) => {
+    await brainContext.setLanguage(lng);
     setIsOpen(false);
   };
 
   const currentLanguage = brainContext.language;
-  const availableLanguages = getAvailableLanguages();
+  const availableLanguages = useAvailableLanguages();
 
   const currentFlag = languagesInfos[currentLanguage]?.flag || currentLanguage;
 
@@ -35,7 +34,7 @@ const LanguageSwitcher: React.FC = () => {
             return (
               <button
                 key={langCode}
-                onClick={() => changeLanguage(langCode)}
+                onClick={async () => await changeLanguage(langCode)}
                 className="flex items-center w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition-colors"
                 aria-label={`Switch to ${languageInfo?.name || langCode}`}
               >

@@ -1,11 +1,11 @@
-import { FC, useContext } from 'react';
+import { FC } from 'react';
 import LeftArrowSVG from '../SVGs/LeftArrowSVG';
 import UpArrowSVG from '../SVGs/UpArrowSVG';
 import CardSelectorButton from './CardSelectorButton';
 import ShareButtonSVG from '../SVGs/ShareButtonSVG';
-import BrainContext from '../../store/BrainContext';
 import useShare from '../../hooks/useShare';
 import { useTranslation } from 'react-i18next';
+import { useBrainContext } from '../../hooks/useBrainContext';
 
 interface CardSelectorProps {
   extraClassName?: string;
@@ -20,7 +20,7 @@ const CardSelector: FC<CardSelectorProps> = ({
   handleClickBackToTop,
   disableBackToTop,
 }) => {
-  const brainContext = useContext(BrainContext);
+  const brainContext = useBrainContext();
   const { t } = useTranslation();
 
   const getShareURL = () => {

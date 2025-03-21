@@ -1,17 +1,17 @@
-import { FC, useContext } from 'react';
+import { FC } from 'react';
 import ICardSet from '../../interfaces/ICardSet';
 import Card from './Card';
 import CardNavigation from './CardNavigation';
-import BrainContext from '../../store/BrainContext';
 import { CardId } from '../../interfaces/ICard';
 import DataValidator from '../../utils/DataValidator';
+import { useBrainContext } from '../../hooks/useBrainContext';
 
 interface CardSetProps {
   cardSet: ICardSet;
 }
 
 const CardSet: FC<CardSetProps> = ({ cardSet }) => {
-  const context = useContext(BrainContext);
+  const context = useBrainContext();
 
   const previousCardId = context.getPreviousCard();
 
@@ -21,7 +21,6 @@ const CardSet: FC<CardSetProps> = ({ cardSet }) => {
     );
 
   const handleClickCard = (cardId: CardId, isPrevious: boolean) => {
-    console.log('click');
     if (isPrevious) context.popCurrentCard();
     else context.selectCard(cardId, true);
   };

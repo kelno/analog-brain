@@ -3,9 +3,10 @@ import { CardId } from '../interfaces/ICard';
 import UrlManager from '../utils/UrlManager';
 import ICardSet, { SetId } from '../interfaces/ICardSet';
 import { i18n } from 'i18next';
-import CardSetStorage from '../cardSets/CardSetStorage';
+import { useCardSetStorage } from '../cardSets/CardSetStorage';
 
 export interface BrainContextState {
+  loaded: boolean;
   cardHistory: Stack<CardId>; // the top is the current card
   set: SetId;
   lang: LangId;
@@ -17,15 +18,18 @@ export class BrainContextData {
   private state: BrainContextState;
   private setState: (state: BrainContextState) => void;
   private i18n: i18n;
+  private cardSetStorage: ReturnType<typeof useCardSetStorage>;
 
   constructor(
     brainState: BrainContextState,
     setBrainState: (brainState: BrainContextState) => void,
     i18n: i18n,
+    cardSetStorage: ReturnType<typeof useCardSetStorage>,
   ) {
     this.state = brainState;
     this.setState = setBrainState;
     this.i18n = i18n;
+    this.cardSetStorage = cardSetStorage;
   }
 
   // properly triggers state update for the card history
@@ -99,8 +103,8 @@ export class BrainContextData {
     this.setState({ ...this.state, set: newSet.id, cardHistory: newCardHistory });
   }
 
-  public selectSet = (setId: SetId) => {
-    const newSet = CardSetStorage.getSetById(this.language, setId);
+  public selectSet = async (setId: SetId) => {
+    const newSet = this.cardSetStorage.getSetById(this.language, setId);
     if (!newSet) {
       console.error('Failed to select set with id + ' + setId);
       return;
@@ -110,7 +114,7 @@ export class BrainContextData {
 
   public get currentSet(): ICardSet | undefined {
     console.debug('BrainContext: get currentSet from selected ' + this.state.set);
-    return CardSetStorage.getSetById(this.language, this.state.set);
+    return this.cardSetStorage.getSetById(this.language, this.state.set);
   }
 
   public get currentSetId(): SetId {
@@ -121,9 +125,13 @@ export class BrainContextData {
     return this.state.lang;
   }
 
+  public get loaded(): boolean {
+    return this.state.loaded;
+  }
+
   // returns success
-  public setLanguage = (lang: LangId): boolean => {
-    const defaultSet = CardSetStorage.getDefaultSetForLanguage(lang);
+  public setLanguage = async (lang: LangId): Promise<boolean> => {
+    const defaultSet = this.cardSetStorage.getDefaultSetForLanguage(lang);
     if (defaultSet === undefined) {
       console.error(`Can't switch language. No available default set for chosen lang ${lang}`);
       return false;

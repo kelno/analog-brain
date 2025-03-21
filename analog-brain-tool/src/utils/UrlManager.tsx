@@ -42,8 +42,11 @@ export class UrlManager {
 
   // Without page reload
   public static clearURLParams() {
-    const newUrl = window.location.origin + window.location.pathname;
-    window.history.replaceState({}, document.title, newUrl);
+    window.history.replaceState({}, document.title, UrlManager.getBaseURL());
+  }
+
+  public static getBaseURL(): string {
+    return window.location.origin + window.location.pathname;
   }
 }
 

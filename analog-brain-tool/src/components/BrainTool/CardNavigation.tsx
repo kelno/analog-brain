@@ -1,11 +1,11 @@
-import { FC, useContext } from 'react';
+import { FC } from 'react';
 import LeftArrowSVG from '../SVGs/LeftArrowSVG';
 import UpArrowSVG from '../SVGs/UpArrowSVG';
 import ShareButtonSVG from '../SVGs/ShareButtonSVG';
 import CardSelectorButton from './CardSelectorButton';
-import BrainContext from '../../store/BrainContext';
 import useShare from '../../hooks/useShare';
 import { useTranslation } from 'react-i18next';
+import { useBrainContext } from '../../hooks/useBrainContext';
 
 interface CardNavigationProps {
   handleClickPrevious: () => void;
@@ -18,7 +18,7 @@ const CardNavigation: FC<CardNavigationProps> = ({
   handleClickBackToTop,
   disableBackToTop,
 }) => {
-  const brainContext = useContext(BrainContext);
+  const brainContext = useBrainContext();
   const { t } = useTranslation();
   const { share } = useShare();
 
