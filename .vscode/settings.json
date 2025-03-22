@@ -1,0 +1,11 @@
+{
+  "json.schemas": [
+    {
+        "fileMatch": [
+            "**/sets/data/*.json"
+        ],
+        "url": "./analog-brain-tool/public/sets/schema.json",
+        "error": true
+    }
+  ]
+}

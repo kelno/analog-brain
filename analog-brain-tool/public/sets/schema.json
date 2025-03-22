@@ -39,23 +39,29 @@
             "type": "object"
         }
     },
+    "description": "A card set is a collection of cards that together form a decision tree.",
     "properties": {
         "cards": {
+            "description": "The list of cards in this set.",
             "items": {
                 "$ref": "#/definitions/ICard"
             },
             "type": "array"
         },
         "id": {
+            "description": "A unique string to identify the set. Won't be shown to the user.",
             "type": "string"
         },
         "isDefaultForLanguage": {
+            "description": "Whether this set should be the default one for the specified language.",
             "type": "boolean"
         },
         "lang": {
+            "description": "Language code",
             "type": "string"
         },
         "title": {
+            "description": "Set title for the user to identify the set",
             "type": "string"
         }
     },
