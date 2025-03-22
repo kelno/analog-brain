@@ -1,7 +1,7 @@
 import { Stack } from '@datastructures-js/stack';
 import { CardId } from '../interfaces/ICard';
 import UrlManager from '../utils/UrlManager';
-import ICardSet, { SetId } from '../interfaces/ICardSet';
+import { ICardSet, SetId } from '../interfaces/ICardSet';
 import { i18n } from 'i18next';
 import { useCardSetStorage } from '../cardSets/CardSetStorage';
 

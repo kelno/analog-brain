@@ -1,9 +1,8 @@
 import { FC } from 'react';
-import ICardSet from '../../interfaces/ICardSet';
+import { ICardSet } from '../../interfaces/ICardSet';
 import Card from './Card';
 import CardNavigation from './CardNavigation';
 import { CardId } from '../../interfaces/ICard';
-import DataValidator from '../../utils/DataValidator';
 import { useBrainContext } from '../../hooks/useBrainContext';
 
 interface CardSetProps {
@@ -14,11 +13,6 @@ const CardSet: FC<CardSetProps> = ({ cardSet }) => {
   const context = useBrainContext();
 
   const previousCardId = context.getPreviousCard();
-
-  if (!DataValidator.validateCardSet(cardSet))
-    return (
-      <div className="py-6">Found invalid data within the card set. Check console for more information.</div>
-    );
 
   const handleClickCard = (cardId: CardId, isPrevious: boolean) => {
     if (isPrevious) context.popCurrentCard();

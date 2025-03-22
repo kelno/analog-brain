@@ -1,12 +1,14 @@
 import { LangId } from '../store/BrainContextData';
-import ICard from './ICard';
+import { ICard } from './ICard';
 
 export type SetId = string;
 
-export default interface ICardSet {
+export interface ICardSet {
   id: SetId;
   title: string;
   lang: LangId;
   isDefaultForLanguage: boolean;
   cards: ICard[];
 }
+
+export default ICardSet; 

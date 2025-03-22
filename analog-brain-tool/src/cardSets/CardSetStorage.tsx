@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react';
-import ICardSet, { SetId } from '../interfaces/ICardSet';
+import { ICardSet, SetId } from '../interfaces/ICardSet';
 import { LangId } from '../store/BrainContextData';
-import DataValidator from '../utils/DataValidator';
 import { useSettings } from '../hooks/useSettings';
 import { toast } from 'sonner';
+import useDataValidator from '../hooks/useDataValidator';
 
 export const useCardSetStorage = () => {
   const { indexUrl } = useSettings();
@@ -12,11 +12,12 @@ export const useCardSetStorage = () => {
   const [availableSetsPerLanguage, setAvailableSetsPerLanguage] = useState<
     Record<LangId, Readonly<ICardSet[]>>
   >({});
+  const { validateCardSet } = useDataValidator();
 
   const loadCardSets = async () => {
     console.debug(`Loading card sets from ${indexUrl}`);
     try {
-      const response = await fetch(indexUrl);
+      const response = await fetch(indexUrl, { cache: 'no-store' });
       if (!response.ok) {
         throw new Error(`Failed to fetch index file, with response ${response}`);
       }
@@ -29,13 +30,17 @@ export const useCardSetStorage = () => {
 
       for (const fileName of indexData.files) {
         try {
-          const response = await fetch(`${baseUrl}${fileName}`);
+          const response = await fetch(`${baseUrl}${fileName}`, { cache: 'no-store' });
           if (!response.ok) {
             throw new Error(`Failed to fetch card set ${fileName}`);
           }
           const cardSet = (await response.json()) as ICardSet;
-          if (!DataValidator.validateCardSet(cardSet)) {
-            console.error(`Invalid card set in database: ${cardSet.title} (id: ${cardSet.id})`);
+          const result = validateCardSet(cardSet);
+          if (result.isValid === false) {
+            console.error(
+              `Invalid card set in database: ${cardSet.title} (id: ${cardSet.id}). Error: ${result.errorMessage}`,
+            );
+            continue;
           }
           cardSets.push(cardSet);
         } catch (error) {

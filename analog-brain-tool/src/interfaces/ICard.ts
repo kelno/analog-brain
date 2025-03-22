@@ -7,7 +7,7 @@ export interface ICardItem {
   borderColor?: string;
 }
 
-export default interface ICard {
+export interface ICard {
   id: CardId;
   title: string;
   text?: string;

@@ -1,0 +1,64 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "definitions": {
+        "ICard": {
+            "properties": {
+                "id": {
+                    "type": "string"
+                },
+                "items": {
+                    "items": {
+                        "$ref": "#/definitions/ICardItem"
+                    },
+                    "type": "array"
+                },
+                "text": {
+                    "type": "string"
+                },
+                "title": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "ICardItem": {
+            "properties": {
+                "borderColor": {
+                    "type": "string"
+                },
+                "link": {
+                    "type": "string"
+                },
+                "nextCardId": {
+                    "type": "string"
+                },
+                "text": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        }
+    },
+    "properties": {
+        "cards": {
+            "items": {
+                "$ref": "#/definitions/ICard"
+            },
+            "type": "array"
+        },
+        "id": {
+            "type": "string"
+        },
+        "isDefaultForLanguage": {
+            "type": "boolean"
+        },
+        "lang": {
+            "type": "string"
+        },
+        "title": {
+            "type": "string"
+        }
+    },
+    "type": "object"
+}
+

@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import ICard, { CardId, ICardItem } from '../../interfaces/ICard';
+import { ICard, CardId, ICardItem } from '../../interfaces/ICard';
 import CardItem from './CardItem';
 
 interface CardProps {
