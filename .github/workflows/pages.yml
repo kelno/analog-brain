@@ -24,6 +24,9 @@ concurrency:
   group: "pages"
   cancel-in-progress: false
 
+env:
+  SUBDIRECTORY: ./analog-brain-tool
+  
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -35,18 +38,16 @@ jobs:
         with:
           node-version: "20"
           cache: npm
-      - name: Setup Pages
-        uses: actions/configure-pages@v5
-        with:
-          static_site_generator: static
       - name: Install dependencies
         run: npm ci
+        working-directory: ${{ env.SUBDIRECTORY }}
       - name: Build
         run: npx --no-install build
+        working-directory: ${{ env.SUBDIRECTORY }}
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: ./dist
+          path: ${{ env.SUBDIRECTORY }}/dist
 
   deploy:
     runs-on: ubuntu-latest
@@ -59,4 +60,5 @@ jobs:
         npm run deploy -- -u "github-actions-bot <support+actions@github.com>"
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      working-directory: ${{ env.SUBDIRECTORY }}
     
