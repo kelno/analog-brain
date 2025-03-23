@@ -43,9 +43,9 @@ function App() {
               </Section>
 */}
 
-              <Section id="tool" title={t('tool.title')}>
-                <BrainTool />
-              </Section>
+              {/* <Section id="tool" title={t('tool.title')}> */}
+              <BrainTool />
+              {/* </Section> */}
 
               <Settings />
 
