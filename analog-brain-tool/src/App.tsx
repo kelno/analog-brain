@@ -1,7 +1,7 @@
 import './App.css';
 import BrainTool from './components/BrainTool/BrainTool';
-import HowTo from './components/HowTo';
-import Intro from './components/Intro';
+/*import HowTo from './components/HowTo';
+import Intro from './components/Intro';*/
 import Outro from './components/Outro';
 import Section from './components/Section';
 import { Toaster } from 'sonner';
@@ -33,9 +33,7 @@ function App() {
             <Header />
             <div className="px-2 max-w-250 mx-auto mt-header pt-2">
               <Toaster position="bottom-right" />
-
-              <Settings />
-
+              {/*
               <Section id="intro" title={t('intro.title')}>
                 <Intro />
               </Section>
@@ -43,10 +41,13 @@ function App() {
               <Section id="howto" title={t('howto.title')}>
                 <HowTo />
               </Section>
+*/}
 
               <Section id="tool" title={t('tool.title')}>
                 <BrainTool />
               </Section>
+
+              <Settings />
 
               <Section id="outro" title={t('about.title')}>
                 <Outro />
