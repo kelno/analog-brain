@@ -43,7 +43,7 @@ jobs:
         run: npm ci
         working-directory: ${{ env.SUBDIRECTORY }}
       - name: Build
-        run: npx --no-install build
+        run: npm run build
         working-directory: ${{ env.SUBDIRECTORY }}
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
