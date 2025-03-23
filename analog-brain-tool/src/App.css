@@ -24,3 +24,7 @@
     --theme-color-brain-secondary: theme('colors.yellow-200');
   }
 }
+
+.brain-a-link {
+  @apply text-blue-400 hover:underline;
+}

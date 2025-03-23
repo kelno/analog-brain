@@ -12,5 +12,8 @@ export default defineConfig({
   build: {
     // make sure we have a fixed out dir for CI/CD
     outDir: './dist',
+  },
+  define: {
+    BUILD_MS_TIME_SINCE_EPOCH: JSON.stringify(Date.now())
   }
 })

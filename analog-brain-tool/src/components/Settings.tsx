@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
 import { useSettings } from '../hooks/useSettings';
+import { useTranslation } from 'react-i18next';
 
 const Settings: React.FC = () => {
   const { indexUrl, setIndexUrl } = useSettings();
   const [inputURL, setCustomUrl] = useState(indexUrl);
+
+  const { t } = useTranslation();
 
   const handleUrlChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setCustomUrl(event.target.value);
@@ -16,11 +19,11 @@ const Settings: React.FC = () => {
 
   return (
     <div className="bg-white dark:bg-slate-800 rounded-lg p-6 shadow-md mb-6">
-      <h2 className="text-2xl font-bold mb-4 text-gray-800 dark:text-white">Settings</h2>
+      <h2 className="text-2xl font-bold mb-4 text-gray-800 dark:text-white"> {t('settings.title')}</h2>
       <div className="space-y-4">
         <div className="flex flex-col">
           <label className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-            Custom Index URL:
+            {t('settings.cardSetsURL')}
           </label>
           <input
             type="text"
@@ -33,7 +36,7 @@ const Settings: React.FC = () => {
           onClick={handleSave}
           className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-md text-sm transition-colors"
         >
-          Save
+          {t('settings.save')}
         </button>
       </div>
     </div>

@@ -1,9 +1,25 @@
+import { Trans, useTranslation } from 'react-i18next';
+
 const Outro = () => {
+  const { t } = useTranslation();
+
+  const date = BUILD_MS_TIME_SINCE_EPOCH ? new Date(BUILD_MS_TIME_SINCE_EPOCH) : undefined;
+  const formattedDate = date?.toISOString().split('T')[0]; // "YYYY-MM-DD" format
+
   return (
     <>
-      <p>Last updated: 12 Febrary, 2025</p>
-      <p>This tool is adapted from... yada yada</p>
-      Submit feedback at <a href="http://adhdanalogbrain.tumblr.com">adhdanalogbrain.tumblr.com</a>
+      {formattedDate && (
+        <p>
+          {t('footer.lastUpdated')} {formattedDate}
+        </p>
+      )}
+
+      <Trans i18nKey="footer.adaptedFrom">
+        This tool is adapted from
+        <a href="http://adhdanalogbrain.tumblr.com" className="brain-a-link">
+          adhdanalogbrain.tumblr.com
+        </a>
+      </Trans>
     </>
   );
 };
