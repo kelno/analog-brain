@@ -9,4 +9,8 @@ export default defineConfig({
     tailwindcss()
   ],
   base: "/analog-brain",
+  build: {
+    // make sure we have a fixed out dir for CI/CD
+    outDir: './dist',
+  }
 })
