@@ -17,13 +17,22 @@
     "title": "À propos"
   },
   "toast": {
-    "noCardSetsForLang": "Aucun jeu de cartes disponible pour la langue {lang}",
+    "noCardSetsForLang": "Aucun jeu de cartes disponible pour la langue {{lang}}",
     "share": {
       "success": "URL copiée dans le presse-papiers",
       "errors": {
-        "generic": "Erreur lors de la copie dans le presse-papiers : {error}",
+        "generic": "Erreur lors de la copie dans le presse-papiers : {{error}}",
         "WebAPI": "L'API Web Share n'est pas supportée"
       }
     }
+  },
+  "footer": {
+    "lastUpdated": "Dernière mise à jour :",
+    "adaptedFrom": "Cet outil est adapté de <1>adhdanalogbrain.tumblr.com</1>."
+  },
+  "settings": {
+    "title": "Paramètres",
+    "cardSetsURL": "Source externe des jeux de cartes :",
+    "save": "Sauvegarder"
   }
 }

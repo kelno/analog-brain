@@ -10,25 +10,34 @@
     "title": "How to use the Analog Brain"
   },
   "tool": {
-    "title" : "The Tool - Start here",
+    "title": "The Tool - Start here",
     "cardset": "Card set"
   },
   "about": {
     "title": "About"
   },
   "toast": {
-    "noCardSetsForLang" : "No available card sets for language {lang}", 
-    "share" : {
+    "noCardSetsForLang": "No available card sets for language {{lang}}",
+    "share": {
       "title": "The Analog Brain Tool",
       "description": "Overcome your executive dysfunction",
-      "success" : "URL copied to clipboard",
-      "errors" : {
-        "generic" : "Error copying to clipboard: {error}",
-        "WebAPI" : "Web Share API not supported"
+      "success": "URL copied to clipboard",
+      "errors": {
+        "generic": "Error copying to clipboard: {{error}}",
+        "WebAPI": "Web Share API not supported"
       }
     }
   },
   "label": {
     "lightModeSwitch": "Light/Dark Mode Switch"
+  },
+  "footer": {
+    "lastUpdated": "Last updated:",
+    "adaptedFrom": "This tool is adapted from <1>adhdanalogbrain.tumblr.com</1>."
+  },
+  "settings": {
+    "title": "Settings",
+    "cardSetsURL": "Remote Dataset URL:",
+    "save": "Save"
   }
 }
