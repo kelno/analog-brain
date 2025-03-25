@@ -3,18 +3,23 @@ import { useSettings } from '../hooks/useSettings';
 import { useTranslation } from 'react-i18next';
 
 const Settings: React.FC = () => {
-  const { indexUrl, setIndexUrl } = useSettings();
-  const [inputURL, setCustomUrl] = useState(indexUrl);
+  const { indexUrl, defaultUrl, setIndexUrl, resetIndexUrl } = useSettings();
+  const isDefaultUrl = indexUrl === defaultUrl;
+  const [inputURL, setInputUrl] = useState(isDefaultUrl ? '' : indexUrl);
 
   const { t } = useTranslation();
 
   const handleUrlChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setCustomUrl(event.target.value);
+    setInputUrl(event.target.value);
   };
 
   const handleSave = () => {
     setIndexUrl(inputURL);
-    localStorage.setItem('indexUrl', inputURL);
+  };
+
+  const handleReset = () => {
+    resetIndexUrl();
+    setInputUrl('');
   };
 
   return (
@@ -29,15 +34,24 @@ const Settings: React.FC = () => {
             type="text"
             value={inputURL}
             onChange={handleUrlChange}
+            placeholder={defaultUrl}
             className="border rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-slate-700 dark:border-slate-600 dark:text-white"
           />
         </div>
-        <button
-          onClick={handleSave}
-          className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-md text-sm transition-colors"
-        >
-          {t('settings.save')}
-        </button>
+        <div className="space-x-4">
+          <button
+            onClick={handleSave}
+            className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-md text-sm transition-colors"
+          >
+            {t('settings.save')}
+          </button>
+          <button
+            onClick={handleReset}
+            className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-md text-sm transition-colors"
+          >
+            {t('settings.reset')}
+          </button>
+        </div>
       </div>
     </div>
   );

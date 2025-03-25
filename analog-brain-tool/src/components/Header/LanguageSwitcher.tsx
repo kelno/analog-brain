@@ -1,27 +1,31 @@
 import React, { useState } from 'react';
 import languagesInfos from '../../language/languageInfo';
-import { useBrainContext } from '../../hooks/useBrainContext';
 import { useAvailableLanguages } from '../../hooks/useAvailableLanguages';
+import { useAppContext } from '../../hooks/useAppContext';
 
 const LanguageSwitcher: React.FC = () => {
-  const brainContext = useBrainContext();
+  const appContext = useAppContext();
   const [isOpen, setIsOpen] = useState(false);
 
-  const changeLanguage = async (lng: string) => {
-    await brainContext.setLanguage(lng);
+  const changeLanguage = (lng: string) => {
+    if (appContext.language != lng) appContext.setLanguage(lng);
+
     setIsOpen(false);
   };
 
-  const currentLanguage = brainContext.language;
+  const currentLanguage = appContext.language;
   const availableLanguages = useAvailableLanguages();
 
-  const currentFlag = languagesInfos[currentLanguage]?.flag || currentLanguage;
+  if (!languagesInfos[currentLanguage]) {
+    console.error(`Missing language info for language ${currentLanguage}`);
+  }
+  const currentFlag = languagesInfos[currentLanguage]?.flag || currentLanguage; // fallback to language code if no flag is available
 
   return (
     <div className="relative">
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className=" px-4 py-2 border-2 border-brain-secondary rounded-2xl shadow-lg hover:bg-brain-secondary"
+        className="px-4 py-2 border-2 border-brain-secondary rounded-2xl shadow-lg hover:bg-brain-secondary"
       >
         {currentFlag}
       </button>
@@ -34,7 +38,7 @@ const LanguageSwitcher: React.FC = () => {
             return (
               <button
                 key={langCode}
-                onClick={async () => await changeLanguage(langCode)}
+                onClick={() => changeLanguage(langCode)}
                 className="flex items-center w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition-colors"
                 aria-label={`Switch to ${languageInfo?.name || langCode}`}
               >

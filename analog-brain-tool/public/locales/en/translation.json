@@ -38,6 +38,8 @@
   "settings": {
     "title": "Settings",
     "cardSetsURL": "Remote Dataset URL:",
-    "save": "Save"
-  }
+    "save": "Save",
+    "reset": "Reset"
+  },
+  "brainLoading": "Loading..."
 }

@@ -1,15 +1,12 @@
 import { Stack } from '@datastructures-js/stack';
 import { CardId } from '../interfaces/ICard';
-import UrlManager from '../utils/UrlManager';
+import { UrlManager } from '../utils/UrlManager/UrlManager';
 import { ICardSet, SetId } from '../interfaces/ICardSet';
-import { i18n } from 'i18next';
-import { useCardSetStorage } from '../cardSets/CardSetStorage';
+import { useCardSets } from '../cardSets/useCardSets';
 
 export interface BrainContextState {
-  loaded: boolean;
   cardHistory: Stack<CardId>; // the top is the current card
-  set: SetId;
-  lang: LangId;
+  currentSetId: SetId;
 }
 
 export type LangId = string;
@@ -17,19 +14,19 @@ export type LangId = string;
 export class BrainContextData {
   private state: BrainContextState;
   private setState: (state: BrainContextState) => void;
-  private i18n: i18n;
-  private cardSetStorage: ReturnType<typeof useCardSetStorage>;
+  private cardSetStorage: ReturnType<typeof useCardSets>;
+  private language: LangId;
 
   constructor(
     brainState: BrainContextState,
     setBrainState: (brainState: BrainContextState) => void,
-    i18n: i18n,
-    cardSetStorage: ReturnType<typeof useCardSetStorage>,
+    cardSetStorage: ReturnType<typeof useCardSets>,
+    language: LangId,
   ) {
     this.state = brainState;
     this.setState = setBrainState;
-    this.i18n = i18n;
     this.cardSetStorage = cardSetStorage;
+    this.language = language;
   }
 
   // properly triggers state update for the card history
@@ -43,6 +40,7 @@ export class BrainContextData {
     return this.state.cardHistory;
   }
 
+  // can throw
   public get currentCard(): CardId {
     if (this.state.cardHistory.isEmpty()) throw Error('Card History is empty and should never be');
 
@@ -100,10 +98,10 @@ export class BrainContextData {
     const firstCardId = newSet.cards[0].id;
     const newCardHistory = new Stack<CardId>([firstCardId]);
 
-    this.setState({ ...this.state, set: newSet.id, cardHistory: newCardHistory });
+    this.setState({ ...this.state, currentSetId: newSet.id, cardHistory: newCardHistory });
   }
 
-  public selectSet = async (setId: SetId) => {
+  public selectSet = (setId: SetId) => {
     const newSet = this.cardSetStorage.getSetById(this.language, setId);
     if (!newSet) {
       console.error('Failed to select set with id + ' + setId);
@@ -113,42 +111,15 @@ export class BrainContextData {
   };
 
   public get currentSet(): ICardSet | undefined {
-    console.debug('BrainContext: get currentSet from selected ' + this.state.set);
-    return this.cardSetStorage.getSetById(this.language, this.state.set);
+    console.debug('BrainContext: get currentSet from selected ' + this.state.currentSetId);
+    return this.cardSetStorage.getSetById(this.language, this.state.currentSetId);
   }
 
   public get currentSetId(): SetId {
-    return this.state.set;
+    return this.state.currentSetId;
   }
-
-  public get language(): LangId {
-    return this.state.lang;
-  }
-
-  public get loaded(): boolean {
-    return this.state.loaded;
-  }
-
-  // returns success
-  public setLanguage = async (lang: LangId): Promise<boolean> => {
-    const defaultSet = this.cardSetStorage.getDefaultSetForLanguage(lang);
-    if (defaultSet === undefined) {
-      console.error(`Can't switch language. No available default set for chosen lang ${lang}`);
-      return false;
-    }
-
-    console.debug('BrainContext: Set language ' + lang);
-    this.state.lang = lang;
-    this.i18n.changeLanguage(lang);
-
-    this._selectSet(defaultSet);
-
-    // already saved by _selectSet call
-    // this.setState({ ...this.state });
-    return true;
-  };
 
   public getShareURLParams = () => {
-    return UrlManager.getShareURLParams(this.state.set, this.currentCard, this.state.lang);
+    return UrlManager.getShareURLParams(this.state.currentSetId, this.currentCard, this.language);
   };
 }

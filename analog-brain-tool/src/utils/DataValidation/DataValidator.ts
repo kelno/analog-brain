@@ -1,13 +1,12 @@
-import { ICardSet } from '../interfaces/ICardSet';
+import { ICardSet } from '../../interfaces/ICardSet';
 
 interface ValidationResult {
   isValid: boolean;
   errorMessage?: string;
 }
 
-const useDataValidator = () => {
-
-  const validateCardSet = (cardSet: ICardSet): ValidationResult => {
+export class DataValidator {
+  public static validateCardSet = (cardSet: ICardSet): ValidationResult => {
     if (cardSet.cards.length === 0) {
       return { isValid: false, errorMessage: 'Found empty card set with id ' + cardSet.id };
     }
@@ -23,8 +22,4 @@ const useDataValidator = () => {
 
     return { isValid: true };
   };
-
-  return { validateCardSet };
 };
-
-export default useDataValidator;

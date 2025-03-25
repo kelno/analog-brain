@@ -1,25 +1,23 @@
 import CardSet from './CardSet';
 import { useTranslation } from 'react-i18next';
-import { toast } from 'sonner';
-import { useCardSetStorage } from '../../cardSets/CardSetStorage';
 import { useBrainContext } from '../../hooks/useBrainContext';
+import { useAppContext } from '../../hooks/useAppContext';
+import { useCardSets } from '../../cardSets/useCardSets';
 
 const BrainTool = () => {
+  const appContext = useAppContext();
   const brainContext = useBrainContext();
   const { t } = useTranslation();
-  const cardSetStorage = useCardSetStorage();
+  const cardSetStorage = useCardSets();
 
-  if (!brainContext.loaded) {
-    return <div>(No card sets loaded)</div>;
-  }
+  const lang = appContext.language;
 
-  const lang = brainContext.language;
-  if (!lang) throw new Error('BrainTool: Language is not set in BrainContext. This should never happen.');
-
+  // this should already be checked and prevented by BrainContext
   const availableSets = cardSetStorage.getAvailableSets(lang);
   if (!availableSets) {
-    console.error('No available card sets for language ' + lang);
-    toast.error(t('toast.noCardSetsForLang', { lang }));
+    const error = `'No available card sets for language ${lang}`;
+    console.error(error);
+    throw Error(error);
   }
 
   const handleSelectSet = (event: React.ChangeEvent<HTMLSelectElement>) => {
@@ -37,9 +35,6 @@ const BrainTool = () => {
   };
 
   const cardSet = brainContext.currentSet;
-  // console.debug('BrainTool: Rendering BrainTool with cardSet:');
-  // console.debug(cardSet);
-
   const currentSetId = cardSet?.id;
 
   return (

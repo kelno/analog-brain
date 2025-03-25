@@ -1,9 +1,10 @@
 
-import { useContext } from 'react';
-import BrainContext from '../store/BrainContext';
+import { use } from 'react';
+import { BrainContext } from '../store/BrainContext';
 
+// can throw
 export const useBrainContext = () => {
-  const context = useContext(BrainContext);
+  const context = use(BrainContext);
   if (!context) {
     throw new Error('useBrainContext must be used within a BrainContextProvider');
   }

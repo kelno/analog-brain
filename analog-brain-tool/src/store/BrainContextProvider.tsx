@@ -1,22 +1,49 @@
-import { useState, ReactNode, useEffect } from 'react';
+import { useState, ReactNode } from 'react';
 import { BrainContextData, BrainContextState, LangId } from './BrainContextData';
-import BrainContext from './BrainContext';
+import { BrainContext } from './BrainContext';
 import { Stack } from '@datastructures-js/stack';
 import { CardId } from '../interfaces/ICard';
-import UrlManager from '../utils/UrlManager';
+import { UrlManager } from '../utils/UrlManager/UrlManager';
+import { useAppContext } from '../hooks/useAppContext';
+import { UrlParams } from '../utils/UrlManager/UrlParams';
+import { toast } from 'sonner';
 import { useTranslation } from 'react-i18next';
-import { useCardSetStorage } from '../cardSets/CardSetStorage';
+import { BrainToolError, BrainToolErrorType } from '../components/BrainTool/BrainToolErrorHandler';
+import { useCardSets } from '../cardSets/useCardSets';
+import { AppContextData } from './AppContextData';
 
-const BrainContextProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
-  const { i18n } = useTranslation();
-  const cardSetStorage = useCardSetStorage();
+export const BrainContextProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
+  const cardSetStorage = useCardSets();
+  const appContext = useAppContext();
 
-  const getSetFromURL = (lang: LangId, urlCardSetId: string) => {
+  // We recreate the brain context every time sets or lang changes
+  const key = `${cardSetStorage.lastUpdateId}_${appContext.language}`;
+
+  return (
+    <BrainContextCore cardSetStorage={cardSetStorage} appContext={appContext} key={key}>
+      {children}
+    </BrainContextCore>
+  );
+};
+
+// can throw
+// This provider will generate a fresh new context every time it's re rendered
+export const BrainContextCore: React.FC<{
+  children: ReactNode;
+  appContext: AppContextData;
+  cardSetStorage: ReturnType<typeof useCardSets>;
+}> = ({ children, appContext, cardSetStorage }) => {
+  const { t } = useTranslation();
+  const lang = appContext.language;
+
+  console.debug(`BrainContextProvider: Rendering`);
+
+  const validateSetFromUrl = (lang: LangId, urlCardSetId: string) => {
     if (urlCardSetId) {
       const set = cardSetStorage.getSetById(lang, urlCardSetId);
       if (!set) {
-        console.error(
-          `Trying to load set ${urlCardSetId} from URL but couldn't find it for language ${lang}`,
+        console.log(
+          `BrainContextProvider: Trying to load set ${urlCardSetId} from URL but couldn't find it for language ${lang}`,
         );
       }
       return set;
@@ -24,70 +51,44 @@ const BrainContextProvider: React.FC<{ children: ReactNode }> = ({ children }) =
     return undefined;
   };
 
-  const initializeContext = () => {
-    setBrainState({ ...brainState, loaded: false });
+  const urlCurrentCard = UrlManager.consumeParam(UrlParams.CARD);
+  const urlCardSetId = UrlManager.consumeParam(UrlParams.SET);
 
-    // Extract URL parameters once
-    const urlLanguage = UrlManager.getLanguage();
-    const urlCurrentCard = UrlManager.getCurrentCard();
-    const urlCardSetId = UrlManager.getCardSet();
-    UrlManager.clearURLParams();
-
-    let lang = urlLanguage ?? i18n.language;
-
-    const defaultSetForLanguage = cardSetStorage.getDefaultSetForLanguage(lang);
-    if (!defaultSetForLanguage) {
-      const availableSets = cardSetStorage.getAvailableSetsPerLanguage();
-      if (Object.keys(availableSets).length === 0) {
-        console.error('No available sets, cant start BrainContext');
-        return;
-      }
-      const fallbackLanguage = Object.keys(availableSets)[0];
-      console.error(`No available sets for chosen lang ${lang}. Falling back to ${fallbackLanguage}`);
-      lang = fallbackLanguage;
+  const defaultSetForLanguage = cardSetStorage.getDefaultSetForLanguage(lang);
+  if (!defaultSetForLanguage) {
+    const availableSets = cardSetStorage.getAvailableSetsPerLanguage();
+    if (Object.keys(availableSets).length === 0) {
+      const error = 'Could not find any available sets, cant start BrainContext';
+      console.error(error);
+      throw new BrainToolError(error, BrainToolErrorType.FAILED_TO_LOAD_SETS);
     }
 
-    const setFromURL = urlCardSetId ? getSetFromURL(lang, urlCardSetId) : undefined;
-    const defaultSet = setFromURL ?? defaultSetForLanguage;
+    const fallbackLanguage = Object.keys(availableSets)[0];
+    const error = `No default set for language ${lang}. Falling back to ${fallbackLanguage}`;
+    console.error(error);
+    toast.error(t('toast.noCardSetsForLang', { lang }));
+    appContext.setLanguage(fallbackLanguage);
+    throw new Error(error);
+    // we'll be redrawn when the language changes
+  }
 
-    if (!defaultSet) {
-      console.error('No valid card set found, cant start BrainContext.');
-      return;
-    }
+  const setFromURL = urlCardSetId ? validateSetFromUrl(lang, urlCardSetId) : undefined;
+  const defaultSet = setFromURL ?? defaultSetForLanguage;
 
-    const urlCard = setFromURL ? urlCurrentCard : null;
-    const defaultCardId = urlCard ?? defaultSet.cards[0].id;
-
-    i18n.changeLanguage(lang);
-
-    setBrainState({
-      loaded: true,
-      cardHistory: new Stack<CardId>([defaultCardId]),
-      set: defaultSet.id,
-      lang: lang,
-    });
-  };
+  const urlCard = setFromURL ? urlCurrentCard : null;
+  const defaultCardId = urlCard ?? defaultSet.cards[0].id;
 
   const [brainState, setBrainState] = useState<BrainContextState>({
-    loaded: false,
-    cardHistory: new Stack<CardId>([]),
-    set: '',
-    lang: '',
+    cardHistory: new Stack<CardId>([defaultCardId]),
+    currentSetId: defaultSet.id,
   });
-
-  // we re initialize the whole context when the loaded card set changes
-  useEffect(() => {
-    if (cardSetStorage.loadedURL) initializeContext();
-  }, [cardSetStorage.loadedURL]); // Reinitialize context when indexUrl changes
 
   const brainContext: BrainContextData = new BrainContextData(
     brainState,
     setBrainState,
-    i18n,
     cardSetStorage,
+    lang,
   );
 
   return <BrainContext.Provider value={brainContext}>{children}</BrainContext.Provider>;
 };
-
-export default BrainContextProvider;

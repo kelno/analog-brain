@@ -3,7 +3,8 @@ import { createContext } from 'react';
 interface SettingsContextType {
   indexUrl: string;
   setIndexUrl: (url: string) => void;
+  resetIndexUrl: () => void;
+  defaultUrl: string;
 }
 
-const SettingsContext = createContext<SettingsContextType | undefined>(undefined);
-export default SettingsContext;
+export const SettingsContext = createContext<SettingsContextType | undefined>(undefined);

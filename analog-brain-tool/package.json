@@ -13,7 +13,9 @@
   },
   "dependencies": {
     "@datastructures-js/stack": "^3.1.4",
+    "@mittwald/react-use-promise": "^3.0.4",
     "@tailwindcss/vite": "^4.0.6",
+    "@tanstack/react-query": "^5.69.0",
     "ajv": "^8.17.1",
     "i18next": "^24.2.2",
     "i18next-browser-languagedetector": "^8.0.4",

@@ -1,7 +1,7 @@
-import { useCardSetStorage } from '../cardSets/CardSetStorage';
+import { useCardSets } from "../cardSets/useCardSets";
 
 export const useAvailableLanguages = () => {
-  const cardSetStorage = useCardSetStorage();
+  const cardSetStorage = useCardSets();
   const availableSets = cardSetStorage.getAvailableSetsPerLanguage();
   return Object.keys(availableSets);
 };

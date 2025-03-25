@@ -26,12 +26,12 @@ const useShare = () => {
       } catch (error) {
         console.error('Error sharing:', error);
         toast.error(t('toast.share.errors.generic', { error }));
-        copy(url);
+        await copy(url);
       }
     } else {
       console.error('Web Share API not supported');
       toast.error(t('toast.share.errors.WebAPI'));
-      copy(url);
+      await copy(url);
     }
   };
 

@@ -10,6 +10,7 @@ interface ErrorBoundaryState {
   errorInfo: ErrorInfo | null;
 }
 
+// if this causes issues, might want to use npm react-error-boundary instead
 class ErrorBoundary extends React.Component<ErrorBoundaryProps, ErrorBoundaryState> {
   constructor(props: ErrorBoundaryProps) {
     super(props);
