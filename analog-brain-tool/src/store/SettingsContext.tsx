@@ -1,10 +1,4 @@
 import { createContext } from 'react';
+import { SettingsContextData } from './SettingsContextData';
 
-interface SettingsContextType {
-  indexUrl: string;
-  setIndexUrl: (url: string) => void;
-  resetIndexUrl: () => void;
-  defaultUrl: string;
-}
-
-export const SettingsContext = createContext<SettingsContextType | undefined>(undefined);
+export const SettingsContext = createContext({} as SettingsContextData);
