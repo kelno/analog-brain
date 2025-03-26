@@ -1,5 +1,5 @@
 import React from 'react';
-import LanguageSwitcher from './LanguageSwitcher';
+import { LanguageSwitcher } from './LanguageSwitcher';
 import { useTranslation } from 'react-i18next';
 import ColorSwitch from './ColorSwitch';
 

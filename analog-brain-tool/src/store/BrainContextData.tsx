@@ -111,7 +111,7 @@ export class BrainContextData {
   };
 
   public get currentSet(): ICardSet | undefined {
-    console.debug('BrainContext: get currentSet from selected ' + this.state.currentSetId);
+    //console.debug('BrainContext: get currentSet from selected ' + this.state.currentSetId);
     return this.cardSetStorage.getSetById(this.language, this.state.currentSetId);
   }
 

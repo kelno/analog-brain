@@ -2,6 +2,7 @@ import { ICardSet, SetId } from '../interfaces/ICardSet';
 import { LangId } from '../store/BrainContextData';
 import { BrainToolError, BrainToolErrorType } from '../components/BrainTool/BrainToolErrorHandler';
 import { DataValidator } from '../utils/DataValidation/DataValidator';
+import { toast } from 'sonner';
 
 export class CardSetManager {
   private processedSets: Record<LangId, ICardSet[]> = {};
@@ -10,8 +11,10 @@ export class CardSetManager {
     console.debug(`CardSetManager: Fetching card sets from ${indexUrl}`);
     const response = await fetch(indexUrl, { cache: 'no-store' });
     if (!response.ok) {
+      console.error(`CardSetManager: Failed to fetch index file`)
+      console.error(response);
       throw new BrainToolError(
-        `CardSetManager: Failed to fetch index file, with response ${response}`,
+        `CardSetManager: Failed to fetch index file (error ${response.status}:${response.statusText})`,
         BrainToolErrorType.FAILED_TO_FETCH_INDEX,
       );
     }
@@ -35,6 +38,7 @@ export class CardSetManager {
 
         cardSets.push(cardSet);
       } catch (error) {
+        // TODO: Can't print an error this way
         console.error(`CardSetManager: Error fetching card set ${fileName}: ${error}`);
       }
     }
@@ -73,7 +77,7 @@ export class CardSetManager {
     return this.processedSets[lang]?.[0];
   }
 
-  public getAvailableSetsPerLanguage(): Readonly< Record<LangId, ICardSet[]>> {
+  public getAvailableSetsPerLanguage(): Readonly<Record<LangId, ICardSet[]>> {
      return this.processedSets;
   }
 }

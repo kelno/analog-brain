@@ -9,6 +9,7 @@ const useShare = () => {
       await navigator.clipboard.writeText(text);
       toast.success(t('toast.share.success'));
     } catch (error) {
+      // TODO: Can't print an error this way
       console.error('Error copying to clipboard:', error);
       toast.error(t('toast.share.errors.generic', { error }));
     }
@@ -24,6 +25,7 @@ const useShare = () => {
         });
         console.log('Successfully shared');
       } catch (error) {
+        // TODO: Can't print an error this way
         console.error('Error sharing:', error);
         toast.error(t('toast.share.errors.generic', { error }));
         await copy(url);

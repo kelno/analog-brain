@@ -11,7 +11,7 @@ interface ErrorBoundaryState {
 }
 
 export enum BrainToolErrorType {
-  FAILED_TO_LOAD_SETS = 'FAILED_TO_LOAD_SETS',
+  FAILED_NO_VALID_SETS = 'FAILED_NO_VALID_SETS',
   FAILED_TO_FETCH_INDEX = 'FAILED_TO_FETCH_INDEX',
   FAILED_TO_FETCH_SET = 'FAILED_TO_FETCH_SET',
   NO_AVAILABLE_SETS_FOR_LANG = 'NO_AVAILABLE_SETS_FOR_LANG',
@@ -43,16 +43,31 @@ class BrainToolErrorHandler extends React.Component<ErrorBoundaryProps, ErrorBou
     if (this.state.hasError) {
       if (!(this.state.error instanceof BrainToolError)) throw this.state.error; // we only handle BrainToolError
 
+      console.log(
+        `BrainToolErrorHandler catched throw with type ${this.state.error.brainError} and message: ${this.state.error?.message}`,
+      );
+
+      //TODO translate
+      let errorMsg = '';
       switch (this.state.error.brainError) {
-        case BrainToolErrorType.FAILED_TO_LOAD_SETS:
-          // ...
+        case BrainToolErrorType.FAILED_NO_VALID_SETS:
+          errorMsg = 'No valid sets found at given index.';
+          break;
+        case BrainToolErrorType.FAILED_TO_FETCH_INDEX:
+          errorMsg = 'Failed to fetch sets index file.';
+          break;
+        case BrainToolErrorType.FAILED_TO_FETCH_SET:
+          errorMsg = 'Failed to fetch a set.';
+          break;
+        case BrainToolErrorType.NO_AVAILABLE_SETS_FOR_LANG:
+          errorMsg = 'No set found for current language.';
           break;
       }
 
       return (
-        <div>
+        <div className="p-20">
           <div className="text-xl font-bold mb-2">Failed to load card sets!</div>
-          <strong>Error:</strong> {this.state.error?.message}
+          {errorMsg && <div>{errorMsg}</div>}
         </div>
       );
     }

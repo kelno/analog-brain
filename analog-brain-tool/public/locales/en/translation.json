@@ -18,6 +18,7 @@
   },
   "toast": {
     "noCardSetsForLang": "No available card sets for language {{lang}}",
+    "someErrorsLoadingCardSet": "There were some errors loading the card set {{setTitle}}.",
     "share": {
       "title": "The Analog Brain Tool",
       "description": "Overcome your executive dysfunction",

@@ -60,7 +60,7 @@ export const BrainContextCore: React.FC<{
     if (Object.keys(availableSets).length === 0) {
       const error = 'Could not find any available sets, cant start BrainContext';
       console.error(error);
-      throw new BrainToolError(error, BrainToolErrorType.FAILED_TO_LOAD_SETS);
+      throw new BrainToolError(error, BrainToolErrorType.FAILED_NO_VALID_SETS);
     }
 
     const fallbackLanguage = Object.keys(availableSets)[0];
