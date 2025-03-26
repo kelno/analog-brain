@@ -33,6 +33,8 @@
   "settings": {
     "title": "Paramètres",
     "cardSetsURL": "Source externe des jeux de cartes :",
-    "save": "Sauvegarder"
-  }
+    "save": "Sauvegarder",
+    "reset": "Réinitialiser"
+  },
+  "brainLoading": "Chargement..."
 }
