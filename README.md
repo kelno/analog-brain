@@ -11,13 +11,15 @@ Implemented in React Typescript with Tailwind.
 
 # How to
 ## Managing Card Sets
-The default sets are located in `public/sets` directory. This app also supports loading different sets from somewhere else, this can be configured in the UI.  
+The default sets are located in `public/sets` directory. You can either edit those or load new sets from a different URL. This can be configured in the UI.  
 
 ## Add/Remove a language
 Available language are automatically computed from the card sets.  
 You do however need to make sure each language has the needed metadata in `languageInfo.tsx`.
 
 # Development Setup
+
+The react project is found in the analog-brain-tool subdirectory.  
 
 ```bash
 cd analog-brain-tool
@@ -27,10 +29,11 @@ npm run dev
 
 # Deploy in GitHub pages
 
-Make sure the base is correct in vite.config.js  
+1 - Make sure the base is correct in vite.config.js  
+2 - Run:
 ```bash
 cd analog-brain-tool
 npm run deploy
 ```
 
-Might need to run it in a terminal that allows prompting for ssh key password, such as git bash.
+(You might need to run it in a terminal that allows prompting for ssh key password, such as git bash.)
