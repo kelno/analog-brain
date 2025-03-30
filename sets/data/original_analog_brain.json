@@ -2,6 +2,8 @@
   "id": "original_analog_brain",
   "title": "Original Analog Brain",
   "lang": "en",
+  "description": "Test!!!",
+  "formatVersion": 1,
   "isDefaultForLanguage": true,
   "cards": [
     {

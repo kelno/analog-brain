@@ -11,7 +11,16 @@
   },
   "tool": {
     "title": "The Tool - Start here",
-    "cardset": "Card set"
+    "cardset": "Card set",
+    "errors" : {
+      "generic": "Error.",
+      "warnErrors":  "Found some errors while trying to load card sets, some sets might be missing. Look in console for more information.",
+      "errorIntro": "Failed to load card sets!",
+      "noValidSets": "Failed to load sets from given index.",
+      "failedToFetchIndex": "Failed to fetch sets index file.",
+      "failedToFetchSet": "Failed to fetch a set.",
+      "noSetForCurrentLang": "No set found for current language."
+    }
   },
   "about": {
     "title": "About"
