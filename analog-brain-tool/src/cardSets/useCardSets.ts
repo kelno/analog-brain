@@ -14,6 +14,7 @@ export const useCardSets = () => {
   
   return {
     lastUpdateId: cardSetManager.lastUpdateId,
+    errors: cardSetManager.errors,
     getAvailableSets: (lang: LangId) => cardSetManager.getAvailableSets(lang),
     getSetById: (lang: LangId, id: SetId) => cardSetManager.getSetById(lang, id),
     getDefaultSetForLanguage: (lang: LangId) => cardSetManager.getDefaultSetForLanguage(lang),

@@ -36,6 +36,7 @@ const BrainTool = () => {
 
   const cardSet = brainContext.currentSet;
   const currentSetId = cardSet?.id;
+  const hasErrors = cardSetStorage.errors.length > 0 ? true : undefined;
 
   return (
     <>
@@ -55,6 +56,11 @@ const BrainTool = () => {
               );
             })}
         </select>
+        {hasErrors && (
+          <span className="ml-2 text-yellow-500" title={t('tool.errors.warnErrors')}>
+            ⚠️
+          </span>
+        )}
       </div>
       {cardSet && <CardSet cardSet={cardSet}></CardSet>}
     </>

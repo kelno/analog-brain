@@ -1,4 +1,5 @@
 import React, { ErrorInfo, ReactNode } from 'react';
+import { useTranslation } from 'react-i18next';
 
 interface ErrorBoundaryProps {
   children: ReactNode;
@@ -24,6 +25,39 @@ export class BrainToolError extends Error {
   }
 }
 
+import { FC } from 'react';
+
+interface BrainToolErrorHandlerProps {
+  error: BrainToolError;
+}
+
+const BrainToolErrorHandlerMessage: FC<BrainToolErrorHandlerProps> = ({ error }) => {
+  const { t } = useTranslation();
+
+  let errorMsg = '';
+  switch (error.brainError) {
+    case BrainToolErrorType.FAILED_NO_VALID_SETS:
+      errorMsg = t('tool.errors.noValidSets');
+      break;
+    case BrainToolErrorType.FAILED_TO_FETCH_INDEX:
+      errorMsg = t('tool.errors.failedToFetchIndex');
+      break;
+    case BrainToolErrorType.FAILED_TO_FETCH_SET:
+      errorMsg = t('tool.errors.failedToFetchSet');
+      break;
+    case BrainToolErrorType.NO_AVAILABLE_SETS_FOR_LANG:
+      errorMsg = t('tool.errors.noSetForCurrentLang');
+      break;
+  }
+
+  return (
+    <div className="p-20">
+      <div className="text-xl font-bold mb-2">Failed to load card sets!</div>
+      {errorMsg && <div>{errorMsg}</div>}
+    </div>
+  );
+};
+
 class BrainToolErrorHandler extends React.Component<ErrorBoundaryProps, ErrorBoundaryState> {
   constructor(props: ErrorBoundaryProps) {
     super(props);
@@ -47,29 +81,7 @@ class BrainToolErrorHandler extends React.Component<ErrorBoundaryProps, ErrorBou
         `BrainToolErrorHandler catched throw with type ${this.state.error.brainError} and message: ${this.state.error?.message}`,
       );
 
-      //TODO translate
-      let errorMsg = '';
-      switch (this.state.error.brainError) {
-        case BrainToolErrorType.FAILED_NO_VALID_SETS:
-          errorMsg = 'No valid sets found at given index.';
-          break;
-        case BrainToolErrorType.FAILED_TO_FETCH_INDEX:
-          errorMsg = 'Failed to fetch sets index file.';
-          break;
-        case BrainToolErrorType.FAILED_TO_FETCH_SET:
-          errorMsg = 'Failed to fetch a set.';
-          break;
-        case BrainToolErrorType.NO_AVAILABLE_SETS_FOR_LANG:
-          errorMsg = 'No set found for current language.';
-          break;
-      }
-
-      return (
-        <div className="p-20">
-          <div className="text-xl font-bold mb-2">Failed to load card sets!</div>
-          {errorMsg && <div>{errorMsg}</div>}
-        </div>
-      );
+      return <BrainToolErrorHandlerMessage error={this.state.error} />;
     }
     return this.props.children;
   }

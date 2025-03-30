@@ -6,7 +6,7 @@ interface ValidationResult {
 }
 
 export class DataValidator {
-  public static validateCardSet = (cardSet: ICardSet): ValidationResult => {
+  public static validateCardSetData = (cardSet: ICardSet): ValidationResult => {
     if (cardSet.cards.length === 0) {
       return { isValid: false, errorMessage: 'Found empty card set with id ' + cardSet.id };
     }
@@ -20,6 +20,10 @@ export class DataValidator {
       return { isValid: false, errorMessage: 'Duplicate card IDs found!' };
     }
 
+    return { isValid: true };
+  };
+
+  public static validateCardSetJSON = (cardSet: ICardSet): ValidationResult => {
     return { isValid: true };
   };
 };
