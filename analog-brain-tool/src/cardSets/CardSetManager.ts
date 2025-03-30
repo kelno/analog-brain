@@ -8,11 +8,24 @@ interface FetchResult {
   errors: string[];
 }
 
+class CardSetsLoadingState {
+  constructor(loadingUrl: string, promise: Promise<FetchResult>) {
+    this.loadingUrl = loadingUrl;
+    this.promise = promise;
+    this.updateId = crypto.randomUUID();
+  };
+
+  public updateId: string;
+  public loadingUrl: string;
+  public promise: Promise<FetchResult>;
+}
+
 export class CardSetManager {
   private _processedSets: Record<LangId, ICardSet[]> = {};
   private _updateId: string = "";
   private _loadedUrl: string = "";
   private _errors: string[] = []; // loading errors
+  private _pendingLoadState: CardSetsLoadingState | undefined = undefined; // exists only while loading
 
   private fetchCardSets = async (indexUrl: string): Promise<FetchResult> => {
     console.debug(`CardSetManager: Fetching card sets from ${indexUrl}`);
@@ -54,7 +67,14 @@ export class CardSetManager {
             BrainToolErrorType.FAILED_TO_FETCH_SET,
           );
         }
-        const cardSet = (await response.json()) as ICardSet;
+        const cardSet = (await response.json().catch(er => {  
+          const error = `Failed to decode set json: ${er.message}`;
+          console.error(error);
+          indexLoadError = new BrainToolError(
+            error,
+            BrainToolErrorType.FAILED_TO_FETCH_SET,
+          ); 
+        })) as ICardSet;
         const result = DataValidator.validateCardSetJSON(cardSet);
         if (!result.isValid) {  
           const errorMsg = `Invalid card set JSON schema: ${URL}. Error: ${result.errorMessage}`;
@@ -74,14 +94,18 @@ export class CardSetManager {
     return { cardSets: cardSets, errors: errors };
   }
 
-  // return lastUpdateId
+  // return lastUpdateId, an id unique refreshed everytime loadCardSets finishes loading.
   public async loadCardSets(indexUrl: string) {
-    // clear state
-    this._errors = [];
-    this._updateId = crypto.randomUUID();
-    this._loadedUrl = indexUrl;
+    // are already loading this?
+    if (this._pendingLoadState?.loadingUrl == indexUrl) {
+      await this._pendingLoadState.promise;
+      return this._pendingLoadState.updateId;
+    }
 
-    const { cardSets: fetchedSets, errors } = await this.fetchCardSets(indexUrl);
+    // else, start loading it
+    const promise = this.fetchCardSets(indexUrl);
+    this._pendingLoadState = new CardSetsLoadingState(indexUrl, promise);
+    const { cardSets: fetchedSets, errors } = await promise;
     
     this._processedSets = fetchedSets.reduce((acc, set) => {
       const result = DataValidator.validateCardSetData(set);
@@ -97,7 +121,10 @@ export class CardSetManager {
       return acc;
     }, {} as Record<LangId, ICardSet[]>);
 
+    this._loadedUrl = indexUrl;
     this._errors = errors;
+    this._updateId = this._pendingLoadState.updateId;
+    this._pendingLoadState = undefined;
     return this._updateId;
   }
 
@@ -117,14 +144,13 @@ export class CardSetManager {
      return this._processedSets;
   }
 
-  // empty string if never loaded. Refreshed every time loadCardSets is called (even if error occurs).
+  // empty string if never loaded. Refreshed every time loadCardSets finishes loading succesfully. 
   public get lastUpdateId() {
     return this._updateId;
   }
 
-  // Url of last triggered loading. 
+  // Url of last triggered loading, updated on success
   // empty string if never loaded
-  // Updated on failure as well.
   public get loadedUrl() {
     return this._loadedUrl;
   }
