@@ -59,6 +59,7 @@ export class UrlManager {
 
   // ending with a /
   public static getBaseURL(): string {
-    return window.location.origin + window.location.pathname;
+    const baseUrl = window.location.origin + window.location.pathname;
+    return baseUrl.endsWith('/') ? baseUrl : baseUrl + '/';
   }
 }
