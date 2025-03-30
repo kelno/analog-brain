@@ -57,6 +57,7 @@ export class UrlManager {
     window.history.replaceState({}, document.title, UrlManager.getBaseURL());
   }
 
+  // ending with a /
   public static getBaseURL(): string {
     return window.location.origin + window.location.pathname;
   }

@@ -7,7 +7,7 @@ const SettingsProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   // console.log('SettingsProvider: SettingsProvider()');
   // console.trace();
 
-  const defaultUrl = `${UrlManager.getBaseURL()}/sets/index.json`;
+  const defaultUrl = `${UrlManager.getBaseURL()}sets/index.json`;
 
   const [settingsState, setSettingsState] = useState<SettingsContextState>({
     indexUrl: localStorage.getItem('indexUrl') || defaultUrl,
