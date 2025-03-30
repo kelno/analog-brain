@@ -27,9 +27,11 @@
                     "type": "string"
                 },
                 "link": {
+                    "description": "NYI",
                     "type": "string"
                 },
                 "nextCardId": {
+                    "description": "Optional reference to a card id to go to when item is selected",
                     "type": "string"
                 },
                 "text": {
@@ -47,6 +49,13 @@
                 "$ref": "#/definitions/ICard"
             },
             "type": "array"
+        },
+        "description": {
+            "description": "Free string for the set creator to use (NYI)",
+            "type": "string"
+        },
+        "formatVersion": {
+            "type": "number"
         },
         "id": {
             "description": "A unique string to identify the set. Won't be shown to the user.",
