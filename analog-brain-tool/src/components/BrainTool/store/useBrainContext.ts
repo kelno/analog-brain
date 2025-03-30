@@ -1,6 +1,6 @@
 
 import { use } from 'react';
-import { BrainContext } from '../components/BrainTool/store/BrainContext';
+import { BrainContext } from './BrainContext';
 
 // can throw
 export const useBrainContext = () => {

@@ -31,8 +31,6 @@ export class CardSetManager {
     console.debug(`CardSetManager: Fetching card sets from ${indexUrl}`);
     const response = await fetch(indexUrl, { cache: 'no-store' });
     if (!response.ok) {
-      console.error(`CardSetManager: Failed to fetch index file from url ${indexUrl}`)
-      console.error(response);
       throw new BrainToolError(
         `CardSetManager: Failed to fetch index file (error ${response.status}:${response.statusText}) from ${indexUrl}`,
         BrainToolErrorType.FAILED_TO_FETCH_INDEX,
@@ -40,11 +38,9 @@ export class CardSetManager {
     }
 
     let indexLoadError: BrainToolError|undefined =  undefined;
-    const indexData = await response.json().catch(er => {  
-      const error = `Failed to decode index json: ${er.message}`;
-      console.error(error);
+    const indexData = await response.json().catch(error => {  
       indexLoadError = new BrainToolError(
-        error,
+        `Failed to decode index json: ${error.message}`,
         BrainToolErrorType.FAILED_TO_FETCH_INDEX,
       ); 
     });
@@ -67,17 +63,15 @@ export class CardSetManager {
             BrainToolErrorType.FAILED_TO_FETCH_SET,
           );
         }
-        const cardSet = (await response.json().catch(er => {  
-          const error = `Failed to decode set json: ${er.message}`;
-          console.error(error);
+        const cardSet = (await response.json().catch(err => {  
           indexLoadError = new BrainToolError(
-            error,
+            `Failed to decode set json: ${err.message}`,
             BrainToolErrorType.FAILED_TO_FETCH_SET,
           ); 
         })) as ICardSet;
         const result = dataValidator.validateCardSetJSON(cardSet);
         if (!result.isValid) {  
-          const errorMsg = `Invalid card set JSON schema: ${URL}. Error: ${result.errorMessage}`;
+          const errorMsg = `Invalid card set JSON schema: ${URL}. Error: ${JSON.stringify(result.errorMessages)}`;
           console.error(errorMsg); 
           errors.push(errorMsg);
           continue;
@@ -110,7 +104,8 @@ export class CardSetManager {
     this._processedSets = fetchedSets.reduce((acc, set) => {
       const result = dataValidator.validateCardSetData(set);
       if (!result.isValid) {  
-        console.error(`Invalid card set in database: ${set.title} (id: ${set.id}). Error: ${result.errorMessage}`); 
+        console.error(`Invalid card set in database: ${set.title} (id: ${set.id}). Errors:`); 
+        console.error(result.errorMessages);
         return acc; 
       }
 

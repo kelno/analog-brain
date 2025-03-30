@@ -36,8 +36,6 @@ export const BrainContextCore: React.FC<{
   const { t } = useTranslation();
   const lang = appContext.language;
 
-  console.debug(`BrainContextProvider: Rendering`);
-
   const validateSetFromUrl = (lang: LangId, urlCardSetId: string) => {
     if (urlCardSetId) {
       const set = cardSetStorage.getSetById(lang, urlCardSetId);
@@ -59,7 +57,6 @@ export const BrainContextCore: React.FC<{
     const availableSets = cardSetStorage.getAvailableSetsPerLanguage();
     if (Object.keys(availableSets).length === 0) {
       const error = 'Could not find any available sets, cant start BrainContext';
-      console.error(error);
       throw new BrainToolError(error, BrainToolErrorType.FAILED_NO_VALID_SETS);
     }
 

@@ -5,7 +5,7 @@ import CardSelectorButton from './CardSelectorButton';
 import ShareButtonSVG from '../SVGs/ShareButtonSVG';
 import useShare from '../../hooks/useShare';
 import { useTranslation } from 'react-i18next';
-import { useBrainContext } from '../../hooks/useBrainContext';
+import { useBrainContext } from './store/useBrainContext';
 
 interface CardSelectorProps {
   extraClassName?: string;

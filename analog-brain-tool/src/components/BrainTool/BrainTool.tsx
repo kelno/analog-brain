@@ -1,6 +1,6 @@
 import CardSet from './CardSet';
 import { useTranslation } from 'react-i18next';
-import { useBrainContext } from '../../hooks/useBrainContext';
+import { useBrainContext } from './store/useBrainContext';
 import { useCardSets } from '../../cardSets/useCardSets';
 import { useAppContext } from '../../appContext/useAppContext';
 

@@ -16,12 +16,14 @@ export enum BrainToolErrorType {
   FAILED_TO_FETCH_INDEX = 'FAILED_TO_FETCH_INDEX',
   FAILED_TO_FETCH_SET = 'FAILED_TO_FETCH_SET',
   NO_AVAILABLE_SETS_FOR_LANG = 'NO_AVAILABLE_SETS_FOR_LANG',
+  FAILED_TO_LOAD_DATA_VALIDATOR = 'FAILED_TO_LOAD_DATA_VALIDATOR',
 }
 
 export class BrainToolError extends Error {
-  constructor(message: string, public brainError: BrainToolErrorType) {
+  constructor(message: string, public brainError: BrainToolErrorType, printToConsole: boolean = true) {
     super(message);
     Object.setPrototypeOf(this, BrainToolError.prototype);
+    if (printToConsole) console.error(message);
   }
 }
 
@@ -47,6 +49,9 @@ const BrainToolErrorHandlerMessage: FC<BrainToolErrorHandlerProps> = ({ error })
       break;
     case BrainToolErrorType.NO_AVAILABLE_SETS_FOR_LANG:
       errorMsg = t('tool.errors.noSetForCurrentLang');
+      break;
+    case BrainToolErrorType.FAILED_TO_LOAD_DATA_VALIDATOR:
+      errorMsg = t('tool.errors.generic');
       break;
   }
 

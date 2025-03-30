@@ -4,7 +4,7 @@ Using npm package typescript-json-schema
 
 
 ```
-typescript-json-schema ./tsconfig.app.json ICardSet --out .\public\sets\schema.json
+typescript-json-schema ./tsconfig.app.json ICardSet --required --out .\public\sets\schema.json
 ```
 
 Weird cache issue...

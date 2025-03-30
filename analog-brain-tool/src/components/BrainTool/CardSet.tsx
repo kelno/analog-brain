@@ -3,7 +3,7 @@ import { ICardSet } from '../../interfaces/ICardSet';
 import Card from './Card';
 import CardNavigation from './CardNavigation';
 import { CardId } from '../../interfaces/ICard';
-import { useBrainContext } from '../../hooks/useBrainContext';
+import { useBrainContext } from './store/useBrainContext';
 
 interface CardSetProps {
   cardSet: ICardSet;

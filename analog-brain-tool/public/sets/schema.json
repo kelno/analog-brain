@@ -19,6 +19,11 @@
                     "type": "string"
                 }
             },
+            "required": [
+                "id",
+                "items",
+                "title"
+            ],
             "type": "object"
         },
         "ICardItem": {
@@ -38,6 +43,9 @@
                     "type": "string"
                 }
             },
+            "required": [
+                "text"
+            ],
             "type": "object"
         }
     },
@@ -55,6 +63,7 @@
             "type": "string"
         },
         "formatVersion": {
+            "description": "Format version used for the current set.\nNon-matching version numbers won't be rejected as long as the required fields are present.\nThis is mainly an helper to warn about version mismatch.",
             "type": "number"
         },
         "id": {
@@ -70,10 +79,18 @@
             "type": "string"
         },
         "title": {
-            "description": "Set title for the user to identify the set",
+            "description": "Set title for the user to identify the set.",
             "type": "string"
         }
     },
+    "required": [
+        "cards",
+        "formatVersion",
+        "id",
+        "isDefaultForLanguage",
+        "lang",
+        "title"
+    ],
     "type": "object"
 }
 
