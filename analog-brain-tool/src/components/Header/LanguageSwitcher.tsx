@@ -1,7 +1,7 @@
 import React, { Suspense, useState } from 'react';
 import languagesInfos from '../../language/languageInfo';
-import { useAvailableLanguages } from '../../hooks/useAvailableLanguages';
-import { useAppContext } from '../../hooks/useAppContext';
+import { useAvailableLanguages } from '../../language/useAvailableLanguages';
+import { useAppContext } from '../../appContext/useAppContext';
 
 export const LanguageSwitcher: React.FC = () => {
   const appContext = useAppContext();

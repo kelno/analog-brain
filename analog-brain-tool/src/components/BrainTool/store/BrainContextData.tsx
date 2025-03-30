@@ -1,8 +1,8 @@
 import { Stack } from '@datastructures-js/stack';
-import { CardId } from '../interfaces/ICard';
-import { UrlManager } from '../utils/UrlManager/UrlManager';
-import { ICardSet, SetId } from '../interfaces/ICardSet';
-import { useCardSets } from '../cardSets/useCardSets';
+import { CardId } from '../../../interfaces/ICard';
+import { UrlManager } from '../../../utils/UrlManager/UrlManager';
+import { ICardSet, SetId } from '../../../interfaces/ICardSet';
+import { useCardSets } from '../../../cardSets/useCardSets';
 
 export interface BrainContextState {
   cardHistory: Stack<CardId>; // the top is the current card

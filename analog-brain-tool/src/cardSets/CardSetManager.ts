@@ -1,7 +1,7 @@
 import { ICardSet, SetId } from '../interfaces/ICardSet';
-import { LangId } from '../store/BrainContextData';
+import { LangId } from '../components/BrainTool/store/BrainContextData';
 import { BrainToolError, BrainToolErrorType } from '../components/BrainTool/BrainToolErrorHandler';
-import { DataValidator } from '../utils/DataValidation/DataValidator';
+import { DataValidator } from '../dataValidation/DataValidator';
 
 interface FetchResult {
   cardSets: ICardSet[];
@@ -27,7 +27,7 @@ export class CardSetManager {
   private _errors: string[] = []; // loading errors
   private _pendingLoadState: CardSetsLoadingState | undefined = undefined; // exists only while loading
 
-  private fetchCardSets = async (indexUrl: string): Promise<FetchResult> => {
+  private fetchCardSets = async (indexUrl: string, dataValidator: DataValidator): Promise<FetchResult> => {
     console.debug(`CardSetManager: Fetching card sets from ${indexUrl}`);
     const response = await fetch(indexUrl, { cache: 'no-store' });
     if (!response.ok) {
@@ -75,7 +75,7 @@ export class CardSetManager {
             BrainToolErrorType.FAILED_TO_FETCH_SET,
           ); 
         })) as ICardSet;
-        const result = DataValidator.validateCardSetJSON(cardSet);
+        const result = dataValidator.validateCardSetJSON(cardSet);
         if (!result.isValid) {  
           const errorMsg = `Invalid card set JSON schema: ${URL}. Error: ${result.errorMessage}`;
           console.error(errorMsg); 
@@ -95,7 +95,7 @@ export class CardSetManager {
   }
 
   // return lastUpdateId, an id unique refreshed everytime loadCardSets finishes loading.
-  public async loadCardSets(indexUrl: string) {
+  public async loadCardSets(indexUrl: string, dataValidator: DataValidator) {
     // are already loading this?
     if (this._pendingLoadState?.loadingUrl == indexUrl) {
       await this._pendingLoadState.promise;
@@ -103,12 +103,12 @@ export class CardSetManager {
     }
 
     // else, start loading it
-    const promise = this.fetchCardSets(indexUrl);
+    const promise = this.fetchCardSets(indexUrl, dataValidator);
     this._pendingLoadState = new CardSetsLoadingState(indexUrl, promise);
     const { cardSets: fetchedSets, errors } = await promise;
     
     this._processedSets = fetchedSets.reduce((acc, set) => {
-      const result = DataValidator.validateCardSetData(set);
+      const result = dataValidator.validateCardSetData(set);
       if (!result.isValid) {  
         console.error(`Invalid card set in database: ${set.title} (id: ${set.id}). Error: ${result.errorMessage}`); 
         return acc; 

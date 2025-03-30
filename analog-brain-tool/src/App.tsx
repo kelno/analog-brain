@@ -5,15 +5,15 @@ import Intro from './components/Intro';*/
 import Outro from './components/Outro';
 import Section from './components/Section';
 import { Toaster } from 'sonner';
-import { BrainContextProvider } from './store/BrainContextProvider';
-import SettingsProvider from './store/SettingsProvider';
+import { BrainContextProvider } from './components/BrainTool/store/BrainContextProvider';
+import SettingsProvider from './settingsContext/SettingsProvider';
 import './i18n';
 import { useTranslation } from 'react-i18next';
 import ErrorBoundary from './components/ErrorBoundary';
 import Header from './components/Header/Header';
 import { Suspense, useEffect } from 'react';
 import Settings from './components/Settings';
-import { AppContextProvider } from './store/AppContextProvider';
+import { AppContextProvider } from './appContext/AppContextProvider';
 import BrainToolErrorHandler from './components/BrainTool/BrainToolErrorHandler';
 
 function App() {

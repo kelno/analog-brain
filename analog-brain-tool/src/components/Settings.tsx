@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useSettings } from '../hooks/useSettings';
+import { useSettings } from '../settingsContext/useSettings';
 import { useTranslation } from 'react-i18next';
 
 const Settings: React.FC = () => {

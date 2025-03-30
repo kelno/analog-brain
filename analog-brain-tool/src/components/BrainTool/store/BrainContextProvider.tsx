@@ -2,15 +2,15 @@ import { useState, ReactNode } from 'react';
 import { BrainContextData, BrainContextState, LangId } from './BrainContextData';
 import { BrainContext } from './BrainContext';
 import { Stack } from '@datastructures-js/stack';
-import { CardId } from '../interfaces/ICard';
-import { UrlManager } from '../utils/UrlManager/UrlManager';
-import { useAppContext } from '../hooks/useAppContext';
-import { UrlParams } from '../utils/UrlManager/UrlParams';
+import { CardId } from '../../../interfaces/ICard';
+import { UrlManager } from '../../../utils/UrlManager/UrlManager';
+import { UrlParams } from '../../../utils/UrlManager/UrlParams';
 import { toast } from 'sonner';
 import { useTranslation } from 'react-i18next';
-import { BrainToolError, BrainToolErrorType } from '../components/BrainTool/BrainToolErrorHandler';
-import { useCardSets } from '../cardSets/useCardSets';
-import { AppContextData } from './AppContextData';
+import { BrainToolError, BrainToolErrorType } from '../BrainToolErrorHandler';
+import { useCardSets } from '../../../cardSets/useCardSets';
+import { AppContextData } from '../../../appContext/AppContextData';
+import { useAppContext } from '../../../appContext/useAppContext';
 
 export const BrainContextProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const cardSetStorage = useCardSets();

@@ -1,6 +1,6 @@
 import { CardId } from '../../interfaces/ICard';
 import { SetId } from '../../interfaces/ICardSet';
-import { LangId } from '../../store/BrainContextData';
+import { LangId } from '../../components/BrainTool/store/BrainContextData';
 import { UrlParams } from './UrlParams';
 
 /* Helps store and retrieve values from URL.

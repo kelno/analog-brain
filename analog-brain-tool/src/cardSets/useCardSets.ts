@@ -1,16 +1,18 @@
-import { useSettings } from '../hooks/useSettings';
+import { useSettings } from '../settingsContext/useSettings';
 import { CardSetManager } from './CardSetManager';
-import { LangId } from '../store/AppContextData';
+import { LangId } from '../appContext/AppContextData';
 import { SetId } from '../interfaces/ICardSet';
 import { use } from 'react';
+import { useDataValidator } from '../dataValidation/useDataValidator';
 
 const cardSetManager = new CardSetManager();
 
 export const useCardSets = () => {
   const { indexUrl } = useSettings();
+  const dataValidator = useDataValidator();
 
   if (cardSetManager.loadedUrl != indexUrl)
-    use(cardSetManager.loadCardSets(indexUrl));
+    use(cardSetManager.loadCardSets(indexUrl, dataValidator));
   
   return {
     lastUpdateId: cardSetManager.lastUpdateId,

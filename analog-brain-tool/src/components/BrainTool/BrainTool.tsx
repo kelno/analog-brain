@@ -1,8 +1,8 @@
 import CardSet from './CardSet';
 import { useTranslation } from 'react-i18next';
 import { useBrainContext } from '../../hooks/useBrainContext';
-import { useAppContext } from '../../hooks/useAppContext';
 import { useCardSets } from '../../cardSets/useCardSets';
+import { useAppContext } from '../../appContext/useAppContext';
 
 const BrainTool = () => {
   const appContext = useAppContext();
@@ -61,6 +61,7 @@ const BrainTool = () => {
             ⚠️
           </span>
         )}
+        {cardSet?.description && <div>Description: {cardSet.description}</div>}
       </div>
       {cardSet && <CardSet cardSet={cardSet}></CardSet>}
     </>

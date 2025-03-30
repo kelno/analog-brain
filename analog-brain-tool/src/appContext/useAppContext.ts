@@ -1,6 +1,6 @@
 
 import { use } from 'react';
-import { AppContext } from '../store/AppContext';
+import { AppContext } from '../appContext/AppContext';
 
 // can throw
 export const useAppContext = () => {

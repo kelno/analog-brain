@@ -1,6 +1,6 @@
 
 import { use } from 'react';
-import { SettingsContext } from '../store/SettingsContext';
+import { SettingsContext } from './SettingsContext';
 
 // can throw
 export const useSettings = () => {
