@@ -51,5 +51,5 @@
     "save": "Save",
     "reset": "Reset"
   },
-  "brainLoading": "Loading..."
+  "suspenseLoading": "Loading..."
 }

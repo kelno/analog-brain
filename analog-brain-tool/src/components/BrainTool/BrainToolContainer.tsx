@@ -9,7 +9,7 @@ export const BrainToolContainer = () => {
 
   return (
     <BrainToolErrorHandler>
-      <Suspense fallback={t(`brainLoading`)}>
+      <Suspense fallback={t(`suspenseLoading`)}>
         <BrainContextProvider>
           <BrainTool />
         </BrainContextProvider>

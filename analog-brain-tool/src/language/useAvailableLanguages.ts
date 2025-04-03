@@ -1,24 +1,17 @@
-import { useCardSets } from "../cardSets/useCardSets";
-import { BrainToolError } from "../components/BrainTool/BrainToolErrorHandler";
 
-// can throw
-export const useAvailableLanguages = () => {
-  let cardSetStorage;
-  try {
-    cardSetStorage = useCardSets();
-  } catch (errorOrPromise) {
-    // If it's an error, we should just use the availableLanguages in it's default state
-    if (errorOrPromise instanceof BrainToolError)
-      console.debug(
-        `useAvailableLanguages couldn't get available languages. This is expected if sets are not yet loaded.`,
-      );
-    // if it's a promise, this is normal behavior too and can be passed up
-    else throw errorOrPromise;
-  }
+//const fallbackLanguage = 'en';
 
+import { useCardSetManager } from "../cardSets/useCardSetManager";
 
-  const availableSets = cardSetStorage?.getAvailableSetsPerLanguage();
-  const fallbackLanguage = 'en';
-  return availableSets ? Object.keys(availableSets) : [ fallbackLanguage ]; 
+interface AvailableLanguages {
+  languages: string[] // list of available languages
+}
+
+// List available language based on what's found in card set.
+// Suspense enabled hook
+export const useAvailableLanguages = (): AvailableLanguages => {
+  const cardSetManager = useCardSetManager();
+
+  const availableSets = cardSetManager.getAvailableSetsPerLanguage();
+  return { languages: Object.keys(availableSets) }
 };
-

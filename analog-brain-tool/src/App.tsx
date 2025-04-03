@@ -12,7 +12,17 @@ import Header from './components/Header/Header';
 import { useEffect } from 'react';
 import Settings from './components/Settings';
 import { AppContextProvider } from './appContext/AppContextProvider';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { BrainToolContainer } from './components/BrainTool/BrainToolContainer';
+
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      staleTime: Infinity,
+      refetchOnWindowFocus: false, // Do not refetch on window focus
+    },
+  },
+});
 
 function App() {
   const { t } = useTranslation();
@@ -27,35 +37,37 @@ function App() {
 
   return (
     <div className="bg-brain-bg text-brain-text min-h-screen leading-relaxed">
-      <AppContextProvider>
-        <SettingsProvider>
-          <ErrorBoundary>
-            <Header />
-            <div className="px-2 max-w-250 mx-auto mt-header pt-2">
-              <Toaster position="bottom-right" />
-              {/*
-              <Section id="intro" title={t('intro.title')}>
-                <Intro />
-              </Section>
+      <QueryClientProvider client={queryClient}>
+        <AppContextProvider>
+          <SettingsProvider>
+            <ErrorBoundary>
+              <Header />
+              <div className="px-2 max-w-250 mx-auto mt-header pt-2">
+                <Toaster position="bottom-right" />
+                {/*
+                              <Section id="intro" title={t('intro.title')}>
+                                <Intro />
+                              </Section>
 
-              <Section id="howto" title={t('howto.title')}>
-                <HowTo />
-              </Section>
-*/}
+                              <Section id="howto" title={t('howto.title')}>
+                                <HowTo />
+                              </Section>
+                */}
 
-              {/* <Section id="tool" title={t('tool.title')}> */}
-              <BrainToolContainer />
-              {/* </Section> */}
+                {/* <Section id="tool" title={t('tool.title')}> */}
+                <BrainToolContainer />
+                {/* </Section> */}
 
-              <Settings />
+                <Settings />
 
-              <Section id="outro" title={t('about.title')}>
-                <Outro />
-              </Section>
-            </div>
-          </ErrorBoundary>
-        </SettingsProvider>
-      </AppContextProvider>
+                <Section id="outro" title={t('about.title')}>
+                  <Outro />
+                </Section>
+              </div>
+            </ErrorBoundary>
+          </SettingsProvider>
+        </AppContextProvider>
+      </QueryClientProvider>
     </div>
   );
 }

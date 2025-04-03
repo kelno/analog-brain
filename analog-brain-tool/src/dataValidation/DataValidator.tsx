@@ -11,6 +11,7 @@ export class DataValidator {
   private _validate: ValidateFunction<ICardSet>;
 
   public constructor(schemaJSON: any) {
+    console.debug('Constructing new DataValidator');
     this._validate = ajv.compile<ICardSet>(schemaJSON);
   }
 

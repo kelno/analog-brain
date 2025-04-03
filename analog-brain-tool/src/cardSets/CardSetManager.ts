@@ -90,6 +90,8 @@ export class CardSetManager {
 
   // return lastUpdateId, an id unique refreshed everytime loadCardSets finishes loading.
   public async loadCardSets(indexUrl: string, dataValidator: DataValidator) {
+    console.debug(`loadCardSets triggered with index ${indexUrl}`);
+
     // are already loading this?
     if (this._pendingLoadState?.loadingUrl == indexUrl) {
       await this._pendingLoadState.promise;

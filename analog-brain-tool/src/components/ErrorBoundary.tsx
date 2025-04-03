@@ -2,6 +2,7 @@ import React, { ErrorInfo, ReactNode } from 'react';
 
 interface ErrorBoundaryProps {
   children: ReactNode;
+  fallback?: ReactNode; // Show this when there is any error. If not defined, will use a default fallback with various dev info.
 }
 
 interface ErrorBoundaryState {
@@ -28,7 +29,9 @@ class ErrorBoundary extends React.Component<ErrorBoundaryProps, ErrorBoundarySta
 
   render() {
     if (this.state.hasError) {
-      return (
+      return this.props.fallback ? (
+        this.props.fallback
+      ) : (
         <div className="p-5 border border-red-500 bg-red-50 text-red-900 rounded-lg">
           <h2 className="text-xl font-bold mb-2">Something went wrong!</h2>
           <p className="mb-4">

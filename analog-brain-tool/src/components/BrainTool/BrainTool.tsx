@@ -1,19 +1,21 @@
 import CardSet from './CardSet';
 import { useTranslation } from 'react-i18next';
 import { useBrainContext } from './store/useBrainContext';
-import { useCardSets } from '../../cardSets/useCardSets';
 import { useAppContext } from '../../appContext/useAppContext';
+import { useCardSetManager } from '../../cardSets/useCardSetManager';
 
 const BrainTool = () => {
   const appContext = useAppContext();
   const brainContext = useBrainContext();
   const { t } = useTranslation();
-  const cardSetStorage = useCardSets();
+  const cardSetManager = useCardSetManager();
+
+  console.debug(`Rendering BrainTool with set manager loaded url ${cardSetManager.loadedUrl}`);
 
   const lang = appContext.language;
 
   // this should already be checked and prevented by BrainContext
-  const availableSets = cardSetStorage.getAvailableSets(lang);
+  const availableSets = cardSetManager.getAvailableSets(lang);
   if (!availableSets) {
     const error = `'No available card sets for language ${lang}`;
     console.error(error);
@@ -36,7 +38,7 @@ const BrainTool = () => {
 
   const cardSet = brainContext.currentSet;
   const currentSetId = cardSet?.id;
-  const hasErrors = cardSetStorage.errors.length > 0 ? true : undefined;
+  const hasErrors = cardSetManager.errors.length > 0 ? true : undefined;
 
   return (
     <>

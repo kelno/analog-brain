@@ -2,6 +2,8 @@ import React, { Suspense, useState } from 'react';
 import languagesInfos from '../../language/languageInfo';
 import { useAvailableLanguages } from '../../language/useAvailableLanguages';
 import { useAppContext } from '../../appContext/useAppContext';
+import ErrorBoundary from '../ErrorBoundary';
+import { useTranslation } from 'react-i18next';
 
 export const LanguageSwitcher: React.FC = () => {
   const appContext = useAppContext();
@@ -27,11 +29,7 @@ export const LanguageSwitcher: React.FC = () => {
       >
         {currentFlag}
       </button>
-      {isOpen && (
-        <Suspense fallback={<></>}>
-          <LanguageSwitcherCore changeLanguage={changeLanguage} />
-        </Suspense>
-      )}
+      {isOpen && <LanguageSwitcherCore changeLanguage={changeLanguage} />}
     </div>
   );
 };
@@ -41,31 +39,39 @@ interface LanguageSwitcherCoreProps {
 }
 
 const LanguageSwitcherCore: React.FC<LanguageSwitcherCoreProps> = ({ changeLanguage }) => {
-  const availableLanguages = useAvailableLanguages();
+  const { languages: availableLanguages } = useAvailableLanguages();
+  const { t } = useTranslation();
 
-  // disabled for now, that seems pretty aggressive to change language if there is any error loading the card sets
-  // if (!availableLanguages.includes(currentLanguage)) {
+  // Change language if the current one is not available within current card set
+  // disabled, shouldn't be done here
+  // if (!isFallback && !availableLanguages.includes(currentLanguage)) {
   //   console.log(`Current language is not among available language, defaulting to english.`);
   //   changeLanguage(fallbackLanguage);
   // }
 
+  const fallback = <div>...</div>; // we failed to get the language list... do nothing here.
+
   return (
     <div className="absolute right-0 mt-2 bg-white rounded-lg shadow-lg overflow-hidden">
-      {availableLanguages.map((langCode) => {
-        const languageInfo = languagesInfos[langCode];
-        if (!languageInfo) console.error(`Missing language info for language ${langCode}`);
-        return (
-          <button
-            key={langCode}
-            onClick={() => changeLanguage(langCode)}
-            className="flex items-center w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition-colors"
-            aria-label={`Switch to ${languageInfo?.name || langCode}`}
-          >
-            <span className="mr-2 text-lg">{languageInfo?.flag || langCode}</span>
-            <span>{languageInfo?.name || langCode}</span>
-          </button>
-        );
-      })}
+      <ErrorBoundary fallback={fallback}>
+        <Suspense fallback={t(`suspenseLoading`)}>
+          {availableLanguages.map((langCode) => {
+            const languageInfo = languagesInfos[langCode];
+            if (!languageInfo) console.error(`Missing language info for language ${langCode}`);
+            return (
+              <button
+                key={langCode}
+                onClick={() => changeLanguage(langCode)}
+                className="flex items-center w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition-colors"
+                aria-label={`Switch to ${languageInfo?.name || langCode}`}
+              >
+                <span className="mr-2 text-lg">{languageInfo?.flag || langCode}</span>
+                <span>{languageInfo?.name || langCode}</span>
+              </button>
+            );
+          })}
+        </Suspense>
+      </ErrorBoundary>
     </div>
   );
 };

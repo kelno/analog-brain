@@ -2,7 +2,6 @@
 import { use } from 'react';
 import { SettingsContext } from './SettingsContext';
 
-// can throw
 export const useSettings = () => {
   const context = use(SettingsContext);
   if (!context) {

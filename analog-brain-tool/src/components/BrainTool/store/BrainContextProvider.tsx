@@ -8,19 +8,21 @@ import { UrlParams } from '../../../utils/UrlManager/UrlParams';
 import { toast } from 'sonner';
 import { useTranslation } from 'react-i18next';
 import { BrainToolError, BrainToolErrorType } from '../BrainToolErrorHandler';
-import { useCardSets } from '../../../cardSets/useCardSets';
 import { AppContextData } from '../../../appContext/AppContextData';
 import { useAppContext } from '../../../appContext/useAppContext';
+import { useCardSetManager } from '../../../cardSets/useCardSetManager';
+import { CardSetManager } from '../../../cardSets/CardSetManager';
 
 export const BrainContextProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
-  const cardSetStorage = useCardSets();
+  console.debug('rendering BrainContextProvider');
+  const cardSetManager = useCardSetManager();
   const appContext = useAppContext();
 
   // We recreate the brain context every time sets or lang changes
-  const key = `${cardSetStorage.lastUpdateId}_${appContext.language}`;
+  const key = `${cardSetManager.lastUpdateId}_${appContext.language}`;
 
   return (
-    <BrainContextCore cardSetStorage={cardSetStorage} appContext={appContext} key={key}>
+    <BrainContextCore cardSetManager={cardSetManager} appContext={appContext} key={key}>
       {children}
     </BrainContextCore>
   );
@@ -31,14 +33,16 @@ export const BrainContextProvider: React.FC<{ children: ReactNode }> = ({ childr
 export const BrainContextCore: React.FC<{
   children: ReactNode;
   appContext: AppContextData;
-  cardSetStorage: ReturnType<typeof useCardSets>;
-}> = ({ children, appContext, cardSetStorage }) => {
+  cardSetManager: CardSetManager;
+}> = ({ children, appContext, cardSetManager }) => {
   const { t } = useTranslation();
   const lang = appContext.language;
 
+  console.debug('Rendering BrainContextCore');
+
   const validateSetFromUrl = (lang: LangId, urlCardSetId: string) => {
     if (urlCardSetId) {
-      const set = cardSetStorage.getSetById(lang, urlCardSetId);
+      const set = cardSetManager.getSetById(lang, urlCardSetId);
       if (!set) {
         console.log(
           `BrainContextProvider: Trying to load set ${urlCardSetId} from URL but couldn't find it for language ${lang}`,
@@ -52,9 +56,9 @@ export const BrainContextCore: React.FC<{
   const urlCurrentCard = UrlManager.consumeParam(UrlParams.CARD);
   const urlCardSetId = UrlManager.consumeParam(UrlParams.SET);
 
-  const defaultSetForLanguage = cardSetStorage.getDefaultSetForLanguage(lang);
+  const defaultSetForLanguage = cardSetManager.getDefaultSetForLanguage(lang);
   if (!defaultSetForLanguage) {
-    const availableSets = cardSetStorage.getAvailableSetsPerLanguage();
+    const availableSets = cardSetManager.getAvailableSetsPerLanguage();
     if (Object.keys(availableSets).length === 0) {
       const error = 'Could not find any available sets, cant start BrainContext';
       throw new BrainToolError(error, BrainToolErrorType.FAILED_NO_VALID_SETS);
@@ -83,7 +87,7 @@ export const BrainContextCore: React.FC<{
   const brainContext: BrainContextData = new BrainContextData(
     brainState,
     setBrainState,
-    cardSetStorage,
+    cardSetManager,
     lang,
   );
 

@@ -2,7 +2,7 @@ import { Stack } from '@datastructures-js/stack';
 import { CardId } from '../../../interfaces/ICard';
 import { UrlManager } from '../../../utils/UrlManager/UrlManager';
 import { ICardSet, SetId } from '../../../interfaces/ICardSet';
-import { useCardSets } from '../../../cardSets/useCardSets';
+import { CardSetManager } from '../../../cardSets/CardSetManager';
 
 export interface BrainContextState {
   cardHistory: Stack<CardId>; // the top is the current card
@@ -14,13 +14,13 @@ export type LangId = string;
 export class BrainContextData {
   private state: BrainContextState;
   private setState: (state: BrainContextState) => void;
-  private cardSetStorage: ReturnType<typeof useCardSets>;
+  private cardSetStorage: CardSetManager;
   private language: LangId;
 
   constructor(
     brainState: BrainContextState,
     setBrainState: (brainState: BrainContextState) => void,
-    cardSetStorage: ReturnType<typeof useCardSets>,
+    cardSetStorage: CardSetManager,
     language: LangId,
   ) {
     this.state = brainState;
