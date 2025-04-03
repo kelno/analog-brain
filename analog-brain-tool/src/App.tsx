@@ -1,20 +1,18 @@
 import './App.css';
-import BrainTool from './components/BrainTool/BrainTool';
 /*import HowTo from './components/HowTo';
 import Intro from './components/Intro';*/
 import Outro from './components/Outro';
 import Section from './components/Section';
 import { Toaster } from 'sonner';
-import { BrainContextProvider } from './components/BrainTool/store/BrainContextProvider';
 import SettingsProvider from './settingsContext/SettingsProvider';
 import './i18n';
 import { useTranslation } from 'react-i18next';
 import ErrorBoundary from './components/ErrorBoundary';
 import Header from './components/Header/Header';
-import { Suspense, useEffect } from 'react';
+import { useEffect } from 'react';
 import Settings from './components/Settings';
 import { AppContextProvider } from './appContext/AppContextProvider';
-import BrainToolErrorHandler from './components/BrainTool/BrainToolErrorHandler';
+import { BrainToolContainer } from './components/BrainTool/BrainToolContainer';
 
 function App() {
   const { t } = useTranslation();
@@ -46,13 +44,7 @@ function App() {
 */}
 
               {/* <Section id="tool" title={t('tool.title')}> */}
-              <BrainToolErrorHandler>
-                <Suspense fallback={t(`brainLoading`)}>
-                  <BrainContextProvider>
-                    <BrainTool />
-                  </BrainContextProvider>
-                </Suspense>
-              </BrainToolErrorHandler>
+              <BrainToolContainer />
               {/* </Section> */}
 
               <Settings />

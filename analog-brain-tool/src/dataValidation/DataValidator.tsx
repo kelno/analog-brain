@@ -51,7 +51,5 @@ export class DataValidator {
       );
       return { isValid: false, errorMessages: [...errors, ...(ajvErrors ?? [])] }; // concat ajvErrors if any
     }
-
-    // TODO: validate/warn about formatVersion
   };
 }
