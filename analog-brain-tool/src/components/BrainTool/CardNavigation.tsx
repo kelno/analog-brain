@@ -1,9 +1,9 @@
 import { FC } from 'react';
-import LeftArrowSVG from '../SVGs/LeftArrowSVG';
-import UpArrowSVG from '../SVGs/UpArrowSVG';
-import ShareButtonSVG from '../SVGs/ShareButtonSVG';
-import CardSelectorButton from './CardSelectorButton';
-import useShare from '../../hooks/useShare';
+import { LeftArrowSVG } from '../SVGs/LeftArrowSVG';
+import { UpArrowSVG } from '../SVGs/UpArrowSVG';
+import { ShareButtonSVG } from '../SVGs/ShareButtonSVG';
+import { CardSelectorButton } from './CardSelectorButton';
+import { useShare } from '../../hooks/useShare';
 import { useTranslation } from 'react-i18next';
 import { useBrainContext } from './store/useBrainContext';
 
@@ -13,7 +13,7 @@ interface CardNavigationProps {
   disableBackToTop: boolean;
 }
 
-const CardNavigation: FC<CardNavigationProps> = ({
+export const CardNavigation: FC<CardNavigationProps> = ({
   handleClickPrevious,
   handleClickBackToTop,
   disableBackToTop,
@@ -45,5 +45,3 @@ const CardNavigation: FC<CardNavigationProps> = ({
     </div>
   );
 };
-
-export default CardNavigation;

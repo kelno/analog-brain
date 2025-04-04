@@ -3,7 +3,7 @@ import { SettingsContext } from './SettingsContext';
 import { UrlManager } from '../utils/UrlManager/UrlManager';
 import { SettingsContextData, SettingsContextState } from './SettingsContextData';
 
-const SettingsProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
+export const SettingsProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   // console.log('SettingsProvider: SettingsProvider()');
   // console.trace();
 
@@ -22,5 +22,3 @@ const SettingsProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
 
   return <SettingsContext.Provider value={settingsContext}>{children}</SettingsContext.Provider>;
 };
-
-export default SettingsProvider;

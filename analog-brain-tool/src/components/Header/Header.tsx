@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { LanguageSwitcher } from './LanguageSwitcher';
 import { useTranslation } from 'react-i18next';
-import ColorSwitch from './ColorSwitch';
-import HamburgerMenuButton from './HamburgerMenuButton';
+import { ColorSwitch } from './ColorSwitch';
+import { HamburgerMenuButton } from './HamburgerMenuButton';
 
-const Header: React.FC = () => {
+export const Header: React.FC = () => {
   const { t } = useTranslation();
 
   const [hamburgerIsOpen, sethamburgerIsOpen] = useState(false);
@@ -37,5 +37,3 @@ const Header: React.FC = () => {
     </header>
   );
 };
-
-export default Header;

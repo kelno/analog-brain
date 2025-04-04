@@ -6,7 +6,13 @@ export interface SVGTemplateProps {
   className?: string;
 }
 
-const SVGTemplate: React.FC<SVGTemplateProps> = ({ alt, draw, width = 24, height = 24, className = '' }) => {
+export const SVGTemplate: React.FC<SVGTemplateProps> = ({
+  alt,
+  draw,
+  width = 24,
+  height = 24,
+  className = '',
+}) => {
   return (
     <svg
       role="graphics-symbol"
@@ -33,5 +39,3 @@ const SVGTemplate: React.FC<SVGTemplateProps> = ({ alt, draw, width = 24, height
     </svg>
   );
 };
-
-export default SVGTemplate;

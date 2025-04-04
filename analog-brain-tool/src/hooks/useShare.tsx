@@ -3,7 +3,7 @@ import { toast } from 'sonner';
 import { useRef } from 'react';
 import { ErrorHelpers } from '../utils/ErrorHelpers';
 
-const useShare = () => {
+export const useShare = () => {
   const { t } = useTranslation();
   const lastShareAttempt = useRef<number>(0);
 
@@ -51,5 +51,3 @@ const useShare = () => {
 
   return { copy, share };
 };
-
-export default useShare;

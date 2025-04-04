@@ -13,7 +13,7 @@ enum LightMode {
 
 // checked = dark
 // unchecked = light
-const ColorSwitch: React.FC = () => {
+export const ColorSwitch: React.FC = () => {
   const [checked, setChecked] = useState<boolean>(false);
 
   // Get the browser's preferred color scheme
@@ -95,5 +95,3 @@ const ColorSwitch: React.FC = () => {
     />
   );
 };
-
-export default ColorSwitch;

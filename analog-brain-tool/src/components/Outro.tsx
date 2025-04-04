@@ -1,6 +1,6 @@
 import { Trans, useTranslation } from 'react-i18next';
 
-const Outro = () => {
+export const Outro = () => {
   const { t } = useTranslation();
 
   const date = BUILD_MS_TIME_SINCE_EPOCH ? new Date(BUILD_MS_TIME_SINCE_EPOCH) : undefined;
@@ -23,5 +23,3 @@ const Outro = () => {
     </>
   );
 };
-
-export default Outro;

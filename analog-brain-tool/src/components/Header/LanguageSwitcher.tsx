@@ -1,8 +1,8 @@
 import React, { Suspense, useState } from 'react';
-import languagesInfos from '../../language/languageInfo';
+import { languagesInfos } from '../../language/languageInfo';
 import { useAvailableLanguages } from '../../language/useAvailableLanguages';
 import { useAppContext } from '../../appContext/useAppContext';
-import ErrorBoundary from '../ErrorBoundary';
+import { ErrorBoundary } from '../ErrorBoundary';
 import { useTranslation } from 'react-i18next';
 
 export const LanguageSwitcher: React.FC = () => {

@@ -6,7 +6,7 @@ interface CardItemProps {
   handleClickCard: (id: CardId, isPrevious: boolean) => void;
 }
 
-const CardItem: FC<CardItemProps> = ({ carditem, handleClickCard }) => {
+export const CardItem: FC<CardItemProps> = ({ carditem, handleClickCard }) => {
   const isClickable = !!carditem.nextCardId;
 
   const handleClick = (event: React.MouseEvent) => {
@@ -32,5 +32,3 @@ const CardItem: FC<CardItemProps> = ({ carditem, handleClickCard }) => {
     </li>
   );
 };
-
-export default CardItem;

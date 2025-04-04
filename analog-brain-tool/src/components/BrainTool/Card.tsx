@@ -1,6 +1,6 @@
 import { FC } from 'react';
 import { ICard, CardId, ICardItem } from '../../interfaces/ICard';
-import CardItem from './CardItem';
+import { CardItem } from './CardItem';
 
 interface CardProps {
   card: ICard;
@@ -8,7 +8,7 @@ interface CardProps {
   isPrevious?: boolean;
 }
 
-const Card: FC<CardProps> = ({ card, handleClickCard, isPrevious = false }) => {
+export const Card: FC<CardProps> = ({ card, handleClickCard, isPrevious = false }) => {
   return (
     <div
       className={`flex-1 p-6 border rounded-2xl shadow-md w-full h-full ${isPrevious ? '' : 'bg-brain-bg'} ${
@@ -32,5 +32,3 @@ const Card: FC<CardProps> = ({ card, handleClickCard, isPrevious = false }) => {
     </div>
   );
 };
-
-export default Card;

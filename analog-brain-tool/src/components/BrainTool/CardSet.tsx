@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import { ICardSet } from '../../interfaces/ICardSet';
-import Card from './Card';
-import CardNavigation from './CardNavigation';
+import { Card } from './Card';
+import { CardNavigation } from './CardNavigation';
 import { CardId } from '../../interfaces/ICard';
 import { useBrainContext } from './store/useBrainContext';
 
@@ -9,7 +9,7 @@ interface CardSetProps {
   cardSet: ICardSet;
 }
 
-const CardSet: FC<CardSetProps> = ({ cardSet }) => {
+export const CardSet: FC<CardSetProps> = ({ cardSet }) => {
   const context = useBrainContext();
 
   const previousCardId = context.getPreviousCard();
@@ -63,5 +63,3 @@ const CardSet: FC<CardSetProps> = ({ cardSet }) => {
     </div>
   );
 };
-
-export default CardSet;

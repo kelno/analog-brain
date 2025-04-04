@@ -1,6 +1,6 @@
 import { useTranslation } from 'react-i18next';
 
-const Intro = () => {
+export const Intro = () => {
   const { t } = useTranslation();
 
   return (
@@ -21,5 +21,3 @@ const Intro = () => {
     </>
   );
 };
-
-export default Intro;

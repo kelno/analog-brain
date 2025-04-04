@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useSettings } from '../settingsContext/useSettings';
 import { useTranslation } from 'react-i18next';
 
-const Settings: React.FC = () => {
+export const Settings: React.FC = () => {
   const { indexUrl, defaultUrl, setIndexUrl, resetIndexUrl } = useSettings();
   const isDefaultUrl = indexUrl === defaultUrl;
   const [inputURL, setInputUrl] = useState(isDefaultUrl ? '' : indexUrl);
@@ -56,5 +56,3 @@ const Settings: React.FC = () => {
     </div>
   );
 };
-
-export default Settings;

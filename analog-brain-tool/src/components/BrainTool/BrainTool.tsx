@@ -1,10 +1,10 @@
-import CardSet from './CardSet';
+import { CardSet } from './CardSet';
 import { useTranslation } from 'react-i18next';
 import { useBrainContext } from './store/useBrainContext';
 import { useAppContext } from '../../appContext/useAppContext';
 import { useCardSetManager } from '../../cardSets/useCardSetManager';
 
-const BrainTool = () => {
+export const BrainTool = () => {
   const appContext = useAppContext();
   const brainContext = useBrainContext();
   const { t } = useTranslation();
@@ -69,5 +69,3 @@ const BrainTool = () => {
     </>
   );
 };
-
-export default BrainTool;

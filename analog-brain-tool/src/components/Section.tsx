@@ -6,7 +6,7 @@ type SectionProps = React.HTMLAttributes<HTMLDivElement> & {
   title: string;
 };
 
-function Section({ children, title, ...props }: PropsWithChildren<SectionProps>) {
+export function Section({ children, title, ...props }: PropsWithChildren<SectionProps>) {
   return (
     <section {...props} className="mt-8">
       <h2 className="text-3xl text-brain-secondary">{title}</h2>
@@ -14,5 +14,3 @@ function Section({ children, title, ...props }: PropsWithChildren<SectionProps>)
     </section>
   );
 }
-
-export default Section;

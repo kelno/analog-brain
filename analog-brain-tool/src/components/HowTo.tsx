@@ -1,4 +1,4 @@
-const HowTo = () => {
+export const HowTo = () => {
   return (
     <>
       <p>
@@ -26,5 +26,3 @@ const HowTo = () => {
     </>
   );
 };
-
-export default HowTo;

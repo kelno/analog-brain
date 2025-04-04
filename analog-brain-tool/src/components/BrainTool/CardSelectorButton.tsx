@@ -6,7 +6,7 @@ interface CardSelectorButtonProps {
   className?: string;
 }
 
-const CardSelectorButton: React.FC<PropsWithChildren<CardSelectorButtonProps>> = ({
+export const CardSelectorButton: React.FC<PropsWithChildren<CardSelectorButtonProps>> = ({
   children,
   onClick,
   disabled,
@@ -23,5 +23,3 @@ const CardSelectorButton: React.FC<PropsWithChildren<CardSelectorButtonProps>> =
     </button>
   );
 };
-
-export default CardSelectorButton;

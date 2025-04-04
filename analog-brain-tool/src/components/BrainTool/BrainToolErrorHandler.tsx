@@ -63,7 +63,7 @@ const BrainToolErrorHandlerMessage: FC<BrainToolErrorHandlerProps> = ({ error })
   );
 };
 
-class BrainToolErrorHandler extends React.Component<ErrorBoundaryProps, ErrorBoundaryState> {
+export class BrainToolErrorHandler extends React.Component<ErrorBoundaryProps, ErrorBoundaryState> {
   constructor(props: ErrorBoundaryProps) {
     super(props);
     this.state = { hasError: false, error: null, errorInfo: null };
@@ -91,5 +91,3 @@ class BrainToolErrorHandler extends React.Component<ErrorBoundaryProps, ErrorBou
     return this.props.children;
   }
 }
-
-export default BrainToolErrorHandler;
