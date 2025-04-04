@@ -51,5 +51,8 @@
     "save": "Save",
     "reset": "Reset"
   },
-  "suspenseLoading": "Loading..."
+  "suspenseLoading": "Loading...",
+  "hamburger": {
+    "title": "Other options"
+  }
 }
