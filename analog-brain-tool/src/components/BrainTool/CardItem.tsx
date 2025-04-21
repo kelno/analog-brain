@@ -22,13 +22,13 @@ export const CardItem: FC<CardItemProps> = ({ carditem, handleClickCard }) => {
       style={{ borderColor: carditem.borderColor || 'inherit' }}
       onClick={handleClick}
     >
-      {carditem.text}
-      {isClickable && (
+      <pre>{carditem.text}</pre>
+      {/* {isClickable && (
         <span>
           {' '}
           {' ➜ '}({carditem.nextCardId})
         </span>
-      )}
+      )} */}
     </li>
   );
 };
