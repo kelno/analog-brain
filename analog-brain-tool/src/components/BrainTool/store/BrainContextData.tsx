@@ -1,6 +1,5 @@
 import { Stack } from '@datastructures-js/stack';
 import { CardId } from '../../../interfaces/ICard';
-import { UrlManager } from '../../../utils/UrlManager/UrlManager';
 import { ICardSet, SetId } from '../../../interfaces/ICardSet';
 import { CardSetManager } from '../../../cardSets/CardSetManager';
 
