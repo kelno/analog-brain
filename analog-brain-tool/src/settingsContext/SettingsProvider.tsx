@@ -4,7 +4,12 @@ import { UrlManager } from '../utils/UrlManager/UrlManager';
 import { SettingsContextData, SettingsContextState } from './SettingsContextData';
 import { UrlParams } from '../utils/UrlManager/UrlParams';
 
+// We load the deck url from the URL params, only once
 const urlFromParam = UrlManager.consumeParam(UrlParams.DECK_URL);
+if (urlFromParam) {
+  localStorage.setItem('indexUrl', urlFromParam);
+  console.debug(`SettingsProvider: urlFromParam: ${urlFromParam}`);
+}
 
 export const SettingsProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   // console.log('SettingsProvider: SettingsProvider()');

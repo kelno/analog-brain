@@ -41,7 +41,7 @@ export class BrainContextData {
   }
 
   // can throw
-  public get currentCard(): CardId {
+  public get currentCardId(): CardId {
     if (this.state.cardHistory.isEmpty()) throw Error('Card History is empty and should never be');
 
     return this.state.cardHistory.peek();
@@ -118,8 +118,4 @@ export class BrainContextData {
   public get currentSetId(): SetId {
     return this.state.currentSetId;
   }
-
-  public getShareURL = () => {
-    return UrlManager.getShareURL(this.state.currentSetId, this.currentCard, this.language);
-  };
 }

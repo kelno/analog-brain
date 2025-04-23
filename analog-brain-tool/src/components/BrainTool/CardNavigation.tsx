@@ -2,7 +2,7 @@ import { FC } from 'react';
 import { LeftArrowSVG } from '../SVGs/LeftArrowSVG';
 import { UpArrowSVG } from '../SVGs/UpArrowSVG';
 import { ShareButtonSVG } from '../SVGs/ShareButtonSVG';
-import { CardSelectorButton } from './CardSelectorButton';
+import { CardNavigationButton } from './CardSelectorButton';
 import { useShare } from '../../hooks/useShare';
 import { useTranslation } from 'react-i18next';
 import { useBrainContext } from './store/useBrainContext';
@@ -19,24 +19,23 @@ export const CardNavigation: FC<CardNavigationProps> = ({
   disableBackToTop,
 }) => {
   const brainContext = useBrainContext();
-  const { t } = useTranslation();
-  const { share } = useShare();
+  const { shareFromParams } = useShare();
 
   const handleShare = () => {
-    share(brainContext.getShareURL(), t('share.title'), t('share.description'));
+    shareFromParams(brainContext.currentSetId, brainContext.currentCardId);
   };
 
   return (
     <div className="flex gap-2">
-      <CardSelectorButton disabled={!brainContext.hasCardHistory} onClick={handleClickPrevious}>
+      <CardNavigationButton disabled={!brainContext.hasCardHistory} onClick={handleClickPrevious}>
         <LeftArrowSVG alt="previous" />
-      </CardSelectorButton>
-      <CardSelectorButton disabled={disableBackToTop} onClick={handleClickBackToTop}>
+      </CardNavigationButton>
+      <CardNavigationButton disabled={disableBackToTop} onClick={handleClickBackToTop}>
         <UpArrowSVG alt="Back-To-Top" />
-      </CardSelectorButton>
-      <CardSelectorButton onClick={handleShare}>
+      </CardNavigationButton>
+      <CardNavigationButton onClick={handleShare}>
         <ShareButtonSVG alt="share" />
-      </CardSelectorButton>
+      </CardNavigationButton>
     </div>
   );
 };

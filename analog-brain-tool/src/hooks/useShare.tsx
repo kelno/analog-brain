@@ -2,10 +2,18 @@ import { useTranslation } from 'react-i18next';
 import { toast } from 'sonner';
 import { useRef } from 'react';
 import { ErrorHelpers } from '../utils/ErrorHelpers';
+import { useSettings } from '../settingsContext/useSettings';
+import { useAppContext } from '../appContext/useAppContext';
+import { SetId } from '../interfaces/ICardSet';
+import { CardId } from '../interfaces/ICard';
+import { UrlManager } from '../utils/UrlManager/UrlManager';
 
 export const useShare = () => {
   const { t } = useTranslation();
   const lastShareAttempt = useRef<number>(0);
+
+  const { indexUrl, isDefaultUrl } = useSettings();
+  const { language } = useAppContext();
 
   const isRecentAttempt = () => {
     const now = Date.now();
@@ -22,6 +30,16 @@ export const useShare = () => {
       console.error('Error copying to clipboard:', error);
       toast.error(t('toast.share.errors.generic', { error: ErrorHelpers.getErrorMessage(error) }));
     }
+  };
+
+  const shareFromParams = (currentSetId: SetId | undefined, currentCardId: CardId | undefined) => {
+    const shareUrl = UrlManager.getShareURL(
+      currentSetId,
+      currentCardId,
+      language,
+      isDefaultUrl ? undefined : indexUrl,
+    );
+    share(shareUrl, t('share.title'), t('share.description'));
   };
 
   const share = async (url: string, title: string, description: string) => {
@@ -49,5 +67,5 @@ export const useShare = () => {
     }
   };
 
-  return { copy, share };
+  return { copy, shareFromParams };
 };

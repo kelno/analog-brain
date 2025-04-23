@@ -28,6 +28,10 @@ export class SettingsContextData {
     return this._state.indexUrl;
   }
 
+  public get isDefaultUrl(): boolean {
+    return this._state.indexUrl === this._defaultUrl;
+  }
+
   public resetIndexUrl = () => {
     localStorage.removeItem('indexUrl');
     this._setState({ ...this._state, indexUrl: this.defaultUrl });

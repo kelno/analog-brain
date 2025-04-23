@@ -28,7 +28,7 @@ export const CardSet: FC<CardSetProps> = ({ cardSet }) => {
     context.resetHistory();
   };
 
-  const currentCardData = cardSet.cards.find((card) => card.id === context.currentCard);
+  const currentCardData = cardSet.cards.find((card) => card.id === context.currentCardId);
   const previousCardData = cardSet.cards.find((card) => card.id === previousCardId);
 
   if (!currentCardData) return <></>;

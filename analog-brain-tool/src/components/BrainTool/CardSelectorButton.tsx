@@ -1,12 +1,12 @@
 import { PropsWithChildren } from 'react';
 
-interface CardSelectorButtonProps {
+interface CardNavigationButtonProps {
   onClick?: (event: React.MouseEvent<HTMLElement, MouseEvent>) => void;
   disabled?: boolean;
   className?: string;
 }
 
-export const CardSelectorButton: React.FC<PropsWithChildren<CardSelectorButtonProps>> = ({
+export const CardNavigationButton: React.FC<PropsWithChildren<CardNavigationButtonProps>> = ({
   children,
   onClick,
   disabled,

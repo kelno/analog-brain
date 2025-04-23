@@ -1,14 +1,11 @@
 import React, { useState } from 'react';
 import { useSettings } from '../settingsContext/useSettings';
 import { useTranslation } from 'react-i18next';
-import { UrlManager } from '../utils/UrlManager/UrlManager';
-import { useShare } from '../hooks/useShare';
 
 export const Settings: React.FC = () => {
   const { indexUrl, defaultUrl, setIndexUrl, resetIndexUrl } = useSettings();
   const isDefaultUrl = indexUrl === defaultUrl;
   const [inputURL, setInputUrl] = useState(isDefaultUrl ? '' : indexUrl);
-  const { share } = useShare();
 
   const { t } = useTranslation();
 
@@ -23,12 +20,6 @@ export const Settings: React.FC = () => {
   const handleReset = () => {
     resetIndexUrl();
     setInputUrl('');
-  };
-
-  const handleShare = () => {
-    const shareDeck = inputURL || indexUrl; // currently input URL or the currently used one
-    const shareURL = UrlManager.getShareURL(undefined, undefined, undefined, shareDeck);
-    share(shareURL, t('share.title'), t('share.description'));
   };
 
   return (
@@ -59,12 +50,6 @@ export const Settings: React.FC = () => {
             className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-md text-sm transition-colors"
           >
             {t('settings.reset')}
-          </button>
-          <button
-            onClick={handleShare}
-            className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-md text-sm transition-colors"
-          >
-            {t('settings.share')}
           </button>
         </div>
       </div>
