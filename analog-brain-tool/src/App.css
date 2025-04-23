@@ -3,21 +3,30 @@
 @custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
 
 @theme {
+  /* Size variables */
   --spacing-header: 60px;
   --previous-card-offset-y: 3rem; /* 12 * 0.25rem = 3rem */
 
+  /* Colors */
   --color-brain-bg: var(--theme-color-brain-bg);
   --color-brain-text: var(--theme-color-brain-text);
   --color-brain-secondary: var(--theme-color-brain-secondary);
 }
 
+/* Defaults for the whole App */
+.default-theme {
+  @apply text-pretty;
+}
+
 @layer base {
+  /* Light */
   :root {
     --theme-color-brain-bg: theme('colors.white');
     --theme-color-brain-text: theme('colors.slate.900');
     --theme-color-brain-secondary: theme('colors.amber-600');
   }
 
+  /* Dark */
   [data-theme='dark'] {
     --theme-color-brain-bg: theme('colors.slate.900');
     --theme-color-brain-text: theme('colors.white');
