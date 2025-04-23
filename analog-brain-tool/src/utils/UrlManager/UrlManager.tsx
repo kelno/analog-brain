@@ -7,15 +7,15 @@ import { UrlParams } from './UrlParams';
 URL is only used for sharing and is not used as state storage after initial load.
 */
 export class UrlManager {
-  //public static UrlParams = UrlParams; // Attach the enum as a static property
-
-  public static getShareURLParams(set: SetId, card: CardId, lang: LangId) {
+  public static getShareURL(set?: SetId, card?: CardId, lang?: LangId, deckUrl?: string): string {
     const params = new URLSearchParams();
-    params.set(UrlParams.SET, set);
-    params.set(UrlParams.LANG, lang);
-    params.set(UrlParams.CARD, card);
+    if (set) params.set(UrlParams.SET, set);
+    if (lang) params.set(UrlParams.LANG, lang);
+    if (card) params.set(UrlParams.CARD, card);
+    if (deckUrl) params.set(UrlParams.DECK_URL, deckUrl);
 
-    return params.toString();
+    const paramsString = params.toString();
+    return `${window.location.href}?${paramsString}`;
   }
 
   public static getCurrentCard(): string | null {
@@ -33,6 +33,10 @@ export class UrlManager {
   public static getParam(paramName: string): string | null {
     const params = new URLSearchParams(window.location.search);
     return params.get(paramName);
+  }
+
+  public static getDeckURL(): string | null {
+    return UrlManager.getParam(UrlParams.DECK_URL);
   }
 
   public static consumeParam(paramName: string): string | null {

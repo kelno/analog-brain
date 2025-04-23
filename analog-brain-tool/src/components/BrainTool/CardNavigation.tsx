@@ -22,13 +22,8 @@ export const CardNavigation: FC<CardNavigationProps> = ({
   const { t } = useTranslation();
   const { share } = useShare();
 
-  const getShareURL = () => {
-    const params = brainContext.getShareURLParams();
-    return `${window.location.href}?${params}`;
-  };
-
   const handleShare = () => {
-    share(getShareURL(), t('share.title'), t('share.description'));
+    share(brainContext.getShareURL(), t('share.title'), t('share.description'));
   };
 
   return (

@@ -24,7 +24,7 @@ export const CardSelector: FC<CardSelectorProps> = ({
   const { t } = useTranslation();
 
   const getShareURL = () => {
-    const params = brainContext.getShareURLParams();
+    const params = brainContext.getShareURL();
     return `${window.location.href}?${params}`;
   };
 

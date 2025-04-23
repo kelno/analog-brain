@@ -119,7 +119,7 @@ export class BrainContextData {
     return this.state.currentSetId;
   }
 
-  public getShareURLParams = () => {
-    return UrlManager.getShareURLParams(this.state.currentSetId, this.currentCard, this.language);
+  public getShareURL = () => {
+    return UrlManager.getShareURL(this.state.currentSetId, this.currentCard, this.language);
   };
 }
