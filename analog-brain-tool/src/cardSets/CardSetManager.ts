@@ -2,6 +2,7 @@ import { ICardSet, SetId } from '../interfaces/ICardSet';
 import { LangId } from '../components/BrainTool/store/BrainContextData';
 import { BrainToolError, BrainToolErrorType } from '../components/BrainTool/BrainToolErrorHandler';
 import { DataValidator } from '../dataValidation/DataValidator';
+import stripJsonComments from 'strip-json-comments';
 
 interface FetchResult {
   cardSets: ICardSet[];
@@ -27,48 +28,60 @@ export class CardSetManager {
   private _errors: string[] = []; // loading errors
   private _pendingLoadState: CardSetsLoadingState | undefined = undefined; // exists only while loading
 
-  private fetchCardSets = async (indexUrl: string, dataValidator: DataValidator): Promise<FetchResult> => {
-    console.debug(`CardSetManager: Fetching card sets from ${indexUrl}`);
-    const response = await fetch(indexUrl, { cache: 'no-store' });
+  private fetchAndParseJSONC = async (url: string, errorType: BrainToolErrorType ) : Promise<any> => {
+    const response = await fetch(url, { cache: 'no-store' });
     if (!response.ok) {
       throw new BrainToolError(
-        `CardSetManager: Failed to fetch index file (error ${response.status}:${response.statusText}) from ${indexUrl}`,
-        BrainToolErrorType.FAILED_TO_FETCH_INDEX,
+        `CardSetManager: Failed to fetch json file (error ${response.status}:${response.statusText}) from ${url}`,
+        errorType,
       );
     }
-
-    let indexLoadError: BrainToolError|undefined =  undefined;
-    const indexData = await response.json().catch(error => {  
-      indexLoadError = new BrainToolError(
-        `Failed to decode index json: ${error.message}`,
-        BrainToolErrorType.FAILED_TO_FETCH_INDEX,
-      ); 
+    
+    return await response.text()
+    .then(text => {
+      try {
+        return JSON.parse(stripJsonComments(text));
+      } catch (parseError) {
+        throw new Error(
+          `JSON parse error: ${
+            parseError instanceof Error 
+              ? parseError.message 
+              : 'Unknown parsing error'
+          }`
+        );
+      }
+    })
+    .catch((error: unknown) => {
+      throw new BrainToolError(
+        error instanceof Error
+          ? error.message
+          : 'Unknown error',
+          errorType,
+      );
     });
-    if (indexLoadError)
-      throw indexLoadError;
+  }
 
+  private getFileURL() {
+    
+  }
+  private fetchCardSets = async (indexUrl: string, dataValidator: DataValidator): Promise<FetchResult> => {
+    console.debug(`CardSetManager: Fetching card sets from ${indexUrl}`);
+
+    const indexData = await this.fetchAndParseJSONC(indexUrl, BrainToolErrorType.FAILED_TO_FETCH_INDEX);
+   
     const cardSets: ICardSet[] = [];
     let errors = [];
 
-    // Get the base URL from the index file location
-    const baseUrl = indexUrl.substring(0, indexUrl.lastIndexOf('/') + 1);
-
+    const getFileUrl = (fileName: string) => {
+      // Get the base URL from the index file location
+      const baseUrl = indexUrl.substring(0, indexUrl.lastIndexOf('/') + 1);
+      return `${baseUrl}${fileName}`;
+    }
+    
     for (const fileName of indexData.files) {
       try {
-        const URL = `${baseUrl}${fileName}`;
-        const response = await fetch(`${URL}`, { cache: 'no-store' });
-        if (!response.ok) {
-          throw new BrainToolError(
-            `CardSetManager: Failed to fetch card set ${fileName}`,
-            BrainToolErrorType.FAILED_TO_FETCH_SET,
-          );
-        }
-        const cardSet = (await response.json().catch(err => {  
-          indexLoadError = new BrainToolError(
-            `Failed to decode set json: ${err.message}`,
-            BrainToolErrorType.FAILED_TO_FETCH_SET,
-          ); 
-        })) as ICardSet;
+        const cardSet = await this.fetchAndParseJSONC(getFileUrl(fileName), BrainToolErrorType.FAILED_TO_FETCH_SET) as ICardSet;
+       
         const result = dataValidator.validateCardSetJSON(cardSet);
         if (!result.isValid) {  
           const errorMsg = `Invalid card set JSON schema: ${URL}. Error: ${JSON.stringify(result.errorMessages)}`;
