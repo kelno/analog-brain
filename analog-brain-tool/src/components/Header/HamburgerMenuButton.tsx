@@ -12,7 +12,7 @@ export const HamburgerMenuButton: React.FC<HamburgerMenuButtonProps> = ({ isOpen
 
   return (
     <>
-      <Hamburger label={t('hamburger.title')} toggled={isOpen} toggle={setIsOpen} />
+      <Hamburger label={t('hamburger.buttonLabel')} toggled={isOpen} toggle={setIsOpen} />
     </>
   );
 };

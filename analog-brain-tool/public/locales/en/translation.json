@@ -53,6 +53,6 @@
   },
   "suspenseLoading": "Loading...",
   "hamburger": {
-    "title": "Other options"
+    "buttonLabel": "Other options"
   }
 }

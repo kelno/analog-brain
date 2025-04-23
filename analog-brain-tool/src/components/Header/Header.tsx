@@ -3,6 +3,7 @@ import { LanguageSwitcher } from './LanguageSwitcher';
 import { useTranslation } from 'react-i18next';
 import { ColorSwitch } from './ColorSwitch';
 import { HamburgerMenuButton } from './HamburgerMenuButton';
+import { HamburgerMenuContent } from './HamburgerMenuContent';
 
 export const Header: React.FC = () => {
   const { t } = useTranslation();
@@ -33,7 +34,7 @@ export const Header: React.FC = () => {
           </div>
         </div>
       </div>
-      {hamburgerIsOpen ? <div className="float-left">YAY BURGER MENU!!!</div> : null}
+      {hamburgerIsOpen ? <HamburgerMenuContent isOpen={hamburgerIsOpen} /> : null}
     </header>
   );
 };
