@@ -61,9 +61,6 @@ export class CardSetManager {
     });
   }
 
-  private getFileURL() {
-    
-  }
   private fetchCardSets = async (indexUrl: string, dataValidator: DataValidator): Promise<FetchResult> => {
     console.debug(`CardSetManager: Fetching card sets from ${indexUrl}`);
 
