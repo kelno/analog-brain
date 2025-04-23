@@ -1,6 +1,6 @@
 {
   "files": [
-    "data/original_analog_brain.json",
-    "data/original_analog_brain_fr.json"
+    "data/original_analog_brain.jsonc",
+    "data/original_analog_brain_fr.jsonc"
   ]
 }
