@@ -22,7 +22,7 @@ export const CardItem: FC<CardItemProps> = ({ carditem, handleClickCard }) => {
       style={{ borderColor: carditem.borderColor || 'inherit' }}
       onClick={handleClick}
     >
-      <pre>{carditem.text}</pre>
+      <p>{carditem.text}</p>
       {/* {isClickable && (
         <span>
           {' '}
