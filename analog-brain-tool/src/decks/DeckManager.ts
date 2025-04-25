@@ -22,7 +22,7 @@ class DecksLoadingState {
 }
 
 export class DeckManager {
-  private _processedSets: Record<LangId, IDeck[]> = {};
+  private _processedDecks: Record<LangId, IDeck[]> = {};
   private _updateId: string = "";
   private _loadedUrl: string = "";
   private _errors: string[] = []; // loading errors
@@ -77,11 +77,11 @@ export class DeckManager {
     
     for (const fileName of indexData.files) {
       try {
-        const deck = await this.fetchAndParseJSONC(getFileUrl(fileName), BrainToolErrorType.FAILED_TO_FETCH_SET) as IDeck;
+        const deck = await this.fetchAndParseJSONC(getFileUrl(fileName), BrainToolErrorType.FAILED_TO_FETCH_DECK) as IDeck;
        
         const result = dataValidator.validateDeckJSON(deck);
         if (!result.isValid) {  
-          const errorMsg = `Invalid card set JSON schema: ${URL}. Error: ${JSON.stringify(result.errorMessages)}`;
+          const errorMsg = `Invalid card deck JSON schema: ${URL}. Error: ${JSON.stringify(result.errorMessages)}`;
           console.error(errorMsg); 
           errors.push(errorMsg);
           continue;
@@ -90,7 +90,7 @@ export class DeckManager {
         decks.push(deck);
       } catch (error) {
         // TODO: Can't print an error this way
-        const errorMsg = `DeckManager: Error fetching card set ${fileName}: ${error}`;
+        const errorMsg = `DeckManager: Error fetching card deck ${fileName}: ${error}`;
         console.error(errorMsg);
         errors.push(errorMsg);
       }
@@ -111,19 +111,19 @@ export class DeckManager {
     // else, start loading it
     const promise = this.fetchDecks(indexUrl, dataValidator);
     this._pendingLoadState = new DecksLoadingState(indexUrl, promise);
-    const { decks: fetchedSets, errors } = await promise;
+    const { decks: fetchedDecks, errors } = await promise;
     
-    this._processedSets = fetchedSets.reduce((acc, set) => {
-      const result = dataValidator.validateDeckData(set);
+    this._processedDecks = fetchedDecks.reduce((acc, deck) => {
+      const result = dataValidator.validateDeckData(deck);
       if (!result.isValid) {  
-        console.error(`Invalid card set in database: ${set.title} (id: ${set.id}). Errors:`); 
+        console.error(`Invalid card deck in database: ${deck.title} (id: ${deck.id}). Errors:`); 
         console.error(result.errorMessages);
         return acc; 
       }
 
-      if (!acc[set.lang]) acc[set.lang] = [];
-      if (set.isDefaultForLanguage) acc[set.lang].unshift(set);
-      else acc[set.lang].push(set);
+      if (!acc[deck.lang]) acc[deck.lang] = [];
+      if (deck.isDefaultForLanguage) acc[deck.lang].unshift(deck);
+      else acc[deck.lang].push(deck);
 
       return acc;
     }, {} as Record<LangId, IDeck[]>);
@@ -135,20 +135,20 @@ export class DeckManager {
     return this._updateId;
   }
 
-  public getAvailableSets(lang: LangId): Readonly<IDeck[]> | undefined {
-    return this._processedSets[lang];
+  public getAvailableDecks(lang: LangId): Readonly<IDeck[]> | undefined {
+    return this._processedDecks[lang];
   }
 
-  public getSetById(lang: LangId, id: DeckId): IDeck | undefined {
-    return this._processedSets[lang]?.find((set) => set.id === id);
+  public getDeckById(lang: LangId, id: DeckId): IDeck | undefined {
+    return this._processedDecks[lang]?.find((deck) => deck.id === id);
   }
 
-  public getDefaultSetForLanguage(lang: LangId): IDeck | undefined {
-    return this._processedSets[lang]?.[0];
+  public getDefaultDeckForLanguage(lang: LangId): IDeck | undefined {
+    return this._processedDecks[lang]?.[0];
   }
 
   public getAvailableSetsPerLanguage(): Readonly<Record<LangId, IDeck[]>> {
-     return this._processedSets;
+     return this._processedDecks;
   }
 
   // empty string if never loaded. Refreshed every time loadDecks finishes loading succesfully. 

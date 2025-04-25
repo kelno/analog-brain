@@ -12,10 +12,10 @@ interface ErrorBoundaryState {
 }
 
 export enum BrainToolErrorType {
-  FAILED_NO_VALID_SETS = 'FAILED_NO_VALID_SETS',
+  FAILED_NO_VALID_DECK = 'FAILED_NO_VALID_DECK',
   FAILED_TO_FETCH_INDEX = 'FAILED_TO_FETCH_INDEX',
-  FAILED_TO_FETCH_SET = 'FAILED_TO_FETCH_SET',
-  NO_AVAILABLE_SETS_FOR_LANG = 'NO_AVAILABLE_SETS_FOR_LANG',
+  FAILED_TO_FETCH_DECK = 'FAILED_TO_FETCH_DECK',
+  NO_AVAILABLE_DECK_FOR_LANG = 'NO_AVAILABLE_DECK_FOR_LANG',
   FAILED_TO_LOAD_DATA_VALIDATOR = 'FAILED_TO_LOAD_DATA_VALIDATOR',
 }
 
@@ -38,17 +38,17 @@ const BrainToolErrorHandlerMessage: FC<BrainToolErrorHandlerProps> = ({ error })
 
   let errorMsg = '';
   switch (error.brainError) {
-    case BrainToolErrorType.FAILED_NO_VALID_SETS:
-      errorMsg = t('tool.errors.noValidSets');
+    case BrainToolErrorType.FAILED_NO_VALID_DECK:
+      errorMsg = t('tool.errors.noValidDecks');
       break;
     case BrainToolErrorType.FAILED_TO_FETCH_INDEX:
       errorMsg = t('tool.errors.failedToFetchIndex');
       break;
-    case BrainToolErrorType.FAILED_TO_FETCH_SET:
-      errorMsg = t('tool.errors.failedToFetchSet');
+    case BrainToolErrorType.FAILED_TO_FETCH_DECK:
+      errorMsg = t('tool.errors.failedToFetchDeck');
       break;
-    case BrainToolErrorType.NO_AVAILABLE_SETS_FOR_LANG:
-      errorMsg = t('tool.errors.noSetForCurrentLang');
+    case BrainToolErrorType.NO_AVAILABLE_DECK_FOR_LANG:
+      errorMsg = t('tool.errors.noDeckForCurrentLang');
       break;
     case BrainToolErrorType.FAILED_TO_LOAD_DATA_VALIDATOR:
       errorMsg = t('tool.errors.generic');

@@ -16,10 +16,10 @@
       "generic": "Error.",
       "warnErrors":  "Found some errors while trying to load decks, some decks might be missing. Look in console for more information.",
       "errorIntro": "Failed to load decks!",
-      "noValidSets": "Failed to load decks from given index.",
+      "noValidDecks": "Failed to load decks from given index.",
       "failedToFetchIndex": "Failed to fetch decks index file.",
-      "failedToFetchSet": "Failed to fetch a set.",
-      "noSetForCurrentLang": "No set found for current language."
+      "failedToFetchDeck": "Failed to fetch a deck.",
+      "noDeckForCurrentLang": "No deck found for current language."
     }
   },
   "about": {
@@ -27,7 +27,7 @@
   },
   "toast": {
     "noDecksForLang": "No available decks for language {{lang}}",
-    "someErrorsLoadingDeck": "There were some errors loading the card set {{setTitle}}.",
+    "someErrorsLoadingDeck": "There were some errors loading the card deck {{deckTitle}}.",
     "share": {
       "title": "The Analog Brain Tool",
       "description": "Overcome your executive dysfunction",
@@ -45,11 +45,11 @@
     "lastUpdated": "Last updated:",
     "adaptedFrom": "This tool is adapted from <1>adhdanalogbrain.tumblr.com</1>."
   },
-  "settings": {
-    "title": "Settings",
-    "decksURL": "Remote Dataset URL:",
+  "decktings": {
+    "title": "Decktings",
+    "decksURL": "Remote Datadeck URL:",
     "save": "Save",
-    "reset": "Reset",
+    "redeck": "Redeck",
     "share": "Share"
   },
   "suspenseLoading": "Loading...",

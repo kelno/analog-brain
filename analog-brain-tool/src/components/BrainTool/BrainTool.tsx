@@ -10,33 +10,31 @@ export const BrainTool = () => {
   const { t } = useTranslation();
   const deckManager = useDeckManager();
 
-  console.debug(`Rendering BrainTool with set manager loaded url ${deckManager.loadedUrl}`);
+  console.debug(`Rendering BrainTool with deck manager loaded url ${deckManager.loadedUrl}`);
 
   const lang = appContext.language;
 
   // this should already be checked and prevented by BrainContext
-  const availableSets = deckManager.getAvailableSets(lang);
-  if (!availableSets) {
+  const availableDecks = deckManager.getAvailableDecks(lang);
+  if (!availableDecks) {
     const error = `'No available decks for language ${lang}`;
     console.error(error);
     throw Error(error);
   }
 
   const handleSelectSet = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    if (availableSets === undefined) return;
+    if (availableDecks === undefined) return;
 
     const id: string = event.target.value;
 
-    const set = availableSets.find((set) => set.id === id);
-    if (set === undefined) {
-      console.error('BrainTool: Could not find set with id ' + id);
+    const deck = availableDecks.find((deck) => deck.id === id);
+    if (deck === undefined) {
+      console.error('BrainTool: Could not find deck with id ' + id);
       return;
     }
-
-    brainContext.selectSet(set.id);
   };
 
-  const deck = brainContext.currentSet;
+  const deck = brainContext.currentDeck;
   const currentDeckId = deck?.id;
   const hasErrors = deckManager.errors.length > 0 ? true : undefined;
 
@@ -49,11 +47,11 @@ export const BrainTool = () => {
           defaultValue={currentDeckId}
           className="my-4 p-1 border rounded bg-white dark:bg-slate-900"
         >
-          {availableSets &&
-            Object.values(availableSets).map((set) => {
+          {availableDecks &&
+            Object.values(availableDecks).map((deck) => {
               return (
-                <option key={set.title} value={set.id}>
-                  {set.title}
+                <option key={deck.title} value={deck.id}>
+                  {deck.title}
                 </option>
               );
             })}

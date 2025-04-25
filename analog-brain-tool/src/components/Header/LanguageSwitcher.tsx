@@ -42,7 +42,7 @@ const LanguageSwitcherCore: React.FC<LanguageSwitcherCoreProps> = ({ changeLangu
   const { languages: availableLanguages } = useAvailableLanguages();
   const { t } = useTranslation();
 
-  // Change language if the current one is not available within current card set
+  // Change language if the current one is not available within current card deck
   // disabled, shouldn't be done here
   // if (!isFallback && !availableLanguages.includes(currentLanguage)) {
   //   console.log(`Current language is not among available language, defaulting to english.`);

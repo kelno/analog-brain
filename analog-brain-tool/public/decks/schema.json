@@ -49,29 +49,33 @@
             "type": "object"
         }
     },
-    "description": "A card set is a collection of cards that together form a decision tree.",
+    "description": "A card deck is a collection of cards that together form a decision tree.",
     "properties": {
+        "author": {
+            "description": "Author of the deck.",
+            "type": "string"
+        },
         "cards": {
-            "description": "The list of cards in this set.",
+            "description": "The list of cards in this deck.",
             "items": {
                 "$ref": "#/definitions/ICard"
             },
             "type": "array"
         },
         "description": {
-            "description": "Free string for the set creator to use (NYI)",
+            "description": "Free string for the deck creator to use (NYI)",
             "type": "string"
         },
         "formatVersion": {
-            "description": "Format version used for the current set.\nNon-matching version numbers won't be rejected as long as the required fields are present.\nThis is mainly an helper to warn about version mismatch.",
+            "description": "Format version used for the current deck.\nNon-matching version numbers won't be rejected as long as the required fields are present.\nThis is mainly an helper to warn about version mismatch.",
             "type": "number"
         },
         "id": {
-            "description": "A unique string to identify the set. Won't be shown to the user.",
+            "description": "A unique string to identify the deck. Won't be shown to the user.",
             "type": "string"
         },
         "isDefaultForLanguage": {
-            "description": "Whether this set should be the default one for the specified language.",
+            "description": "Whether this deck should be the default one for the specified language.",
             "type": "boolean"
         },
         "lang": {
@@ -79,7 +83,7 @@
             "type": "string"
         },
         "title": {
-            "description": "Set title for the user to identify the set.",
+            "description": "Deck title for the user to identify the deck.",
             "type": "string"
         }
     },

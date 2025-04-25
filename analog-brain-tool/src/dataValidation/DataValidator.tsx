@@ -1,4 +1,4 @@
-import { IDeck, MINIMAL_CARD_SET_FORMAT_VERSION } from '../interfaces/IDeck';
+import { IDeck, MINIMAL_CARD_DECK_FORMAT_VERSION } from '../interfaces/IDeck';
 import { ValidateFunction } from 'ajv';
 import { ajv } from './useAjv';
 
@@ -17,11 +17,11 @@ export class DataValidator {
 
   public validateDeckData = (deck: IDeck): ValidationResult => {
     if (deck.cards.length === 0) {
-      return { isValid: false, errorMessages: [`Found empty card set with id ${deck.id}`] };
+      return { isValid: false, errorMessages: [`Found empty card deck with id ${deck.id}`] };
     }
 
-    const hasDuplicateCardIds = (set: IDeck): boolean => {
-      const ids = set.cards.map((card) => card.id);
+    const hasDuplicateCardIds = (deck: IDeck): boolean => {
+      const ids = deck.cards.map((card) => card.id);
       return new Set(ids).size !== ids.length;
     };
 
@@ -35,8 +35,8 @@ export class DataValidator {
   public validateDeckJSON = (deck: IDeck): ValidationResult => {
     let errors: string[] = [];
 
-    if (deck.formatVersion < MINIMAL_CARD_SET_FORMAT_VERSION) {
-      const error = `Card set ${deck.id} format version is below minimal version ${MINIMAL_CARD_SET_FORMAT_VERSION}`;
+    if (deck.formatVersion < MINIMAL_CARD_DECK_FORMAT_VERSION) {
+      const error = `Card deck ${deck.id} format version is below minimal version ${MINIMAL_CARD_DECK_FORMAT_VERSION}`;
       console.warn(error);
       errors.push(error);
     }
@@ -46,7 +46,7 @@ export class DataValidator {
 
       return { isValid: true };
     } else {
-      console.error(`Validating failed for set: ${JSON.stringify(deck)}`);
+      console.error(`Validating failed for deck: ${JSON.stringify(deck)}`);
       const ajvErrors: string[] | undefined = this._validate.errors?.map((ajvError) =>
         JSON.stringify(ajvError),
       );

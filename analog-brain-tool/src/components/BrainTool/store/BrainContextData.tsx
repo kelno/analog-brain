@@ -91,27 +91,27 @@ export class BrainContextData {
     this.saveCardHistory();
   };
 
-  private _selectSet(newSet: IDeck) {
-    console.debug('BrainContext: Selected set with id ' + newSet.id + ' (' + newSet.title + ')');
+  private _selectDeck(newDeck: IDeck) {
+    console.debug('BrainContext: Selected deck with id ' + newDeck.id + ' (' + newDeck.title + ')');
 
-    const firstCardId = newSet.cards[0].id;
+    const firstCardId = newDeck.cards[0].id;
     const newCardHistory = new Stack<CardId>([firstCardId]);
 
-    this.setState({ ...this.state, currentDeckId: newSet.id, cardHistory: newCardHistory });
+    this.setState({ ...this.state, currentDeckId: newDeck.id, cardHistory: newCardHistory });
   }
 
-  public selectSet = (deckId: DeckId) => {
-    const newSet = this.deckStorage.getSetById(this.language, deckId);
-    if (!newSet) {
-      console.error('Failed to select set with id + ' + deckId);
+  public selectDeck = (deckId: DeckId) => {
+    const newDeck = this.deckStorage.getDeckById(this.language, deckId);
+    if (!newDeck) {
+      console.error('Failed to select deck with id + ' + deckId);
       return;
     }
-    this._selectSet(newSet);
+    this._selectDeck(newDeck);
   };
 
-  public get currentSet(): IDeck | undefined {
-    //console.debug('BrainContext: get currentSet from selected ' + this.state.currentDeckId);
-    return this.deckStorage.getSetById(this.language, this.state.currentDeckId);
+  public get currentDeck(): IDeck | undefined {
+    //console.debug('BrainContext: get currentDeck from selected ' + this.state.currentDeckId);
+    return this.deckStorage.getDeckById(this.language, this.state.currentDeckId);
   }
 
   public get currentDeckId(): DeckId {

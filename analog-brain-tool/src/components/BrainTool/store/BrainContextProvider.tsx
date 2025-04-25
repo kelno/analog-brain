@@ -40,32 +40,32 @@ export const BrainContextCore: React.FC<{
 
   console.debug('Rendering BrainContextCore');
 
-  const validateSetFromUrl = (lang: LangId, urlDeckId: string) => {
+  const validateDeckFromUrl = (lang: LangId, urlDeckId: string) => {
     if (urlDeckId) {
-      const set = deckManager.getSetById(lang, urlDeckId);
-      if (!set) {
+      const deck = deckManager.getDeckById(lang, urlDeckId);
+      if (!deck) {
         console.log(
-          `BrainContextProvider: Trying to load set ${urlDeckId} from URL but couldn't find it for language ${lang}`,
+          `BrainContextProvider: Trying to load deck ${urlDeckId} from URL but couldn't find it for language ${lang}`,
         );
       }
-      return set;
+      return deck;
     }
     return undefined;
   };
 
   const urlCurrentCard = UrlManager.consumeParam(UrlParams.CARD);
-  const urlDeckId = UrlManager.consumeParam(UrlParams.SET);
+  const urlDeckId = UrlManager.consumeParam(UrlParams.DECK);
 
-  const defaultSetForLanguage = deckManager.getDefaultSetForLanguage(lang);
+  const defaultSetForLanguage = deckManager.getDefaultDeckForLanguage(lang);
   if (!defaultSetForLanguage) {
-    const availableSets = deckManager.getAvailableSetsPerLanguage();
-    if (Object.keys(availableSets).length === 0) {
+    const availableDecks = deckManager.getAvailableSetsPerLanguage();
+    if (Object.keys(availableDecks).length === 0) {
       const error = 'Could not find any available decks, cant start BrainContext';
-      throw new BrainToolError(error, BrainToolErrorType.FAILED_NO_VALID_SETS);
+      throw new BrainToolError(error, BrainToolErrorType.FAILED_NO_VALID_DECK);
     }
 
-    const fallbackLanguage = Object.keys(availableSets)[0];
-    const error = `No default set for language ${lang}. Falling back to ${fallbackLanguage}`;
+    const fallbackLanguage = Object.keys(availableDecks)[0];
+    const error = `No default deck for language ${lang}. Falling back to ${fallbackLanguage}`;
     console.error(error);
     toast.error(t('toast.noDecksForLang', { lang }));
     appContext.setLanguage(fallbackLanguage);
@@ -73,15 +73,15 @@ export const BrainContextCore: React.FC<{
     // we'll be redrawn when the language changes
   }
 
-  const setFromURL = urlDeckId ? validateSetFromUrl(lang, urlDeckId) : undefined;
-  const defaultSet = setFromURL ?? defaultSetForLanguage;
+  const setFromURL = urlDeckId ? validateDeckFromUrl(lang, urlDeckId) : undefined;
+  const defaultDeck = setFromURL ?? defaultSetForLanguage;
 
   const urlCard = setFromURL ? urlCurrentCard : null;
-  const defaultCardId = urlCard ?? defaultSet.cards[0].id;
+  const defaultCardId = urlCard ?? defaultDeck.cards[0].id;
 
   const [brainState, setBrainState] = useState<BrainContextState>({
     cardHistory: new Stack<CardId>([defaultCardId]),
-    currentDeckId: defaultSet.id,
+    currentDeckId: defaultDeck.id,
   });
 
   const brainContext: BrainContextData = new BrainContextData(brainState, setBrainState, deckManager, lang);

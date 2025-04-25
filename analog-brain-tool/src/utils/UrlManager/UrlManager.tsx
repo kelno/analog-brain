@@ -7,9 +7,9 @@ import { UrlParams } from './UrlParams';
 URL is only used for sharing and is not used as state storage after initial load.
 */
 export class UrlManager {
-  public static getShareURL(set?: DeckId, card?: CardId, lang?: LangId, deckUrl?: string): string {
+  public static getShareURL(deck?: DeckId, card?: CardId, lang?: LangId, deckUrl?: string): string {
     const params = new URLSearchParams();
-    if (set) params.set(UrlParams.SET, set);
+    if (deck) params.set(UrlParams.DECK, deck);
     if (lang) params.set(UrlParams.LANG, lang);
     if (card) params.set(UrlParams.CARD, card);
     if (deckUrl) params.set(UrlParams.DECK_URL, deckUrl);
@@ -23,7 +23,7 @@ export class UrlManager {
   }
 
   public static getDeck(): DeckId | null {
-    return UrlManager.getParam(UrlParams.SET);
+    return UrlManager.getParam(UrlParams.DECK);
   }
 
   public static getLanguage(): string | null {
