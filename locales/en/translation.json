@@ -11,7 +11,11 @@
   },
   "tool": {
     "title": "The Tool - Start here",
-    "deck": "Decision Deck",
+    "deck" : {
+      "title": "Decision Deck",
+      "description": "Description:",
+      "author": "Author:"
+    },
     "errors" : {
       "generic": "Error.",
       "warnErrors":  "Found some errors while trying to load decks, some decks might be missing. Look in console for more information.",
