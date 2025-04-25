@@ -21,7 +21,7 @@ export const CardNavigation: FC<CardNavigationProps> = ({
   const { shareFromParams } = useShare();
 
   const handleShare = () => {
-    shareFromParams(brainContext.currentSetId, brainContext.currentCardId);
+    shareFromParams(brainContext.currentDeckId, brainContext.currentCardId);
   };
 
   return (

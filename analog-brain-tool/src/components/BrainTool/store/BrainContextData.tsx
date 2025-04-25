@@ -1,11 +1,11 @@
 import { Stack } from '@datastructures-js/stack';
 import { CardId } from '../../../interfaces/ICard';
-import { ICardSet, SetId } from '../../../interfaces/ICardSet';
-import { CardSetManager } from '../../../cardSets/CardSetManager';
+import { IDeck, DeckId } from '../../../interfaces/IDeck';
+import { DeckManager } from '../../../decks/DeckManager';
 
 export interface BrainContextState {
   cardHistory: Stack<CardId>; // the top is the current card
-  currentSetId: SetId;
+  currentDeckId: DeckId;
 }
 
 export type LangId = string;
@@ -13,18 +13,18 @@ export type LangId = string;
 export class BrainContextData {
   private state: BrainContextState;
   private setState: (state: BrainContextState) => void;
-  private cardSetStorage: CardSetManager;
+  private deckStorage: DeckManager;
   private language: LangId;
 
   constructor(
     brainState: BrainContextState,
     setBrainState: (brainState: BrainContextState) => void,
-    cardSetStorage: CardSetManager,
+    deckStorage: DeckManager,
     language: LangId,
   ) {
     this.state = brainState;
     this.setState = setBrainState;
-    this.cardSetStorage = cardSetStorage;
+    this.deckStorage = deckStorage;
     this.language = language;
   }
 
@@ -91,30 +91,30 @@ export class BrainContextData {
     this.saveCardHistory();
   };
 
-  private _selectSet(newSet: ICardSet) {
+  private _selectSet(newSet: IDeck) {
     console.debug('BrainContext: Selected set with id ' + newSet.id + ' (' + newSet.title + ')');
 
     const firstCardId = newSet.cards[0].id;
     const newCardHistory = new Stack<CardId>([firstCardId]);
 
-    this.setState({ ...this.state, currentSetId: newSet.id, cardHistory: newCardHistory });
+    this.setState({ ...this.state, currentDeckId: newSet.id, cardHistory: newCardHistory });
   }
 
-  public selectSet = (setId: SetId) => {
-    const newSet = this.cardSetStorage.getSetById(this.language, setId);
+  public selectSet = (deckId: DeckId) => {
+    const newSet = this.deckStorage.getSetById(this.language, deckId);
     if (!newSet) {
-      console.error('Failed to select set with id + ' + setId);
+      console.error('Failed to select set with id + ' + deckId);
       return;
     }
     this._selectSet(newSet);
   };
 
-  public get currentSet(): ICardSet | undefined {
-    //console.debug('BrainContext: get currentSet from selected ' + this.state.currentSetId);
-    return this.cardSetStorage.getSetById(this.language, this.state.currentSetId);
+  public get currentSet(): IDeck | undefined {
+    //console.debug('BrainContext: get currentSet from selected ' + this.state.currentDeckId);
+    return this.deckStorage.getSetById(this.language, this.state.currentDeckId);
   }
 
-  public get currentSetId(): SetId {
-    return this.state.currentSetId;
+  public get currentDeckId(): DeckId {
+    return this.state.currentDeckId;
   }
 }

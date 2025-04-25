@@ -23,7 +23,7 @@ export class AppContextData {
 
   // returns success
   public setLanguage = (lang: LangId) => {
-    // const defaultSet = this.cardSetStorage.getDefaultSetForLanguage(lang);
+    // const defaultSet = this.deckStorage.getDefaultSetForLanguage(lang);
     // if (defaultSet === undefined) {
     //   console.error(`Can't switch language. No available default set for chosen lang ${lang}`);
     //   return false;

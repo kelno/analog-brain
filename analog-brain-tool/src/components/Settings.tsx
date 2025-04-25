@@ -28,7 +28,7 @@ export const Settings: React.FC = () => {
       <div className="space-y-4">
         <div className="flex flex-col">
           <label className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-            {t('settings.cardSetsURL')}
+            {t('settings.decksURL')}
           </label>
           <input
             type="text"

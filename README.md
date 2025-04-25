@@ -10,11 +10,11 @@ Implemented in React Typescript with Tailwind.
 
 
 # How to
-## Managing Card Sets
-The default sets are located in `public/sets` directory. You can either edit those or load new sets from a different URL. This can be configured in the UI.  
+## Managing Decks
+The default decks are located in `public/decks` directory. You can either edit those or load new decks from a different URL. This can be configured in the UI.  
 
 ## Add/Remove a language
-Available language are automatically computed from the card sets.  
+Available language are automatically computed from the decks.  
 You do however need to make sure each language has the needed metadata in `languageInfo.tsx`.
 
 # Development Setup

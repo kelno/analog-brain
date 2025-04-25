@@ -4,7 +4,7 @@ import { useRef } from 'react';
 import { ErrorHelpers } from '../utils/ErrorHelpers';
 import { useSettings } from '../settingsContext/useSettings';
 import { useAppContext } from '../appContext/useAppContext';
-import { SetId } from '../interfaces/ICardSet';
+import { DeckId } from '../interfaces/IDeck';
 import { CardId } from '../interfaces/ICard';
 import { UrlManager } from '../utils/UrlManager/UrlManager';
 
@@ -32,9 +32,9 @@ export const useShare = () => {
     }
   };
 
-  const shareFromParams = (currentSetId: SetId | undefined, currentCardId: CardId | undefined) => {
+  const shareFromParams = (currentDeckId: DeckId | undefined, currentCardId: CardId | undefined) => {
     const shareUrl = UrlManager.getShareURL(
-      currentSetId,
+      currentDeckId,
       currentCardId,
       language,
       isDefaultUrl ? undefined : indexUrl,

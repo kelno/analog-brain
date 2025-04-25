@@ -15,7 +15,7 @@ export const SettingsProvider: React.FC<{ children: ReactNode }> = ({ children }
   // console.log('SettingsProvider: SettingsProvider()');
   // console.trace();
 
-  const defaultUrl = `${UrlManager.getBaseURL()}sets/index.json`;
+  const defaultUrl = `${UrlManager.getBaseURL()}decks/index.json`;
 
   // The app starting deck URL is, in order of priority:
   // - Loaded from the URL

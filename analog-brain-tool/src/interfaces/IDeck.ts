@@ -1,7 +1,7 @@
 import { LangId } from '../components/BrainTool/store/BrainContextData';
 import { ICard } from './ICard';
 
-export type SetId = string;
+export type DeckId = string;
 
 // current format version
 export const CARD_SET_FORMAT_VERSION: number = 1;
@@ -11,11 +11,11 @@ export const MINIMAL_CARD_SET_FORMAT_VERSION: number = 1;
 /**
    * A card set is a collection of cards that together form a decision tree.
 */
-export interface ICardSet {
+export interface IDeck {
   /**
      * A unique string to identify the set. Won't be shown to the user.
   */
-  id: SetId;
+  id: DeckId;
   /**
      * Set title for the user to identify the set.
   */
@@ -44,4 +44,4 @@ export interface ICardSet {
   cards: ICard[];
 }
 
-export default ICardSet; 
+export default IDeck; 

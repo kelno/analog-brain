@@ -1,4 +1,4 @@
-import { ICardSet, MINIMAL_CARD_SET_FORMAT_VERSION } from '../interfaces/ICardSet';
+import { IDeck, MINIMAL_CARD_SET_FORMAT_VERSION } from '../interfaces/IDeck';
 import { ValidateFunction } from 'ajv';
 import { ajv } from './useAjv';
 
@@ -8,45 +8,45 @@ interface ValidationResult {
 }
 
 export class DataValidator {
-  private _validate: ValidateFunction<ICardSet>;
+  private _validate: ValidateFunction<IDeck>;
 
   public constructor(schemaJSON: any) {
     console.debug('Constructing new DataValidator');
-    this._validate = ajv.compile<ICardSet>(schemaJSON);
+    this._validate = ajv.compile<IDeck>(schemaJSON);
   }
 
-  public validateCardSetData = (cardSet: ICardSet): ValidationResult => {
-    if (cardSet.cards.length === 0) {
-      return { isValid: false, errorMessages: [`Found empty card set with id ${cardSet.id}`] };
+  public validateDeckData = (deck: IDeck): ValidationResult => {
+    if (deck.cards.length === 0) {
+      return { isValid: false, errorMessages: [`Found empty card set with id ${deck.id}`] };
     }
 
-    const hasDuplicateCardIds = (set: ICardSet): boolean => {
+    const hasDuplicateCardIds = (set: IDeck): boolean => {
       const ids = set.cards.map((card) => card.id);
       return new Set(ids).size !== ids.length;
     };
 
-    if (hasDuplicateCardIds(cardSet)) {
+    if (hasDuplicateCardIds(deck)) {
       return { isValid: false, errorMessages: ['Duplicate card IDs found!'] };
     }
 
     return { isValid: true };
   };
 
-  public validateCardSetJSON = (cardSet: ICardSet): ValidationResult => {
+  public validateDeckJSON = (deck: IDeck): ValidationResult => {
     let errors: string[] = [];
 
-    if (cardSet.formatVersion < MINIMAL_CARD_SET_FORMAT_VERSION) {
-      const error = `Card set ${cardSet.id} format version is below minimal version ${MINIMAL_CARD_SET_FORMAT_VERSION}`;
+    if (deck.formatVersion < MINIMAL_CARD_SET_FORMAT_VERSION) {
+      const error = `Card set ${deck.id} format version is below minimal version ${MINIMAL_CARD_SET_FORMAT_VERSION}`;
       console.warn(error);
       errors.push(error);
     }
 
-    if (this._validate(cardSet)) {
-      console.debug(`Validating ${cardSet.id} passed`);
+    if (this._validate(deck)) {
+      console.debug(`Validating ${deck.id} passed`);
 
       return { isValid: true };
     } else {
-      console.error(`Validating failed for set: ${JSON.stringify(cardSet)}`);
+      console.error(`Validating failed for set: ${JSON.stringify(deck)}`);
       const ajvErrors: string[] | undefined = this._validate.errors?.map((ajvError) =>
         JSON.stringify(ajvError),
       );

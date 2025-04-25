@@ -1,15 +1,15 @@
 import { FC } from 'react';
-import { ICardSet } from '../../interfaces/ICardSet';
+import { IDeck } from '../../interfaces/IDeck';
 import { Card } from './Card';
 import { CardNavigation } from './CardNavigation';
 import { CardId } from '../../interfaces/ICard';
 import { useBrainContext } from './store/useBrainContext';
 
-interface CardSetProps {
-  cardSet: ICardSet;
+interface DeckProps {
+  deck: IDeck;
 }
 
-export const CardSet: FC<CardSetProps> = ({ cardSet }) => {
+export const Deck: FC<DeckProps> = ({ deck }) => {
   const context = useBrainContext();
 
   const previousCardId = context.getPreviousCard();
@@ -28,8 +28,8 @@ export const CardSet: FC<CardSetProps> = ({ cardSet }) => {
     context.resetHistory();
   };
 
-  const currentCardData = cardSet.cards.find((card) => card.id === context.currentCardId);
-  const previousCardData = cardSet.cards.find((card) => card.id === previousCardId);
+  const currentCardData = deck.cards.find((card) => card.id === context.currentCardId);
+  const previousCardData = deck.cards.find((card) => card.id === previousCardId);
 
   if (!currentCardData) return <></>;
 
@@ -43,7 +43,7 @@ export const CardSet: FC<CardSetProps> = ({ cardSet }) => {
           <CardNavigation
             handleClickPrevious={handleClickPrevious}
             handleClickBackToTop={handleClickBackToTop}
-            disableBackToTop={currentCardData.id === cardSet.cards[0].id}
+            disableBackToTop={currentCardData.id === deck.cards[0].id}
           />
         </div>
       </div>

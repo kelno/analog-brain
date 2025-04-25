@@ -4,7 +4,7 @@ import { useSuspenseQuery } from '@tanstack/react-query';
 
 // Suspension enabled hook
 export const useDataValidator = () => {
-  const schemaURL = `${UrlManager.getBaseURL()}sets/schema.json`; // fixed URL in public dir
+  const schemaURL = `${UrlManager.getBaseURL()}decks/schema.json`; // fixed URL in public dir
 
   const dataValidator = useSuspenseQuery({
     queryKey: ['dataValidator', schemaURL],

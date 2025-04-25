@@ -1,15 +1,15 @@
-import { ICardSet, SetId } from '../interfaces/ICardSet';
+import { IDeck, DeckId } from '../interfaces/IDeck';
 import { LangId } from '../components/BrainTool/store/BrainContextData';
 import { BrainToolError, BrainToolErrorType } from '../components/BrainTool/BrainToolErrorHandler';
 import { DataValidator } from '../dataValidation/DataValidator';
 import stripJsonComments from 'strip-json-comments';
 
 interface FetchResult {
-  cardSets: ICardSet[];
+  decks: IDeck[];
   errors: string[];
 }
 
-class CardSetsLoadingState {
+class DecksLoadingState {
   constructor(loadingUrl: string, promise: Promise<FetchResult>) {
     this.loadingUrl = loadingUrl;
     this.promise = promise;
@@ -21,18 +21,18 @@ class CardSetsLoadingState {
   public promise: Promise<FetchResult>;
 }
 
-export class CardSetManager {
-  private _processedSets: Record<LangId, ICardSet[]> = {};
+export class DeckManager {
+  private _processedSets: Record<LangId, IDeck[]> = {};
   private _updateId: string = "";
   private _loadedUrl: string = "";
   private _errors: string[] = []; // loading errors
-  private _pendingLoadState: CardSetsLoadingState | undefined = undefined; // exists only while loading
+  private _pendingLoadState: DecksLoadingState | undefined = undefined; // exists only while loading
 
   private fetchAndParseJSONC = async (url: string, errorType: BrainToolErrorType ) : Promise<any> => {
     const response = await fetch(url, { cache: 'no-store' });
     if (!response.ok) {
       throw new BrainToolError(
-        `CardSetManager: Failed to fetch json file (error ${response.status}:${response.statusText}) from ${url}`,
+        `DeckManager: Failed to fetch json file (error ${response.status}:${response.statusText}) from ${url}`,
         errorType,
       );
     }
@@ -61,12 +61,12 @@ export class CardSetManager {
     });
   }
 
-  private fetchCardSets = async (indexUrl: string, dataValidator: DataValidator): Promise<FetchResult> => {
-    console.debug(`CardSetManager: Fetching card sets from ${indexUrl}`);
+  private fetchDecks = async (indexUrl: string, dataValidator: DataValidator): Promise<FetchResult> => {
+    console.debug(`DeckManager: Fetching decks from ${indexUrl}`);
 
     const indexData = await this.fetchAndParseJSONC(indexUrl, BrainToolErrorType.FAILED_TO_FETCH_INDEX);
    
-    const cardSets: ICardSet[] = [];
+    const decks: IDeck[] = [];
     let errors = [];
 
     const getFileUrl = (fileName: string) => {
@@ -77,9 +77,9 @@ export class CardSetManager {
     
     for (const fileName of indexData.files) {
       try {
-        const cardSet = await this.fetchAndParseJSONC(getFileUrl(fileName), BrainToolErrorType.FAILED_TO_FETCH_SET) as ICardSet;
+        const deck = await this.fetchAndParseJSONC(getFileUrl(fileName), BrainToolErrorType.FAILED_TO_FETCH_SET) as IDeck;
        
-        const result = dataValidator.validateCardSetJSON(cardSet);
+        const result = dataValidator.validateDeckJSON(deck);
         if (!result.isValid) {  
           const errorMsg = `Invalid card set JSON schema: ${URL}. Error: ${JSON.stringify(result.errorMessages)}`;
           console.error(errorMsg); 
@@ -87,20 +87,20 @@ export class CardSetManager {
           continue;
         }
 
-        cardSets.push(cardSet);
+        decks.push(deck);
       } catch (error) {
         // TODO: Can't print an error this way
-        const errorMsg = `CardSetManager: Error fetching card set ${fileName}: ${error}`;
+        const errorMsg = `DeckManager: Error fetching card set ${fileName}: ${error}`;
         console.error(errorMsg);
         errors.push(errorMsg);
       }
     }
-    return { cardSets: cardSets, errors: errors };
+    return { decks: decks, errors: errors };
   }
 
-  // return lastUpdateId, an id unique refreshed everytime loadCardSets finishes loading.
-  public async loadCardSets(indexUrl: string, dataValidator: DataValidator) {
-    console.debug(`loadCardSets triggered with index ${indexUrl}`);
+  // return lastUpdateId, an id unique refreshed everytime loadDecks finishes loading.
+  public async loadDecks(indexUrl: string, dataValidator: DataValidator) {
+    console.debug(`loadDecks triggered with index ${indexUrl}`);
 
     // are already loading this?
     if (this._pendingLoadState?.loadingUrl == indexUrl) {
@@ -109,12 +109,12 @@ export class CardSetManager {
     }
 
     // else, start loading it
-    const promise = this.fetchCardSets(indexUrl, dataValidator);
-    this._pendingLoadState = new CardSetsLoadingState(indexUrl, promise);
-    const { cardSets: fetchedSets, errors } = await promise;
+    const promise = this.fetchDecks(indexUrl, dataValidator);
+    this._pendingLoadState = new DecksLoadingState(indexUrl, promise);
+    const { decks: fetchedSets, errors } = await promise;
     
     this._processedSets = fetchedSets.reduce((acc, set) => {
-      const result = dataValidator.validateCardSetData(set);
+      const result = dataValidator.validateDeckData(set);
       if (!result.isValid) {  
         console.error(`Invalid card set in database: ${set.title} (id: ${set.id}). Errors:`); 
         console.error(result.errorMessages);
@@ -126,7 +126,7 @@ export class CardSetManager {
       else acc[set.lang].push(set);
 
       return acc;
-    }, {} as Record<LangId, ICardSet[]>);
+    }, {} as Record<LangId, IDeck[]>);
 
     this._loadedUrl = indexUrl;
     this._errors = errors;
@@ -135,23 +135,23 @@ export class CardSetManager {
     return this._updateId;
   }
 
-  public getAvailableSets(lang: LangId): Readonly<ICardSet[]> | undefined {
+  public getAvailableSets(lang: LangId): Readonly<IDeck[]> | undefined {
     return this._processedSets[lang];
   }
 
-  public getSetById(lang: LangId, id: SetId): ICardSet | undefined {
+  public getSetById(lang: LangId, id: DeckId): IDeck | undefined {
     return this._processedSets[lang]?.find((set) => set.id === id);
   }
 
-  public getDefaultSetForLanguage(lang: LangId): ICardSet | undefined {
+  public getDefaultSetForLanguage(lang: LangId): IDeck | undefined {
     return this._processedSets[lang]?.[0];
   }
 
-  public getAvailableSetsPerLanguage(): Readonly<Record<LangId, ICardSet[]>> {
+  public getAvailableSetsPerLanguage(): Readonly<Record<LangId, IDeck[]>> {
      return this._processedSets;
   }
 
-  // empty string if never loaded. Refreshed every time loadCardSets finishes loading succesfully. 
+  // empty string if never loaded. Refreshed every time loadDecks finishes loading succesfully. 
   public get lastUpdateId() {
     return this._updateId;
   }

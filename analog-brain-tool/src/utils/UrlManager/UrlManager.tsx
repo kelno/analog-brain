@@ -1,5 +1,5 @@
 import { CardId } from '../../interfaces/ICard';
-import { SetId } from '../../interfaces/ICardSet';
+import { DeckId } from '../../interfaces/IDeck';
 import { LangId } from '../../components/BrainTool/store/BrainContextData';
 import { UrlParams } from './UrlParams';
 
@@ -7,7 +7,7 @@ import { UrlParams } from './UrlParams';
 URL is only used for sharing and is not used as state storage after initial load.
 */
 export class UrlManager {
-  public static getShareURL(set?: SetId, card?: CardId, lang?: LangId, deckUrl?: string): string {
+  public static getShareURL(set?: DeckId, card?: CardId, lang?: LangId, deckUrl?: string): string {
     const params = new URLSearchParams();
     if (set) params.set(UrlParams.SET, set);
     if (lang) params.set(UrlParams.LANG, lang);
@@ -22,7 +22,7 @@ export class UrlManager {
     return UrlManager.getParam(UrlParams.CARD);
   }
 
-  public static getCardSet(): SetId | null {
+  public static getDeck(): DeckId | null {
     return UrlManager.getParam(UrlParams.SET);
   }
 

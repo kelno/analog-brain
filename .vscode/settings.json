@@ -2,9 +2,9 @@
   "json.schemas": [
     {
         "fileMatch": [
-            "**/sets/data/*.json"
+            "**/decks/data/*.json"
         ],
-        "url": "./analog-brain-tool/public/sets/schema.json",
+        "url": "./analog-brain-tool/public/decks/schema.json",
         "error": true
     }
   ]

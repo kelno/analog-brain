@@ -57,7 +57,7 @@ const BrainToolErrorHandlerMessage: FC<BrainToolErrorHandlerProps> = ({ error })
 
   return (
     <div className="p-20">
-      <div className="text-xl font-bold mb-2">Failed to load card sets!</div>
+      <div className="text-xl font-bold mb-2">Failed to load decks!</div>
       {errorMsg && <div>{errorMsg}</div>}
     </div>
   );

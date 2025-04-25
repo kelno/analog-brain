@@ -1,23 +1,23 @@
-import { CardSet } from './CardSet';
+import { Deck } from './Deck';
 import { useTranslation } from 'react-i18next';
 import { useBrainContext } from './store/useBrainContext';
 import { useAppContext } from '../../appContext/useAppContext';
-import { useCardSetManager } from '../../cardSets/useCardSetManager';
+import { useDeckManager } from '../../decks/useDeckManager';
 
 export const BrainTool = () => {
   const appContext = useAppContext();
   const brainContext = useBrainContext();
   const { t } = useTranslation();
-  const cardSetManager = useCardSetManager();
+  const deckManager = useDeckManager();
 
-  console.debug(`Rendering BrainTool with set manager loaded url ${cardSetManager.loadedUrl}`);
+  console.debug(`Rendering BrainTool with set manager loaded url ${deckManager.loadedUrl}`);
 
   const lang = appContext.language;
 
   // this should already be checked and prevented by BrainContext
-  const availableSets = cardSetManager.getAvailableSets(lang);
+  const availableSets = deckManager.getAvailableSets(lang);
   if (!availableSets) {
-    const error = `'No available card sets for language ${lang}`;
+    const error = `'No available decks for language ${lang}`;
     console.error(error);
     throw Error(error);
   }
@@ -36,17 +36,17 @@ export const BrainTool = () => {
     brainContext.selectSet(set.id);
   };
 
-  const cardSet = brainContext.currentSet;
-  const currentSetId = cardSet?.id;
-  const hasErrors = cardSetManager.errors.length > 0 ? true : undefined;
+  const deck = brainContext.currentSet;
+  const currentDeckId = deck?.id;
+  const hasErrors = deckManager.errors.length > 0 ? true : undefined;
 
   return (
     <>
       <div>
-        <span>{t('tool.cardset')}: </span>
+        <span>{t('tool.deck')}: </span>
         <select
           onChange={handleSelectSet}
-          defaultValue={currentSetId}
+          defaultValue={currentDeckId}
           className="my-4 p-1 border rounded bg-white dark:bg-slate-900"
         >
           {availableSets &&
@@ -63,9 +63,9 @@ export const BrainTool = () => {
             ⚠️
           </span>
         )}
-        {cardSet?.description && <div>Description: {cardSet.description}</div>}
+        {deck?.description && <div>Description: {deck.description}</div>}
       </div>
-      {cardSet && <CardSet cardSet={cardSet}></CardSet>}
+      {deck && <Deck deck={deck}></Deck>}
     </>
   );
 };

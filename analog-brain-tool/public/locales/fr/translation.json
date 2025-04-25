@@ -11,13 +11,13 @@
   },
   "tool": {
     "title": "L'outil - Commencez ici",
-    "cardset": "Jeu de cartes"
+    "deck": "Jeu de cartes"
   },
   "about": {
     "title": "À propos"
   },
   "toast": {
-    "noCardSetsForLang": "Aucun jeu de cartes disponible pour la langue {{lang}}",
+    "noDecksForLang": "Aucun jeu de cartes disponible pour la langue {{lang}}",
     "share": {
       "success": "URL copiée dans le presse-papiers",
       "errors": {
@@ -32,7 +32,7 @@
   },
   "settings": {
     "title": "Paramètres",
-    "cardSetsURL": "Source externe des jeux de cartes :",
+    "decksURL": "Source externe des jeux de cartes :",
     "save": "Sauvegarder",
     "reset": "Réinitialiser"
   },

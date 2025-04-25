@@ -1,7 +1,7 @@
 
 //const fallbackLanguage = 'en';
 
-import { useCardSetManager } from "../cardSets/useCardSetManager";
+import { useDeckManager } from "../decks/useDeckManager";
 
 interface AvailableLanguages {
   languages: string[] // list of available languages
@@ -10,8 +10,8 @@ interface AvailableLanguages {
 // List available language based on what's found in card set.
 // Suspense enabled hook
 export const useAvailableLanguages = (): AvailableLanguages => {
-  const cardSetManager = useCardSetManager();
+  const deckManager = useDeckManager();
 
-  const availableSets = cardSetManager.getAvailableSetsPerLanguage();
+  const availableSets = deckManager.getAvailableSetsPerLanguage();
   return { languages: Object.keys(availableSets) }
 };
