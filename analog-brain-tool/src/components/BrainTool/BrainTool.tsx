@@ -41,7 +41,7 @@ export const BrainTool = () => {
   return (
     <>
       <div>
-        <span>{t('tool.deck')}: </span>
+        <span>{t('tool.deck.title')}: </span>
         <select
           onChange={handleSelectSet}
           defaultValue={currentDeckId}
@@ -61,7 +61,17 @@ export const BrainTool = () => {
             ⚠️
           </span>
         )}
-        {deck?.description && <div>Description: {deck.description}</div>}
+        {deck?.description && (
+          <div>
+            {' '}
+            {t('tool.deck.description')} {deck.description}
+          </div>
+        )}
+        {deck?.author && (
+          <div>
+            {t('tool.deck.author')} {deck.author}
+          </div>
+        )}
       </div>
       {deck && <Deck deck={deck}></Deck>}
     </>
