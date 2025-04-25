@@ -11,13 +11,13 @@
   },
   "tool": {
     "title": "The Tool - Start here",
-    "cardset": "Card set",
+    "deck": "Decision Deck",
     "errors" : {
       "generic": "Error.",
-      "warnErrors":  "Found some errors while trying to load card sets, some sets might be missing. Look in console for more information.",
-      "errorIntro": "Failed to load card sets!",
-      "noValidSets": "Failed to load sets from given index.",
-      "failedToFetchIndex": "Failed to fetch sets index file.",
+      "warnErrors":  "Found some errors while trying to load decks, some decks might be missing. Look in console for more information.",
+      "errorIntro": "Failed to load decks!",
+      "noValidSets": "Failed to load decks from given index.",
+      "failedToFetchIndex": "Failed to fetch decks index file.",
       "failedToFetchSet": "Failed to fetch a set.",
       "noSetForCurrentLang": "No set found for current language."
     }
@@ -26,8 +26,8 @@
     "title": "About"
   },
   "toast": {
-    "noCardSetsForLang": "No available card sets for language {{lang}}",
-    "someErrorsLoadingCardSet": "There were some errors loading the card set {{setTitle}}.",
+    "noDecksForLang": "No available decks for language {{lang}}",
+    "someErrorsLoadingDeck": "There were some errors loading the card set {{setTitle}}.",
     "share": {
       "title": "The Analog Brain Tool",
       "description": "Overcome your executive dysfunction",
@@ -47,7 +47,7 @@
   },
   "settings": {
     "title": "Settings",
-    "cardSetsURL": "Remote Dataset URL:",
+    "decksURL": "Remote Dataset URL:",
     "save": "Save",
     "reset": "Reset",
     "share": "Share"
