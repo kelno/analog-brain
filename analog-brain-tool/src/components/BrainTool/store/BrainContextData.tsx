@@ -2,6 +2,8 @@ import { Stack } from '@datastructures-js/stack';
 import { CardId } from '../../../interfaces/ICard';
 import { IDeck, DeckId } from '../../../interfaces/IDeck';
 import { DeckManager } from '../../../decks/DeckManager';
+import { PersistentStorageManager } from '../../../utils/PersistentStorageManager/PersistentStorageManager';
+import { PersistentStorageTypes } from '../../../utils/PersistentStorageManager/PersistentStorageTypes';
 
 export interface BrainContextState {
   cardHistory: Stack<CardId>; // the top is the current card
@@ -91,22 +93,24 @@ export class BrainContextData {
     this.saveCardHistory();
   };
 
-  private _selectDeck(newDeck: IDeck) {
+  private _selectDeck(newDeck: IDeck, userRequest: boolean) {
     console.debug('BrainContext: Selected deck with id ' + newDeck.id + ' (' + newDeck.title + ')');
 
     const firstCardId = newDeck.cards[0].id;
     const newCardHistory = new Stack<CardId>([firstCardId]);
 
     this.setState({ ...this.state, currentDeckId: newDeck.id, cardHistory: newCardHistory });
+
+    if (userRequest) PersistentStorageManager.set(PersistentStorageTypes.CHOSEN_DECK, newDeck.id);
   }
 
-  public selectDeck = (deckId: DeckId) => {
+  public selectDeck = (deckId: DeckId, userRequest: boolean = false) => {
     const newDeck = this.deckStorage.getDeckById(this.language, deckId);
     if (!newDeck) {
       console.error('Failed to select deck with id + ' + deckId);
       return;
     }
-    this._selectDeck(newDeck);
+    this._selectDeck(newDeck, userRequest);
   };
 
   public get currentDeck(): IDeck | undefined {

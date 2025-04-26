@@ -33,7 +33,7 @@ export const BrainTool = () => {
       return;
     }
 
-    brainContext.selectDeck(deck.id);
+    brainContext.selectDeck(deck.id, true);
   };
 
   const deck = brainContext.currentDeck;

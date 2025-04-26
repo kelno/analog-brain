@@ -12,6 +12,8 @@ import { AppContextData } from '../../../appContext/AppContextData';
 import { useAppContext } from '../../../appContext/useAppContext';
 import { useDeckManager } from '../../../decks/useDeckManager';
 import { DeckManager } from '../../../decks/DeckManager';
+import { PersistentStorageManager } from '../../../utils/PersistentStorageManager/PersistentStorageManager';
+import { PersistentStorageTypes } from '../../../utils/PersistentStorageManager/PersistentStorageTypes';
 
 export const BrainContextProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   console.debug('rendering BrainContextProvider');
@@ -54,29 +56,46 @@ export const BrainContextCore: React.FC<{
   };
 
   const urlCurrentCard = UrlManager.consumeParam(UrlParams.CARD);
-  const urlDeckId = UrlManager.consumeParam(UrlParams.DECK);
 
-  const defaultSetForLanguage = deckManager.getDefaultDeckForLanguage(lang);
-  if (!defaultSetForLanguage) {
-    const availableDecks = deckManager.getAvailableSetsPerLanguage();
-    if (Object.keys(availableDecks).length === 0) {
-      const error = 'Could not find any available decks, cant start BrainContext';
-      throw new BrainToolError(error, BrainToolErrorType.FAILED_NO_VALID_DECK);
+  const getDeckFromURL = () => {
+    const urlDeckId = UrlManager.consumeParam(UrlParams.DECK);
+    return urlDeckId ? validateDeckFromUrl(lang, urlDeckId) : undefined;
+  };
+
+  const getLastExplicitelySelectedDeck = () => {
+    const lastSelectedDeckId = PersistentStorageManager.get(PersistentStorageTypes.CHOSEN_DECK);
+    const lastSelectedDeck = lastSelectedDeckId
+      ? deckManager.getDeckById(lang, lastSelectedDeckId)
+      : undefined;
+    console.trace('Using last explicitely selected deck', lastSelectedDeckId);
+    return lastSelectedDeck;
+  };
+
+  const getDefaultSetForLanguage = () => {
+    const defaultSetForLanguage = deckManager.getDefaultDeckForLanguage(lang);
+    if (!defaultSetForLanguage) {
+      const availableDecks = deckManager.getAvailableSetsPerLanguage();
+      if (Object.keys(availableDecks).length === 0) {
+        const error = 'Could not find any available decks, cant start BrainContext';
+        throw new BrainToolError(error, BrainToolErrorType.FAILED_NO_VALID_DECK);
+      }
+
+      const fallbackLanguage = Object.keys(availableDecks)[0];
+      const error = `No default deck for language ${lang}. Falling back to ${fallbackLanguage}`;
+      console.error(error);
+      toast.error(t('toast.noDecksForLang', { lang }));
+      appContext.setLanguage(fallbackLanguage);
+      throw new Error(error);
+      // we'll be redrawn when the language changes
     }
+    return defaultSetForLanguage;
+  };
 
-    const fallbackLanguage = Object.keys(availableDecks)[0];
-    const error = `No default deck for language ${lang}. Falling back to ${fallbackLanguage}`;
-    console.error(error);
-    toast.error(t('toast.noDecksForLang', { lang }));
-    appContext.setLanguage(fallbackLanguage);
-    throw new Error(error);
-    // we'll be redrawn when the language changes
-  }
+  // Priority: URL > last selected deck > default deck
+  const deckFromURL = getDeckFromURL();
+  const currentDeck = deckFromURL ?? getLastExplicitelySelectedDeck() ?? getDefaultSetForLanguage();
 
-  const setFromURL = urlDeckId ? validateDeckFromUrl(lang, urlDeckId) : undefined;
-  const currentDeck = setFromURL ?? defaultSetForLanguage;
-
-  const urlCard = setFromURL ? urlCurrentCard : null;
+  const urlCard = deckFromURL ? urlCurrentCard : null;
   const defaultCardId = urlCard ?? currentDeck.cards[0].id;
 
   const [brainState, setBrainState] = useState<BrainContextState>({

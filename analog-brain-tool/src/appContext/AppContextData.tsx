@@ -23,12 +23,6 @@ export class AppContextData {
 
   // returns success
   public setLanguage = (lang: LangId) => {
-    // const defaultDeck = this.deckStorage.getDefaultDeckForLanguage(lang);
-    // if (defaultDeck === undefined) {
-    //   console.error(`Can't switch language. No available default deck for chosen lang ${lang}`);
-    //   return false;
-    // }
-
     console.debug('AppContext: Set language ' + lang);
     this.i18n.changeLanguage(lang);
 
