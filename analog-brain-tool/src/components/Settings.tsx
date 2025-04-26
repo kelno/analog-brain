@@ -23,7 +23,7 @@ export const Settings: React.FC = () => {
   };
 
   return (
-    <div className="bg-white dark:bg-slate-800 rounded-lg p-6 shadow-md mb-6">
+    <div className="rounded-lg p-6 shadow-md mb-6">
       <h2 className="text-2xl font-bold mb-4 text-gray-800 dark:text-white"> {t('settings.title')}</h2>
       <div className="space-y-4">
         <div className="flex flex-col">

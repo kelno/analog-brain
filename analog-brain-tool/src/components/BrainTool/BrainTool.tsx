@@ -44,11 +44,7 @@ export const BrainTool = () => {
     <>
       <div>
         <span>{t('tool.deck.title')}: </span>
-        <select
-          onChange={handleSelectDeck}
-          defaultValue={currentDeckId}
-          className="my-4 p-1 border rounded bg-white dark:bg-slate-900"
-        >
+        <select onChange={handleSelectDeck} defaultValue={currentDeckId} className="my-4 p-1 border rounded">
           {availableDecks &&
             Object.values(availableDecks).map((deck) => {
               return (

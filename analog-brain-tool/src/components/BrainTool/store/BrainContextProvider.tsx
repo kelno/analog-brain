@@ -68,7 +68,7 @@ export const BrainContextCore: React.FC<{
     const lastSelectedDeck = lastSelectedDeckId
       ? deckManager.getDeckById(lang, lastSelectedDeckId)
       : undefined;
-    console.trace('Using last explicitely selected deck', lastSelectedDeckId);
+    console.debug('Using last explicitely selected deck', lastSelectedDeckId);
     return lastSelectedDeck;
   };
 

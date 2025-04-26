@@ -36,7 +36,7 @@ export function App() {
   });
 
   return (
-    <div className="bg-brain-bg text-brain-text min-h-screen leading-relaxed default-theme">
+    <div className="default-theme text-brain-text min-h-screen max-h-screen leading-relaxed">
       <QueryClientProvider client={queryClient}>
         <AppContextProvider>
           <SettingsProvider>
