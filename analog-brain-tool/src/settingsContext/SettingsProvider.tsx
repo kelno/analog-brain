@@ -3,11 +3,13 @@ import { SettingsContext } from './SettingsContext';
 import { UrlManager } from '../utils/UrlManager/UrlManager';
 import { SettingsContextData, SettingsContextState } from './SettingsContextData';
 import { UrlParams } from '../utils/UrlManager/UrlParams';
+import { PersistentStorageTypes } from '../utils/PersistentStorageManager/PersistentStorageTypes';
+import { PersistentStorageManager } from '../utils/PersistentStorageManager/PersistentStorageManager';
 
 // We load the deck url from the URL params, only once
 const urlFromParam = UrlManager.consumeParam(UrlParams.DECK_URL);
 if (urlFromParam) {
-  localStorage.setItem('indexUrl', urlFromParam);
+  PersistentStorageManager.set(PersistentStorageTypes.DECK_INDEX_URL, urlFromParam);
   console.debug(`SettingsProvider: urlFromParam: ${urlFromParam}`);
 }
 
@@ -22,7 +24,8 @@ export const SettingsProvider: React.FC<{ children: ReactNode }> = ({ children }
   // - Loaded from user settings (local storage)
   // - The default deck from this project
   const [settingsState, setSettingsState] = useState<SettingsContextState>({
-    indexUrl: urlFromParam || localStorage.getItem('indexUrl') || defaultUrl,
+    indexUrl:
+      urlFromParam || PersistentStorageManager.get(PersistentStorageTypes.DECK_INDEX_URL) || defaultUrl,
   });
   console.debug(`SettingsProvider starting with ${settingsState.indexUrl}`);
 

@@ -74,14 +74,14 @@ export const BrainContextCore: React.FC<{
   }
 
   const setFromURL = urlDeckId ? validateDeckFromUrl(lang, urlDeckId) : undefined;
-  const defaultDeck = setFromURL ?? defaultSetForLanguage;
+  const currentDeck = setFromURL ?? defaultSetForLanguage;
 
   const urlCard = setFromURL ? urlCurrentCard : null;
-  const defaultCardId = urlCard ?? defaultDeck.cards[0].id;
+  const defaultCardId = urlCard ?? currentDeck.cards[0].id;
 
   const [brainState, setBrainState] = useState<BrainContextState>({
     cardHistory: new Stack<CardId>([defaultCardId]),
-    currentDeckId: defaultDeck.id,
+    currentDeckId: currentDeck.id,
   });
 
   const brainContext: BrainContextData = new BrainContextData(brainState, setBrainState, deckManager, lang);

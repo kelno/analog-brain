@@ -22,7 +22,7 @@ export const BrainTool = () => {
     throw Error(error);
   }
 
-  const handleSelectSet = (event: React.ChangeEvent<HTMLSelectElement>) => {
+  const handleSelectDeck = (event: React.ChangeEvent<HTMLSelectElement>) => {
     if (availableDecks === undefined) return;
 
     const id: string = event.target.value;
@@ -32,6 +32,8 @@ export const BrainTool = () => {
       console.error('BrainTool: Could not find deck with id ' + id);
       return;
     }
+
+    brainContext.selectDeck(deck.id);
   };
 
   const deck = brainContext.currentDeck;
@@ -43,7 +45,7 @@ export const BrainTool = () => {
       <div>
         <span>{t('tool.deck.title')}: </span>
         <select
-          onChange={handleSelectSet}
+          onChange={handleSelectDeck}
           defaultValue={currentDeckId}
           className="my-4 p-1 border rounded bg-white dark:bg-slate-900"
         >

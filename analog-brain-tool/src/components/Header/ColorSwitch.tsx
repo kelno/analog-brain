@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import Switch from 'react-switch';
+import { PersistentStorageManager } from '../../utils/PersistentStorageManager/PersistentStorageManager';
+import { PersistentStorageTypes } from '../../utils/PersistentStorageManager/PersistentStorageTypes';
 
 // Doc for the react-switch API https://www.npmjs.com/package/react-switch
 
@@ -21,9 +23,9 @@ export const ColorSwitch: React.FC = () => {
     return window.matchMedia('(prefers-color-scheme: dark)').matches ? LightMode.DARK : LightMode.LIGHT;
   };
 
-  // Load the saved user preference from localStorage
+  // Load the saved user preference from storage
   const loadSavedPreference = (): LightMode | null => {
-    const savedPreference = localStorage.getItem('colorScheme');
+    const savedPreference = PersistentStorageManager.get(PersistentStorageTypes.COLOR_SCHEME);
     return savedPreference === LightMode.LIGHT || savedPreference === LightMode.DARK ? savedPreference : null;
   };
 
@@ -50,10 +52,10 @@ export const ColorSwitch: React.FC = () => {
 
     if (userChoice === browserPreference) {
       // If the user selects the browser preference, remove the saved choice
-      localStorage.removeItem('colorScheme');
+      PersistentStorageManager.remove(PersistentStorageTypes.COLOR_SCHEME);
     } else {
       // Otherwise, save the user's choice to localStorage
-      localStorage.setItem('colorScheme', userChoice);
+      PersistentStorageManager.set(PersistentStorageTypes.COLOR_SCHEME, userChoice);
     }
 
     // Update the state

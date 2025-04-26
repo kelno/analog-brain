@@ -1,3 +1,6 @@
+import { PersistentStorageManager } from '../utils/PersistentStorageManager/PersistentStorageManager';
+import { PersistentStorageTypes } from '../utils/PersistentStorageManager/PersistentStorageTypes';
+
 export interface SettingsContextState {
   indexUrl: string;
 }
@@ -20,7 +23,7 @@ export class SettingsContextData {
   }
 
   public setIndexUrl = (url: string) => {
-    localStorage.setItem('indexUrl', url);
+    PersistentStorageManager.set(PersistentStorageTypes.DECK_INDEX_URL, url);
     this._setState({ ...this._state, indexUrl: url });
   };
 
@@ -33,7 +36,7 @@ export class SettingsContextData {
   }
 
   public resetIndexUrl = () => {
-    localStorage.removeItem('indexUrl');
+    PersistentStorageManager.remove(PersistentStorageTypes.DECK_INDEX_URL);
     this._setState({ ...this._state, indexUrl: this.defaultUrl });
   };
 
