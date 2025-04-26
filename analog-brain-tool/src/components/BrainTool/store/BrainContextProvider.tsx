@@ -2,7 +2,7 @@ import { useState, ReactNode } from 'react';
 import { BrainContextData, BrainContextState, LangId } from './BrainContextData';
 import { BrainContext } from './BrainContext';
 import { Stack } from '@datastructures-js/stack';
-import { CardId } from '../../../interfaces/ICard';
+import { CardId } from '../../../types/Card/ICard';
 import { UrlManager } from '../../../utils/UrlManager/UrlManager';
 import { UrlParams } from '../../../utils/UrlManager/UrlParams';
 import { toast } from 'sonner';
@@ -45,10 +45,11 @@ export const BrainContextCore: React.FC<{
   const validateDeckFromUrl = (lang: LangId, urlDeckId: string) => {
     if (urlDeckId) {
       const deck = deckManager.getDeckById(lang, urlDeckId);
-      if (!deck) {
-        console.log(
-          `BrainContextProvider: Trying to load deck ${urlDeckId} from URL but couldn't find it for language ${lang}`,
+      if (deck === undefined) {
+        console.error(
+          `BrainContextCore: Trying to load deck ${urlDeckId} from URL but couldn't find it for language ${lang}`,
         );
+        return undefined;
       }
       return deck;
     }

@@ -1,8 +1,8 @@
 import { FC } from 'react';
-import { IDeck } from '../../interfaces/IDeck';
+import { IDeck } from '../../types/Deck/IDeck';
 import { Card } from './Card';
 import { CardNavigation } from './CardNavigation';
-import { CardId } from '../../interfaces/ICard';
+import { CardId } from '../../types/Card/ICard';
 import { useBrainContext } from './store/useBrainContext';
 
 interface DeckProps {

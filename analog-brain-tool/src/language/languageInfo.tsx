@@ -1,4 +1,4 @@
-import { ILanguageInfo } from '../interfaces/ILanguageData';
+import { ILanguageInfo } from '../types/ILanguageData';
 
 export const languagesInfos: Readonly<Record<string, Readonly<ILanguageInfo>>> = {
   en: { name: 'English', flag: '🇬🇧' },

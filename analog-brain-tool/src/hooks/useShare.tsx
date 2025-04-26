@@ -4,8 +4,8 @@ import { useRef } from 'react';
 import { ErrorHelpers } from '../utils/ErrorHelpers';
 import { useSettings } from '../settingsContext/useSettings';
 import { useAppContext } from '../appContext/useAppContext';
-import { DeckId } from '../interfaces/IDeck';
-import { CardId } from '../interfaces/ICard';
+import { DeckId } from '../types/Deck/IDeck';
+import { CardId } from '../types/Card/ICard';
 import { UrlManager } from '../utils/UrlManager/UrlManager';
 
 export const useShare = () => {

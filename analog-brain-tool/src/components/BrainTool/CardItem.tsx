@@ -1,5 +1,8 @@
 import { FC } from 'react';
-import { CardId, ICardItem } from '../../interfaces/ICard';
+import { CardId, ICardItem } from '../../types/Card/ICard';
+import { DeckUtils } from '../../types/Deck';
+import { useBrainContext } from './store/useBrainContext';
+import { useTranslation } from 'react-i18next';
 
 interface CardItemProps {
   carditem: ICardItem;
@@ -8,10 +11,19 @@ interface CardItemProps {
 
 export const CardItem: FC<CardItemProps> = ({ carditem, handleClickCard }) => {
   const isClickable = !!carditem.nextCardId;
+  const brainContext = useBrainContext();
+  const { t } = useTranslation();
 
-  //DeckManager.getCardInDeckById(yay, carditem.nextCardId);
-  const linkedCardName = carditem.nextCardId ? carditem.nextCardId : 'No linked card'; //NYI
-  const tooltipText = isClickable ? `Click to navigate to ${linkedCardName}` : undefined;
+  const getLinkedCardName = (cardId: CardId) => {
+    const deck = brainContext.currentDeck;
+    if (!deck) throw new Error('No deck found in context'); // should never happen at this point
+    return DeckUtils.findCard(deck, cardId)?.title ?? 'Unknown card';
+  };
+
+  const tooltipText =
+    carditem.nextCardId !== undefined
+      ? t('tool.cardItem.nextCardTooltip', { cardName: getLinkedCardName(carditem.nextCardId) })
+      : undefined;
 
   const handleClick = (event: React.MouseEvent) => {
     if (isClickable) {
@@ -29,12 +41,6 @@ export const CardItem: FC<CardItemProps> = ({ carditem, handleClickCard }) => {
       title={tooltipText}
     >
       <p>{carditem.text}</p>
-      {/* {isClickable && (
-        <span>
-          {' '}
-          {' ➜ '}({carditem.nextCardId})
-        </span>
-      )} */}
     </li>
   );
 };

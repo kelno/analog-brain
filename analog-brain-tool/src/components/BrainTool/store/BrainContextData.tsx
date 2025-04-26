@@ -1,6 +1,6 @@
 import { Stack } from '@datastructures-js/stack';
-import { CardId } from '../../../interfaces/ICard';
-import { IDeck, DeckId } from '../../../interfaces/IDeck';
+import { CardId } from '../../../types/Card/ICard';
+import { IDeck, DeckId } from '../../../types/Deck/IDeck';
 import { DeckManager } from '../../../decks/DeckManager';
 import { PersistentStorageManager } from '../../../utils/PersistentStorageManager/PersistentStorageManager';
 import { PersistentStorageTypes } from '../../../utils/PersistentStorageManager/PersistentStorageTypes';

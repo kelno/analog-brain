@@ -1,6 +1,7 @@
-import { IDeck, MINIMAL_CARD_DECK_FORMAT_VERSION } from '../interfaces/IDeck';
+import { IDeck, MINIMAL_CARD_DECK_FORMAT_VERSION } from '../types/Deck/IDeck';
 import { ValidateFunction } from 'ajv';
 import { ajv } from './useAjv';
+import { DeckUtils } from '../types/Deck';
 
 interface ValidationResult {
   isValid: boolean;
@@ -16,8 +17,8 @@ export class DataValidator {
   }
 
   public validateDeckData = (deck: IDeck): ValidationResult => {
-    if (deck.cards.length === 0) {
-      return { isValid: false, errorMessages: [`Found empty card deck with id ${deck.id}`] };
+    if (DeckUtils.isEmpty(deck)) {
+      return { isValid: false, errorMessages: [`Found empty card deck with id ${deck.id}.`] };
     }
 
     const hasDuplicateCardIds = (deck: IDeck): boolean => {
@@ -26,7 +27,7 @@ export class DataValidator {
     };
 
     if (hasDuplicateCardIds(deck)) {
-      return { isValid: false, errorMessages: ['Duplicate card IDs found!'] };
+      return { isValid: false, errorMessages: ['Duplicate card IDs found.'] };
     }
 
     return { isValid: true };
