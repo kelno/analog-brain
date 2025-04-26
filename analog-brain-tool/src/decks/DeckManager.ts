@@ -3,6 +3,7 @@ import { LangId } from '../components/BrainTool/store/BrainContextData';
 import { BrainToolError, BrainToolErrorType } from '../components/BrainTool/BrainToolErrorHandler';
 import { DataValidator } from '../dataValidation/DataValidator';
 import stripJsonComments from 'strip-json-comments';
+import { ICard } from '../interfaces/ICard';
 
 interface FetchResult {
   decks: IDeck[];

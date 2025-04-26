@@ -9,6 +9,10 @@ interface CardItemProps {
 export const CardItem: FC<CardItemProps> = ({ carditem, handleClickCard }) => {
   const isClickable = !!carditem.nextCardId;
 
+  //DeckManager.getCardInDeckById(yay, carditem.nextCardId);
+  const linkedCardName = carditem.nextCardId ? carditem.nextCardId : 'No linked card'; //NYI
+  const tooltipText = isClickable ? `Click to navigate to ${linkedCardName}` : undefined;
+
   const handleClick = (event: React.MouseEvent) => {
     if (isClickable) {
       event.stopPropagation(); // Prevent the click event from bubbling up to the parent card
@@ -18,9 +22,11 @@ export const CardItem: FC<CardItemProps> = ({ carditem, handleClickCard }) => {
 
   return (
     <li
-      className={`p-2 border rounded ${isClickable ? 'cursor-pointer hover:bg-gray-200' : ''}`}
+      className={`p-2 border ${isClickable ? 'rounded cursor-pointer hover:bg-gray-200' : 'border-dashed'}`}
       style={{ borderColor: carditem.borderColor || 'inherit' }}
       onClick={handleClick}
+      aria-label={tooltipText}
+      title={tooltipText}
     >
       <p>{carditem.text}</p>
       {/* {isClickable && (
