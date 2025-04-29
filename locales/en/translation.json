@@ -53,12 +53,11 @@
     "lastUpdated": "Last updated:",
     "adaptedFrom": "This tool is adapted from <1>adhdanalogbrain.tumblr.com</1>."
   },
-  "decktings": {
-    "title": "Decktings",
-    "decksURL": "Remote Datadeck URL:",
+  "settings": {
+    "title": "Settings",
+    "decksURL": "External deck data source:",
     "save": "Save",
-    "redeck": "Redeck",
-    "share": "Share"
+    "reset": "Reset"
   },
   "suspenseLoading": "Loading...",
   "hamburger": {
