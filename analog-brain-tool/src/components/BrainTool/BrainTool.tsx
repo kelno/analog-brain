@@ -1,4 +1,4 @@
-import { Deck } from './Deck';
+import { Deck } from './Deck/Deck';
 import { useTranslation } from 'react-i18next';
 import { useBrainContext } from './store/useBrainContext';
 import { useAppContext } from '../../appContext/useAppContext';

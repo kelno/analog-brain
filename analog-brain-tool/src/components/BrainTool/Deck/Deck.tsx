@@ -1,15 +1,9 @@
-import { FC } from 'react';
-import { IDeck } from '../../../types/Deck/IDeck';
-import { Card } from './../Card';
-import { CardNavigation } from './../CardNavigation';
+import { Card } from '../Card';
+import { CardNavigation } from '../CardNavigation';
 import { CardId } from '../../../types/Card/ICard';
 import { useDeckContext } from './../Deck/useDeckContext';
 
-interface DeckProps {
-  deck: IDeck;
-}
-
-export const Deck: FC<DeckProps> = ({ deck }) => {
+export const Deck = ({}) => {
   const context = useDeckContext();
 
   const handleClickCard = (cardId: CardId, isPrevious: boolean) => {
@@ -26,7 +20,7 @@ export const Deck: FC<DeckProps> = ({ deck }) => {
     context.resetHistory();
   };
 
-  const currentCardData = deck.cards.find((card) => card.id === context.currentCardId);
+  const currentCardData = context.deck.cards.find((card) => card.id === context.currentCardId);
 
   if (!currentCardData) return <></>;
 
@@ -38,7 +32,7 @@ export const Deck: FC<DeckProps> = ({ deck }) => {
           <CardNavigation
             handleClickPrevious={handleClickPrevious}
             handleClickBackToTop={handleClickBackToTop}
-            disableBackToTop={currentCardData.id === deck.cards[0].id}
+            disableBackToTop={currentCardData.id === context.deck.cards[0].id}
           />
         </div>
         <div className="relative flex-grow">
