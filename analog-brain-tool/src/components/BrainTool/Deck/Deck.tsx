@@ -26,18 +26,15 @@ export const Deck = ({}) => {
 
   return (
     <>
-      {/* We take at least the whole screen, but maybe more*/}
-      <div className="mx-8 mb-8 flex flex-grow flex-col relative">
-        <div className="flex justify-center py-4">
-          <CardNavigation
-            handleClickPrevious={handleClickPrevious}
-            handleClickBackToTop={handleClickBackToTop}
-            disableBackToTop={currentCardData.id === context.deck.cards[0].id}
-          />
-        </div>
-        <div className="relative flex-grow">
-          <Card card={currentCardData} handleClickCard={handleClickCard} />
-        </div>
+      <div className="flex justify-center py-4">
+        <CardNavigation
+          handleClickPrevious={handleClickPrevious}
+          handleClickBackToTop={handleClickBackToTop}
+          disableBackToTop={currentCardData.id === context.deck.cards[0].id}
+        />
+      </div>
+      <div className="relative flex-grow">
+        <Card card={currentCardData} handleClickCard={handleClickCard} />
       </div>
     </>
   );
