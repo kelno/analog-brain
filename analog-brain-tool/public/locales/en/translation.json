@@ -14,12 +14,14 @@
     "deck" : {
       "title": "Decision Deck",
       "description": "Description:",
-      "author": "Author:"
+      "author": "Author:",
+      "start": "Start"
     },
     "cardItem": {
       "nextCardTooltip": "Click to navigate to {{cardName}}."
     },
     "errors" : {
+      "noDecksForLanguage": "No available decks for language {{lang}}",
       "generic": "Error.",
       "warnErrors":  "Found some errors while trying to load decks, some decks might be missing. Look in console for more information.",
       "errorIntro": "Failed to load decks!",
@@ -33,7 +35,6 @@
     "title": "About"
   },
   "toast": {
-    "noDecksForLang": "No available decks for language {{lang}}",
     "someErrorsLoadingDeck": "There were some errors loading the card deck {{deckTitle}}.",
     "share": {
       "title": "The Analog Brain Tool",

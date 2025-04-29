@@ -1,17 +1,15 @@
-import { Stack } from '@datastructures-js/stack';
-import { CardId } from '../../../types/Card/ICard';
 import { IDeck, DeckId } from '../../../types/Deck/IDeck';
 import { DeckManager } from '../../../decks/DeckManager';
 import { PersistentStorageManager } from '../../../utils/PersistentStorageManager/PersistentStorageManager';
 import { PersistentStorageTypes } from '../../../utils/PersistentStorageManager/PersistentStorageTypes';
 
 export interface BrainContextState {
-  cardHistory: Stack<CardId>; // the top is the current card
-  currentDeckId: DeckId;
+  currentDeckId: DeckId | null; // the current deck id, null if no deck is selected
 }
 
 export type LangId = string;
 
+/* Brain Context is responsible for ... */
 export class BrainContextData {
   private state: BrainContextState;
   private setState: (state: BrainContextState) => void;
@@ -30,76 +28,10 @@ export class BrainContextData {
     this.language = language;
   }
 
-  // properly triggers state update for the card history
-  // A shallow copy is not enough for this one to trigger state updates
-  private saveCardHistory = () => {
-    const newCardHistory = this.state.cardHistory.clone();
-    this.setState({ ...this.state, cardHistory: newCardHistory });
-  };
-
-  public get cardHistory() {
-    return this.state.cardHistory;
-  }
-
-  // can throw
-  public get currentCardId(): CardId {
-    if (this.state.cardHistory.isEmpty()) throw Error('Card History is empty and should never be');
-
-    return this.state.cardHistory.peek();
-  }
-
-  // Method to get the previous card ID
-  public getPreviousCard = (): CardId | undefined => {
-    // Create a temporary stack using the static method fromArray
-    const tempHistory = Stack.fromArray<CardId>(this.state.cardHistory.toArray());
-
-    // Pop the current card to access the previous one
-    tempHistory.pop();
-
-    // Return the previous card ID if available
-    if (tempHistory.isEmpty()) {
-      return undefined;
-    }
-    return tempHistory.peek();
-  };
-
-  public selectCard = (cardId: CardId, pushHistory: boolean) => {
-    if (pushHistory && this.state.cardHistory.peek() != cardId) {
-      this.state.cardHistory.push(cardId);
-      this.saveCardHistory();
-      console.debug('BrainContext: Pushed card ' + cardId + ' to history');
-      console.debug(this.state.cardHistory);
-    }
-  };
-
-  public get hasCardHistory(): boolean {
-    return this.state.cardHistory.size() > 1;
-  }
-
-  // return previous card
-  public popCurrentCard = (): CardId | null => {
-    if (this.state.cardHistory.isEmpty()) return null;
-    else {
-      this.state.cardHistory.pop();
-      this.saveCardHistory();
-      if (this.state.cardHistory.isEmpty()) return null;
-      else return this.state.cardHistory.peek();
-    }
-  };
-
-  // Go back to root item in history
-  public resetHistory = () => {
-    while (this.state.cardHistory.size() > 1) this.state.cardHistory.pop();
-    this.saveCardHistory();
-  };
-
   private _selectDeck(newDeck: IDeck, userRequest: boolean) {
     console.debug('BrainContext: Selected deck with id ' + newDeck.id + ' (' + newDeck.title + ')');
 
-    const firstCardId = newDeck.cards[0].id;
-    const newCardHistory = new Stack<CardId>([firstCardId]);
-
-    this.setState({ ...this.state, currentDeckId: newDeck.id, cardHistory: newCardHistory });
+    this.setState({ ...this.state, currentDeckId: newDeck.id });
 
     if (userRequest) PersistentStorageManager.set(PersistentStorageTypes.CHOSEN_DECK, newDeck.id);
   }
@@ -113,14 +45,27 @@ export class BrainContextData {
     this._selectDeck(newDeck, userRequest);
   };
 
-  public closeDeck = () => {};
+  public closeDeck = () => {
+    if (this.state.currentDeckId === null) return;
 
-  public get currentDeck(): IDeck | undefined {
+    console.debug('BrainContext: Closing deck with id ' + this.state.currentDeckId);
+    this.setState({ ...this.state, currentDeckId: null });
+    PersistentStorageManager.remove(PersistentStorageTypes.CHOSEN_DECK);
+  };
+
+  /* Returns:
+  - currently selected deck if any.
+  - null if no deck is selected.
+  - undefined if deck wasn't found. (this is an error state)
+  */
+  public get currentDeck(): IDeck | undefined | null {
     //console.debug('BrainContext: get currentDeck from selected ' + this.state.currentDeckId);
-    return this.deckStorage.getDeckById(this.language, this.state.currentDeckId);
+    return this.state.currentDeckId
+      ? this.deckStorage.getDeckById(this.language, this.state.currentDeckId)
+      : null;
   }
 
-  public get currentDeckId(): DeckId {
+  public get currentDeckId(): DeckId | null {
     return this.state.currentDeckId;
   }
 }

@@ -3,6 +3,10 @@ import { useTranslation } from 'react-i18next';
 import { useBrainContext } from './store/useBrainContext';
 import { useAppContext } from '../../appContext/useAppContext';
 import { useDeckManager } from '../../decks/useDeckManager';
+import { DeckContextProvider } from './Deck/DeckContextProvider';
+import { useState } from 'react';
+import { IDeck } from '../../types/Deck';
+import { languagesInfos } from '../../language/languageInfo';
 
 export const BrainTool = () => {
   const appContext = useAppContext();
@@ -13,14 +17,12 @@ export const BrainTool = () => {
   console.debug(`Rendering BrainTool with deck manager loaded url ${deckManager.loadedUrl}`);
 
   const lang = appContext.language;
+  const languageName = languagesInfos[lang]?.name ?? lang;
 
-  // this should already be checked and prevented by BrainContext
   const availableDecks = deckManager.getAvailableDecks(lang);
-  if (!availableDecks) {
-    const error = `'No available decks for language ${lang}`;
-    console.error(error);
-    throw Error(error);
-  }
+
+  const defaultDeck = availableDecks && availableDecks.length > 0 ? availableDecks[0] : null;
+  const [selectedDeckInfo, setSelectedDeckInfo] = useState<IDeck | null>(defaultDeck);
 
   const handleSelectDeck = (event: React.ChangeEvent<HTMLSelectElement>) => {
     if (availableDecks === undefined) return;
@@ -33,42 +35,58 @@ export const BrainTool = () => {
       return;
     }
 
-    brainContext.selectDeck(deck.id, true);
+    setSelectedDeckInfo(deck);
   };
 
-  //TODO: Have a deck selection here, making this a dropdown to select one, see the info, then have a button to confirm that's the one we want
-
-  const deck = brainContext.currentDeck;
-  const currentDeckId = deck?.id;
-  const hasErrors = deckManager.errors.length > 0 ? true : undefined;
+  const hasErrors = deckManager.errors.length > 0;
 
   const renderDeckSelection = () => (
-    <div>
-      <span>{t('tool.deck.title')}: </span>
-      <select onChange={handleSelectDeck} defaultValue={currentDeckId} className="my-4 p-1 border rounded">
-        {availableDecks &&
-          Object.values(availableDecks).map((deck) => {
-            return (
-              <option key={deck.title} value={deck.id}>
+    <div className="p-4">
+      <div className="mb-4">
+        <span>{t('tool.deck.title')}: </span>
+        <select
+          onChange={handleSelectDeck}
+          className="my-4 p-1 border rounded"
+          defaultValue={selectedDeckInfo?.id ?? ''}
+        >
+          {!availableDecks && (
+            <option value="" disabled>
+              {t('tool.errors.noDecksForLanguage', { lang: languageName })}
+            </option>
+          )}
+          {availableDecks &&
+            availableDecks.map((deck) => (
+              <option key={deck.id} value={deck.id}>
                 {deck.title}
               </option>
-            );
-          })}
-      </select>
-      {hasErrors && (
-        <span className="ml-2 text-yellow-500" title={t('tool.errors.warnErrors')}>
-          ⚠️
-        </span>
-      )}
-      {deck?.description && (
-        <div>
-          {' '}
-          {t('tool.deck.description')} {deck.description}
-        </div>
-      )}
-      {deck?.author && (
-        <div>
-          {t('tool.deck.author')} {deck.author}
+            ))}
+        </select>
+        {hasErrors && (
+          <span className="ml-2 text-yellow-500" title={t('tool.errors.warnErrors')}>
+            ⚠️
+          </span>
+        )}
+      </div>
+
+      {selectedDeckInfo && (
+        <div className="border p-4 rounded">
+          <h3 className="font-bold mb-2">{selectedDeckInfo.title}</h3>
+          {selectedDeckInfo.description && (
+            <div className="mb-2">
+              <strong>{t('tool.deck.description')}</strong> {selectedDeckInfo.description}
+            </div>
+          )}
+          {selectedDeckInfo.author && (
+            <div className="mb-4">
+              <strong>{t('tool.deck.author')}</strong> {selectedDeckInfo.author}
+            </div>
+          )}
+          <button
+            onClick={() => brainContext.selectDeck(selectedDeckInfo.id, true)}
+            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+          >
+            {t('tool.deck.start')}
+          </button>
         </div>
       )}
     </div>
@@ -76,18 +94,19 @@ export const BrainTool = () => {
 
   return (
     <div className="relative min-h-full flex">
-      {!deck && renderDeckSelection()}
-      {deck && (
+      {!brainContext.currentDeck && renderDeckSelection()}
+      {brainContext.currentDeck && (
         <>
-          {' '}
           <button
             onClick={() => brainContext.closeDeck()}
             className="absolute top-2 left-2 w-8 h-8 bg-gray-200 hover:bg-gray-300 rounded-full flex items-center justify-center"
-            title="Close deck"
+            title={t('tool.deck.close')}
           >
             ✕
           </button>
-          <Deck deck={deck} />
+          <DeckContextProvider deck={brainContext.currentDeck}>
+            <Deck />
+          </DeckContextProvider>
         </>
       )}
     </div>

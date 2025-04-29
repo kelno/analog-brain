@@ -1,13 +1,8 @@
 import { useState, ReactNode } from 'react';
 import { BrainContextData, BrainContextState, LangId } from './BrainContextData';
 import { BrainContext } from './BrainContext';
-import { Stack } from '@datastructures-js/stack';
-import { CardId } from '../../../types/Card/ICard';
 import { UrlManager } from '../../../utils/UrlManager/UrlManager';
 import { UrlParams } from '../../../utils/UrlManager/UrlParams';
-import { toast } from 'sonner';
-import { useTranslation } from 'react-i18next';
-import { BrainToolError, BrainToolErrorType } from '../BrainToolErrorHandler';
 import { AppContextData } from '../../../appContext/AppContextData';
 import { useAppContext } from '../../../appContext/useAppContext';
 import { useDeckManager } from '../../../decks/useDeckManager';
@@ -37,7 +32,7 @@ export const BrainContextCore: React.FC<{
   appContext: AppContextData;
   deckManager: DeckManager;
 }> = ({ children, appContext, deckManager }) => {
-  const { t } = useTranslation();
+  //const { t } = useTranslation();
   const lang = appContext.language;
 
   console.debug('Rendering BrainContextCore');
@@ -56,8 +51,6 @@ export const BrainContextCore: React.FC<{
     return undefined;
   };
 
-  const urlCurrentCard = UrlManager.consumeParam(UrlParams.CARD);
-
   const getDeckFromURL = () => {
     const urlDeckId = UrlManager.consumeParam(UrlParams.DECK);
     return urlDeckId ? validateDeckFromUrl(lang, urlDeckId) : undefined;
@@ -72,36 +65,12 @@ export const BrainContextCore: React.FC<{
     return lastSelectedDeck;
   };
 
-  const getDefaultSetForLanguage = () => {
-    const defaultSetForLanguage = deckManager.getDefaultDeckForLanguage(lang);
-    if (!defaultSetForLanguage) {
-      const availableDecks = deckManager.getAvailableSetsPerLanguage();
-      if (Object.keys(availableDecks).length === 0) {
-        const error = 'Could not find any available decks, cant start BrainContext';
-        throw new BrainToolError(error, BrainToolErrorType.FAILED_NO_VALID_DECK);
-      }
-
-      const fallbackLanguage = Object.keys(availableDecks)[0];
-      const error = `No default deck for language ${lang}. Falling back to ${fallbackLanguage}`;
-      console.error(error);
-      toast.error(t('toast.noDecksForLang', { lang }));
-      appContext.setLanguage(fallbackLanguage);
-      throw new Error(error);
-      // we'll be redrawn when the language changes
-    }
-    return defaultSetForLanguage;
-  };
-
   // Priority: URL > last selected deck > default deck
   const deckFromURL = getDeckFromURL();
-  const currentDeck = deckFromURL ?? getLastExplicitelySelectedDeck() ?? getDefaultSetForLanguage();
-
-  const urlCard = deckFromURL ? urlCurrentCard : null;
-  const defaultCardId = urlCard ?? currentDeck.cards[0].id;
+  const currentDeck = deckFromURL ?? getLastExplicitelySelectedDeck() ?? null;
 
   const [brainState, setBrainState] = useState<BrainContextState>({
-    cardHistory: new Stack<CardId>([defaultCardId]),
-    currentDeckId: currentDeck.id,
+    currentDeckId: currentDeck ? currentDeck.id : null,
   });
 
   const brainContext: BrainContextData = new BrainContextData(brainState, setBrainState, deckManager, lang);

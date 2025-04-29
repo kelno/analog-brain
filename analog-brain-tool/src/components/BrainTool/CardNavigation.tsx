@@ -4,7 +4,7 @@ import { UpArrowSVG } from '../SVGs/UpArrowSVG';
 import { ShareButtonSVG } from '../SVGs/ShareButtonSVG';
 import { CardNavigationButton } from './CardSelectorButton';
 import { useShare } from '../../hooks/useShare';
-import { useBrainContext } from './store/useBrainContext';
+import { useDeckContext } from './Deck/useDeckContext';
 
 interface CardNavigationProps {
   handleClickPrevious: () => void;
@@ -17,16 +17,16 @@ export const CardNavigation: FC<CardNavigationProps> = ({
   handleClickBackToTop,
   disableBackToTop,
 }) => {
-  const brainContext = useBrainContext();
+  const context = useDeckContext();
   const { shareFromParams } = useShare();
 
   const handleShare = () => {
-    shareFromParams(brainContext.currentDeckId, brainContext.currentCardId);
+    shareFromParams(context.deck.id, context.currentCardId);
   };
 
   return (
     <div className="flex gap-2">
-      <CardNavigationButton disabled={!brainContext.hasCardHistory} onClick={handleClickPrevious}>
+      <CardNavigationButton disabled={!context.hasCardHistory} onClick={handleClickPrevious}>
         <LeftArrowSVG alt="previous" />
       </CardNavigationButton>
       <CardNavigationButton disabled={disableBackToTop} onClick={handleClickBackToTop}>
