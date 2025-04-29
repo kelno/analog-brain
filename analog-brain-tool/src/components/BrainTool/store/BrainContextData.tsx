@@ -113,6 +113,8 @@ export class BrainContextData {
     this._selectDeck(newDeck, userRequest);
   };
 
+  public closeDeck = () => {};
+
   public get currentDeck(): IDeck | undefined {
     //console.debug('BrainContext: get currentDeck from selected ' + this.state.currentDeckId);
     return this.deckStorage.getDeckById(this.language, this.state.currentDeckId);

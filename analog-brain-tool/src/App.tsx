@@ -35,36 +35,23 @@ export function App() {
   });
 
   return (
-    <div className="default-theme text-brain-text h-full leading-relaxed">
-      <QueryClientProvider client={queryClient}>
-        <AppContextProvider>
-          <SettingsProvider>
-            <ErrorBoundary>
-              <Header />
-              <div className="px-2 max-w-250 mx-auto mt-header pt-2">
-                <Toaster position="bottom-right" />
-                {/*
-                              <Section id="intro" title={t('intro.title')}>
-                                <Intro />
-                              </Section>
-
-                              <Section id="howto" title={t('howto.title')}>
-                                <HowTo />
-                              </Section>
-                */}
-
-                {/* <Section id="tool" title={t('tool.title')}> */}
-                <BrainToolContainer />
-                {/* </Section> */}
-
-                {/* <Section id="outro" title={t('about.title')}>
-                  <Outro />
-                </Section> */}
-              </div>
-            </ErrorBoundary>
-          </SettingsProvider>
-        </AppContextProvider>
-      </QueryClientProvider>
-    </div>
+    <>
+      <div className="default-theme h-screen w-screen flex flex-col">
+        <QueryClientProvider client={queryClient}>
+          <AppContextProvider>
+            <SettingsProvider>
+              <ErrorBoundary>
+                <Header />
+                {/* Layout if locked in width, but vertical scrolling is allowed in main */}
+                <main id="body" className="flex-grow overflow-x-hidden relative">
+                  <Toaster position="bottom-right" />
+                  <BrainToolContainer />
+                </main>
+              </ErrorBoundary>
+            </SettingsProvider>
+          </AppContextProvider>
+        </QueryClientProvider>
+      </div>
+    </>
   );
 }

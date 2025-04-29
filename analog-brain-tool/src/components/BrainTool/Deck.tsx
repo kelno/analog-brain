@@ -31,8 +31,9 @@ export const Deck: FC<DeckProps> = ({ deck }) => {
   if (!currentCardData) return <></>;
 
   return (
-    <div className="m-8 flex flex-col-reverse" style={{ height: 'calc(100vh - var(--spacing-header))' }}>
-      <div className="flex-none">
+    <>
+      {/* We take at least the whole screen, but maybe more*/}
+      <div className="mx-8 mb-8 flex flex-grow flex-col relative">
         <div className="flex justify-center py-4">
           <CardNavigation
             handleClickPrevious={handleClickPrevious}
@@ -40,12 +41,10 @@ export const Deck: FC<DeckProps> = ({ deck }) => {
             disableBackToTop={currentCardData.id === deck.cards[0].id}
           />
         </div>
-      </div>
-      <div className="relative flex-col flex-auto">
-        <div id="currentCard" className="relative z-10 w-full h-full">
+        <div className="relative flex-grow">
           <Card card={currentCardData} handleClickCard={handleClickCard} />
         </div>
       </div>
-    </div>
+    </>
   );
 };

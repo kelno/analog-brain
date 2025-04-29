@@ -11,7 +11,7 @@ export const Header: React.FC = () => {
   const [hamburgerIsOpen, sethamburgerIsOpen] = useState(false);
 
   return (
-    <header className="fixed top-0 left-0 w-full bg-brain-secondary shadow-md z-50 h-header">
+    <header className="top-0 left-0 w-full bg-brain-secondary shadow-md z-50 h-15">
       <div className="mx-auto px-4 flex justify-between items-center py-4 h-full">
         {/* Left side */}
         <div className="flex items-center space-x-4 text-white">

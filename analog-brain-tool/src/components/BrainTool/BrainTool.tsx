@@ -36,42 +36,60 @@ export const BrainTool = () => {
     brainContext.selectDeck(deck.id, true);
   };
 
+  //TODO: Have a deck selection here, making this a dropdown to select one, see the info, then have a button to confirm that's the one we want
+
   const deck = brainContext.currentDeck;
   const currentDeckId = deck?.id;
   const hasErrors = deckManager.errors.length > 0 ? true : undefined;
 
+  const renderDeckSelection = () => (
+    <div>
+      <span>{t('tool.deck.title')}: </span>
+      <select onChange={handleSelectDeck} defaultValue={currentDeckId} className="my-4 p-1 border rounded">
+        {availableDecks &&
+          Object.values(availableDecks).map((deck) => {
+            return (
+              <option key={deck.title} value={deck.id}>
+                {deck.title}
+              </option>
+            );
+          })}
+      </select>
+      {hasErrors && (
+        <span className="ml-2 text-yellow-500" title={t('tool.errors.warnErrors')}>
+          ⚠️
+        </span>
+      )}
+      {deck?.description && (
+        <div>
+          {' '}
+          {t('tool.deck.description')} {deck.description}
+        </div>
+      )}
+      {deck?.author && (
+        <div>
+          {t('tool.deck.author')} {deck.author}
+        </div>
+      )}
+    </div>
+  );
+
   return (
-    <>
-      <div>
-        <span>{t('tool.deck.title')}: </span>
-        <select onChange={handleSelectDeck} defaultValue={currentDeckId} className="my-4 p-1 border rounded">
-          {availableDecks &&
-            Object.values(availableDecks).map((deck) => {
-              return (
-                <option key={deck.title} value={deck.id}>
-                  {deck.title}
-                </option>
-              );
-            })}
-        </select>
-        {hasErrors && (
-          <span className="ml-2 text-yellow-500" title={t('tool.errors.warnErrors')}>
-            ⚠️
-          </span>
-        )}
-        {deck?.description && (
-          <div>
-            {' '}
-            {t('tool.deck.description')} {deck.description}
-          </div>
-        )}
-        {deck?.author && (
-          <div>
-            {t('tool.deck.author')} {deck.author}
-          </div>
-        )}
-      </div>
-      {deck && <Deck deck={deck}></Deck>}
-    </>
+    <div className="relative min-h-full flex">
+      {!deck && renderDeckSelection()}
+      {deck && (
+        <>
+          {' '}
+          <button
+            onClick={() => brainContext.closeDeck()}
+            className="absolute top-2 left-2 w-8 h-8 bg-gray-200 hover:bg-gray-300 rounded-full flex items-center justify-center"
+            title="Close deck"
+          >
+            ✕
+          </button>
+          <Deck deck={deck} />
+        </>
+      )}
+    </div>
   );
 };

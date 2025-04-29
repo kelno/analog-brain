@@ -3,9 +3,6 @@
 @custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
 
 @theme {
-  /* Size variables */
-  --spacing-header: 60px;
-
   /* Colors */
   --color-brain-text: var(--theme-color-brain-text);
   --color-brain-secondary: var(--theme-color-brain-secondary);
@@ -13,8 +10,10 @@
 
 /* Defaults for the whole App */
 .default-theme {
-  @apply text-pretty;
+  @apply text-brain-text text-pretty leading-relaxed;
+}
 
+#body {
   /* Some palettes https://tailwind-color.vercel.app */
   /* Background */
   @apply bg-gradient-to-bl from-pink-300 via-purple-300 to-indigo-400
