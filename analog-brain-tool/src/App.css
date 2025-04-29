@@ -5,7 +5,6 @@
 @theme {
   /* Size variables */
   --spacing-header: 60px;
-  --previous-card-offset-y: 3rem; /* 12 * 0.25rem = 3rem */
 
   /* Colors */
   --color-brain-text: var(--theme-color-brain-text);
