@@ -1,3 +1,5 @@
+import { Settings } from '../Settings';
+
 interface HamburgerMenuContentProps {
   isOpen: boolean;
 }
@@ -5,5 +7,11 @@ interface HamburgerMenuContentProps {
 export const HamburgerMenuContent: React.FC<HamburgerMenuContentProps> = ({ isOpen }) => {
   //const { t } = useTranslation();
 
-  return <div>{isOpen ? 'OPEN' : null}</div>;
+  if (isOpen === false) return null;
+
+  return (
+    <div className="bg-slate-400">
+      <Settings />
+    </div>
+  );
 };
