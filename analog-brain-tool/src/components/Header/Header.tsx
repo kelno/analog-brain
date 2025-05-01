@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { ColorSwitch } from './ColorSwitch';
 import { HamburgerMenuButton } from './HamburgerMenuButton';
 import { HamburgerMenuContent } from './HamburgerMenuContent';
+import { Brain } from 'lucide-react';
 
 export const Header: React.FC = () => {
   const { t } = useTranslation();
@@ -12,18 +13,17 @@ export const Header: React.FC = () => {
 
   return (
     <header className="top-0 left-0 w-full bg-brain-secondary shadow-md z-50 h-15">
-      <div className="mx-auto px-4 flex justify-between items-center py-4 h-full">
-        {/* Left side */}
-        <div className="flex items-center space-x-4 text-white">
-          {/* Hamburger Menu */}
-          <HamburgerMenuButton isOpen={hamburgerIsOpen} setIsOpen={sethamburgerIsOpen} />
-
-          {/* Logo & App Name */}
+      <div className="mx-auto px-4 flex justify-between items-center py-4 h-full text-white">
+        {/* Left side: Logo & Title */}
+        <div className="flex items-center justify-center text-nowrap space-x-2">
+          <div>
+            <Brain />
+          </div>
           <div className="text-2xl font-bold">{t('title')}</div>
         </div>
 
         {/* Right side: Always shown options */}
-        <div className="flex items-center space-x-6">
+        <div className="flex items-center space-x-6 justify-end">
           <div className="flex items-center">
             <LanguageSwitcher />
           </div>
@@ -31,6 +31,11 @@ export const Header: React.FC = () => {
           {/* Color Scheme Toggle Switch */}
           <div className="flex items-center">
             <ColorSwitch />
+          </div>
+
+          {/* Hamburger Menu */}
+          <div className="">
+            <HamburgerMenuButton isOpen={hamburgerIsOpen} setIsOpen={sethamburgerIsOpen} />
           </div>
         </div>
       </div>
