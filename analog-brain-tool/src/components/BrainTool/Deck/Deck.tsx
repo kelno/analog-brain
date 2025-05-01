@@ -1,5 +1,4 @@
 import { Card } from '../Card';
-import { CardId } from '../../../types/Card/ICard';
 import { useDeckContext } from './../Deck/useDeckContext';
 import { useTranslation } from 'react-i18next';
 import { RotateCcw, CircleX, ChevronLeft, ChevronRight } from 'lucide-react';
@@ -10,10 +9,6 @@ export const Deck = ({}) => {
   const context = useDeckContext();
   const brainContext = useBrainContext();
   const { t } = useTranslation();
-
-  const handleClickCard = (cardId: CardId) => {
-    context.selectCard(cardId, true);
-  };
 
   const currentCardData = context.deck.cards.find((card) => card.id === context.currentCardId);
   if (currentCardData === undefined) {
@@ -57,8 +52,7 @@ export const Deck = ({}) => {
         disabled={!context.hasCardHistory}
       />
       <div className="relative flex-grow m-8 mt-12">
-        {currentCardData && <Card card={currentCardData} handleClickCard={handleClickCard} />}
-        {!currentCardData && <>(Card not found)</>}
+        <Card card={currentCardData} />
       </div>
       <SimpleIconButton
         handleClick={handleNext}
