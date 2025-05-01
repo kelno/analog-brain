@@ -1,6 +1,6 @@
 import { Trans, useTranslation } from 'react-i18next';
 
-export const Outro = () => {
+export const About = () => {
   const { t } = useTranslation();
 
   const date = BUILD_MS_TIME_SINCE_EPOCH ? new Date(BUILD_MS_TIME_SINCE_EPOCH) : undefined;

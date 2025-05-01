@@ -1,8 +1,4 @@
 import './App.css';
-/*import HowTo from './components/HowTo';
-import Intro from './components/Intro';*/
-// import { Outro } from './components/Outro';
-// import { Section } from './components/Section';
 import { Toaster } from 'sonner';
 import { SettingsProvider } from './settingsContext/SettingsProvider';
 import './i18n';

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useSettings } from '../settingsContext/useSettings';
 import { useTranslation } from 'react-i18next';
+import { About } from './About';
 
 export const Settings: React.FC = () => {
   const { indexUrl, defaultUrl, setIndexUrl, resetIndexUrl } = useSettings();
@@ -23,13 +24,11 @@ export const Settings: React.FC = () => {
   };
 
   return (
-    <div className="rounded-lg p-6 shadow-md mb-6">
-      <h2 className="text-2xl font-bold mb-4 text-gray-800 dark:text-white"> {t('settings.title')}</h2>
+    <div className="rounded-lg p-6 shadow-md mb-6 space-y-8 text-white">
+      <h2 className="text-2xl font-bold mb-4 "> {t('settings.title')}</h2>
       <div className="space-y-4">
         <div className="flex flex-col">
-          <label className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-            {t('settings.decksURL')}
-          </label>
+          <label className="text-sm font-medium mb-2">{t('settings.decksURL')}</label>
           <input
             type="text"
             value={inputURL}
@@ -52,6 +51,10 @@ export const Settings: React.FC = () => {
             {t('settings.reset')}
           </button>
         </div>
+      </div>
+      <div>
+        <h2 className="text-2xl font-bold mb-4 "> About </h2> {/*TODO translate */}
+        <About />
       </div>
     </div>
   );
