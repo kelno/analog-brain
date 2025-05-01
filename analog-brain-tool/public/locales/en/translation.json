@@ -15,7 +15,14 @@
       "title": "Decision Deck",
       "description": "Description:",
       "author": "Author:",
-      "start": "Start"
+      "start": "Start",
+      "close": "Close",
+      "reset": "Reset",
+      "previous": "Previous",
+      "next": "Next"
+    },
+    "card": {
+      "shareLabel" : "Share this card"
     },
     "cardItem": {
       "nextCardTooltip": "Click to navigate to {{cardName}}."
