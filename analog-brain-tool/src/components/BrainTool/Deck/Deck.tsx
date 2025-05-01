@@ -6,18 +6,8 @@ import { useDeckContext } from './../Deck/useDeckContext';
 export const Deck = ({}) => {
   const context = useDeckContext();
 
-  const handleClickCard = (cardId: CardId, isPrevious: boolean) => {
-    if (isPrevious) context.popCurrentCard();
-    else context.selectCard(cardId, true);
-  };
-
-  const handleClickPrevious = () => {
-    console.log('Click previous');
-    context.popCurrentCard();
-  };
-
-  const handleClickBackToTop = () => {
-    context.resetHistory();
+  const handleClickCard = (cardId: CardId) => {
+    context.selectCard(cardId, true);
   };
 
   const currentCardData = context.deck.cards.find((card) => card.id === context.currentCardId);
@@ -27,11 +17,7 @@ export const Deck = ({}) => {
   return (
     <>
       <div className="flex justify-center py-4">
-        <CardNavigation
-          handleClickPrevious={handleClickPrevious}
-          handleClickBackToTop={handleClickBackToTop}
-          disableBackToTop={currentCardData.id === context.deck.cards[0].id}
-        />
+        <CardNavigation disableBackToTop={currentCardData.id === context.deck.cards[0].id} />
       </div>
       <div className="relative flex-grow">
         <Card card={currentCardData} handleClickCard={handleClickCard} />

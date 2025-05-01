@@ -7,18 +7,21 @@ import { useShare } from '../../hooks/useShare';
 import { useDeckContext } from './Deck/useDeckContext';
 
 interface CardNavigationProps {
-  handleClickPrevious: () => void;
-  handleClickBackToTop: () => void;
   disableBackToTop: boolean;
 }
 
-export const CardNavigation: FC<CardNavigationProps> = ({
-  handleClickPrevious,
-  handleClickBackToTop,
-  disableBackToTop,
-}) => {
+export const CardNavigation: FC<CardNavigationProps> = ({ disableBackToTop }) => {
   const context = useDeckContext();
   const { shareFromParams } = useShare();
+
+  const handleClickPrevious = () => {
+    console.log('Click previous');
+    context.popCurrentCard();
+  };
+
+  const handleClickBackToTop = () => {
+    context.resetHistory();
+  };
 
   const handleShare = () => {
     shareFromParams(context.deck.id, context.currentCardId);
