@@ -72,7 +72,7 @@ export class DeckContextData {
 
   // return previous card
   public popCurrentCard = (): CardId | null => {
-    if (this.state.cardHistory.isEmpty()) return null;
+    if (this.state.cardHistory.isEmpty() || !this.hasCardHistory) return null;
     else {
       this.state.cardHistory.pop();
       this.saveCardHistory();
