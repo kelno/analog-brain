@@ -9,9 +9,5 @@ export const HamburgerMenuContent: React.FC<HamburgerMenuContentProps> = ({ isOp
 
   if (isOpen === false) return null;
 
-  return (
-    <div className="bg-slate-400">
-      <Settings />
-    </div>
-  );
+  return <Settings />;
 };

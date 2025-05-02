@@ -5,6 +5,7 @@ import { useAppContext } from '../../appContext/useAppContext';
 import { IDeck } from '../../types/Deck';
 import { languagesInfos } from '../../language/languageInfo';
 import { useBrainContext } from './store/useBrainContext';
+import { Button } from '../Button';
 
 interface DeckSelectionProps {}
 
@@ -40,11 +41,11 @@ export const DeckSelection: FC<DeckSelectionProps> = ({}) => {
 
   return (
     <div className="flex flex-col h-full justify-center m-4">
-      <div className="text-xl">
+      <div className="text-xl my-4">
         <span>{t('tool.deck.title')}: </span>
         <select
           onChange={handleSelectDeck}
-          className="my-4 p-1 border rounded-2xl shadow-md"
+          className="py-1 px-2 border rounded-2xl shadow-md"
           defaultValue={selectedDeckInfo?.id ?? ''}
         >
           {!availableDecks && (
@@ -67,24 +68,24 @@ export const DeckSelection: FC<DeckSelectionProps> = ({}) => {
       </div>
 
       {selectedDeckInfo && (
-        <div className="border rounded-lg p-4 shadow-md mb-6">
-          <h3 className="font-bold mb-2 text-2xl">{selectedDeckInfo.title}</h3>
+        <div className="border rounded-lg p-4 shadow-md flex flex-col space-y-1">
+          <h3 className="font-bold text-2xl text-center">{selectedDeckInfo.title}</h3>
           {selectedDeckInfo.description && (
-            <div className="mb-2">
+            <div className="">
               <span className="font-bold">{t('tool.deck.description')}</span> {selectedDeckInfo.description}
             </div>
           )}
           {selectedDeckInfo.author && (
-            <div className="mb-4">
+            <div className="">
               <span className="font-bold">{t('tool.deck.author')}</span> {selectedDeckInfo.author}
             </div>
           )}
-          <button
-            onClick={() => brainContext.selectDeck(selectedDeckInfo.id, true)}
-            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+          <Button
+            handleClick={() => brainContext.selectDeck(selectedDeckInfo.id, true)}
+            className="font-bold mt-4"
           >
             {t('tool.deck.start')}
-          </button>
+          </Button>
         </div>
       )}
     </div>
