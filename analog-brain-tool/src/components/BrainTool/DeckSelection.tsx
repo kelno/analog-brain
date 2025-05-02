@@ -40,54 +40,56 @@ export const DeckSelection: FC<DeckSelectionProps> = ({}) => {
   const hasErrors = deckManager.errors.length > 0;
 
   return (
-    <div className="flex flex-col h-full justify-center m-4">
-      <div className="text-xl my-4">
-        <span>{t('tool.deck.title')}: </span>
-        <select
-          onChange={handleSelectDeck}
-          className="py-1 px-2 border rounded-2xl shadow-md"
-          defaultValue={selectedDeckInfo?.id ?? ''}
-        >
-          {!availableDecks && (
-            <option value="" disabled>
-              {t('tool.errors.noDecksForLanguage', { lang: languageName })}
-            </option>
-          )}
-          {availableDecks &&
-            availableDecks.map((deck) => (
-              <option key={deck.id} value={deck.id}>
-                {deck.title}
+    <div className="flex flex-col min-h-full w-full justify-center items-center ">
+      <div className="container mx-auto max-w-2xl">
+        <div className="text-xl my-4">
+          <span>{t('tool.deck.title')}: </span>
+          <select
+            onChange={handleSelectDeck}
+            className="py-1 px-2 border rounded-2xl shadow-md"
+            defaultValue={selectedDeckInfo?.id ?? ''}
+          >
+            {!availableDecks && (
+              <option value="" disabled>
+                {t('tool.errors.noDecksForLanguage', { lang: languageName })}
               </option>
-            ))}
-        </select>
-        {hasErrors && (
-          <span className="ml-2 text-yellow-500" title={t('tool.errors.warnErrors')}>
-            ⚠️
-          </span>
+            )}
+            {availableDecks &&
+              availableDecks.map((deck) => (
+                <option key={deck.id} value={deck.id}>
+                  {deck.title}
+                </option>
+              ))}
+          </select>
+          {hasErrors && (
+            <span className="ml-2 text-yellow-500" title={t('tool.errors.warnErrors')}>
+              ⚠️
+            </span>
+          )}
+        </div>
+
+        {selectedDeckInfo && (
+          <div className="border rounded-lg p-4 shadow-md flex flex-col space-y-1">
+            <h3 className="font-bold text-2xl text-center">{selectedDeckInfo.title}</h3>
+            {selectedDeckInfo.description && (
+              <div className="">
+                <span className="font-bold">{t('tool.deck.description')}</span> {selectedDeckInfo.description}
+              </div>
+            )}
+            {selectedDeckInfo.author && (
+              <div className="">
+                <span className="font-bold">{t('tool.deck.author')}</span> {selectedDeckInfo.author}
+              </div>
+            )}
+            <Button
+              handleClick={() => brainContext.selectDeck(selectedDeckInfo.id, true)}
+              className="font-bold mt-4"
+            >
+              {t('tool.deck.start')}
+            </Button>
+          </div>
         )}
       </div>
-
-      {selectedDeckInfo && (
-        <div className="border rounded-lg p-4 shadow-md flex flex-col space-y-1">
-          <h3 className="font-bold text-2xl text-center">{selectedDeckInfo.title}</h3>
-          {selectedDeckInfo.description && (
-            <div className="">
-              <span className="font-bold">{t('tool.deck.description')}</span> {selectedDeckInfo.description}
-            </div>
-          )}
-          {selectedDeckInfo.author && (
-            <div className="">
-              <span className="font-bold">{t('tool.deck.author')}</span> {selectedDeckInfo.author}
-            </div>
-          )}
-          <Button
-            handleClick={() => brainContext.selectDeck(selectedDeckInfo.id, true)}
-            className="font-bold mt-4"
-          >
-            {t('tool.deck.start')}
-          </Button>
-        </div>
-      )}
     </div>
   );
 };
