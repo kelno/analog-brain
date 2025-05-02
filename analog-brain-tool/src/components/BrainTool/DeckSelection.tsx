@@ -39,7 +39,7 @@ export const DeckSelection: FC<DeckSelectionProps> = ({}) => {
   const hasErrors = deckManager.errors.length > 0;
 
   return (
-    <div className="flex flex-col w-full h-full justify-center m-4">
+    <div className="flex flex-col h-full justify-center m-4">
       <div className="text-xl">
         <span>{t('tool.deck.title')}: </span>
         <select
