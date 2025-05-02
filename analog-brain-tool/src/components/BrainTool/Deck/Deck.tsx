@@ -23,8 +23,6 @@ export const Deck = ({}) => {
     context.resetHistory();
   };
 
-  const disableReset = currentCardData?.id === context.deck.cards[0].id;
-
   const handlePrevious = () => {
     context.popCurrentCard();
   };
@@ -36,13 +34,11 @@ export const Deck = ({}) => {
   return (
     <>
       <div className="absolute top-2 left-2 flex gap-2">
-        <SimpleIconButton handleClick={handleClickClose} label={t('tool.deck.close')} icon={CircleX} />
-        <SimpleIconButton
-          handleClick={handleClickReset}
-          label={t('tool.deck.reset')}
-          icon={RotateCcw}
-          disabled={disableReset}
-        />
+        {context.hasCardHistory ? (
+          <SimpleIconButton handleClick={handleClickReset} label={t('tool.deck.reset')} icon={RotateCcw} />
+        ) : (
+          <SimpleIconButton handleClick={handleClickClose} label={t('tool.deck.close')} icon={CircleX} />
+        )}
       </div>
       <SimpleIconButton
         handleClick={handlePrevious}
