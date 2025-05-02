@@ -11,7 +11,7 @@ export const BrainTool = () => {
   return (
     <div className="relative min-h-full flex">
       {/* We take at least the whole screen, but maybe more*/}
-      <div className="flex flex-grow flex-col relative">
+      <div className="flex flex-grow flex-col relative min-h-full ">
         {!brainContext.currentDeck && <DeckSelection />}
         {brainContext.currentDeck && (
           <DeckContextProvider deck={brainContext.currentDeck}>

@@ -56,14 +56,14 @@ export const Deck = ({}) => {
 
   return (
     <>
-      <div className="absolute top-2 left-2 flex gap-2">
+      <div className="m-2">
         {context.hasCardHistory ? (
           <SimpleIconButton handleClick={handleClickReset} label={t('tool.deck.reset')} icon={RotateCcw} />
         ) : (
           <SimpleIconButton handleClick={handleClickClose} label={t('tool.deck.close')} icon={CircleX} />
         )}
       </div>
-      <div className="flex w-full min-h-full mt-12">
+      <div className="flex flex-grow w-full mb-4">
         <DeckNavigationButton
           onClick={previousDisabled ? undefined : handlePrevious}
           label={t('tool.deck.previous')}
