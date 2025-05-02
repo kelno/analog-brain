@@ -6,36 +6,41 @@ import { useTranslation } from 'react-i18next';
 
 interface CardItemProps {
   carditem: ICardItem;
-  handleClickCard: (id: CardId, isPrevious: boolean) => void;
+  handleClickCard: (id: CardId) => void;
 }
 
 export const CardItem: FC<CardItemProps> = ({ carditem, handleClickCard }) => {
-  const isClickable = !!carditem.nextCardId;
   const brainContext = useBrainContext();
   const { t } = useTranslation();
+  const deck = brainContext.currentDeck;
+  if (!deck) throw new Error('CardItem : No deck found in context'); // should never happen at this point
 
-  const getLinkedCardName = (cardId: CardId) => {
-    const deck = brainContext.currentDeck;
-    if (!deck) throw new Error('No deck found in context'); // should never happen at this point
-    return DeckUtils.findCard(deck, cardId)?.title ?? 'Unknown card';
-  };
-
-  const tooltipText =
-    carditem.nextCardId !== undefined
-      ? t('tool.cardItem.nextCardTooltip', { cardName: getLinkedCardName(carditem.nextCardId) })
-      : undefined;
+  const hasLinkedCard = carditem.nextCardId !== undefined;
+  const linkedCard = carditem.nextCardId ? DeckUtils.findCard(deck, carditem.nextCardId) : undefined;
+  const linkedCardError = hasLinkedCard && linkedCard === undefined;
+  const tooltipText = linkedCard
+    ? t('tool.cardItem.nextCardTooltip', { cardName: linkedCard.title })
+    : hasLinkedCard
+    ? t('tool.cardItem.nextCardTooltipError')
+    : undefined;
+  const isClickable = linkedCard;
 
   const handleClick = (event: React.MouseEvent) => {
     if (isClickable) {
       event.stopPropagation(); // Prevent the click event from bubbling up to the parent card
-      handleClickCard(carditem.nextCardId!, false);
+      handleClickCard(carditem.nextCardId!);
     }
   };
 
+  const borderColor = linkedCardError ? 'red' : carditem.borderColor || 'inherit';
+  const cursor = linkedCardError ? 'cursor-not-allowed' : isClickable ? 'cursor-pointer' : undefined;
+
   return (
     <li
-      className={`p-2 border ${isClickable ? 'rounded cursor-pointer hover:bg-gray-200' : 'border-dashed'}`}
-      style={{ borderColor: carditem.borderColor || 'inherit' }}
+      className={`p-2 border 
+        ${hasLinkedCard ? 'rounded hover:bg-gray-200' : 'border-dashed'} 
+        ${cursor}`}
+      style={{ borderColor: borderColor }}
       onClick={handleClick}
       aria-label={tooltipText}
       title={tooltipText}
