@@ -6,6 +6,7 @@ interface SimpleIconButtonProps {
   icon: LucideIcon;
   disabled?: boolean;
   className?: string;
+  size?: number;
 }
 
 export function SimpleIconButton({
@@ -14,6 +15,7 @@ export function SimpleIconButton({
   icon: Icon,
   disabled,
   className,
+  size,
 }: SimpleIconButtonProps) {
   return (
     <button
@@ -24,7 +26,7 @@ export function SimpleIconButton({
       aria-label={label}
       disabled={disabled}
     >
-      <Icon />
+      <Icon size={size} />
     </button>
   );
 }

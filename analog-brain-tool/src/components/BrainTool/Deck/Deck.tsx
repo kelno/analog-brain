@@ -1,9 +1,29 @@
 import { Card } from '../Card';
 import { useDeckContext } from './../Deck/useDeckContext';
 import { useTranslation } from 'react-i18next';
-import { RotateCcw, CircleX, ChevronLeft, ChevronRight } from 'lucide-react';
+import { RotateCcw, CircleX, ChevronLeft, ChevronRight, LucideIcon } from 'lucide-react';
 import { useBrainContext } from '../store/useBrainContext';
 import { SimpleIconButton } from '../../SimpleIconButton';
+
+interface DeckNavigationButtonProps {
+  onClick?: () => void;
+  label: string;
+  icon: LucideIcon;
+  disabled: boolean;
+}
+
+const DeckNavigationButton = ({ onClick, label, icon: Icon, disabled }: DeckNavigationButtonProps) => (
+  <button
+    onClick={disabled ? undefined : onClick}
+    className={`h-full transition-colors align-stretch rounded-xl [&>svg]:scale-y-[3] ${
+      disabled ? 'cursor-default opacity-50' : 'cursor-pointer hover:bg-brain-secondary'
+    }`}
+    aria-label={label}
+    disabled={disabled}
+  >
+    <Icon size={50} />
+  </button>
+);
 
 export const Deck = ({}) => {
   const context = useDeckContext();
@@ -31,6 +51,9 @@ export const Deck = ({}) => {
     //NYI
   };
 
+  const previousDisabled = !context.hasCardHistory;
+  const nextDisabled = true; //NYI
+
   return (
     <>
       <div className="absolute top-2 left-2 flex gap-2">
@@ -40,22 +63,23 @@ export const Deck = ({}) => {
           <SimpleIconButton handleClick={handleClickClose} label={t('tool.deck.close')} icon={CircleX} />
         )}
       </div>
-      <SimpleIconButton
-        handleClick={handlePrevious}
-        label={t('tool.deck.previous')}
-        icon={ChevronLeft}
-        className="absolute left-0 top-1/2 -translate-y-1/2"
-        disabled={!context.hasCardHistory}
-      />
-      <div className="relative flex-grow m-8 mt-12">
-        <Card card={currentCardData} />
+      <div className="flex w-full min-h-full mt-12">
+        <DeckNavigationButton
+          onClick={previousDisabled ? undefined : handlePrevious}
+          label={t('tool.deck.previous')}
+          disabled={previousDisabled}
+          icon={ChevronLeft}
+        />
+        <div className="flex-1">
+          <Card card={currentCardData} />
+        </div>
+        <DeckNavigationButton
+          onClick={nextDisabled ? undefined : handleNext}
+          label={t('tool.deck.next')}
+          disabled={nextDisabled}
+          icon={ChevronRight}
+        />
       </div>
-      <SimpleIconButton
-        handleClick={handleNext}
-        label={t('tool.deck.next')}
-        icon={ChevronRight}
-        className="absolute right-0 top-1/2 -translate-y-1/2"
-      />
     </>
   );
 };
