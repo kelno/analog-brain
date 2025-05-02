@@ -25,7 +25,8 @@
       "shareLabel" : "Share this card"
     },
     "cardItem": {
-      "nextCardTooltip": "Click to navigate to {{cardName}}."
+      "nextCardTooltip": "Click to navigate to {{cardName}}.",
+      "nextCardTooltipError": "Could not find next card."
     },
     "errors" : {
       "noDecksForLanguage": "No available decks for language {{lang}}",
