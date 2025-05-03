@@ -1,8 +1,9 @@
-import { FC } from 'react';
+import React, { FC } from 'react';
 import { CardId, ICardItem } from '../../types/Card/ICard';
 import { DeckUtils } from '../../types/Deck';
 import { useBrainContext } from './store/useBrainContext';
 import { useTranslation } from 'react-i18next';
+import { processTextContent } from '../../utils/TextProcessing';
 
 interface CardItemProps {
   carditem: ICardItem;
@@ -45,7 +46,7 @@ export const CardItem: FC<CardItemProps> = ({ carditem, handleClickCard }) => {
       aria-label={tooltipText}
       title={tooltipText}
     >
-      <p>{carditem.text}</p>
+      <p>{processTextContent(carditem.text)}</p>
     </li>
   );
 };

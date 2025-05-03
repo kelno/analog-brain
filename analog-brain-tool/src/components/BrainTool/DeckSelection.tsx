@@ -6,6 +6,7 @@ import { IDeck } from '../../types/Deck';
 import { languagesInfos } from '../../language/languageInfo';
 import { useBrainContext } from './store/useBrainContext';
 import { Button } from '../Button';
+import { processTextContent } from '../../utils/TextProcessing';
 
 interface DeckSelectionProps {}
 
@@ -70,10 +71,11 @@ export const DeckSelection: FC<DeckSelectionProps> = ({}) => {
 
         {selectedDeckInfo && (
           <div className="border rounded-lg p-4 shadow-md flex flex-col space-y-1">
-            <h3 className="font-bold text-2xl text-center">{selectedDeckInfo.title}</h3>
+            {/* <h3 className="font-bold text-2xl text-center">{selectedDeckInfo.title}</h3> */}
             {selectedDeckInfo.description && (
               <div className="">
-                <span className="font-bold">{t('tool.deck.description')}</span> {selectedDeckInfo.description}
+                <div className="font-bold">{t('tool.deck.description')}</div>
+                {processTextContent(selectedDeckInfo.description)}
               </div>
             )}
             {selectedDeckInfo.author && (

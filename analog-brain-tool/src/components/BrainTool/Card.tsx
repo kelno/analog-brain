@@ -6,6 +6,7 @@ import { useDeckContext } from './Deck/useDeckContext';
 import { SimpleIconButton } from '../SimpleIconButton';
 import { useTranslation } from 'react-i18next';
 import { Share2 } from 'lucide-react';
+import { processTextContent } from '../../utils/TextProcessing';
 
 interface CardProps {
   card: ICard | undefined;
@@ -33,7 +34,7 @@ export const Card: FC<CardProps> = ({ card }) => {
           </div>
           <div className="p-6">
             <h2 className="text-xl font-bold">{card.title}</h2>
-            {card.text && <p className="mt-2">{card.text}</p>}
+            {card.text && <p className="mt-2">{processTextContent(card.text)}</p>}
             <ul className="mt-4 space-y-2">
               {card.items.map((carditem: ICardItem, index: number) => (
                 <CardItem key={index} carditem={carditem} handleClickCard={handleClickCard} />
