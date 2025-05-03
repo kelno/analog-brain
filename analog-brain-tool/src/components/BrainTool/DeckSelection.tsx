@@ -41,7 +41,7 @@ export const DeckSelection: FC<DeckSelectionProps> = ({}) => {
 
   return (
     <div className="flex flex-col min-h-full w-full justify-center items-center ">
-      <div className="container mx-auto max-w-2xl">
+      <div className="mx-4 min-w-3/4 md:min-w-2xl lg:min-w-3xl">
         <div className="text-xl my-4">
           <span>{t('tool.deck.title')}: </span>
           <select
