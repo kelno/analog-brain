@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import { ICard, CardId, ICardItem } from '../../types/Card/ICard';
 import { CardItem } from './CardItem';
-import { useShare } from '../../hooks/useShare';
+import { useShare } from '../../share/useShare';
 import { useDeckContext } from './Deck/useDeckContext';
 import { SimpleIconButton } from '../SimpleIconButton';
 import { useTranslation } from 'react-i18next';

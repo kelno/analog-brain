@@ -24,19 +24,13 @@ export const Header: React.FC = () => {
 
         {/* Right side: Always shown options */}
         <div className="flex items-center space-x-6 flex-shrink-0">
-          <div className="flex items-center">
-            <LanguageSwitcher />
-          </div>
+          <LanguageSwitcher />
 
           {/* Color Scheme Toggle Switch */}
-          <div className="flex items-center">
-            <ColorSwitch />
-          </div>
+          <ColorSwitch />
 
           {/* Hamburger Menu */}
-          <div className="">
-            <HamburgerMenuButton isOpen={hamburgerIsOpen} setIsOpen={sethamburgerIsOpen} />
-          </div>
+          <HamburgerMenuButton isOpen={hamburgerIsOpen} setIsOpen={sethamburgerIsOpen} />
         </div>
       </div>
       {hamburgerIsOpen ? <HamburgerMenuContent isOpen={hamburgerIsOpen} /> : null}

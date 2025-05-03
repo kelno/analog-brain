@@ -11,8 +11,8 @@ export const HamburgerMenuButton: React.FC<HamburgerMenuButtonProps> = ({ isOpen
   const { t } = useTranslation();
 
   return (
-    <>
+    <div className="hover:text-brain-secondary-light">
       <Hamburger label={t('hamburger.buttonLabel')} toggled={isOpen} toggle={setIsOpen} />
-    </>
+    </div>
   );
 };
