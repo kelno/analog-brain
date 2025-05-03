@@ -56,12 +56,14 @@ export const Deck = ({}) => {
 
   return (
     <>
-      <div className="m-2">
-        {context.hasCardHistory ? (
-          <SimpleIconButton handleClick={handleClickReset} label={t('tool.deck.reset')} icon={RotateCcw} />
-        ) : (
-          <SimpleIconButton handleClick={handleClickClose} label={t('tool.deck.close')} icon={CircleX} />
-        )}
+      <div className="m-2 gap-2">
+        <SimpleIconButton handleClick={handleClickClose} label={t('tool.deck.close')} icon={CircleX} />
+        <SimpleIconButton
+          handleClick={handleClickReset}
+          label={t('tool.deck.reset')}
+          icon={RotateCcw}
+          disabled={!context.hasCardHistory}
+        />
       </div>
       <div className="flex flex-grow w-full mb-4">
         <DeckNavigationButton
