@@ -15,15 +15,15 @@ export const Header: React.FC = () => {
     <header className="top-0 left-0 w-full bg-brain-secondary shadow-md z-50 h-15">
       <div className="mx-auto px-4 flex justify-between items-center py-4 h-full text-white">
         {/* Left side: Logo & Title */}
-        <div className="flex items-center justify-center text-nowrap space-x-2">
-          <div>
+        <div className="flex items-center justify-center text-nowrap space-x-2 truncate">
+          <a href="#">
             <Brain />
-          </div>
-          <div className="text-2xl font-bold">{t('title')}</div>
+          </a>
+          <div className="text-2xl font-bold truncate">{t('title')}</div>
         </div>
 
         {/* Right side: Always shown options */}
-        <div className="flex items-center space-x-6 justify-end">
+        <div className="flex items-center space-x-6 flex-shrink-0">
           <div className="flex items-center">
             <LanguageSwitcher />
           </div>
