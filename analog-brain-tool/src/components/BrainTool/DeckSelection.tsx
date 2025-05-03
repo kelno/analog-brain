@@ -41,46 +41,67 @@ export const DeckSelection: FC<DeckSelectionProps> = ({}) => {
   const hasErrors = deckManager.errors.length > 0;
 
   return (
-    <div className="flex flex-col min-h-full w-full justify-center items-center ">
+    <section
+      className="flex flex-col min-h-full w-full justify-center items-center"
+      aria-labelledby={t('tool.deck.deckSelectionTitle')}
+    >
       <div className="mx-4 min-w-3/4 md:min-w-2xl lg:min-w-3xl">
         <div className="text-xl my-4">
-          <span>{t('tool.deck.title')}: </span>
-          <select
-            onChange={handleSelectDeck}
-            className="py-1 px-2 border rounded-2xl shadow-md"
-            defaultValue={selectedDeckInfo?.id ?? ''}
-          >
-            {!availableDecks && (
-              <option value="" disabled>
-                {t('tool.errors.noDecksForLanguage', { lang: languageName })}
-              </option>
-            )}
-            {availableDecks &&
-              availableDecks.map((deck) => (
-                <option key={deck.id} value={deck.id}>
-                  {deck.title}
-                </option>
-              ))}
-          </select>
-          {hasErrors && (
-            <span className="ml-2 text-yellow-500" title={t('tool.errors.warnErrors')}>
-              ⚠️
-            </span>
-          )}
+          <form onSubmit={(e) => e.preventDefault()} className="mb-6">
+            <div className="flex flex-col gap-4">
+              <div className="flex flex-wrap items-center">
+                <label htmlFor="deck-selector" className="text-xl mr-2">
+                  {t('tool.deck.choosePrompt')}
+                </label>
+                <div className="flex items-center">
+                  <select
+                    id="deck-selector"
+                    onChange={handleSelectDeck}
+                    className="py-1 px-2 border rounded-2xl shadow-md"
+                    defaultValue={selectedDeckInfo?.id ?? ''}
+                    aria-invalid={hasErrors}
+                  >
+                    {!availableDecks && (
+                      <option value="" disabled>
+                        {t('tool.errors.noDecksForLanguage', { lang: languageName })}
+                      </option>
+                    )}
+                    {availableDecks &&
+                      availableDecks.map((deck) => (
+                        <option key={deck.id} value={deck.id}>
+                          {deck.title}
+                        </option>
+                      ))}
+                  </select>
+                  {hasErrors && (
+                    <span className="ml-2 text-yellow-500" aria-label={t('tool.errors.warnErrors')}>
+                      ⚠️
+                    </span>
+                  )}
+                </div>
+              </div>
+            </div>
+          </form>
         </div>
 
         {selectedDeckInfo && (
-          <div className="border rounded-lg p-4 shadow-md flex flex-col space-y-1">
-            {/* <h3 className="font-bold text-2xl text-center">{selectedDeckInfo.title}</h3> */}
+          <article
+            className="border rounded-lg p-4 shadow-md flex flex-col space-y-1"
+            aria-labelledby="selected-deck-title"
+          >
+            <h1 id="selected-deck-title" className="font-bold text-xl text-center">
+              {selectedDeckInfo.title}
+            </h1>
+
             {selectedDeckInfo.description && (
               <div className="">
-                <div className="font-bold">{t('tool.deck.description')}</div>
+                <h2 className="font-bold">{t('tool.deck.description')}</h2>
                 {processTextContent(selectedDeckInfo.description)}
               </div>
             )}
             {selectedDeckInfo.author && (
               <div className="">
-                <span className="font-bold">{t('tool.deck.author')}</span> {selectedDeckInfo.author}
+                <h2 className="font-bold">{t('tool.deck.author')}</h2> {selectedDeckInfo.author}
               </div>
             )}
             <Button
@@ -89,9 +110,9 @@ export const DeckSelection: FC<DeckSelectionProps> = ({}) => {
             >
               {t('tool.deck.start')}
             </Button>
-          </div>
+          </article>
         )}
       </div>
-    </div>
+    </section>
   );
 };

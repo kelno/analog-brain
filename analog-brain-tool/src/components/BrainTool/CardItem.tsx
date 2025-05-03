@@ -43,7 +43,7 @@ export const CardItem: FC<CardItemProps> = ({ carditem, handleClickCard }) => {
         ${cursor}`}
       style={{ borderColor: borderColor }}
       onClick={handleClick}
-      aria-label={tooltipText}
+      aria-describedby={tooltipText}
       title={tooltipText}
     >
       <p>{processTextContent(carditem.text)}</p>

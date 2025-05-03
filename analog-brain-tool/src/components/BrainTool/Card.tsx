@@ -36,8 +36,17 @@ export const Card: FC<CardProps> = ({ card }) => {
             <h2 className="text-xl font-bold">{card.title}</h2>
             {card.text && <p className="mt-2">{processTextContent(card.text)}</p>}
             <ul className="mt-4 space-y-2">
-              {card.items.map((carditem: ICardItem, index: number) => (
-                <CardItem key={index} carditem={carditem} handleClickCard={handleClickCard} />
+              {card.items.map((carditem: ICardItem) => (
+                <CardItem
+                  key={
+                    `${card.id}-item-${carditem.text.substring(
+                      0,
+                      10,
+                    )}` /* maybe not great, we could use a cardItem id later we we have a proper editor*/
+                  }
+                  carditem={carditem}
+                  handleClickCard={handleClickCard}
+                />
               ))}
             </ul>
           </div>

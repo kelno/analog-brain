@@ -1,4 +1,5 @@
 export type CardId = string;
+export type CardItemId = string;
 
 export interface ICardItem {
   /**

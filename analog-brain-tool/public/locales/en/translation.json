@@ -12,7 +12,8 @@
   "tool": {
     "title": "The Tool - Start here",
     "deck" : {
-      "title": "Decision Deck",
+      "deckSelectionTitle": "Deck Selection",
+      "choosePrompt": "Decision Deck:",
       "description": "Description:",
       "author": "Author:",
       "start": "Start",
