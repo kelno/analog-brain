@@ -4,7 +4,7 @@ Using npm package typescript-json-schema
 My need to install it globally to have access to the command?
 
 ```bash
-npx typescript-json-schema ./tsconfig.app.json IDeck --required --out .\public\decks\schema.json
+npx typescript-json-schema ./tsconfig.app.json IDeck --required --noExtraProps --out .\public\decks\schema.json
 ```
 
 Weird cache issue...
