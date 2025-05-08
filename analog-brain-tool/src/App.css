@@ -8,6 +8,7 @@
   --color-brain-secondary: var(--theme-color-brain-secondary);
   --color-brain-secondary-hover: var(--theme-color-brain-secondary-hover);
   --color-brain-secondary-light: var(--theme-color-brain-secondary-light);
+  --color-brain-header: var(--theme-color-brain-header);
 }
 
 /* Defaults for the whole App */
@@ -18,23 +19,27 @@
 #body {
   /* Some palettes https://tailwind-color.vercel.app */
   /* Background */
-  @apply bg-gradient-to-bl from-pink-300 via-purple-300 to-indigo-400
-  dark:bg-gradient-to-tr dark:from-blue-500 dark:via-violet-700 dark:to-gray-600;
+  @apply bg-red-100
+  dark:bg-slate-800;
 }
 
 @layer base {
   /* Light */
   :root {
-    --theme-color-brain-text: #613c39;
-    --theme-color-brain-secondary: theme('colors.indigo.500');
+    --theme-color-brain-header: #ffffff;
+    --theme-color-brain-text: #632f2a;
+    --theme-color-brain-secondary: #973d3f;
     --theme-color-brain-secondary-hover: color-mix(in srgb, var(--theme-color-brain-secondary), black 15%);
-    --theme-color-brain-secondary-light: color-mix(in srgb, var(--theme-color-brain-secondary), white 35%);
+    --theme-color-brain-secondary-light: color-mix(in srgb, var(--theme-color-brain-secondary), white 75%);
   }
 
   /* Dark */
   [data-theme='dark'] {
+    --theme-color-brain-header: #ffffff;
     --theme-color-brain-text: theme('colors.white');
-    --theme-color-brain-secondary: theme('colors.blue.600');
+    --theme-color-brain-secondary: theme('colors.slate.600');
+    --theme-color-brain-secondary-hover: color-mix(in srgb, var(--theme-color-brain-secondary), black 15%);
+    --theme-color-brain-secondary-light: color-mix(in srgb, var(--theme-color-brain-secondary), white 75%);
   }
 }
 

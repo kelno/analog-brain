@@ -13,13 +13,13 @@ export const Header: React.FC = () => {
 
   return (
     <header className="top-0 left-0 w-full bg-brain-secondary shadow-md z-50 h-15">
-      <div className="mx-auto px-4 flex justify-between items-center py-4 h-full text-white">
+      <div className="mx-auto px-4 flex justify-between items-center py-4 h-full text text-brain-header">
         {/* Left side: Logo & Title */}
         <div className="flex items-center justify-center text-nowrap space-x-2 truncate">
           <a href="#">
             <Brain />
           </a>
-          <div className="text-2xl font-bold truncate">{t('title')}</div>
+          <div className="text-xl font-bold truncate">{t('title')}</div>
         </div>
 
         {/* Right side: Always shown options */}
