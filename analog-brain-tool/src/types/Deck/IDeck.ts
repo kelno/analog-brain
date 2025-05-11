@@ -1,4 +1,4 @@
-import { LangId } from '../../components/BrainTool/store/BrainContextData';
+import { LangId } from '../../brainTool/store/BrainContextData';
 import { ICard } from '../Card/ICard';
 
 export type DeckId = string;

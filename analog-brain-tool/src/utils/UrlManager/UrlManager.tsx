@@ -1,6 +1,6 @@
+import { LangId } from '../../appContext/AppContextData';
 import { CardId } from '../../types/Card/ICard';
 import { DeckId } from '../../types/Deck/IDeck';
-import { LangId } from '../../components/BrainTool/store/BrainContextData';
 import { UrlParams } from './UrlParams';
 
 /* Helps store and retrieve values from URL.

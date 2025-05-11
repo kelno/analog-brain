@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import Switch from 'react-switch';
-import { PersistentStorageManager } from '../../utils/PersistentStorageManager/PersistentStorageManager';
-import { PersistentStorageTypes } from '../../utils/PersistentStorageManager/PersistentStorageTypes';
+import { PersistentStorageManager } from '../utils/PersistentStorageManager/PersistentStorageManager';
+import { PersistentStorageTypes } from '../utils/PersistentStorageManager/PersistentStorageTypes';
 
 // Doc for the react-switch API https://www.npmjs.com/package/react-switch
 

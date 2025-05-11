@@ -1,12 +1,12 @@
 import { FC } from 'react';
-import { ICard, CardId, ICardItem } from '../../types/Card/ICard';
+import { ICard, CardId, ICardItem } from '../types/Card/ICard';
 import { CardItem } from './CardItem';
-import { useShare } from '../../share/useShare';
+import { useShare } from '../share/useShare';
 import { useDeckContext } from './Deck/useDeckContext';
-import { SimpleIconButton } from '../SimpleIconButton';
+import { SimpleIconButton } from '../components/SimpleIconButton';
 import { useTranslation } from 'react-i18next';
 import { Share2 } from 'lucide-react';
-import { processTextContent } from '../../utils/TextProcessing';
+import { processTextContent } from '../utils/TextProcessing';
 
 interface CardProps {
   card: ICard | undefined;

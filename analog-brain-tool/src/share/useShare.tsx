@@ -2,11 +2,11 @@ import { useTranslation } from 'react-i18next';
 import { toast } from 'sonner';
 import { useRef } from 'react';
 import { ErrorHelpers } from '../utils/ErrorHelpers';
-import { useSettings } from '../settingsContext/useSettings';
 import { useAppContext } from '../appContext/useAppContext';
 import { DeckId } from '../types/Deck/IDeck';
 import { CardId } from '../types/Card/ICard';
 import { UrlManager } from '../utils/UrlManager/UrlManager';
+import { useSettings } from '../settings/settingsContext/useSettings';
 
 export const useShare = () => {
   const { t } = useTranslation();

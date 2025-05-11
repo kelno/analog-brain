@@ -1,11 +1,12 @@
 {
   "json.schemas": [
     {
-        "fileMatch": [
-            "**/decks/data/*.json"
-        ],
-        "url": "./analog-brain-tool/public/decks/schema.json",
-        "error": true
+      "fileMatch": [
+        "**/decks/data/*.json"
+      ],
+      "url": "./analog-brain-tool/public/decks/schema.json",
+      "error": true
     }
-  ]
+  ],
+  "javascript.preferences.importModuleSpecifier": "non-relative"
 }

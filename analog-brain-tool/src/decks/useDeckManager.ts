@@ -1,7 +1,7 @@
-import { useSettings } from '../settingsContext/useSettings';
 import { DeckManager } from './DeckManager';
 import { useDataValidator } from '../dataValidation/useDataValidator';
 import { useSuspenseQuery } from '@tanstack/react-query';
+import { useSettings } from '../settings/settingsContext/useSettings';
 
 // Suspense enabled hook, loads DeckManager with current URL from settings
 export const useDeckManager = () : DeckManager => {

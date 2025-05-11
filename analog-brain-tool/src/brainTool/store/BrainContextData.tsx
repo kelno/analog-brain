@@ -1,7 +1,7 @@
-import { IDeck, DeckId } from '../../../types/Deck/IDeck';
-import { DeckManager } from '../../../decks/DeckManager';
-import { PersistentStorageManager } from '../../../utils/PersistentStorageManager/PersistentStorageManager';
-import { PersistentStorageTypes } from '../../../utils/PersistentStorageManager/PersistentStorageTypes';
+import { IDeck, DeckId } from '../../types/Deck/IDeck';
+import { DeckManager } from '../../decks/DeckManager';
+import { PersistentStorageManager } from '../../utils/PersistentStorageManager/PersistentStorageManager';
+import { PersistentStorageTypes } from '../../utils/PersistentStorageManager/PersistentStorageTypes';
 
 export interface BrainContextState {
   currentDeckId: DeckId | null; // the current deck id, null if no deck is selected

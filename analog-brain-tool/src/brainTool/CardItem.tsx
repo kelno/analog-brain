@@ -1,9 +1,9 @@
 import React, { FC } from 'react';
-import { CardId, ICardItem } from '../../types/Card/ICard';
-import { DeckUtils } from '../../types/Deck';
+import { CardId, ICardItem } from '../types/Card/ICard';
+import { DeckUtils } from '../types/Deck';
 import { useBrainContext } from './store/useBrainContext';
 import { useTranslation } from 'react-i18next';
-import { processTextContent } from '../../utils/TextProcessing';
+import { processTextContent } from '../utils/TextProcessing';
 
 interface CardItemProps {
   carditem: ICardItem;

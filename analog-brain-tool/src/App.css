@@ -4,6 +4,7 @@
 
 @theme {
   /* Colors */
+  --color-brain-bg: var(--theme-color-brain-bg);
   --color-brain-text: var(--theme-color-brain-text);
   --color-brain-secondary: var(--theme-color-brain-secondary);
   --color-brain-secondary-hover: var(--theme-color-brain-secondary-hover);
@@ -16,16 +17,12 @@
   @apply text-brain-text text-pretty leading-relaxed;
 }
 
-#body {
-  /* Some palettes https://tailwind-color.vercel.app */
-  /* Background */
-  @apply bg-red-100
-  dark:bg-slate-800;
-}
+/* Some palettes https://tailwind-color.vercel.app */
 
 @layer base {
   /* Light */
   :root {
+    --theme-color-brain-bg: theme('colors.red.100');
     --theme-color-brain-header: #ffffff;
     --theme-color-brain-text: #632f2a;
     --theme-color-brain-secondary: #973d3f;
@@ -35,11 +32,12 @@
 
   /* Dark */
   [data-theme='dark'] {
+    --theme-color-brain-bg: theme('colors.slate.800');
     --theme-color-brain-header: #ffffff;
     --theme-color-brain-text: theme('colors.white');
     --theme-color-brain-secondary: theme('colors.slate.600');
-    --theme-color-brain-secondary-hover: color-mix(in srgb, var(--theme-color-brain-secondary), black 15%);
-    --theme-color-brain-secondary-light: color-mix(in srgb, var(--theme-color-brain-secondary), white 75%);
+    --theme-color-brain-secondary-hover: color-mix(in srgb, var(--theme-color-brain-secondary), white 10%);
+    --theme-color-brain-secondary-light: color-mix(in srgb, var(--theme-color-brain-secondary), black 15%);
   }
 }
 

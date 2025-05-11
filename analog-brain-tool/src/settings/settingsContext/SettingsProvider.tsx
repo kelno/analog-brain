@@ -1,10 +1,10 @@
 import { useState, ReactNode } from 'react';
 import { SettingsContext } from './SettingsContext';
-import { UrlManager } from '../utils/UrlManager/UrlManager';
 import { SettingsContextData, SettingsContextState } from './SettingsContextData';
-import { UrlParams } from '../utils/UrlManager/UrlParams';
-import { PersistentStorageTypes } from '../utils/PersistentStorageManager/PersistentStorageTypes';
-import { PersistentStorageManager } from '../utils/PersistentStorageManager/PersistentStorageManager';
+import { UrlManager } from '../../utils/UrlManager/UrlManager';
+import { UrlParams } from '../../utils/UrlManager/UrlParams';
+import { PersistentStorageTypes } from '../../utils/PersistentStorageManager/PersistentStorageTypes';
+import { PersistentStorageManager } from '../../utils/PersistentStorageManager/PersistentStorageManager';
 
 // We load the deck url from the URL params, only once
 const urlFromParam = UrlManager.consumeParam(UrlParams.DECK_URL);

@@ -1,14 +1,11 @@
 import React, { useState } from 'react';
-import { LanguageSwitcher } from './LanguageSwitcher';
-import { useTranslation } from 'react-i18next';
-import { ColorSwitch } from './ColorSwitch';
+import { Brain } from 'lucide-react';
 import { HamburgerMenuButton } from './HamburgerMenuButton';
 import { HamburgerMenuContent } from './HamburgerMenuContent';
-import { Brain } from 'lucide-react';
+
+const APP_TITLE = 'Analog Brain';
 
 export const Header: React.FC = () => {
-  const { t } = useTranslation();
-
   const [hamburgerIsOpen, sethamburgerIsOpen] = useState(false);
 
   return (
@@ -19,16 +16,11 @@ export const Header: React.FC = () => {
           <a href="#">
             <Brain />
           </a>
-          <div className="text-xl font-bold truncate">{t('title')}</div>
+          <div className="text-xl font-bold truncate">{APP_TITLE}</div>
         </div>
 
         {/* Right side: Always shown options */}
         <div className="flex items-center space-x-6 flex-shrink-0">
-          <LanguageSwitcher />
-
-          {/* Color Scheme Toggle Switch */}
-          <ColorSwitch />
-
           {/* Hamburger Menu */}
           <HamburgerMenuButton isOpen={hamburgerIsOpen} setIsOpen={sethamburgerIsOpen} />
         </div>

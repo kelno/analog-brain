@@ -1,10 +1,10 @@
 import { useState, ReactNode } from 'react';
 import { DeckContextData, DeckContextState } from './DeckContextData';
 import { Stack } from '@datastructures-js/stack';
-import { CardId } from '../../../types/Card/ICard';
-import { UrlManager } from '../../../utils/UrlManager/UrlManager';
-import { UrlParams } from '../../../utils/UrlManager/UrlParams';
-import { IDeck } from '../../../types/Deck';
+import { CardId } from '../../types/Card/ICard';
+import { UrlManager } from '../../utils/UrlManager/UrlManager';
+import { UrlParams } from '../../utils/UrlManager/UrlParams';
+import { IDeck } from '../../types/Deck';
 import { DeckContext } from './DeckContext';
 
 export const DeckContextProvider: React.FC<{ deck: IDeck; children: ReactNode }> = ({ deck, children }) => {

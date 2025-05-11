@@ -1,8 +1,8 @@
 import { IDeck, DeckId } from '../types/Deck/IDeck';
-import { LangId } from '../components/BrainTool/store/BrainContextData';
-import { BrainToolError, BrainToolErrorType } from '../components/BrainTool/BrainToolErrorHandler';
+import { LangId } from '../brainTool/store/BrainContextData';
 import { DataValidator } from '../dataValidation/DataValidator';
 import stripJsonComments from 'strip-json-comments';
+import { BrainToolError, BrainToolErrorType } from '../brainTool/BrainToolErrorHandler';
 
 interface FetchResult {
   decks: IDeck[];

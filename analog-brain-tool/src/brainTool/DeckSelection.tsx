@@ -1,12 +1,12 @@
 import { FC, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useDeckManager } from '../../decks/useDeckManager';
-import { useAppContext } from '../../appContext/useAppContext';
-import { IDeck } from '../../types/Deck';
-import { languagesInfos } from '../../language/languageInfo';
+import { useDeckManager } from '../decks/useDeckManager';
+import { useAppContext } from '../appContext/useAppContext';
+import { IDeck } from '../types/Deck';
+import { languagesInfos } from '../language/languageInfo';
 import { useBrainContext } from './store/useBrainContext';
-import { Button } from '../Button';
-import { processTextContent } from '../../utils/TextProcessing';
+import { Button } from '../components/Button';
+import { processTextContent } from '../utils/TextProcessing';
 
 interface DeckSelectionProps {}
 

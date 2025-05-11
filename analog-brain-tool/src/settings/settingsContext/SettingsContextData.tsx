@@ -1,5 +1,5 @@
-import { PersistentStorageManager } from '../utils/PersistentStorageManager/PersistentStorageManager';
-import { PersistentStorageTypes } from '../utils/PersistentStorageManager/PersistentStorageTypes';
+import { PersistentStorageManager } from '../../utils/PersistentStorageManager/PersistentStorageManager';
+import { PersistentStorageTypes } from '../../utils/PersistentStorageManager/PersistentStorageTypes';
 
 export interface SettingsContextState {
   indexUrl: string;

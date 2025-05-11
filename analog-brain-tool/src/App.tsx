@@ -1,14 +1,14 @@
 import './App.css';
 import { Toaster } from 'sonner';
-import { SettingsProvider } from './settingsContext/SettingsProvider';
 import './i18n';
 import { useTranslation } from 'react-i18next';
 import { ErrorBoundary } from './components/ErrorBoundary';
-import { Header } from './components/Header/Header';
 import { useEffect } from 'react';
-import { AppContextProvider } from './appContext/AppContextProvider';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { BrainToolContainer } from './components/BrainTool/BrainToolContainer';
+import { BrainToolContainer } from './brainTool/BrainToolContainer';
+import { SettingsProvider } from './settings/settingsContext/SettingsProvider';
+import { Header } from './header/Header';
+import { AppContextProvider } from './appContext/AppContextProvider';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -32,7 +32,7 @@ export function App() {
 
   return (
     <>
-      <div className="default-theme h-screen w-screen flex flex-col">
+      <div className="default-theme h-screen w-screen flex flex-col bg-brain-bg">
         <QueryClientProvider client={queryClient}>
           <AppContextProvider>
             <SettingsProvider>

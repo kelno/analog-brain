@@ -1,9 +1,9 @@
 import { Card } from '../Card';
-import { useDeckContext } from './../Deck/useDeckContext';
+import { useDeckContext } from './useDeckContext';
 import { useTranslation } from 'react-i18next';
 import { RotateCcw, CircleX, ChevronLeft, ChevronRight, LucideIcon } from 'lucide-react';
 import { useBrainContext } from '../store/useBrainContext';
-import { SimpleIconButton } from '../../SimpleIconButton';
+import { SimpleIconButton } from '../../components/SimpleIconButton';
 
 interface DeckNavigationButtonProps {
   onClick?: () => void;

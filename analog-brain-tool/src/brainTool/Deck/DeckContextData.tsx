@@ -1,6 +1,6 @@
 import { Stack } from '@datastructures-js/stack';
-import { CardId } from '../../../types/Card/ICard';
-import { IDeck } from '../../../types/Deck';
+import { CardId } from '../../types/Card/ICard';
+import { IDeck } from '../../types/Deck';
 
 export interface DeckContextState {
   cardHistory: Stack<CardId>; // the top is the current card

@@ -1,14 +1,14 @@
 import { useState, ReactNode } from 'react';
 import { BrainContextData, BrainContextState, LangId } from './BrainContextData';
 import { BrainContext } from './BrainContext';
-import { UrlManager } from '../../../utils/UrlManager/UrlManager';
-import { UrlParams } from '../../../utils/UrlManager/UrlParams';
-import { AppContextData } from '../../../appContext/AppContextData';
-import { useAppContext } from '../../../appContext/useAppContext';
-import { useDeckManager } from '../../../decks/useDeckManager';
-import { DeckManager } from '../../../decks/DeckManager';
-import { PersistentStorageManager } from '../../../utils/PersistentStorageManager/PersistentStorageManager';
-import { PersistentStorageTypes } from '../../../utils/PersistentStorageManager/PersistentStorageTypes';
+import { UrlManager } from '../../utils/UrlManager/UrlManager';
+import { UrlParams } from '../../utils/UrlManager/UrlParams';
+import { AppContextData } from '../../appContext/AppContextData';
+import { useAppContext } from '../../appContext/useAppContext';
+import { useDeckManager } from '../../decks/useDeckManager';
+import { DeckManager } from '../../decks/DeckManager';
+import { PersistentStorageManager } from '../../utils/PersistentStorageManager/PersistentStorageManager';
+import { PersistentStorageTypes } from '../../utils/PersistentStorageManager/PersistentStorageTypes';
 
 export const BrainContextProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   console.debug('rendering BrainContextProvider');
