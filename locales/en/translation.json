@@ -1,5 +1,4 @@
 {
-  "title": "Analog Brain",
   "pageTitle": "Analog Brain Tool",
   "skipButton": "Skip the intro and go to the tool",
   "intro": {
@@ -11,7 +10,7 @@
   },
   "tool": {
     "title": "The Tool - Start here",
-    "deck" : {
+    "deck": {
       "deckSelectionTitle": "Deck Selection",
       "choosePrompt": "Decision Deck:",
       "description": "Description:",
@@ -23,16 +22,16 @@
       "next": "Next"
     },
     "card": {
-      "shareLabel" : "Share this card"
+      "shareLabel": "Share this card"
     },
     "cardItem": {
       "nextCardTooltip": "Click to navigate to {{cardName}}.",
       "nextCardTooltipError": "Could not find next card."
     },
-    "errors" : {
+    "errors": {
       "noDecksForLanguage": "No available decks for language {{lang}}",
       "generic": "Error.",
-      "warnErrors":  "Found some errors while trying to load decks, some decks might be missing. Look in console for more information.",
+      "warnErrors": "Found some errors while trying to load decks, some decks might be missing. Look in console for more information.",
       "errorIntro": "Failed to load decks!",
       "noValidDecks": "Failed to load decks from given index.",
       "failedToFetchIndex": "Failed to fetch decks index file.",

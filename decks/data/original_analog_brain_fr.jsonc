@@ -11,755 +11,1726 @@
       "id": "0-1",
       "title": "Savez-vous ce que vous voulez ?",
       "items": [
-        { "text": "Oui", "nextCardId": "0-2" },
-        { "text": "Non", "nextCardId": "0-3" }
+        {
+          "text": "Oui",
+          "nextCardId": "0-2"
+        },
+        {
+          "text": "Non",
+          "nextCardId": "0-3"
+        }
       ]
     },
     {
       "id": "0-2",
       "title": "Que voulez-vous faire ?",
       "items": [
-        { "text": "Je m’ennuie et je veux faire quelque chose", "nextCardId": "2-1" },
-        { "text": "J’ai des émotions et j’ai besoin de les gérer", "nextCardId": "1-1" },
-        { "text": "Je procrastine et je veux arrêter", "nextCardId": "1-12" },
-        { "text": "J’ai mal", "nextCardId": "5-1" },
-        { "text": "Je veux dormir", "nextCardId": "5-12" },
-        { "text": "Je veux nettoyer", "nextCardId": "4-2" },
-        { "text": "Je veux manger", "nextCardId": "4-7" }
+        {
+          "text": "Je m’ennuie et je veux faire quelque chose",
+          "nextCardId": "2-1"
+        },
+        {
+          "text": "J’ai des émotions et j’ai besoin de les gérer",
+          "nextCardId": "1-1"
+        },
+        {
+          "text": "Je procrastine et je veux arrêter",
+          "nextCardId": "1-12"
+        },
+        {
+          "text": "J’ai mal",
+          "nextCardId": "5-1"
+        },
+        {
+          "text": "Je veux dormir",
+          "nextCardId": "5-12"
+        },
+        {
+          "text": "Je veux nettoyer",
+          "nextCardId": "4-2"
+        },
+        {
+          "text": "Je veux manger",
+          "nextCardId": "4-7"
+        }
       ]
     },
     {
       "id": "0-3",
       "title": "Comment vous sentez-vous ?",
       "items": [
-        { "text": "Surexcité(e)", "nextCardId": "1-6" },
-        { "text": "Douleur", "nextCardId": "5-1" },
-        { "text": "Anxieux/Anxieuse", "nextCardId": "1-2" },
-        { "text": "Fatigué(e)", "nextCardId": "5-11" },
-        { "text": "Auto-critique / honte", "nextCardId": "1-3" },
-        { "text": "En colère", "nextCardId": "1-4" },
-        { "text": "Faim", "nextCardId": "4-7" },
-        { "text": "Agité(e)", "nextCardId": "3-1" },
-        { "text": "Ennuyé(e)", "nextCardId": "2-1" },
-        { "text": "Procrastination", "nextCardId": "1-12" },
-        { "text": "Inutile", "nextCardId": "4-1" },
-        { "text": "Dissocié(e) / Pas vraiment là", "nextCardId": "1-6" }
+        {
+          "text": "Surexcité(e)",
+          "nextCardId": "1-6"
+        },
+        {
+          "text": "Douleur",
+          "nextCardId": "5-1"
+        },
+        {
+          "text": "Anxieux/Anxieuse",
+          "nextCardId": "1-2"
+        },
+        {
+          "text": "Fatigué(e)",
+          "nextCardId": "5-11"
+        },
+        {
+          "text": "Auto-critique / honte",
+          "nextCardId": "1-3"
+        },
+        {
+          "text": "En colère",
+          "nextCardId": "1-4"
+        },
+        {
+          "text": "Faim",
+          "nextCardId": "4-7"
+        },
+        {
+          "text": "Agité(e)",
+          "nextCardId": "3-1"
+        },
+        {
+          "text": "Ennuyé(e)",
+          "nextCardId": "2-1"
+        },
+        {
+          "text": "Procrastination",
+          "nextCardId": "1-12"
+        },
+        {
+          "text": "Inutile",
+          "nextCardId": "4-1"
+        },
+        {
+          "text": "Dissocié(e) / Pas vraiment là",
+          "nextCardId": "1-6"
+        }
       ]
     },
     {
       "id": "1-1",
       "title": "J’ai des émotions et j’ai besoin de les gérer :",
       "items": [
-        { "text": "Panique / anxiété", "nextCardId": "1-2" },
-        { "text": "Honte / auto-critique", "nextCardId": "1-3" },
-        { "text": "Colère", "nextCardId": "1-4" },
-        { "text": "Sous-stimulé(e) / déprimé(e)", "nextCardId": "1-14" },
-        { "text": "Toutes les émotions : exercice de mise à la terre", "nextCardId": "1-6" }
+        {
+          "text": "Panique / anxiété",
+          "nextCardId": "1-2"
+        },
+        {
+          "text": "Honte / auto-critique",
+          "nextCardId": "1-3"
+        },
+        {
+          "text": "Colère",
+          "nextCardId": "1-4"
+        },
+        {
+          "text": "Sous-stimulé(e) / déprimé(e)",
+          "nextCardId": "1-14"
+        },
+        {
+          "text": "Toutes les émotions : exercice de mise à la terre",
+          "nextCardId": "1-6"
+        }
       ]
     },
     {
       "id": "1-2",
       "title": "Gérer une crise de panique / anxiété",
       "items": [
-        { "text": "Prenez un xanax, ativan, benadryl ou autre médicament contre la panique selon les instructions" },
-        { "text": "Écoutez de la musique" },
-        { "text": "Buvez un grand verre d’eau" },
-        { "text": "Exercices rapides", "nextCardId": "3-2" },
-        { "text": "Exercices de mise à la terre", "nextCardId": "1-6" },
-        { "text": "Regardez quelque chose de réconfortant", "nextCardId": "2-3" },
-        { "text": "Faites quelque chose de créatif", "nextCardId": "2-4" },
-        { "text": "Nettoyez quelque chose", "nextCardId": "4-2" },
-        { "text": "Mangez quelque chose", "nextCardId": "4-7" },
-        { "text": "Prenez une douche ou un bain" },
-        { "text": "Appelez une ligne d’aide", "nextCardId": "1-13" }
+        {
+          "text": "Prenez un xanax, ativan, benadryl ou autre médicament contre la panique selon les instructions"
+        },
+        {
+          "text": "Écoutez de la musique"
+        },
+        {
+          "text": "Buvez un grand verre d’eau"
+        },
+        {
+          "text": "Exercices rapides",
+          "nextCardId": "3-2"
+        },
+        {
+          "text": "Exercices de mise à la terre",
+          "nextCardId": "1-6"
+        },
+        {
+          "text": "Regardez quelque chose de réconfortant",
+          "nextCardId": "2-3"
+        },
+        {
+          "text": "Faites quelque chose de créatif",
+          "nextCardId": "2-4"
+        },
+        {
+          "text": "Nettoyez quelque chose",
+          "nextCardId": "4-2"
+        },
+        {
+          "text": "Mangez quelque chose",
+          "nextCardId": "4-7"
+        },
+        {
+          "text": "Prenez une douche ou un bain"
+        },
+        {
+          "text": "Appelez une ligne d’aide",
+          "nextCardId": "1-13"
+        }
       ]
     },
     {
       "id": "1-3",
       "title": "Gérer la honte / l’auto-critique",
       "items": [
-        { "text": "Faites une liste de vos choses préférées" },
-        { "text": "Pensez à un moment où vous avez réussi" },
-        { "text": "Listez 18 choses pour lesquelles vous êtes reconnaissant(e)" },
-        { "text": "Contactez une personne de confiance" },
-        { "text": "Faites un exercice de mise à la terre", "nextCardId": "1-6" },
-        { "text": "Gérez une crise de panique", "nextCardId": "1-2" },
-        { "text": "Arrêtez de procrastiner quelque chose", "nextCardId": "1-12" }
+        {
+          "text": "Faites une liste de vos choses préférées"
+        },
+        {
+          "text": "Pensez à un moment où vous avez réussi"
+        },
+        {
+          "text": "Listez 18 choses pour lesquelles vous êtes reconnaissant(e)"
+        },
+        {
+          "text": "Contactez une personne de confiance"
+        },
+        {
+          "text": "Faites un exercice de mise à la terre",
+          "nextCardId": "1-6"
+        },
+        {
+          "text": "Gérez une crise de panique",
+          "nextCardId": "1-2"
+        },
+        {
+          "text": "Arrêtez de procrastiner quelque chose",
+          "nextCardId": "1-12"
+        }
       ]
     },
     {
       "id": "1-4",
       "title": "Gérer la colère",
       "items": [
-        { "text": "Éloignez-vous de la situation actuelle et vérifiez comment vous vous sentez. Êtes-vous anxieux(se) ? En danger ? En mode combat-fuite ?" },
-        { "text": "Buvez un verre d’eau" },
-        { "text": "Mangez quelque chose", "nextCardId": "4-7" },
-        { "text": "Concentrez-vous sur votre respiration - inspirez sur 4 temps et expirez sur 8 temps. Répétez 10 fois." },
-        { "text": "Faites un exercice de mise à la terre", "nextCardId": "1-6" },
-        { "text": "Faites un exercice rapide", "nextCardId": "3-2" },
-        { "text": "Gérez une crise de panique", "nextCardId": "1-2" }
+        {
+          "text": "Éloignez-vous de la situation actuelle et vérifiez comment vous vous sentez. Êtes-vous anxieux(se) ? En danger ? En mode combat-fuite ?"
+        },
+        {
+          "text": "Buvez un verre d’eau"
+        },
+        {
+          "text": "Mangez quelque chose",
+          "nextCardId": "4-7"
+        },
+        {
+          "text": "Concentrez-vous sur votre respiration - inspirez sur 4 temps et expirez sur 8 temps. Répétez 10 fois."
+        },
+        {
+          "text": "Faites un exercice de mise à la terre",
+          "nextCardId": "1-6"
+        },
+        {
+          "text": "Faites un exercice rapide",
+          "nextCardId": "3-2"
+        },
+        {
+          "text": "Gérez une crise de panique",
+          "nextCardId": "1-2"
+        }
       ]
     },
     {
       "id": "1-5",
       "title": "Solutions pour la surexcitation",
       "items": [
-        { "text": "Écoutez de la musique" },
-        { "text": "Bouchons d’oreille" },
-        { "text": "Casque antibruit" },
-        { "text": "Bruit blanc" },
-        { "text": "Prenez une douche" },
-        { "text": "Coiffez vos cheveux" },
-        { "text": "Tenez-vous au milieu d’une pièce calme et respirez" },
-        { "text": "Enlevez le vêtement qui vous gêne" },
-        { "text": "Pastille pour la toux" },
-        { "text": "Faites du cardio", "nextCardId": "3-3" },
-        { "text": "Faites du yoga", "nextCardId": "3-4" },
-        { "text": "Mangez quelque chose", "nextCardId": "4-7" },
-        { "text": "Exercice de mise à la terre", "nextCardId": "1-6" },
-        { "text": "Dormez", "nextCardId": "5-12" }
+        {
+          "text": "Écoutez de la musique"
+        },
+        {
+          "text": "Bouchons d’oreille"
+        },
+        {
+          "text": "Casque antibruit"
+        },
+        {
+          "text": "Bruit blanc"
+        },
+        {
+          "text": "Prenez une douche"
+        },
+        {
+          "text": "Coiffez vos cheveux"
+        },
+        {
+          "text": "Tenez-vous au milieu d’une pièce calme et respirez"
+        },
+        {
+          "text": "Enlevez le vêtement qui vous gêne"
+        },
+        {
+          "text": "Pastille pour la toux"
+        },
+        {
+          "text": "Faites du cardio",
+          "nextCardId": "3-3"
+        },
+        {
+          "text": "Faites du yoga",
+          "nextCardId": "3-4"
+        },
+        {
+          "text": "Mangez quelque chose",
+          "nextCardId": "4-7"
+        },
+        {
+          "text": "Exercice de mise à la terre",
+          "nextCardId": "1-6"
+        },
+        {
+          "text": "Dormez",
+          "nextCardId": "5-12"
+        }
       ]
     },
     {
       "id": "1-6",
       "title": "Techniques de mise à la terre",
       "items": [
-        { "text": "Techniques de mise à la terre mentale", "nextCardId": "1-7" },
-        { "text": "Techniques de mise à la terre physique", "nextCardId": "1-10" },
-        { "text": "Techniques de mise à la terre apaisantes", "nextCardId": "1-11" },
-        { "text": "Exercice de mise à la terre \"5-4-3-2-1\"", "nextCardId": "1-8" },
-        { "text": "Exercice de l’avion", "nextCardId": "1-9" }
+        {
+          "text": "Techniques de mise à la terre mentale",
+          "nextCardId": "1-7"
+        },
+        {
+          "text": "Techniques de mise à la terre physique",
+          "nextCardId": "1-10"
+        },
+        {
+          "text": "Techniques de mise à la terre apaisantes",
+          "nextCardId": "1-11"
+        },
+        {
+          "text": "Exercice de mise à la terre \"5-4-3-2-1\"",
+          "nextCardId": "1-8"
+        },
+        {
+          "text": "Exercice de l’avion",
+          "nextCardId": "1-9"
+        }
       ]
     },
     {
       "id": "1-7",
       "title": "Techniques de mise à la terre mentale",
       "items": [
-        { "text": "Décrivez votre environnement à voix haute en détail, en utilisant tous vos sens" },
-        { "text": "Listez tous les éléments d’une catégorie (par exemple, les noms de chaque arbre)" },
-        { "text": "Décrivez une activité quotidienne en détail (par exemple, comment faire du café)" },
-        { "text": "Lisez quelque chose à voix haute" },
-        { "text": "Pensez à un mot et épellez-le à l’envers" },
-        { "text": "Comptez jusqu’à 10 à voix haute" },
-        { "text": "Dites l’alphabet très lentement" },
-        { "text": "Répétez une citation préférée" },
-        { "text": "Trouvez quelque chose que vous pouvez voir pour chaque couleur de l’arc-en-ciel" },
-        { "text": "Exercice \"5-4-3-2-1\"", "nextCardId": "1-8" },
-        { "text": "Faites la technique de l’avion", "nextCardId": "1-9" }
+        {
+          "text": "Décrivez votre environnement à voix haute en détail, en utilisant tous vos sens"
+        },
+        {
+          "text": "Listez tous les éléments d’une catégorie (par exemple, les noms de chaque arbre)"
+        },
+        {
+          "text": "Décrivez une activité quotidienne en détail (par exemple, comment faire du café)"
+        },
+        {
+          "text": "Lisez quelque chose à voix haute"
+        },
+        {
+          "text": "Pensez à un mot et épellez-le à l’envers"
+        },
+        {
+          "text": "Comptez jusqu’à 10 à voix haute"
+        },
+        {
+          "text": "Dites l’alphabet très lentement"
+        },
+        {
+          "text": "Répétez une citation préférée"
+        },
+        {
+          "text": "Trouvez quelque chose que vous pouvez voir pour chaque couleur de l’arc-en-ciel"
+        },
+        {
+          "text": "Exercice \"5-4-3-2-1\"",
+          "nextCardId": "1-8"
+        },
+        {
+          "text": "Faites la technique de l’avion",
+          "nextCardId": "1-9"
+        }
       ]
     },
     {
       "id": "1-8",
       "title": "Exercice de mise à la terre \"5-4-3-2-1\"",
       "items": [
-        { "text": "5 choses que vous pouvez voir" },
-        { "text": "4 choses que vous pouvez toucher ou sentir" },
-        { "text": "3 choses que vous pouvez entendre" },
-        { "text": "2 choses que vous pouvez sentir" },
-        { "text": "1 chose que vous pouvez goûter" }
+        {
+          "text": "5 choses que vous pouvez voir"
+        },
+        {
+          "text": "4 choses que vous pouvez toucher ou sentir"
+        },
+        {
+          "text": "3 choses que vous pouvez entendre"
+        },
+        {
+          "text": "2 choses que vous pouvez sentir"
+        },
+        {
+          "text": "1 chose que vous pouvez goûter"
+        }
       ]
     },
     {
       "id": "1-9",
       "title": "Exercice de l’avion pour la panique",
       "items": [
-        { "text": "Imaginez un avion. C’est votre avion et seulement le vôtre. Vous décidez ce que vous voulez en faire. Pour chaque question suivante, répondez à voix haute." },
-        { "text": "De quelle couleur sera l’extérieur ?" },
-        { "text": "Et l’intérieur ?" },
-        { "text": "Et les sièges ? Sont-ils moelleux ou normaux ? Et de quelle couleur ?" },
-        { "text": "Maintenant, 3 plats à servir. Une entrée, un plat principal et un dessert" },
-        { "text": "Qui voulez-vous emmener dans l’avion ? Cela peut être jusqu’à 24 personnes, réelles ou fictives" },
-        { "text": "Y a-t-il des décorations dans l’avion ?" },
-        { "text": "À quoi ressembleraient les hôtesses de l’air ?" },
-        { "text": "Où va l’avion ?" }
+        {
+          "text": "Imaginez un avion. C’est votre avion et seulement le vôtre. Vous décidez ce que vous voulez en faire. Pour chaque question suivante, répondez à voix haute."
+        },
+        {
+          "text": "De quelle couleur sera l’extérieur ?"
+        },
+        {
+          "text": "Et l’intérieur ?"
+        },
+        {
+          "text": "Et les sièges ? Sont-ils moelleux ou normaux ? Et de quelle couleur ?"
+        },
+        {
+          "text": "Maintenant, 3 plats à servir. Une entrée, un plat principal et un dessert"
+        },
+        {
+          "text": "Qui voulez-vous emmener dans l’avion ? Cela peut être jusqu’à 24 personnes, réelles ou fictives"
+        },
+        {
+          "text": "Y a-t-il des décorations dans l’avion ?"
+        },
+        {
+          "text": "À quoi ressembleraient les hôtesses de l’air ?"
+        },
+        {
+          "text": "Où va l’avion ?"
+        }
       ]
     },
     {
       "id": "1-10",
       "title": "Techniques de mise à la terre physique",
       "items": [
-        { "text": "Éclaboussez vos mains et votre visage avec de l’eau fraîche" },
-        { "text": "Saisissez quelque chose aussi fort que possible, puis relâchez. Répétez." },
-        { "text": "Touchez des objets autour de vous et remarquez les détails sensoriels" },
-        { "text": "Enfoncez vos talons dans le sol" },
-        { "text": "Sautez sur place" },
-        { "text": "Remarquez votre corps, ce que chaque muscle fait" },
-        { "text": "Étirez-vous" },
-        { "text": "Marchez lentement en remarquant chaque pas" },
-        { "text": "Mangez quelque chose et décrivez ses saveurs" },
-        { "text": "Concentrez-vous sur votre respiration - inspirez sur 4 temps et expirez sur 8 temps." }
+        {
+          "text": "Éclaboussez vos mains et votre visage avec de l’eau fraîche"
+        },
+        {
+          "text": "Saisissez quelque chose aussi fort que possible, puis relâchez. Répétez."
+        },
+        {
+          "text": "Touchez des objets autour de vous et remarquez les détails sensoriels"
+        },
+        {
+          "text": "Enfoncez vos talons dans le sol"
+        },
+        {
+          "text": "Sautez sur place"
+        },
+        {
+          "text": "Remarquez votre corps, ce que chaque muscle fait"
+        },
+        {
+          "text": "Étirez-vous"
+        },
+        {
+          "text": "Marchez lentement en remarquant chaque pas"
+        },
+        {
+          "text": "Mangez quelque chose et décrivez ses saveurs"
+        },
+        {
+          "text": "Concentrez-vous sur votre respiration - inspirez sur 4 temps et expirez sur 8 temps."
+        }
       ]
     },
     {
       "id": "1-11",
       "title": "Techniques de mise à la terre apaisantes",
       "items": [
-        { "text": "Dites des affirmations bienveillantes" },
-        { "text": "Pensez à vos choses préférées, aliments, personnes, animaux" },
-        { "text": "Visualisez des personnes que vous aimez" },
-        { "text": "Rappelez-vous les paroles d’une chanson, citation ou poème inspirant" },
-        { "text": "Rappelez-vous un endroit sûr" },
-        { "text": "Dites une affirmation de coping" },
-        { "text": "Planifiez une petite récompense pour vous-même" },
-        { "text": "Pensez à des choses que vous attendez avec impatience dans la semaine à venir" }
+        {
+          "text": "Dites des affirmations bienveillantes"
+        },
+        {
+          "text": "Pensez à vos choses préférées, aliments, personnes, animaux"
+        },
+        {
+          "text": "Visualisez des personnes que vous aimez"
+        },
+        {
+          "text": "Rappelez-vous les paroles d’une chanson, citation ou poème inspirant"
+        },
+        {
+          "text": "Rappelez-vous un endroit sûr"
+        },
+        {
+          "text": "Dites une affirmation de coping"
+        },
+        {
+          "text": "Planifiez une petite récompense pour vous-même"
+        },
+        {
+          "text": "Pensez à des choses que vous attendez avec impatience dans la semaine à venir"
+        }
       ]
     },
     {
       "id": "1-12",
       "title": "Je procrastine et je veux arrêter",
       "items": [
-        { "text": "Divisez la tâche en sous-tâches jusqu’à ce que chaque tâche semble moins écrasante" },
-        { "text": "Trouvez un moyen de commencer (même en faisant un petit progrès)" },
-        { "text": "Rendez-la plus intéressante" },
-        { "text": "Arrêtez et essayez de comprendre s’il y a un blocage mental (par exemple, vous ne comprenez pas la tâche, vous avez une mauvaise association avec elle ou vous êtes coincé(e) sur quelque chose de spécifique)" }
+        {
+          "text": "Divisez la tâche en sous-tâches jusqu’à ce que chaque tâche semble moins écrasante"
+        },
+        {
+          "text": "Trouvez un moyen de commencer (même en faisant un petit progrès)"
+        },
+        {
+          "text": "Rendez-la plus intéressante"
+        },
+        {
+          "text": "Arrêtez et essayez de comprendre s’il y a un blocage mental (par exemple, vous ne comprenez pas la tâche, vous avez une mauvaise association avec elle ou vous êtes coincé(e) sur quelque chose de spécifique)"
+        }
       ]
     },
     {
       "id": "1-13",
       "title": "Lignes d’aide pour plus de soutien",
       "items": [
-        { "text": "Australie et Nouvelle-Zélande :" },
-        { "text": "Lifeline Australie : 13 11 14" },
-        { "text": "Lifeline Nouvelle-Zélande : 09 5222 999 (Auckland), 0800 543 354 (Reste de la NZ)" },
-        { "text": "Canada :" },
-        { "text": "Services de crise Canada : 1-833-456-4566 (gratuit)" },
-        { "text": "Au Québec : 1-866-277-3553" },
-        { "text": "France (anglophone) :" },
-        { "text": "Suicide Écoute : 0033 145 39 4000" },
-        { "text": "SOS Help : 01 46 21 46 46" },
-        { "text": "Allemagne :" },
-        { "text": "Telefonseelsorge Deutschland (National) :" },
-        { "text": "En allemand : 0800 -111 0 222" },
-        { "text": "En anglais : 030-44 01 06 07" },
-        { "text": "Italie :" },
-        { "text": "Samaritans : 800 86 00 22" },
-        { "text": "Japon :" },
-        { "text": "Befrienders International, Tokyo : +81 (0) 3 5286 9090" },
-        { "text": "BI Suicide Prevention Centre, Osaka : +81 (0) 6 4395 4343" },
-        { "text": "Tokyo English Lifeline : 107-0062" },
-        { "text": "Afrique du Sud :" },
-        { "text": "Lifeline Afrique du Sud : 0861 322 322" },
-        { "text": "Royaume-Uni et République d’Irlande :" },
-        { "text": "Samaritans : 116 123" },
-        { "text": "HopeLine UK : 0800 068 4141" },
-        { "text": "Ireland Lifeline : 0808 808 8000" },
-        { "text": "États-Unis :" },
-        { "text": "Ligne de crise et de suicide - appelez ou envoyez un SMS au 988" },
-        { "text": "The Trevor Project : 866-488-7386" },
-        { "text": "Trans Lifeline : 877-565-8860" },
-        { "text": "HopeLine : 1-800-273-TALK (8255)" },
-        { "text": "Plus de lignes d’aide internationales disponibles sur suicide.org" }
+        {
+          "text": "Australie et Nouvelle-Zélande :"
+        },
+        {
+          "text": "Lifeline Australie : 13 11 14"
+        },
+        {
+          "text": "Lifeline Nouvelle-Zélande : 09 5222 999 (Auckland), 0800 543 354 (Reste de la NZ)"
+        },
+        {
+          "text": "Canada :"
+        },
+        {
+          "text": "Services de crise Canada : 1-833-456-4566 (gratuit)"
+        },
+        {
+          "text": "Au Québec : 1-866-277-3553"
+        },
+        {
+          "text": "France (anglophone) :"
+        },
+        {
+          "text": "Suicide Écoute : 0033 145 39 4000"
+        },
+        {
+          "text": "SOS Help : 01 46 21 46 46"
+        },
+        {
+          "text": "Allemagne :"
+        },
+        {
+          "text": "Telefonseelsorge Deutschland (National) :"
+        },
+        {
+          "text": "En allemand : 0800 -111 0 222"
+        },
+        {
+          "text": "En anglais : 030-44 01 06 07"
+        },
+        {
+          "text": "Italie :"
+        },
+        {
+          "text": "Samaritans : 800 86 00 22"
+        },
+        {
+          "text": "Japon :"
+        },
+        {
+          "text": "Befrienders International, Tokyo : +81 (0) 3 5286 9090"
+        },
+        {
+          "text": "BI Suicide Prevention Centre, Osaka : +81 (0) 6 4395 4343"
+        },
+        {
+          "text": "Tokyo English Lifeline : 107-0062"
+        },
+        {
+          "text": "Afrique du Sud :"
+        },
+        {
+          "text": "Lifeline Afrique du Sud : 0861 322 322"
+        },
+        {
+          "text": "Royaume-Uni et République d’Irlande :"
+        },
+        {
+          "text": "Samaritans : 116 123"
+        },
+        {
+          "text": "HopeLine UK : 0800 068 4141"
+        },
+        {
+          "text": "Ireland Lifeline : 0808 808 8000"
+        },
+        {
+          "text": "États-Unis :"
+        },
+        {
+          "text": "Ligne de crise et de suicide - appelez ou envoyez un SMS au 988"
+        },
+        {
+          "text": "The Trevor Project : 866-488-7386"
+        },
+        {
+          "text": "Trans Lifeline : 877-565-8860"
+        },
+        {
+          "text": "HopeLine : 1-800-273-TALK (8255)"
+        },
+        {
+          "text": "Plus de lignes d’aide internationales disponibles sur suicide.org"
+        }
       ]
     },
     {
       "id": "1-14",
       "title": "Solutions pour la sous-stimulation",
       "items": [
-        { "text": "Activité physique", "nextCardId": "3-1" },
-        { "text": "Lumière du soleil", "nextCardId": "2-7" },
-        { "text": "Nourriture", "nextCardId": "4-7" },
-        { "text": "Sommeil", "nextCardId": "5-12" },
-        { "text": "Temps personnel", "nextCardId": "2-1" },
-        { "text": "Expression créative", "nextCardId": "2-4" }
+        {
+          "text": "Activité physique",
+          "nextCardId": "3-1"
+        },
+        {
+          "text": "Lumière du soleil",
+          "nextCardId": "2-7"
+        },
+        {
+          "text": "Nourriture",
+          "nextCardId": "4-7"
+        },
+        {
+          "text": "Sommeil",
+          "nextCardId": "5-12"
+        },
+        {
+          "text": "Temps personnel",
+          "nextCardId": "2-1"
+        },
+        {
+          "text": "Expression créative",
+          "nextCardId": "2-4"
+        }
       ]
     },
     {
       "id": "2-1",
       "title": "Je m’ennuie et je veux faire quelque chose :",
       "items": [
-        { "text": "Bougez mon corps", "nextCardId": "3-1" },
-        { "text": "Lisez quelque chose", "nextCardId": "2-2" },
-        { "text": "Regardez quelque chose", "nextCardId": "2-3" },
-        { "text": "Soyez créatif(ve)", "nextCardId": "2-4" },
-        { "text": "Apprenez quelque chose", "nextCardId": "2-5" },
-        { "text": "Faites quelque chose d’utile", "nextCardId": "4-1" },
-        { "text": "Partez à l’aventure", "nextCardId": "2-7" },
-        { "text": "Jouez à un jeu", "nextCardId": "2-8" }
+        {
+          "text": "Bougez mon corps",
+          "nextCardId": "3-1"
+        },
+        {
+          "text": "Lisez quelque chose",
+          "nextCardId": "2-2"
+        },
+        {
+          "text": "Regardez quelque chose",
+          "nextCardId": "2-3"
+        },
+        {
+          "text": "Soyez créatif(ve)",
+          "nextCardId": "2-4"
+        },
+        {
+          "text": "Apprenez quelque chose",
+          "nextCardId": "2-5"
+        },
+        {
+          "text": "Faites quelque chose d’utile",
+          "nextCardId": "4-1"
+        },
+        {
+          "text": "Partez à l’aventure",
+          "nextCardId": "2-7"
+        },
+        {
+          "text": "Jouez à un jeu",
+          "nextCardId": "2-8"
+        }
       ]
     },
     {
       "id": "2-2",
       "title": "Que voulez-vous lire ?",
       "items": [
-        { "text": "Fiction" },
-        { "text": "Poésie" },
-        { "text": "Non-fiction" },
-        { "text": "Fiction pour jeunes adultes" },
-        { "text": "Science-fiction" },
-        { "text": "Fantasy" },
-        { "text": "Mystère" },
-        { "text": "Horreur" },
-        { "text": "Romance" },
-        { "text": "Allez sur Project Gutenberg pour des ebooks gratuits et légaux" },
-        { "text": "Connectez votre carte de bibliothèque à Libby pour des ebooks gratuits et à Overdrive pour des audiobooks gratuits" },
-        { "text": "Fanfiction", "link": "http://archiveofourown.org" }
+        {
+          "text": "Fiction"
+        },
+        {
+          "text": "Poésie"
+        },
+        {
+          "text": "Non-fiction"
+        },
+        {
+          "text": "Fiction pour jeunes adultes"
+        },
+        {
+          "text": "Science-fiction"
+        },
+        {
+          "text": "Fantasy"
+        },
+        {
+          "text": "Mystère"
+        },
+        {
+          "text": "Horreur"
+        },
+        {
+          "text": "Romance"
+        },
+        {
+          "text": "Allez sur Project Gutenberg pour des ebooks gratuits et légaux"
+        },
+        {
+          "text": "Connectez votre carte de bibliothèque à Libby pour des ebooks gratuits et à Overdrive pour des audiobooks gratuits"
+        },
+        {
+          "text": "Fanfiction",
+          "link": "http://archiveofourown.org"
+        }
       ]
     },
     {
       "id": "2-3",
       "title": "Que voulez-vous regarder ?",
       "items": [
-        { "text": "Film réconfortant" },
-        { "text": "Nouveau film" },
-        { "text": "Série réconfortante" },
-        { "text": "Nouvelle série" },
-        { "text": "Documentaire" }
+        {
+          "text": "Film réconfortant"
+        },
+        {
+          "text": "Nouveau film"
+        },
+        {
+          "text": "Série réconfortante"
+        },
+        {
+          "text": "Nouvelle série"
+        },
+        {
+          "text": "Documentaire"
+        }
       ]
     },
     {
       "id": "2-4",
       "title": "Choses créatives à faire",
       "items": [
-        { "text": "Coudre / Faire du patchwork" },
-        { "text": "Crocheter / Tricoter" },
-        { "text": "Tisser" },
-        { "text": "Dessiner" },
-        { "text": "Peindre" },
-        { "text": "Calligraphie" },
-        { "text": "Écrire de la fiction" },
-        { "text": "Écrire de la poésie" },
-        { "text": "Origami" },
-        { "text": "Broder" },
-        { "text": "Construire quelque chose" }
+        {
+          "text": "Coudre / Faire du patchwork"
+        },
+        {
+          "text": "Crocheter / Tricoter"
+        },
+        {
+          "text": "Tisser"
+        },
+        {
+          "text": "Dessiner"
+        },
+        {
+          "text": "Peindre"
+        },
+        {
+          "text": "Calligraphie"
+        },
+        {
+          "text": "Écrire de la fiction"
+        },
+        {
+          "text": "Écrire de la poésie"
+        },
+        {
+          "text": "Origami"
+        },
+        {
+          "text": "Broder"
+        },
+        {
+          "text": "Construire quelque chose"
+        }
       ]
     },
     {
       "id": "2-5",
       "title": "Moyens d’apprendre des choses :",
       "items": [
-        { "text": "Apprenez une langue", "nextCardId": "2-6" },
-        { "text": "Wikipedia", "link": "https://en.wikipedia.org" },
-        { "text": "TedX Talks", "link": "https://www.ted.com/watch/tedx-talks" },
-        { "text": "Explorez l’océan avec nautiluslive.org", "link": "http://nautiluslive.org" },
-        { "text": "Choisissez le premier cours intéressant que vous voyez sur EdX" },
-        { "text": "Regardez un documentaire PBS" },
-        { "text": "Commencez à lire le premier livre de non-fiction non lu sur votre étagère" },
-        { "text": "Lisez un article aléatoire sur Wikipedia", "link": "https://en.wikipedia.org/wiki/Special:Random" }
+        {
+          "text": "Apprenez une langue",
+          "nextCardId": "2-6"
+        },
+        {
+          "text": "Wikipedia",
+          "link": "https://en.wikipedia.org"
+        },
+        {
+          "text": "TedX Talks",
+          "link": "https://www.ted.com/watch/tedx-talks"
+        },
+        {
+          "text": "Explorez l’océan avec nautiluslive.org",
+          "link": "http://nautiluslive.org"
+        },
+        {
+          "text": "Choisissez le premier cours intéressant que vous voyez sur EdX"
+        },
+        {
+          "text": "Regardez un documentaire PBS"
+        },
+        {
+          "text": "Commencez à lire le premier livre de non-fiction non lu sur votre étagère"
+        },
+        {
+          "text": "Lisez un article aléatoire sur Wikipedia",
+          "link": "https://en.wikipedia.org/wiki/Special:Random"
+        }
       ]
     },
     {
       "id": "2-6",
       "title": "Apprenez une langue",
       "items": [
-        { "text": "Drops", "link": "https://languagedrops.com/" },
-        { "text": "Mango Languages (gratuit avec une carte de bibliothèque)", "link": "https://mangolanguages.com/" },
-        { "text": "Duolingo", "link": "https://www.duolingo.com/" }
+        {
+          "text": "Drops",
+          "link": "https://languagedrops.com/"
+        },
+        {
+          "text": "Mango Languages (gratuit avec une carte de bibliothèque)",
+          "link": "https://mangolanguages.com/"
+        },
+        {
+          "text": "Duolingo",
+          "link": "https://www.duolingo.com/"
+        }
       ]
     },
     {
       "id": "2-7",
       "title": "Partez à l’aventure",
       "items": [
-        { "text": "Randonnée" },
-        { "text": "Observation des oiseaux" },
-        { "text": "Vélo" },
-        { "text": "Parc d’État / zone naturelle" },
-        { "text": "Musée" },
-        { "text": "Jardin botanique" },
-        { "text": "Verger" },
-        { "text": "Musée des sciences" },
-        { "text": "Librairie" },
-        { "text": "Magasin d’artisanat" },
-        { "text": "Nouveau restaurant" },
-        { "text": "Zoo" },
-        { "text": "Aquarium" }
+        {
+          "text": "Randonnée"
+        },
+        {
+          "text": "Observation des oiseaux"
+        },
+        {
+          "text": "Vélo"
+        },
+        {
+          "text": "Parc d’État / zone naturelle"
+        },
+        {
+          "text": "Musée"
+        },
+        {
+          "text": "Jardin botanique"
+        },
+        {
+          "text": "Verger"
+        },
+        {
+          "text": "Musée des sciences"
+        },
+        {
+          "text": "Librairie"
+        },
+        {
+          "text": "Magasin d’artisanat"
+        },
+        {
+          "text": "Nouveau restaurant"
+        },
+        {
+          "text": "Zoo"
+        },
+        {
+          "text": "Aquarium"
+        }
       ]
     },
     {
       "id": "2-8",
       "title": "Jouez à un jeu",
       "items": [
-        { "text": "Jeux de cartes" },
-        { "text": "Jeux de société" },
-        { "text": "Jeux vidéo" },
-        { "text": "Jeux sur téléphone" }
+        {
+          "text": "Jeux de cartes"
+        },
+        {
+          "text": "Jeux de société"
+        },
+        {
+          "text": "Jeux vidéo"
+        },
+        {
+          "text": "Jeux sur téléphone"
+        }
       ]
     },
     {
       "id": "3-1",
       "title": "Quel type d’exercice voulez-vous faire ?",
       "items": [
-        { "text": "Exercices de poids corporel sans besoin de salle de sport", "nextCardId": "3-2" },
-        { "text": "Yoga", "nextCardId": "3-4" },
-        { "text": "Cardio sans besoin de salle de sport", "nextCardId": "3-3" }
+        {
+          "text": "Exercices de poids corporel sans besoin de salle de sport",
+          "nextCardId": "3-2"
+        },
+        {
+          "text": "Yoga",
+          "nextCardId": "3-4"
+        },
+        {
+          "text": "Cardio sans besoin de salle de sport",
+          "nextCardId": "3-3"
+        }
       ]
     },
     {
       "id": "3-2",
       "title": "Exercices de poids corporel",
       "items": [
-        { "text": "Pompes contre le mur" },
-        { "text": "Dips sur chaise" },
-        { "text": "Squats" },
-        { "text": "Fentes" },
-        { "text": "Élévations des mollets" },
-        { "text": "Abdominaux" }
+        {
+          "text": "Pompes contre le mur"
+        },
+        {
+          "text": "Dips sur chaise"
+        },
+        {
+          "text": "Squats"
+        },
+        {
+          "text": "Fentes"
+        },
+        {
+          "text": "Élévations des mollets"
+        },
+        {
+          "text": "Abdominaux"
+        }
       ]
     },
     {
       "id": "3-3",
       "title": "Exercices de cardio",
       "items": [
-        { "text": "Marche rapide" },
-        { "text": "Course à pied" },
-        { "text": "Elliptique" },
-        { "text": "Tapis de course" },
-        { "text": "Vélo" },
-        { "text": "Sauts avec écart" },
-        { "text": "Burpees" },
-        { "text": "Corde à sauter" },
-        { "text": "Danse" }
+        {
+          "text": "Marche rapide"
+        },
+        {
+          "text": "Course à pied"
+        },
+        {
+          "text": "Elliptique"
+        },
+        {
+          "text": "Tapis de course"
+        },
+        {
+          "text": "Vélo"
+        },
+        {
+          "text": "Sauts avec écart"
+        },
+        {
+          "text": "Burpees"
+        },
+        {
+          "text": "Corde à sauter"
+        },
+        {
+          "text": "Danse"
+        }
       ]
     },
     {
       "id": "3-4",
       "title": "Ressources pour le yoga",
       "items": [
-        { "text": "Chaîne YouTube Yoga with Adriene", "link": "https://www.youtube.com/user/yogawithadriene" },
-        { "text": "Jessamyn à The Underbelly", "link": "https://theunderbelly.com/" },
-        { "text": "James Knight à Gentle Somatic Yoga", "link": "https://www.gentlesomaticyoga.com/" },
-        { "text": "Dianne Bondy à Yoga for Every Body", "link": "https://diannebondyyoga.com/" },
-        { "text": "Val Verdier", "link": "https://www.instagram.com/valerie.a.verdier/?hl=en" }
+        {
+          "text": "Chaîne YouTube Yoga with Adriene",
+          "link": "https://www.youtube.com/user/yogawithadriene"
+        },
+        {
+          "text": "Jessamyn à The Underbelly",
+          "link": "https://theunderbelly.com/"
+        },
+        {
+          "text": "James Knight à Gentle Somatic Yoga",
+          "link": "https://www.gentlesomaticyoga.com/"
+        },
+        {
+          "text": "Dianne Bondy à Yoga for Every Body",
+          "link": "https://diannebondyyoga.com/"
+        },
+        {
+          "text": "Val Verdier",
+          "link": "https://www.instagram.com/valerie.a.verdier/?hl=en"
+        }
       ]
     },
     {
       "id": "4-1",
       "title": "Choses utiles à faire",
       "items": [
-        { "text": "Nettoyez quelque chose", "nextCardId": "4-2" },
-        { "text": "Faites vos devoirs" },
-        { "text": "Vérifiez votre compte bancaire / finances" },
-        { "text": "Cuisinez un repas" },
-        { "text": "Organisez un placard, une étagère, un dressing ou un autre espace discret" },
-        { "text": "Appelez un ami ou un proche pour prendre de ses nouvelles" },
-        { "text": "Triez le courrier" },
-        { "text": "Sortez les poubelles / le recyclage" }
+        {
+          "text": "Nettoyez quelque chose",
+          "nextCardId": "4-2"
+        },
+        {
+          "text": "Faites vos devoirs"
+        },
+        {
+          "text": "Vérifiez votre compte bancaire / finances"
+        },
+        {
+          "text": "Cuisinez un repas"
+        },
+        {
+          "text": "Organisez un placard, une étagère, un dressing ou un autre espace discret"
+        },
+        {
+          "text": "Appelez un ami ou un proche pour prendre de ses nouvelles"
+        },
+        {
+          "text": "Triez le courrier"
+        },
+        {
+          "text": "Sortez les poubelles / le recyclage"
+        }
       ]
     },
     {
       "id": "4-2",
       "title": "Choses à nettoyer",
       "items": [
-        { "text": "Cuisine", "nextCardId": "4-3" },
-        { "text": "Salle de bain", "nextCardId": "4-4" },
-        { "text": "Chambre", "nextCardId": "4-5" },
-        { "text": "Espace de vie général", "nextCardId": "4-6" }
+        {
+          "text": "Cuisine",
+          "nextCardId": "4-3"
+        },
+        {
+          "text": "Salle de bain",
+          "nextCardId": "4-4"
+        },
+        {
+          "text": "Chambre",
+          "nextCardId": "4-5"
+        },
+        {
+          "text": "Espace de vie général",
+          "nextCardId": "4-6"
+        }
       ]
     },
     {
       "id": "4-3",
       "title": "Nettoyer la cuisine",
       "items": [
-        { "text": "Rangez la vaisselle propre" },
-        { "text": "Lavez la vaisselle sale" },
-        { "text": "Nettoyez les comptoirs et la cuisinière" },
-        { "text": "Balayez le sol de la cuisine" },
-        { "text": "Nettoyez les étagères du frigo" },
-        { "text": "Jetez les aliments périmés" },
-        { "text": "Videz la poubelle" },
-        { "text": "Organisez le frigo et le garde-manger" }
+        {
+          "text": "Rangez la vaisselle propre"
+        },
+        {
+          "text": "Lavez la vaisselle sale"
+        },
+        {
+          "text": "Nettoyez les comptoirs et la cuisinière"
+        },
+        {
+          "text": "Balayez le sol de la cuisine"
+        },
+        {
+          "text": "Nettoyez les étagères du frigo"
+        },
+        {
+          "text": "Jetez les aliments périmés"
+        },
+        {
+          "text": "Videz la poubelle"
+        },
+        {
+          "text": "Organisez le frigo et le garde-manger"
+        }
       ]
     },
     {
       "id": "4-4",
       "title": "Nettoyer la salle de bain",
       "items": [
-        { "text": "Désinfectez les toilettes avec une brosse et un nettoyant pour toilettes" },
-        { "text": "Videz la poubelle" },
-        { "text": "Nettoyez le miroir, les comptoirs et le sol" },
-        { "text": "Lavez le rideau de douche" },
-        { "text": "Frottez la moisissure dans la baignoire / douche" },
-        { "text": "Mettez le linge sale / les serviettes dans le panier à linge" },
-        { "text": "Organisez le comptoir / l’armoire" },
-        { "text": "Balayez / aspirez le sol" }
+        {
+          "text": "Désinfectez les toilettes avec une brosse et un nettoyant pour toilettes"
+        },
+        {
+          "text": "Videz la poubelle"
+        },
+        {
+          "text": "Nettoyez le miroir, les comptoirs et le sol"
+        },
+        {
+          "text": "Lavez le rideau de douche"
+        },
+        {
+          "text": "Frottez la moisissure dans la baignoire / douche"
+        },
+        {
+          "text": "Mettez le linge sale / les serviettes dans le panier à linge"
+        },
+        {
+          "text": "Organisez le comptoir / l’armoire"
+        },
+        {
+          "text": "Balayez / aspirez le sol"
+        }
       ]
     },
     {
       "id": "4-5",
       "title": "Nettoyer la chambre",
       "items": [
-        { "text": "Changez les draps du lit" },
-        { "text": "Mettez les draps sales dans la machine à laver" },
-        { "text": "Mettez le linge sale dans le panier à linge" },
-        { "text": "Videz la poubelle" },
-        { "text": "Pliez le linge propre" },
-        { "text": "Rangez le linge propre" },
-        { "text": "Balayez / aspirez le sol" },
-        { "text": "Nettoyez le dessus des meubles" },
-        { "text": "Organisez la table de chevet / la commode" }
+        {
+          "text": "Changez les draps du lit"
+        },
+        {
+          "text": "Mettez les draps sales dans la machine à laver"
+        },
+        {
+          "text": "Mettez le linge sale dans le panier à linge"
+        },
+        {
+          "text": "Videz la poubelle"
+        },
+        {
+          "text": "Pliez le linge propre"
+        },
+        {
+          "text": "Rangez le linge propre"
+        },
+        {
+          "text": "Balayez / aspirez le sol"
+        },
+        {
+          "text": "Nettoyez le dessus des meubles"
+        },
+        {
+          "text": "Organisez la table de chevet / la commode"
+        }
       ]
     },
     {
       "id": "4-6",
       "title": "Nettoyer l’espace de vie général",
       "items": [
-        { "text": "Aspirez tous les tapis ou moquettes visibles" },
-        { "text": "Balayez ou aspirez les sols" },
-        { "text": "Rangez le désordre et rangez les objets" },
-        { "text": "Faites le tour avec un sac poubelle et jetez tous les déchets" }
+        {
+          "text": "Aspirez tous les tapis ou moquettes visibles"
+        },
+        {
+          "text": "Balayez ou aspirez les sols"
+        },
+        {
+          "text": "Rangez le désordre et rangez les objets"
+        },
+        {
+          "text": "Faites le tour avec un sac poubelle et jetez tous les déchets"
+        }
       ]
     },
     {
       "id": "4-7",
       "title": "Vous avez besoin de manger. Où êtes-vous ?",
       "items": [
-        { "text": "À la maison", "nextCardId": "4-8" },
-        { "text": "Au travail", "nextCardId": "4-9" },
-        { "text": "Au supermarché", "nextCardId": "4-10" },
-        { "text": "Ailleurs", "nextCardId": "4-11" }
+        {
+          "text": "À la maison",
+          "nextCardId": "4-8"
+        },
+        {
+          "text": "Au travail",
+          "nextCardId": "4-9"
+        },
+        {
+          "text": "Au supermarché",
+          "nextCardId": "4-10"
+        },
+        {
+          "text": "Ailleurs",
+          "nextCardId": "4-11"
+        }
       ]
     },
     {
       "id": "4-8",
       "title": "Vous voulez manger quelque chose et vous êtes à la maison.",
       "items": [
-        { "text": "Une cuillère de beurre de cacahuète" },
-        { "text": "Une tranche de pain avec de la confiture ou du beurre" },
-        { "text": "Un œuf brouillé" },
-        { "text": "Flocons d’avoine" },
-        { "text": "Céréales" },
-        { "text": "Crackers" },
-        { "text": "Fromage" },
-        { "text": "Lait au chocolat" },
-        { "text": "Légumes crus (carottes, brocoli, concombre) avec du houmous ou de la vinaigrette" },
-        { "text": "Faites chauffer au micro-ondes un bol de légumes surgelés avec de l’huile d’olive, du sel, du poivre et d’autres épices (paprika ! cumin ! thym !)" },
-        { "text": "Fruit" },
-        { "text": "Cacahuètes, noix, autres noix ou graines" },
-        { "text": "Un verre de jus / smoothie" },
-        { "text": "Aliments emballés (par exemple, pop-tarts, burritos micro-ondes)" },
-        { "text": "Aliments faciles à digérer : Banane, Riz, Compote de pommes, Toast, Yaourt" }
+        {
+          "text": "Une cuillère de beurre de cacahuète"
+        },
+        {
+          "text": "Une tranche de pain avec de la confiture ou du beurre"
+        },
+        {
+          "text": "Un œuf brouillé"
+        },
+        {
+          "text": "Flocons d’avoine"
+        },
+        {
+          "text": "Céréales"
+        },
+        {
+          "text": "Crackers"
+        },
+        {
+          "text": "Fromage"
+        },
+        {
+          "text": "Lait au chocolat"
+        },
+        {
+          "text": "Légumes crus (carottes, brocoli, concombre) avec du houmous ou de la vinaigrette"
+        },
+        {
+          "text": "Faites chauffer au micro-ondes un bol de légumes surgelés avec de l’huile d’olive, du sel, du poivre et d’autres épices (paprika ! cumin ! thym !)"
+        },
+        {
+          "text": "Fruit"
+        },
+        {
+          "text": "Cacahuètes, noix, autres noix ou graines"
+        },
+        {
+          "text": "Un verre de jus / smoothie"
+        },
+        {
+          "text": "Aliments emballés (par exemple, pop-tarts, burritos micro-ondes)"
+        },
+        {
+          "text": "Aliments faciles à digérer : Banane, Riz, Compote de pommes, Toast, Yaourt"
+        }
       ]
     },
     {
       "id": "4-9",
       "title": "Vous avez faim et vous êtes au travail.",
       "items": [
-        { "text": "Hoummous et crackers" },
-        { "text": "Yaourt" },
-        { "text": "Bâtonnet de fromage" },
-        { "text": "Bagel / muffin anglais / toast" },
-        { "text": "Bar à salade : légumes verts, graines, noix, fruits, œufs durs" },
-        { "text": "Bar à soupe" },
-        { "text": "Barre granola" },
-        { "text": "M&Ms cacahuètes" },
-        { "text": "Mélange de fruits secs" },
-        { "text": "Tout ce qui contient des protéines / graisses / fibres vous rassasiera plus longtemps que quelque chose avec juste du sucre / de la farine." },
-        { "text": "Commandez une livraison via DoorDash, Panera Bread, une pizzeria locale, etc. (si disponible)." },
-        { "text": "Vérifiez les salles de pause pour de la nourriture gratuite" },
-        { "text": "Demandez à vos collègues" }
+        {
+          "text": "Hoummous et crackers"
+        },
+        {
+          "text": "Yaourt"
+        },
+        {
+          "text": "Bâtonnet de fromage"
+        },
+        {
+          "text": "Bagel / muffin anglais / toast"
+        },
+        {
+          "text": "Bar à salade : légumes verts, graines, noix, fruits, œufs durs"
+        },
+        {
+          "text": "Bar à soupe"
+        },
+        {
+          "text": "Barre granola"
+        },
+        {
+          "text": "M&Ms cacahuètes"
+        },
+        {
+          "text": "Mélange de fruits secs"
+        },
+        {
+          "text": "Tout ce qui contient des protéines / graisses / fibres vous rassasiera plus longtemps que quelque chose avec juste du sucre / de la farine."
+        },
+        {
+          "text": "Commandez une livraison via DoorDash, Panera Bread, une pizzeria locale, etc. (si disponible)."
+        },
+        {
+          "text": "Vérifiez les salles de pause pour de la nourriture gratuite"
+        },
+        {
+          "text": "Demandez à vos collègues"
+        }
       ]
     },
     {
       "id": "4-10",
       "title": "Vous avez faim et vous êtes au supermarché.",
       "items": [
-        { "text": "Repas préparés dans la section des aliments frais" },
-        { "text": "Fruits / légumes crus pré-lavés et emballés (section des produits frais)" },
-        { "text": "Lunchable (section traiteur)" },
-        { "text": "Fromage emballé individuellement (rayon des produits laitiers)" },
-        { "text": "Yaourt (rayon des produits laitiers)" },
-        { "text": "Poches de nourriture pour bébé (disponibles dans le rayon bébé, pas besoin d’ustensiles, variétés incluent Banane & Citrouille, Mangue & Kale, Fraise Banane.)" },
-        { "text": "Smoothie préparé (rayon des boissons)" }
+        {
+          "text": "Repas préparés dans la section des aliments frais"
+        },
+        {
+          "text": "Fruits / légumes crus pré-lavés et emballés (section des produits frais)"
+        },
+        {
+          "text": "Lunchable (section traiteur)"
+        },
+        {
+          "text": "Fromage emballé individuellement (rayon des produits laitiers)"
+        },
+        {
+          "text": "Yaourt (rayon des produits laitiers)"
+        },
+        {
+          "text": "Poches de nourriture pour bébé (disponibles dans le rayon bébé, pas besoin d’ustensiles, variétés incluent Banane & Citrouille, Mangue & Kale, Fraise Banane.)"
+        },
+        {
+          "text": "Smoothie préparé (rayon des boissons)"
+        }
       ]
     },
     {
       "id": "4-11",
       "title": "Vous avez faim et vous êtes dehors.",
       "items": [
-        { "text": "Station-service (smoothie préparé, biscuits, noix, pâtisseries emballées)" },
-        { "text": "Fast-food (Vous n’êtes pas obligé(e) de commander un repas complet à 8 $. Vous pouvez prendre juste des frites, un milkshake ou un paquet de 4 nuggets de poulet)" },
-        { "text": "Supermarché", "nextCardId": "4-10" },
-        { "text": "À la maison", "nextCardId": "4-8" }
+        {
+          "text": "Station-service (smoothie préparé, biscuits, noix, pâtisseries emballées)"
+        },
+        {
+          "text": "Fast-food (Vous n’êtes pas obligé(e) de commander un repas complet à 8 $. Vous pouvez prendre juste des frites, un milkshake ou un paquet de 4 nuggets de poulet)"
+        },
+        {
+          "text": "Supermarché",
+          "nextCardId": "4-10"
+        },
+        {
+          "text": "À la maison",
+          "nextCardId": "4-8"
+        }
       ]
     },
     {
       "id": "5-1",
       "title": "Quel type de douleur avez-vous ?",
       "items": [
-        { "text": "Douleur menstruelle / pelvienne", "nextCardId": "5-2" },
-        { "text": "Douleur articulaire", "nextCardId": "5-3" },
-        { "text": "Tête", "nextCardId": "5-5" },
-        { "text": "Douleur musculaire due à l’exercice", "nextCardId": "5-4" },
-        { "text": "Estomac", "nextCardId": "5-10" }
+        {
+          "text": "Douleur menstruelle / pelvienne",
+          "nextCardId": "5-2"
+        },
+        {
+          "text": "Douleur articulaire",
+          "nextCardId": "5-3"
+        },
+        {
+          "text": "Tête",
+          "nextCardId": "5-5"
+        },
+        {
+          "text": "Douleur musculaire due à l’exercice",
+          "nextCardId": "5-4"
+        },
+        {
+          "text": "Estomac",
+          "nextCardId": "5-10"
+        }
       ]
     },
     {
       "id": "5-2",
       "title": "Comment gérer la douleur menstruelle",
       "items": [
-        { "text": "Appliquez une bouillotte" },
-        { "text": "Prenez un anti-inflammatoire non stéroïdien (AINS) (par exemple, ibuprofène, Motrin, Advil, Aleve). Prenez avec un grand verre d’eau pour éviter les brûlures d’estomac. Ne buvez pas d’alcool en prenant des AINS." },
-        { "text": "Unité TENS" },
-        { "text": "Exercice", "nextCardId": "3-1" },
-        { "text": "Buvez de l’eau" },
-        { "text": "Prenez un bain chaud" },
-        { "text": "Mangez du chocolat" },
-        { "text": "Mangez quelque chose de salé" },
-        { "text": "Distrayez-vous", "nextCardId": "2-1" }
+        {
+          "text": "Appliquez une bouillotte"
+        },
+        {
+          "text": "Prenez un anti-inflammatoire non stéroïdien (AINS) (par exemple, ibuprofène, Motrin, Advil, Aleve). Prenez avec un grand verre d’eau pour éviter les brûlures d’estomac. Ne buvez pas d’alcool en prenant des AINS."
+        },
+        {
+          "text": "Unité TENS"
+        },
+        {
+          "text": "Exercice",
+          "nextCardId": "3-1"
+        },
+        {
+          "text": "Buvez de l’eau"
+        },
+        {
+          "text": "Prenez un bain chaud"
+        },
+        {
+          "text": "Mangez du chocolat"
+        },
+        {
+          "text": "Mangez quelque chose de salé"
+        },
+        {
+          "text": "Distrayez-vous",
+          "nextCardId": "2-1"
+        }
       ]
     },
     {
       "id": "5-3",
       "title": "Comment gérer la douleur articulaire / due à une blessure",
       "items": [
-        { "text": "Prenez un anti-inflammatoire non stéroïdien (AINS) (par exemple, ibuprofène, Motrin, Advil, Aleve). Prenez avec un grand verre d’eau pour éviter les brûlures d’estomac. Ne buvez pas d’alcool en prenant des AINS." },
-        { "text": "Appliquez de la glace ou de la chaleur (selon ce qui vous fait du bien) pendant 20 minutes, puis reposez-vous pendant 20 minutes, répétez." },
-        { "text": "Massage" },
-        { "text": "Rouleau en mousse" },
-        { "text": "Bain chaud" },
-        { "text": "Choisissez une vidéo de yoga axée sur cette zone", "nextCardId": "3-4" }
+        {
+          "text": "Prenez un anti-inflammatoire non stéroïdien (AINS) (par exemple, ibuprofène, Motrin, Advil, Aleve). Prenez avec un grand verre d’eau pour éviter les brûlures d’estomac. Ne buvez pas d’alcool en prenant des AINS."
+        },
+        {
+          "text": "Appliquez de la glace ou de la chaleur (selon ce qui vous fait du bien) pendant 20 minutes, puis reposez-vous pendant 20 minutes, répétez."
+        },
+        {
+          "text": "Massage"
+        },
+        {
+          "text": "Rouleau en mousse"
+        },
+        {
+          "text": "Bain chaud"
+        },
+        {
+          "text": "Choisissez une vidéo de yoga axée sur cette zone",
+          "nextCardId": "3-4"
+        }
       ]
     },
     {
       "id": "5-4",
       "title": "Comment gérer les courbatures",
       "items": [
-        { "text": "Prenez un anti-inflammatoire non stéroïdien (AINS) (par exemple, ibuprofène, Motrin, Advil, Aleve). Prenez avec un grand verre d’eau pour éviter les brûlures d’estomac. Ne buvez pas d’alcool en prenant des AINS." },
-        { "text": "Buvez de l’eau" },
-        { "text": "Étirements" },
-        { "text": "Yoga", "nextCardId": "3-4" },
-        { "text": "Cardio léger", "nextCardId": "3-3" },
-        { "text": "Bain chaud" }
+        {
+          "text": "Prenez un anti-inflammatoire non stéroïdien (AINS) (par exemple, ibuprofène, Motrin, Advil, Aleve). Prenez avec un grand verre d’eau pour éviter les brûlures d’estomac. Ne buvez pas d’alcool en prenant des AINS."
+        },
+        {
+          "text": "Buvez de l’eau"
+        },
+        {
+          "text": "Étirements"
+        },
+        {
+          "text": "Yoga",
+          "nextCardId": "3-4"
+        },
+        {
+          "text": "Cardio léger",
+          "nextCardId": "3-3"
+        },
+        {
+          "text": "Bain chaud"
+        }
       ]
     },
     {
       "id": "5-5",
       "title": "Quel type de douleur à la tête ?",
       "items": [
-        { "text": "Sinus (quand j’appuie sur mon visage, ça fait plus mal)", "nextCardId": "5-6" },
-        { "text": "Tension (les épaules et le cou font mal, ou un élastique serre mon crâne)", "nextCardId": "5-7" },
-        { "text": "Migraine (sensibilité à la lumière/au bruit/aux odeurs, nausées, brouillard mental, émotions désordonnées)", "nextCardId": "5-8" },
-        { "text": "Mal de tête général", "nextCardId": "5-9" }
+        {
+          "text": "Sinus (quand j’appuie sur mon visage, ça fait plus mal)",
+          "nextCardId": "5-6"
+        },
+        {
+          "text": "Tension (les épaules et le cou font mal, ou un élastique serre mon crâne)",
+          "nextCardId": "5-7"
+        },
+        {
+          "text": "Migraine (sensibilité à la lumière/au bruit/aux odeurs, nausées, brouillard mental, émotions désordonnées)",
+          "nextCardId": "5-8"
+        },
+        {
+          "text": "Mal de tête général",
+          "nextCardId": "5-9"
+        }
       ]
     },
     {
       "id": "5-6",
       "title": "Comment gérer un mal de tête des sinus",
       "items": [
-        { "text": "Prenez un anti-inflammatoire non stéroïdien (AINS) (par exemple, ibuprofène, Motrin, Advil, Aleve). Prenez avec un grand verre d’eau pour éviter les brûlures d’estomac. Ne buvez pas d’alcool en prenant des AINS." },
-        { "text": "Prenez un décongestionnant (Sudafed, Mucinex, etc.)" },
-        { "text": "Spray nasal salin" },
-        { "text": "Douche" },
-        { "text": "Buvez de l’eau" },
-        { "text": "Poche de glace (enveloppée dans une serviette) sur votre visage" },
-        { "text": "Enveloppez votre visage dans une serviette et massez votre visage avec un vibreur sur la vitesse la plus basse" }
+        {
+          "text": "Prenez un anti-inflammatoire non stéroïdien (AINS) (par exemple, ibuprofène, Motrin, Advil, Aleve). Prenez avec un grand verre d’eau pour éviter les brûlures d’estomac. Ne buvez pas d’alcool en prenant des AINS."
+        },
+        {
+          "text": "Prenez un décongestionnant (Sudafed, Mucinex, etc.)"
+        },
+        {
+          "text": "Spray nasal salin"
+        },
+        {
+          "text": "Douche"
+        },
+        {
+          "text": "Buvez de l’eau"
+        },
+        {
+          "text": "Poche de glace (enveloppée dans une serviette) sur votre visage"
+        },
+        {
+          "text": "Enveloppez votre visage dans une serviette et massez votre visage avec un vibreur sur la vitesse la plus basse"
+        }
       ]
     },
     {
       "id": "5-7",
       "title": "Comment gérer un mal de tête de tension",
       "items": [
-        { "text": "Massage du cou/dos" },
-        { "text": "Bouillotte ou poche de glace (selon ce qui vous fait du bien)" },
-        { "text": "Prenez un anti-inflammatoire non stéroïdien (AINS) (par exemple, ibuprofène, Motrin, Advil, Aleve). Prenez avec un grand verre d’eau pour éviter les brûlures d’estomac. Ne buvez pas d’alcool en prenant des AINS." },
-        { "text": "Relaxant musculaire (si prescrit)" },
-        { "text": "Prenez une douche chaude" },
-        { "text": "Cardio", "nextCardId": "3-3" },
-        { "text": "Desserrez votre mâchoire" },
-        { "text": "Exercice léger", "nextCardId": "3-1" }
+        {
+          "text": "Massage du cou/dos"
+        },
+        {
+          "text": "Bouillotte ou poche de glace (selon ce qui vous fait du bien)"
+        },
+        {
+          "text": "Prenez un anti-inflammatoire non stéroïdien (AINS) (par exemple, ibuprofène, Motrin, Advil, Aleve). Prenez avec un grand verre d’eau pour éviter les brûlures d’estomac. Ne buvez pas d’alcool en prenant des AINS."
+        },
+        {
+          "text": "Relaxant musculaire (si prescrit)"
+        },
+        {
+          "text": "Prenez une douche chaude"
+        },
+        {
+          "text": "Cardio",
+          "nextCardId": "3-3"
+        },
+        {
+          "text": "Desserrez votre mâchoire"
+        },
+        {
+          "text": "Exercice léger",
+          "nextCardId": "3-1"
+        }
       ]
     },
     {
       "id": "5-8",
       "title": "Comment gérer une migraine (avec aura)",
       "items": [
-        { "text": "Prenez vos médicaments d’urgence contre la migraine (si prescrits)" },
-        { "text": "Buvez un grand verre d’eau" },
-        { "text": "Prenez un anti-inflammatoire non stéroïdien (AINS) (par exemple, ibuprofène, Motrin, Advil, Aleve). Prenez avec un grand verre d’eau pour éviter les brûlures d’estomac. Ne buvez pas d’alcool en prenant des AINS ou d’autres médicaments contre la migraine." },
-        { "text": "Prenez 1 000 mg d’oxyde de magnésium" },
-        { "text": "Prenez un benadryl et faites une sieste" },
-        { "text": "Mangez quelque chose", "nextCardId": "4-7" },
-        { "text": "Mettez une poche de glace ou une bouillotte sur votre tête, selon ce qui vous fait du bien" },
-        { "text": "Allongez-vous dans une pièce sombre et calme" },
-        { "text": "Mettez des bouchons d’oreille" },
-        { "text": "Dormez", "nextCardId": "5-12" },
-        { "text": "Évitez les lumières vives / les appareils à lumière bleue" }
+        {
+          "text": "Prenez vos médicaments d’urgence contre la migraine (si prescrits)"
+        },
+        {
+          "text": "Buvez un grand verre d’eau"
+        },
+        {
+          "text": "Prenez un anti-inflammatoire non stéroïdien (AINS) (par exemple, ibuprofène, Motrin, Advil, Aleve). Prenez avec un grand verre d’eau pour éviter les brûlures d’estomac. Ne buvez pas d’alcool en prenant des AINS ou d’autres médicaments contre la migraine."
+        },
+        {
+          "text": "Prenez 1 000 mg d’oxyde de magnésium"
+        },
+        {
+          "text": "Prenez un benadryl et faites une sieste"
+        },
+        {
+          "text": "Mangez quelque chose",
+          "nextCardId": "4-7"
+        },
+        {
+          "text": "Mettez une poche de glace ou une bouillotte sur votre tête, selon ce qui vous fait du bien"
+        },
+        {
+          "text": "Allongez-vous dans une pièce sombre et calme"
+        },
+        {
+          "text": "Mettez des bouchons d’oreille"
+        },
+        {
+          "text": "Dormez",
+          "nextCardId": "5-12"
+        },
+        {
+          "text": "Évitez les lumières vives / les appareils à lumière bleue"
+        }
       ]
     },
     {
       "id": "5-9",
       "title": "Comment gérer un mal de tête général",
       "items": [
-        { "text": "Prenez un anti-inflammatoire non stéroïdien (AINS) (par exemple, ibuprofène, Motrin, Advil, Aleve). Prenez avec un grand verre d’eau pour éviter les brûlures d’estomac. Ne buvez pas d’alcool en prenant des AINS." },
-        { "text": "Mangez quelque chose", "nextCardId": "4-7" },
-        { "text": "Buvez un grand verre d’eau" },
-        { "text": "Reposez-vous si cela vous fait du bien" },
-        { "text": "Exercice léger si cela vous fait du bien" },
-        { "text": "Réduisez les stimuli - sons, lumières, téléphone, humains" }
+        {
+          "text": "Prenez un anti-inflammatoire non stéroïdien (AINS) (par exemple, ibuprofène, Motrin, Advil, Aleve). Prenez avec un grand verre d’eau pour éviter les brûlures d’estomac. Ne buvez pas d’alcool en prenant des AINS."
+        },
+        {
+          "text": "Mangez quelque chose",
+          "nextCardId": "4-7"
+        },
+        {
+          "text": "Buvez un grand verre d’eau"
+        },
+        {
+          "text": "Reposez-vous si cela vous fait du bien"
+        },
+        {
+          "text": "Exercice léger si cela vous fait du bien"
+        },
+        {
+          "text": "Réduisez les stimuli - sons, lumières, téléphone, humains"
+        }
       ]
     },
     {
       "id": "5-10",
       "title": "Douleur à l’estomac ou nausées",
       "items": [
-        { "text": "Tums - si vous avez des brûlures d’estomac, des maux d’estomac ou une indigestion" },
-        { "text": "Gas-X - si vous vous sentez gazeux / ballonné" },
-        { "text": "Buvez un verre d’eau" },
-        { "text": "Toast/crackers/banane mangés en petites bouchées" },
-        { "text": "Ginger ale ou thé au gingembre" },
-        { "text": "Si vous avez des nausées, allongez-vous sur votre côté gauche (si confortable). Cela place votre estomac sous votre œsophage et peut réduire les nausées / l’envie de vomir." }
+        {
+          "text": "Tums - si vous avez des brûlures d’estomac, des maux d’estomac ou une indigestion"
+        },
+        {
+          "text": "Gas-X - si vous vous sentez gazeux / ballonné"
+        },
+        {
+          "text": "Buvez un verre d’eau"
+        },
+        {
+          "text": "Toast/crackers/banane mangés en petites bouchées"
+        },
+        {
+          "text": "Ginger ale ou thé au gingembre"
+        },
+        {
+          "text": "Si vous avez des nausées, allongez-vous sur votre côté gauche (si confortable). Cela place votre estomac sous votre œsophage et peut réduire les nausées / l’envie de vomir."
+        }
       ]
     },
     {
       "id": "5-11",
       "title": "Quand vous avez mal dormi",
       "items": [
-        { "text": "Faites une sieste" },
-        { "text": "Fermez les yeux, détendez votre corps et concentrez-vous sur votre respiration pendant 3-5 minutes" },
-        { "text": "Buvez de l’eau" },
-        { "text": "Prenez un bain chaud" },
-        { "text": "Prévenez la surexcitation", "nextCardId": "1-5" },
-        { "text": "Prévenez une migraine", "nextCardId": "5-5" },
-        { "text": "Faites un exercice de mise à la terre", "nextCardId": "1-6" }
+        {
+          "text": "Faites une sieste"
+        },
+        {
+          "text": "Fermez les yeux, détendez votre corps et concentrez-vous sur votre respiration pendant 3-5 minutes"
+        },
+        {
+          "text": "Buvez de l’eau"
+        },
+        {
+          "text": "Prenez un bain chaud"
+        },
+        {
+          "text": "Prévenez la surexcitation",
+          "nextCardId": "1-5"
+        },
+        {
+          "text": "Prévenez une migraine",
+          "nextCardId": "5-5"
+        },
+        {
+          "text": "Faites un exercice de mise à la terre",
+          "nextCardId": "1-6"
+        }
       ]
     },
     {
       "id": "5-12",
       "title": "Améliorer l’hygiène du sommeil",
       "items": [
-        { "text": "J’ai mal dormi la nuit dernière", "nextCardId": "5-11" },
-        { "text": "J’ai de l’insomnie MAINTENANT", "nextCardId": "5-15" },
-        { "text": "Améliorer le sommeil en général", "nextCardId": "5-13" },
-        { "text": "Je dois parler à un médecin de mes problèmes de sommeil", "nextCardId": "5-14" }
+        {
+          "text": "J’ai mal dormi la nuit dernière",
+          "nextCardId": "5-11"
+        },
+        {
+          "text": "J’ai de l’insomnie MAINTENANT",
+          "nextCardId": "5-15"
+        },
+        {
+          "text": "Améliorer le sommeil en général",
+          "nextCardId": "5-13"
+        },
+        {
+          "text": "Je dois parler à un médecin de mes problèmes de sommeil",
+          "nextCardId": "5-14"
+        }
       ]
     },
     {
       "id": "5-13",
       "title": "Conseils pour améliorer l’hygiène du sommeil",
       "items": [
-        { "text": "Réglez une alarme pour commencer votre routine nocturne à la même heure chaque soir, même si vous n’êtes pas fatigué(e) quand l’alarme sonne. L’objectif est de terminer toutes les tâches du coucher. Ensuite, la seule tâche restante est de fermer les yeux." },
-        { "text": "Essayez de faire suffisamment d’activité physique pendant la journée. Cela peut réduire l’agitation que vous ressentez lorsque vous vous allongez enfin." },
-        { "text": "Déterminez jusqu’à quelle heure vous pouvez consommer de la caféine sans qu’elle affecte votre coucher, et respectez cette règle autant que possible. Savoir comment la caféine vous affecte peut vous aider à contrôler son impact." },
-        { "text": "Déterminez jusqu’à quelle heure vous pouvez prendre vos médicaments pour le TDAH ou d’autres stimulants sans qu’ils affectent votre coucher. Vous devrez peut-être régler une alarme pour prendre vos médicaments du matin assez tôt." },
-        { "text": "Installez un filtre de lumière bleue pour votre téléphone / ordinateur" },
-        { "text": "Parlez à votre médecin de vos problèmes de sommeil", "nextCardId": "5-14" }
+        {
+          "text": "Réglez une alarme pour commencer votre routine nocturne à la même heure chaque soir, même si vous n’êtes pas fatigué(e) quand l’alarme sonne. L’objectif est de terminer toutes les tâches du coucher. Ensuite, la seule tâche restante est de fermer les yeux."
+        },
+        {
+          "text": "Essayez de faire suffisamment d’activité physique pendant la journée. Cela peut réduire l’agitation que vous ressentez lorsque vous vous allongez enfin."
+        },
+        {
+          "text": "Déterminez jusqu’à quelle heure vous pouvez consommer de la caféine sans qu’elle affecte votre coucher, et respectez cette règle autant que possible. Savoir comment la caféine vous affecte peut vous aider à contrôler son impact."
+        },
+        {
+          "text": "Déterminez jusqu’à quelle heure vous pouvez prendre vos médicaments pour le TDAH ou d’autres stimulants sans qu’ils affectent votre coucher. Vous devrez peut-être régler une alarme pour prendre vos médicaments du matin assez tôt."
+        },
+        {
+          "text": "Installez un filtre de lumière bleue pour votre téléphone / ordinateur"
+        },
+        {
+          "text": "Parlez à votre médecin de vos problèmes de sommeil",
+          "nextCardId": "5-14"
+        }
       ]
     },
     {
       "id": "5-14",
       "title": "Problèmes de sommeil à discuter avec votre médecin",
       "items": [
-        { "text": "Ronflez-vous ? Ou respirez-vous bruyamment la nuit ? Parlez à votre médecin d’un test de sommeil pour l’apnée obstructive du sommeil. De nombreux tests d’apnée peuvent être effectués à domicile pendant la nuit." },
-        { "text": "Vous endormez-vous à des moments / endroits aléatoires ? Beaucoup de personnes atteintes de TDAH ont également de la narcolepsie ou un autre trouble du sommeil. Parlez de vos symptômes à votre médecin." },
-        { "text": "Avez-vous des migraines ?" },
-        { "text": "Est-il difficile de s’endormir parce que vos pensées commencent à tourner et que votre anxiété augmente ? Vous pourriez bénéficier d’un médicament anti-anxiété pris au coucher pour arrêter les pensées qui tournent." }
+        {
+          "text": "Ronflez-vous ? Ou respirez-vous bruyamment la nuit ? Parlez à votre médecin d’un test de sommeil pour l’apnée obstructive du sommeil. De nombreux tests d’apnée peuvent être effectués à domicile pendant la nuit."
+        },
+        {
+          "text": "Vous endormez-vous à des moments / endroits aléatoires ? Beaucoup de personnes atteintes de TDAH ont également de la narcolepsie ou un autre trouble du sommeil. Parlez de vos symptômes à votre médecin."
+        },
+        {
+          "text": "Avez-vous des migraines ?"
+        },
+        {
+          "text": "Est-il difficile de s’endormir parce que vos pensées commencent à tourner et que votre anxiété augmente ? Vous pourriez bénéficier d’un médicament anti-anxiété pris au coucher pour arrêter les pensées qui tournent."
+        }
       ]
     },
     {
       "id": "5-15",
       "title": "Gérer l’insomnie",
       "items": [
-        { "text": "Éteignez les lumières vives" },
-        { "text": "Utilisez le mode sombre et le filtre de lumière bleue sur vos appareils" },
-        { "text": "Ne regardez pas de vidéos / films / émissions excitants ou mentalement intenses juste avant de dormir" },
-        { "text": "Prenez une collation avant de dormir" },
-        { "text": "Prenez de la mélatonine ou du benadryl avant de dormir" },
-        { "text": "Prenez une douche chaude. Votre corps se sentira plus somnolent en refroidissant." },
-        { "text": "Essayez une application de méditation (comme l’application gratuite et sans publicité Mindfulness Coach du Département des Anciens Combattants des États-Unis)" },
-        { "text": "Écoutez de la musique relaxante, des livres audio ou des podcasts." },
-        { "text": "Si les bruits nocturnes vous dérangent, essayez des bouchons d’oreille. Assurez-vous que votre réveil est réglé sur le volume le plus fort et sur la vibration." },
-        { "text": "Posez le téléphone. Fermez les yeux. Respirez régulièrement et travaillez à détendre tous vos muscles, en commençant par votre tête et en descendant lentement." },
-        { "text": "Rappelez-vous que même si vous ne pouvez pas dormir, simplement vous allonger avec les yeux fermés donnera à votre esprit et à votre corps un peu de repos." }
+        {
+          "text": "Éteignez les lumières vives"
+        },
+        {
+          "text": "Utilisez le mode sombre et le filtre de lumière bleue sur vos appareils"
+        },
+        {
+          "text": "Ne regardez pas de vidéos / films / émissions excitants ou mentalement intenses juste avant de dormir"
+        },
+        {
+          "text": "Prenez une collation avant de dormir"
+        },
+        {
+          "text": "Prenez de la mélatonine ou du benadryl avant de dormir"
+        },
+        {
+          "text": "Prenez une douche chaude. Votre corps se sentira plus somnolent en refroidissant."
+        },
+        {
+          "text": "Essayez une application de méditation (comme l’application gratuite et sans publicité Mindfulness Coach du Département des Anciens Combattants des États-Unis)"
+        },
+        {
+          "text": "Écoutez de la musique relaxante, des livres audio ou des podcasts."
+        },
+        {
+          "text": "Si les bruits nocturnes vous dérangent, essayez des bouchons d’oreille. Assurez-vous que votre réveil est réglé sur le volume le plus fort et sur la vibration."
+        },
+        {
+          "text": "Posez le téléphone. Fermez les yeux. Respirez régulièrement et travaillez à détendre tous vos muscles, en commençant par votre tête et en descendant lentement."
+        },
+        {
+          "text": "Rappelez-vous que même si vous ne pouvez pas dormir, simplement vous allonger avec les yeux fermés donnera à votre esprit et à votre corps un peu de repos."
+        }
       ]
     }
   ]
