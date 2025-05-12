@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Brain } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import { HamburgerMenuButton } from './HamburgerMenuButton';
 import { HamburgerMenuContent } from './HamburgerMenuContent';
 
@@ -13,9 +14,9 @@ export const Header: React.FC = () => {
       <div className="mx-auto px-4 flex justify-between items-center py-4 h-full text text-brain-header">
         {/* Left side: Logo & Title */}
         <div className="flex items-center justify-center text-nowrap space-x-2 truncate">
-          <a href="#">
+          <Link to="/">
             <Brain />
-          </a>
+          </Link>
           <div className="text-xl font-bold truncate">{APP_TITLE}</div>
         </div>
 

@@ -25,7 +25,7 @@ const DeckNavigationButton = ({ onClick, label, icon: Icon, disabled }: DeckNavi
   </button>
 );
 
-export const Deck = ({}) => {
+export const Deck = () => {
   const context = useDeckContext();
   const brainContext = useBrainContext();
   const { t } = useTranslation();
