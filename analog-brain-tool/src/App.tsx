@@ -9,6 +9,7 @@ import { BrainToolContainer } from './brainTool/BrainToolContainer';
 import { SettingsProvider } from './settings/settingsContext/SettingsProvider';
 import { Header } from './header/Header';
 import { AppContextProvider } from './appContext/AppContextProvider';
+import useThemeManager from './theme/useThemeManager';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -21,6 +22,9 @@ const queryClient = new QueryClient({
 
 export function App() {
   const { t } = useTranslation();
+  const themeManager = useThemeManager(); // make sure it's loaded already
+
+  themeManager.initialize();
 
   const setPageTitle = () => {
     document.title = t(`pageTitle`);

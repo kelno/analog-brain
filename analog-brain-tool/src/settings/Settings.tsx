@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { About } from '../components/About';
 import { Button } from '../components/Button';
 import { LanguageSwitcher } from './LanguageSwitcher';
-import { ColorSwitch } from './ColorSwitch';
+import { ThemeSwitcher } from './ThemeSwitcher';
 
 export const Settings: React.FC = () => {
   const { indexUrl, defaultUrl, setIndexUrl, resetIndexUrl } = useSettings();
@@ -30,7 +30,7 @@ export const Settings: React.FC = () => {
     <div className="rounded-lg p-6 shadow-md mb-6 space-y-8 bg-brain-bg">
       <h2 className="text-2xl font-bold mb-4"> {t('settings.title')}</h2>
       <LanguageSwitcher />
-      <ColorSwitch />
+      <ThemeSwitcher />
       <div className="space-y-4">
         <div className="flex flex-col">
           <label className="text-sm font-medium mb-2">{t('settings.decksURL')}</label>
