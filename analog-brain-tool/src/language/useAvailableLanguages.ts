@@ -1,7 +1,7 @@
 
 //const fallbackLanguage = 'en';
 
-import { useDeckManager } from "../decks/useDeckManager";
+import { useDeckManager } from "../deckManager/useDeckManager";
 
 interface AvailableLanguages {
   languages: string[] // list of available languages

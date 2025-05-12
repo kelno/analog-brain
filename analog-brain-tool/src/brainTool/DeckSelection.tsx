@@ -1,6 +1,6 @@
 import { FC, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useDeckManager } from '../decks/useDeckManager';
+import { useDeckManager } from '../deckManager/useDeckManager';
 import { useAppContext } from '../appContext/useAppContext';
 import { IDeck } from '../types/Deck';
 import { languagesInfos } from '../language/languageInfo';

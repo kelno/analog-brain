@@ -1,5 +1,5 @@
 import { IDeck, DeckId } from '../../types/Deck/IDeck';
-import { DeckManager } from '../../decks/DeckManager';
+import { DeckManager } from '../../deckManager/DeckManager';
 import { PersistentStorageManager } from '../../utils/PersistentStorageManager/PersistentStorageManager';
 import { PersistentStorageTypes } from '../../utils/PersistentStorageManager/PersistentStorageTypes';
 

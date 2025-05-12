@@ -5,8 +5,8 @@ import { UrlManager } from '../../utils/UrlManager/UrlManager';
 import { UrlParams } from '../../utils/UrlManager/UrlParams';
 import { AppContextData } from '../../appContext/AppContextData';
 import { useAppContext } from '../../appContext/useAppContext';
-import { useDeckManager } from '../../decks/useDeckManager';
-import { DeckManager } from '../../decks/DeckManager';
+import { useDeckManager } from '../../deckManager/useDeckManager';
+import { DeckManager } from '../../deckManager/DeckManager';
 import { PersistentStorageManager } from '../../utils/PersistentStorageManager/PersistentStorageManager';
 import { PersistentStorageTypes } from '../../utils/PersistentStorageManager/PersistentStorageTypes';
 
