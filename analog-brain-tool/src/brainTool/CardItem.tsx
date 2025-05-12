@@ -39,10 +39,10 @@ export const CardItem: FC<CardItemProps> = ({ carditem, handleClickCard }) => {
   return (
     <li
       className={`p-2 border 
-        ${hasLinkedCard ? 'rounded hover:bg-gray-200' : 'border-dashed'} 
+        ${hasLinkedCard ? 'rounded hover:bg-brain-secondary-hover' : 'border-dashed'} 
         ${cursor}`}
       style={{ borderColor: borderColor }}
-      onClick={handleClick}
+      {...(isClickable && { onClick: handleClick })}
       aria-describedby={tooltipText}
       title={tooltipText}
     >
