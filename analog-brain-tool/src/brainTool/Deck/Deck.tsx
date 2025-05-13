@@ -5,7 +5,7 @@ import { RotateCcw, CircleX, ChevronLeft, ChevronRight, LucideIcon } from 'lucid
 import { useBrainContext } from '../store/useBrainContext';
 import { SimpleIconButton } from '../../components/SimpleIconButton';
 import { useParams } from 'react-router-dom';
-import { BrainToolError, BrainToolErrorType } from '../BrainToolErrorHandler';
+import { BrainToolError, BrainToolErrorType } from '../error/BrainToolError';
 
 interface DeckNavigationButtonProps {
   onClick?: () => void;
@@ -16,7 +16,7 @@ interface DeckNavigationButtonProps {
 
 const DeckNavigationButton = ({ onClick, label, icon: Icon, disabled }: DeckNavigationButtonProps) => (
   <button
-    onClick={disabled ? undefined : onClick}
+    {...(!disabled && { onClick: onClick })}
     className={`h-full transition-colors align-stretch rounded-xl [&>svg]:scale-y-[3] ${
       disabled ? 'cursor-default opacity-50' : 'cursor-pointer hover:bg-brain-secondary'
     }`}

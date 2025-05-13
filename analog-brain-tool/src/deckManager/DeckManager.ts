@@ -2,7 +2,7 @@ import { IDeck, DeckId } from '../types/Deck/IDeck';
 import { LangId } from '../brainTool/store/BrainContextData';
 import { DataValidator } from '../dataValidation/DataValidator';
 import stripJsonComments from 'strip-json-comments';
-import { BrainToolError, BrainToolErrorType } from '../brainTool/BrainToolErrorHandler';
+import { BrainToolError, BrainToolErrorType } from '../brainTool/error/BrainToolError';
 
 interface FetchResult {
   decks: IDeck[];
@@ -28,6 +28,7 @@ export class DeckManager {
   private _errors: string[] = []; // loading errors
   private _pendingLoadState: DecksLoadingState | undefined = undefined; // exists only while loading
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   private fetchAndParseJSONC = async (url: string, errorType: BrainToolErrorType ) : Promise<any> => {
     const response = await fetch(url, { cache: 'no-store' });
     if (!response.ok) {
@@ -67,7 +68,7 @@ export class DeckManager {
     const indexData = await this.fetchAndParseJSONC(indexUrl, BrainToolErrorType.FAILED_TO_FETCH_INDEX);
    
     const decks: IDeck[] = [];
-    let errors = [];
+    const errors = [];
 
     const getFileUrl = (fileName: string) => {
       // Get the base URL from the index file location

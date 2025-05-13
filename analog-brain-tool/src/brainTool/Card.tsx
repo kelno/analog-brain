@@ -8,7 +8,7 @@ import { useTranslation } from 'react-i18next';
 import { Share2 } from 'lucide-react';
 import { processTextContent } from '../utils/TextProcessing';
 import { useParams } from 'react-router-dom';
-import { BrainToolError, BrainToolErrorType } from './BrainToolErrorHandler';
+import { BrainToolError, BrainToolErrorType } from './error/BrainToolError';
 
 interface CardProps {
   card: ICard | undefined;

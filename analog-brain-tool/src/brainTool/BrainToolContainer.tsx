@@ -1,5 +1,5 @@
 import { useTranslation } from 'react-i18next';
-import { BrainToolErrorHandler } from './BrainToolErrorHandler';
+import { BrainToolErrorHandler } from './error/BrainToolErrorHandler';
 import { Suspense } from 'react';
 import { BrainContextProvider } from './store/BrainContextProvider';
 import { BrainTool } from './BrainTool';

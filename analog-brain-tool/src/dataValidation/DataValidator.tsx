@@ -1,5 +1,5 @@
 import { IDeck, MINIMAL_CARD_DECK_FORMAT_VERSION } from '../types/Deck/IDeck';
-import { ValidateFunction } from 'ajv';
+import { JSONSchemaType, ValidateFunction } from 'ajv';
 import { ajv } from './useAjv';
 import { DeckUtils } from '../types/Deck';
 
@@ -11,9 +11,9 @@ interface ValidationResult {
 export class DataValidator {
   private _validate: ValidateFunction<IDeck>;
 
-  public constructor(schemaJSON: any) {
+  public constructor(schemaJSON: JSONSchemaType<IDeck>) {
     console.debug('Constructing new DataValidator');
-    this._validate = ajv.compile<IDeck>(schemaJSON);
+    this._validate = ajv.compile(schemaJSON);
   }
 
   public validateDeckData = (deck: IDeck): ValidationResult => {
@@ -34,7 +34,7 @@ export class DataValidator {
   };
 
   public validateDeckJSON = (deck: IDeck): ValidationResult => {
-    let errors: string[] = [];
+    const errors: string[] = [];
 
     if (deck.formatVersion < MINIMAL_CARD_DECK_FORMAT_VERSION) {
       const error = `Card deck ${deck.id} format version is below minimal version ${MINIMAL_CARD_DECK_FORMAT_VERSION}`;
