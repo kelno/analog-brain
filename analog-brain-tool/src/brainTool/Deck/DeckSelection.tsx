@@ -1,13 +1,12 @@
 import { FC, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useDeckManager } from '../deckManager/useDeckManager';
-import { useAppContext } from '../appContext/useAppContext';
-import { IDeck } from '../types/Deck';
-import { languagesInfos } from '../language/languageInfo';
-import { useBrainContext } from './store/useBrainContext';
-import { Button } from '../components/Button';
-import { processTextContent } from '../utils/TextProcessing';
-import { Form } from 'react-router-dom';
+import { useAppContext } from '../../appContext/useAppContext';
+import { useDeckManager } from '../../deckManager/useDeckManager';
+import { languagesInfos } from '../../language/languageInfo';
+import { IDeck } from '../../types/Deck';
+import { processTextContent } from '../../utils/TextProcessing';
+import { Button } from '../../components/Button';
+import { useNavigate } from 'react-router';
 
 interface DeckSelectionProps extends Record<never, never> {}
 
@@ -15,7 +14,9 @@ export const DeckSelection: FC<DeckSelectionProps> = () => {
   const appContext = useAppContext();
   const { t } = useTranslation();
   const deckManager = useDeckManager();
-  const brainContext = useBrainContext();
+  const navigate = useNavigate(); // Initialize useNavigate
+
+  const [invalidSelection, setInvalidSelection] = useState(false);
 
   const lang = appContext.language;
   const languageName = languagesInfos[lang]?.name ?? lang;
@@ -39,12 +40,15 @@ export const DeckSelection: FC<DeckSelectionProps> = () => {
     setSelectedDeckInfo(deck);
   };
 
-  const hasErrors = deckManager.errors.length > 0;
+  const hasWarnings = deckManager.errors.length > 0;
 
   const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
     if (!selectedDeckInfo) {
-      e.preventDefault();
+      setInvalidSelection(true);
+      return;
     }
+    navigate(`/deck/${selectedDeckInfo.id}`); // Navigate to the selected deck
   };
 
   return (
@@ -52,12 +56,12 @@ export const DeckSelection: FC<DeckSelectionProps> = () => {
       className="flex flex-col min-h-full w-full justify-center items-center"
       aria-labelledby={t('tool.deck.deckSelectionTitle')}
     >
-      <Form action={`/deck/${selectedDeckInfo?.id}`} className="mb-6" onSubmit={handleSubmit}>
+      <form className="mb-6" onSubmit={handleSubmit}>
         <div className="mx-4 min-w-3/4 md:min-w-2xl lg:min-w-3xl">
-          <div className="text-xl my-4">
+          <div className="my-4">
             <div className="flex flex-col gap-4">
-              <div className="flex flex-wrap items-center">
-                <label htmlFor="deck-selector" className="text-xl mr-2">
+              <div className="text-xl flex flex-wrap items-center">
+                <label htmlFor="deck-selector" className="mr-2">
                   {t('tool.deck.choosePrompt')}
                 </label>
                 <div className="flex items-center">
@@ -66,7 +70,9 @@ export const DeckSelection: FC<DeckSelectionProps> = () => {
                     onChange={handleSelectDeck}
                     className="py-1 px-2 border rounded-2xl shadow-md"
                     defaultValue={selectedDeckInfo?.id ?? ''}
-                    aria-invalid={hasErrors}
+                    aria-errormessage="selectError"
+                    aria-required
+                    aria-invalid={invalidSelection}
                   >
                     {!availableDecks && (
                       <option value="" disabled>
@@ -80,43 +86,46 @@ export const DeckSelection: FC<DeckSelectionProps> = () => {
                         </option>
                       ))}
                   </select>
-                  {hasErrors && (
+                  {hasWarnings && (
                     <span className="ml-2 text-yellow-500" aria-label={t('tool.errors.warnErrors')}>
                       ⚠️
                     </span>
                   )}
                 </div>
               </div>
+              {invalidSelection ? <div id="selectError">Invalid selection</div> : undefined}
             </div>
           </div>
 
-          {selectedDeckInfo && (
-            <article
-              className="border rounded-lg p-4 shadow-md flex flex-col space-y-1"
-              aria-labelledby="selected-deck-title"
-            >
-              <h1 id="selected-deck-title" className="font-bold text-xl text-center">
-                {selectedDeckInfo.title}
-              </h1>
+          <article
+            className="border rounded-lg p-4 shadow-md flex flex-col space-y-1"
+            aria-labelledby="selected-deck-title"
+          >
+            {selectedDeckInfo && (
+              <>
+                <h1 id="selected-deck-title" className="font-bold text-xl text-center">
+                  {selectedDeckInfo.title}
+                </h1>
 
-              {selectedDeckInfo.description && (
-                <div className="">
-                  <h2 className="font-bold">{t('tool.deck.description')}</h2>
-                  {processTextContent(selectedDeckInfo.description)}
-                </div>
-              )}
-              {selectedDeckInfo.author && (
-                <div className="">
-                  <h2 className="font-bold">{t('tool.deck.author')}</h2> {selectedDeckInfo.author}
-                </div>
-              )}
-              <Button type="submit" className="font-bold mt-4">
-                {t('tool.deck.start')}
-              </Button>
-            </article>
-          )}
+                {selectedDeckInfo.description && (
+                  <div className="">
+                    <h2 className="font-bold">{t('tool.deck.description')}</h2>
+                    {processTextContent(selectedDeckInfo.description)}
+                  </div>
+                )}
+                {selectedDeckInfo.author && (
+                  <div className="">
+                    <h2 className="font-bold">{t('tool.deck.author')}</h2> {selectedDeckInfo.author}
+                  </div>
+                )}
+              </>
+            )}
+            <Button type="submit" className="font-bold mt-4">
+              {t('tool.deck.start')}
+            </Button>
+          </article>
         </div>
-      </Form>
+      </form>
     </section>
   );
 };

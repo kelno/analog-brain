@@ -8,12 +8,17 @@ export const BrainToolContainer = () => {
   const { t } = useTranslation();
 
   return (
-    <BrainToolErrorHandler>
-      <Suspense fallback={t(`suspenseLoading`)}>
-        <BrainContextProvider>
-          <BrainTool />
-        </BrainContextProvider>
-      </Suspense>
-    </BrainToolErrorHandler>
+    <div className="relative min-h-full flex">
+      {/* We take at least the whole screen, but maybe more*/}
+      <div className="flex flex-grow flex-col relative min-h-full ">
+        <BrainToolErrorHandler>
+          <Suspense fallback={t(`suspenseLoading`)}>
+            <BrainContextProvider>
+              <BrainTool />
+            </BrainContextProvider>
+          </Suspense>
+        </BrainToolErrorHandler>
+      </div>
+    </div>
   );
 };

@@ -1,16 +1,16 @@
 import React, { FC } from 'react';
-import { CardId, ICardItem } from '../types/Card/ICard';
-import { DeckUtils } from '../types/Deck';
-import { useBrainContext } from './store/useBrainContext';
+import { CardId, ICardItem } from '../../types/Card/ICard';
+import { DeckUtils } from '../../types/Deck';
+import { useBrainContext } from '../store/useBrainContext';
 import { useTranslation } from 'react-i18next';
-import { processTextContent } from '../utils/TextProcessing';
+import { processTextContent } from '../../utils/TextProcessing';
 
 interface CardItemProps {
-  carditem: ICardItem;
+  cardItem: ICardItem;
   handleClickCard: (id: CardId) => void;
 }
 
-export const CardItem: FC<CardItemProps> = ({ carditem, handleClickCard }) => {
+export const CardItem: FC<CardItemProps> = ({ cardItem: carditem, handleClickCard }) => {
   const brainContext = useBrainContext();
   const { t } = useTranslation();
   const deck = brainContext.currentDeck;
@@ -24,7 +24,7 @@ export const CardItem: FC<CardItemProps> = ({ carditem, handleClickCard }) => {
     : hasLinkedCard
     ? t('tool.cardItem.nextCardTooltipError')
     : undefined;
-  const isClickable = linkedCard;
+  const isClickable: boolean = linkedCard !== undefined;
 
   const handleClick = (event: React.MouseEvent) => {
     if (isClickable) {

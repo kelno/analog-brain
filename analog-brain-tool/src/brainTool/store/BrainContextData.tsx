@@ -36,13 +36,15 @@ export class BrainContextData {
     if (userRequest) PersistentStorageManager.set(PersistentStorageTypes.CHOSEN_DECK, newDeck.id);
   }
 
-  public selectDeck = (deckId: DeckId, userRequest: boolean = false) => {
+  // returns success
+  public selectDeck = (deckId: DeckId, userRequest: boolean = false): boolean => {
     const newDeck = this.deckStorage.getDeckById(this.language, deckId);
     if (!newDeck) {
       console.error('Failed to select deck with id + ' + deckId);
-      return;
+      return false;
     }
     this._selectDeck(newDeck, userRequest);
+    return true;
   };
 
   public closeDeck = () => {

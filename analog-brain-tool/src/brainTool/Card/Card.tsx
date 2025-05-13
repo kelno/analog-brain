@@ -1,14 +1,12 @@
 import { FC } from 'react';
-import { ICard, CardId, ICardItem } from '../types/Card/ICard';
+import { ICard, CardId, ICardItem } from '../../types/Card/ICard';
 import { CardItem } from './CardItem';
-import { useShare } from '../share/useShare';
-import { useDeckContext } from './Deck/useDeckContext';
-import { SimpleIconButton } from '../components/SimpleIconButton';
+import { useShare } from '../../share/useShare';
+import { SimpleIconButton } from '../../components/SimpleIconButton';
 import { useTranslation } from 'react-i18next';
 import { Share2 } from 'lucide-react';
-import { processTextContent } from '../utils/TextProcessing';
-import { useParams } from 'react-router-dom';
-import { BrainToolError, BrainToolErrorType } from './error/BrainToolError';
+import { processTextContent } from '../../utils/TextProcessing';
+import { useDeckContext } from '../Deck/useDeckContext';
 
 interface CardProps {
   card: ICard | undefined;
@@ -16,11 +14,7 @@ interface CardProps {
 
 export const Card: FC<CardProps> = ({ card }) => {
   const { shareFromParams } = useShare();
-  const { id } = useParams();
-  if (id === undefined)
-    throw new BrainToolError('No id provided for Deck', BrainToolErrorType.DECK_NO_ID_PROVIDED);
-
-  const context = useDeckContext(id);
+  const context = useDeckContext();
   const { t } = useTranslation();
 
   const handleShare = () => {
@@ -29,6 +23,11 @@ export const Card: FC<CardProps> = ({ card }) => {
 
   const handleClickCard = (cardId: CardId) => {
     context.selectCard(cardId, true);
+  };
+
+  const getItemId = (card: ICard, cardItem: ICardItem): string => {
+    return `${card.id}-item-${cardItem.text.substring(0, 10)}-${cardItem.text.length}`;
+    /* maybe not great, we could use a cardItem id later we we have a proper editor*/
   };
 
   return (
@@ -42,15 +41,10 @@ export const Card: FC<CardProps> = ({ card }) => {
             <h2 className="text-xl font-bold">{card.title}</h2>
             {card.text && <p className="mt-2">{processTextContent(card.text)}</p>}
             <ul className="mt-4 space-y-2">
-              {card.items.map((carditem: ICardItem) => (
+              {card.items.map((cardItem: ICardItem) => (
                 <CardItem
-                  key={
-                    `${card.id}-item-${carditem.text.substring(
-                      0,
-                      10,
-                    )}` /* maybe not great, we could use a cardItem id later we we have a proper editor*/
-                  }
-                  carditem={carditem}
+                  key={getItemId(card, cardItem)}
+                  cardItem={cardItem}
                   handleClickCard={handleClickCard}
                 />
               ))}

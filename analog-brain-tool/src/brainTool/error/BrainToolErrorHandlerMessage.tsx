@@ -25,14 +25,14 @@ export const BrainToolErrorHandlerMessage: FC<BrainToolErrorHandlerProps> = ({ e
     case BrainToolErrorType.FAILED_TO_LOAD_DATA_VALIDATOR:
       errorMsg = t('tool.errors.generic');
       break;
-    case BrainToolErrorType.DECK_NO_ID_PROVIDED:
-      throw new Error('DECK_NO_ID_PROVIDED/ TODO: redirect to home?');
-      break;
+    case BrainToolErrorType.DECK_FAILED_TO_SELECT:
+      errorMsg = t('tool.errors.generic');
   }
 
   return (
     <div className="p-20">
-      <div className="text-xl font-bold mb-2">Failed to load decks!</div>
+      {/* TODO translate */}
+      <div className="text-xl font-bold mb-2">Failed to load deck!</div>
       {errorMsg && <div>{errorMsg}</div>}
     </div>
   );

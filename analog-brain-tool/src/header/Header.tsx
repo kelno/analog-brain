@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Brain } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router';
 import { HamburgerMenuButton } from './HamburgerMenuButton';
 import { HamburgerMenuContent } from './HamburgerMenuContent';
 

@@ -4,11 +4,8 @@ import { DeckContext } from './DeckContext';
 import { DeckContextData } from './DeckContextData';
 
 // can throw
-export const useDeckContext = (deckId: string) : DeckContextData => {
-  console.debug(`Rendering useDeckContext with id ${deckId}`);
-
-  if (deckId === undefined)
-    throw new Error('useDeckContext received no deckId');
+export const useDeckContext = () : DeckContextData => {
+  console.debug(`Rendering useDeckContext`);
 
   const context = use(DeckContext);
   if (!context) {

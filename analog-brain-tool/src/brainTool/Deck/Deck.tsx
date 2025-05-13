@@ -1,38 +1,25 @@
-import { Card } from '../Card';
+import { Card } from '../Card/Card';
 import { useDeckContext } from './useDeckContext';
 import { useTranslation } from 'react-i18next';
-import { RotateCcw, CircleX, ChevronLeft, ChevronRight, LucideIcon } from 'lucide-react';
+import { RotateCcw, CircleX, ChevronLeft, ChevronRight } from 'lucide-react';
 import { useBrainContext } from '../store/useBrainContext';
 import { SimpleIconButton } from '../../components/SimpleIconButton';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router';
 import { BrainToolError, BrainToolErrorType } from '../error/BrainToolError';
-
-interface DeckNavigationButtonProps {
-  onClick?: () => void;
-  label: string;
-  icon: LucideIcon;
-  disabled: boolean;
-}
-
-const DeckNavigationButton = ({ onClick, label, icon: Icon, disabled }: DeckNavigationButtonProps) => (
-  <button
-    {...(!disabled && { onClick: onClick })}
-    className={`h-full transition-colors align-stretch rounded-xl [&>svg]:scale-y-[3] ${
-      disabled ? 'cursor-default opacity-50' : 'cursor-pointer hover:bg-brain-secondary'
-    }`}
-    aria-label={label}
-    disabled={disabled}
-  >
-    <Icon size={50} />
-  </button>
-);
+import { DeckNavigationButton } from './DeckNavigationButton';
 
 export const Deck = () => {
   const { id } = useParams();
-  if (id === undefined)
-    throw new BrainToolError('No id provided for Deck', BrainToolErrorType.DECK_NO_ID_PROVIDED);
+  const navigate = useNavigate();
 
-  const context = useDeckContext(id);
+  if (!id) {
+    // Instead of throwing, we navigate back to selection
+    navigate('/');
+    console.error('No id provided for Deck');
+    return null;
+  }
+
+  const context = useDeckContext();
   const brainContext = useBrainContext();
   const { t } = useTranslation();
 
@@ -43,6 +30,7 @@ export const Deck = () => {
 
   const handleClickClose = () => {
     brainContext.closeDeck();
+    navigate('/');
   };
 
   const handleClickReset = () => {
