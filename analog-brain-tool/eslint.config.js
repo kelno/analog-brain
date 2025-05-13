@@ -45,6 +45,7 @@ export default tseslint.config(
       'prefer-const': ['warn'],
       'import/no-default-export': ['warn'],
       'jsx-a11y/alt-text': 'error',
+      '@typescript-eslint/no-empty-object-type': ['error', { allowInterfaces: 'with-single-extends' }],
     },
   },
 );

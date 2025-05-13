@@ -7,6 +7,8 @@ import { SimpleIconButton } from '../components/SimpleIconButton';
 import { useTranslation } from 'react-i18next';
 import { Share2 } from 'lucide-react';
 import { processTextContent } from '../utils/TextProcessing';
+import { useParams } from 'react-router-dom';
+import { BrainToolError, BrainToolErrorType } from './BrainToolErrorHandler';
 
 interface CardProps {
   card: ICard | undefined;
@@ -14,7 +16,11 @@ interface CardProps {
 
 export const Card: FC<CardProps> = ({ card }) => {
   const { shareFromParams } = useShare();
-  const context = useDeckContext();
+  const { id } = useParams();
+  if (id === undefined)
+    throw new BrainToolError('No id provided for Deck', BrainToolErrorType.DECK_NO_ID_PROVIDED);
+
+  const context = useDeckContext(id);
   const { t } = useTranslation();
 
   const handleShare = () => {

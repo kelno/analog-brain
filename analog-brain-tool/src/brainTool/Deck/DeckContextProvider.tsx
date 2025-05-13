@@ -8,7 +8,7 @@ import { IDeck } from '../../types/Deck';
 import { DeckContext } from './DeckContext';
 
 export const DeckContextProvider: React.FC<{ deck: IDeck; children: ReactNode }> = ({ deck, children }) => {
-  console.debug('rendering DeckContextProvider');
+  console.debug(`Rendering DeckContextProvider for deck ${deck.id}`);
 
   return <DeckContextCore deck={deck}>{children}</DeckContextCore>;
 };

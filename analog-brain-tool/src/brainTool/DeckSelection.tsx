@@ -7,10 +7,11 @@ import { languagesInfos } from '../language/languageInfo';
 import { useBrainContext } from './store/useBrainContext';
 import { Button } from '../components/Button';
 import { processTextContent } from '../utils/TextProcessing';
+import { Form } from 'react-router-dom';
 
-interface DeckSelectionProps {}
+interface DeckSelectionProps extends Record<never, never> {}
 
-export const DeckSelection: FC<DeckSelectionProps> = ({}) => {
+export const DeckSelection: FC<DeckSelectionProps> = () => {
   const appContext = useAppContext();
   const { t } = useTranslation();
   const deckManager = useDeckManager();
@@ -40,14 +41,20 @@ export const DeckSelection: FC<DeckSelectionProps> = ({}) => {
 
   const hasErrors = deckManager.errors.length > 0;
 
+  const handleSubmit = (e: React.FormEvent) => {
+    if (!selectedDeckInfo) {
+      e.preventDefault();
+    }
+  };
+
   return (
     <section
       className="flex flex-col min-h-full w-full justify-center items-center"
       aria-labelledby={t('tool.deck.deckSelectionTitle')}
     >
-      <div className="mx-4 min-w-3/4 md:min-w-2xl lg:min-w-3xl">
-        <div className="text-xl my-4">
-          <form onSubmit={(e) => e.preventDefault()} className="mb-6">
+      <Form action={`/deck/${selectedDeckInfo?.id}`} className="mb-6" onSubmit={handleSubmit}>
+        <div className="mx-4 min-w-3/4 md:min-w-2xl lg:min-w-3xl">
+          <div className="text-xl my-4">
             <div className="flex flex-col gap-4">
               <div className="flex flex-wrap items-center">
                 <label htmlFor="deck-selector" className="text-xl mr-2">
@@ -81,38 +88,35 @@ export const DeckSelection: FC<DeckSelectionProps> = ({}) => {
                 </div>
               </div>
             </div>
-          </form>
-        </div>
+          </div>
 
-        {selectedDeckInfo && (
-          <article
-            className="border rounded-lg p-4 shadow-md flex flex-col space-y-1"
-            aria-labelledby="selected-deck-title"
-          >
-            <h1 id="selected-deck-title" className="font-bold text-xl text-center">
-              {selectedDeckInfo.title}
-            </h1>
-
-            {selectedDeckInfo.description && (
-              <div className="">
-                <h2 className="font-bold">{t('tool.deck.description')}</h2>
-                {processTextContent(selectedDeckInfo.description)}
-              </div>
-            )}
-            {selectedDeckInfo.author && (
-              <div className="">
-                <h2 className="font-bold">{t('tool.deck.author')}</h2> {selectedDeckInfo.author}
-              </div>
-            )}
-            <Button
-              handleClick={() => brainContext.selectDeck(selectedDeckInfo.id, true)}
-              className="font-bold mt-4"
+          {selectedDeckInfo && (
+            <article
+              className="border rounded-lg p-4 shadow-md flex flex-col space-y-1"
+              aria-labelledby="selected-deck-title"
             >
-              {t('tool.deck.start')}
-            </Button>
-          </article>
-        )}
-      </div>
+              <h1 id="selected-deck-title" className="font-bold text-xl text-center">
+                {selectedDeckInfo.title}
+              </h1>
+
+              {selectedDeckInfo.description && (
+                <div className="">
+                  <h2 className="font-bold">{t('tool.deck.description')}</h2>
+                  {processTextContent(selectedDeckInfo.description)}
+                </div>
+              )}
+              {selectedDeckInfo.author && (
+                <div className="">
+                  <h2 className="font-bold">{t('tool.deck.author')}</h2> {selectedDeckInfo.author}
+                </div>
+              )}
+              <Button type="submit" className="font-bold mt-4">
+                {t('tool.deck.start')}
+              </Button>
+            </article>
+          )}
+        </div>
+      </Form>
     </section>
   );
 };

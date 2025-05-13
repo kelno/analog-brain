@@ -1,4 +1,4 @@
-import React, { ErrorInfo, ReactNode } from 'react';
+import React, { ErrorInfo, ReactNode, FC } from 'react';
 import { useTranslation } from 'react-i18next';
 
 interface ErrorBoundaryProps {
@@ -17,6 +17,7 @@ export enum BrainToolErrorType {
   FAILED_TO_FETCH_DECK = 'FAILED_TO_FETCH_DECK',
   NO_AVAILABLE_DECK_FOR_LANG = 'NO_AVAILABLE_DECK_FOR_LANG',
   FAILED_TO_LOAD_DATA_VALIDATOR = 'FAILED_TO_LOAD_DATA_VALIDATOR',
+  DECK_NO_ID_PROVIDED = 'DECK_NO_ID_PROVIDED',
 }
 
 export class BrainToolError extends Error {
@@ -26,8 +27,6 @@ export class BrainToolError extends Error {
     if (printToConsole) console.error(message);
   }
 }
-
-import { FC } from 'react';
 
 interface BrainToolErrorHandlerProps {
   error: BrainToolError;
@@ -52,6 +51,9 @@ const BrainToolErrorHandlerMessage: FC<BrainToolErrorHandlerProps> = ({ error })
       break;
     case BrainToolErrorType.FAILED_TO_LOAD_DATA_VALIDATOR:
       errorMsg = t('tool.errors.generic');
+      break;
+    case BrainToolErrorType.DECK_NO_ID_PROVIDED:
+      throw new Error('DECK_NO_ID_PROVIDED/ TODO: redirect to home?');
       break;
   }
 

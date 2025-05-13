@@ -4,6 +4,8 @@ import { useTranslation } from 'react-i18next';
 import { RotateCcw, CircleX, ChevronLeft, ChevronRight, LucideIcon } from 'lucide-react';
 import { useBrainContext } from '../store/useBrainContext';
 import { SimpleIconButton } from '../../components/SimpleIconButton';
+import { useParams } from 'react-router-dom';
+import { BrainToolError, BrainToolErrorType } from '../BrainToolErrorHandler';
 
 interface DeckNavigationButtonProps {
   onClick?: () => void;
@@ -26,7 +28,11 @@ const DeckNavigationButton = ({ onClick, label, icon: Icon, disabled }: DeckNavi
 );
 
 export const Deck = () => {
-  const context = useDeckContext();
+  const { id } = useParams();
+  if (id === undefined)
+    throw new BrainToolError('No id provided for Deck', BrainToolErrorType.DECK_NO_ID_PROVIDED);
+
+  const context = useDeckContext(id);
   const brainContext = useBrainContext();
   const { t } = useTranslation();
 
