@@ -23,7 +23,7 @@ i18n
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       loadPath: function (lng: any, ns: any) {
         // front end
-        return `${window.location.pathname}/locales/${lng}/${ns}.json`;
+        return `${import.meta.env.BASE_URL}/locales/${lng}/${ns}.json`;
       },
     },
     fallbackLng: 'en',
