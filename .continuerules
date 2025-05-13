@@ -1,7 +1,10 @@
 More project specific rules and context:
+
 This website is front-end only and serverless. 
 This website is a tool designed to overcome executive dysfunction by asking questions and leading to an helpful resolution.
 This is implemented as a decision tree to help with decision paralysis. 
 This tree is called a deck (component Deck), cards (component Card) being a some text information and some items (CardItem) to read or pick from, leading to other cards.
+
 All UI text should be supporting multiple language using i18n.
 We use Ajv for json schema validation.
+We use BrowserRouter from react-router-dom in a declarative style. The main route looks like this: /deck/<deck_id>/<card_id>
