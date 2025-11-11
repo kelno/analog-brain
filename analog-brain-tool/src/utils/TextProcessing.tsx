@@ -1,5 +1,5 @@
 import { ReactNode } from 'react';
-import { InfoTooltip } from '../components/InfoTooltip';
+import { DetailsTooltip } from '../components/InfoTooltip';
 
 /**
  * Processes text content to support:
@@ -30,7 +30,7 @@ export function processTextContent(text: string): ReactNode {
     // Handle tooltip or line break
     if (match[1]) {
       // It's a tooltip
-      parts.push(<InfoTooltip key={`info-${match.index}`} text={match[1].trim()} />);
+      parts.push(<DetailsTooltip key={`info-${match.index}`} text={match[1].trim()} />);
     } else {
       // It's a line break
       parts.push(<br key={`br-${match.index}`} />);
