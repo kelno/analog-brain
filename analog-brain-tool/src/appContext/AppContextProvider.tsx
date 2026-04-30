@@ -8,7 +8,6 @@ import { UrlParams } from '../utils/UrlManager/UrlParams';
 
 export const AppContextProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const { i18n } = useTranslation();
-  //const { lang, setLanguage } = useAppStore();
 
   console.debug(`AppContextProvider: Render`);
 
