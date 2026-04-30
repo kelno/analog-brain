@@ -9,8 +9,6 @@ import { UrlParams } from '../utils/UrlManager/UrlParams';
 export const AppContextProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const { i18n } = useTranslation();
 
-  console.debug(`AppContextProvider: Render`);
-
   const urlLanguage = UrlManager.consumeParam(UrlParams.LANG);
   const initialLang = urlLanguage ?? i18n.language;
 
