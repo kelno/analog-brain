@@ -57,7 +57,8 @@
     "title": "Settings",
     "decksURL": "External deck data source:",
     "save": "Save",
-    "reset": "Reset"
+    "reset": "Reset",
+    "switchToLang": "Switch to {{ langCode }}"
   },
   "suspenseLoading": "Loading...",
   "hamburger": {

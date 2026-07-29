@@ -57,7 +57,7 @@ const LanguageSwitcherCore: React.FC<LanguageSwitcherCoreProps> = ({ changeLangu
                 key={langCode}
                 onClick={() => changeLanguage(langCode)}
                 className="flex items-center w-full px-4 py-2 text-sm hover:bg-brain-secondary transition-colors"
-                aria-label={`Switch to ${languageInfo?.name || langCode}` /*TODO translate*/}
+                aria-label={t(`settings.switchToLang`, { langCode: languageInfo?.name || langCode })}
               >
                 <span className="mr-2 text-lg">{languageInfo?.flag || langCode}</span>
                 <span>{languageInfo?.name || langCode}</span>
