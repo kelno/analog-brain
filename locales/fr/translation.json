@@ -25,7 +25,8 @@
     "title": "Paramètres",
     "decksURL": "Source externe des jeux de cartes :",
     "save": "Sauvegarder",
-    "reset": "Réinitialiser"
+    "reset": "Réinitialiser",
+    "switchToLang": "Changer en {{ langCode }}"
   },
   "brainLoading": "Chargement..."
 }
