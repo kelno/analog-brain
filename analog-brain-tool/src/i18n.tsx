@@ -7,7 +7,7 @@ import { languagesInfos } from './language/languageInfo';
 // have a look at the Quick start guide
 // for passing in lng and translations on init
 
-const base_url = import.meta.env.BASE_URL ?? '/';
+const baseUrl = import.meta.env.BASE_URL ?? '/';
 
 i18n
   // load translation using http -> see /public/locales (i.e. https://github.com/i18next/react-i18next/tree/master/example/react/public/locales)
@@ -25,8 +25,9 @@ i18n
     backend: {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       loadPath: function (lng: any, ns: any) {
-        // front end
-        return `${base_url}locales/${lng}/${ns}.json`;
+        // Use URL constructor to properly join paths regardless of trailing slash
+        const url = new URL(`locales/${lng}/${ns}.json`, window.location.origin + baseUrl);
+        return url.toString();
       },
     },
     fallbackLng: 'en',
