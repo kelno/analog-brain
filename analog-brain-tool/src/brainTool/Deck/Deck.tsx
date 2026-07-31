@@ -63,7 +63,7 @@ export const Deck = () => {
           disabled={!context.canReset}
         />
       </div>
-      <div className="flex flex-grow w-full mb-4">
+      <div className="flex grow w-full mb-4">
         <DeckNavigationButton
           onClick={previousDisabled ? undefined : handlePrevious}
           label={t('tool.deck.previous')}
