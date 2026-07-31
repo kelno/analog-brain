@@ -6,6 +6,7 @@ import { useBrainContext } from '../store/useBrainContext';
 import { SimpleIconButton } from '../../components/SimpleIconButton';
 import { useNavigate } from 'react-router';
 import { DeckNavigationButton } from './DeckNavigationButton';
+import { getCardPath } from '../routing/routePaths';
 
 export const Deck = () => {
   const navigate = useNavigate();
@@ -25,11 +26,13 @@ export const Deck = () => {
   };
 
   const handleClickReset = () => {
-    context.resetHistory();
+    const firstCardId = context.resetHistory();
+    navigate(getCardPath(context.deck.id, firstCardId), { replace: true });
   };
 
   const handlePrevious = () => {
-    context.popCurrentCard();
+    const previousCardId = context.popCurrentCard();
+    if (previousCardId) navigate(-1);
   };
 
   const handleNext = () => {
@@ -47,7 +50,7 @@ export const Deck = () => {
           handleClick={handleClickReset}
           label={t('tool.deck.reset')}
           icon={RotateCcw}
-          disabled={!context.hasCardHistory}
+          disabled={!context.canReset}
         />
       </div>
       <div className="flex flex-grow w-full mb-4">

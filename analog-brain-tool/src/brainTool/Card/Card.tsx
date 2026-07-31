@@ -7,6 +7,8 @@ import { useTranslation } from 'react-i18next';
 import { Share2 } from 'lucide-react';
 import { processTextContent } from '../../utils/TextProcessing';
 import { useDeckContext } from '../Deck/useDeckContext';
+import { useNavigate } from 'react-router';
+import { getCardPath } from '../routing/routePaths';
 
 interface CardProps {
   card: ICard | undefined;
@@ -16,18 +18,15 @@ export const Card: FC<CardProps> = ({ card }) => {
   const { shareFromParams } = useShare();
   const context = useDeckContext();
   const { t } = useTranslation();
+  const navigate = useNavigate();
 
   const handleShare = () => {
     shareFromParams(context.deck.id, context.currentCardId);
   };
 
   const handleClickCard = (cardId: CardId) => {
-    context.selectCard(cardId, true);
-  };
-
-  const getItemId = (card: ICard, cardItem: ICardItem): string => {
-    return `${card.id}-item-${cardItem.text.substring(0, 10)}-${cardItem.text.length}`;
-    /* maybe not great, we could use a cardItem id later we we have a proper editor*/
+    context.selectCard(cardId);
+    navigate(getCardPath(context.deck.id, cardId));
   };
 
   return (
@@ -41,9 +40,10 @@ export const Card: FC<CardProps> = ({ card }) => {
             <h2 className="text-xl font-bold">{card.title}</h2>
             {card.text && <p className="mt-2">{processTextContent(card.text)}</p>}
             <ul className="mt-4 space-y-2">
-              {card.items.map((cardItem: ICardItem) => (
+              {/* Deck content is immutable at runtime, so position is stable until card items have IDs. */}
+              {card.items.map((cardItem: ICardItem, index) => (
                 <CardItem
-                  key={getItemId(card, cardItem)}
+                  key={`${card.id}-item-${index}`}
                   cardItem={cardItem}
                   handleClickCard={handleClickCard}
                 />

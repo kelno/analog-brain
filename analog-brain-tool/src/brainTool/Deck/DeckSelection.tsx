@@ -7,6 +7,7 @@ import { IDeck } from '../../types/Deck';
 import { processTextContent } from '../../utils/TextProcessing';
 import { Button } from '../../components/Button';
 import { useNavigate } from 'react-router';
+import { getCardPath } from '../routing/routePaths';
 
 interface DeckSelectionProps extends Record<never, never> {}
 
@@ -14,7 +15,7 @@ export const DeckSelection: FC<DeckSelectionProps> = () => {
   const appContext = useAppContext();
   const { t } = useTranslation();
   const deckManager = useDeckManager();
-  const navigate = useNavigate(); // Initialize useNavigate
+  const navigate = useNavigate();
 
   const [invalidSelection, setInvalidSelection] = useState(false);
 
@@ -48,7 +49,7 @@ export const DeckSelection: FC<DeckSelectionProps> = () => {
       setInvalidSelection(true);
       return;
     }
-    navigate(`/deck/${selectedDeckInfo.id}`); // Navigate to the selected deck
+    navigate(getCardPath(selectedDeckInfo.id, selectedDeckInfo.cards[0].id));
   };
 
   return (

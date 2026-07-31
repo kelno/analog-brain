@@ -39,6 +39,8 @@
     "notFoundMessage": "The page you requested does not exist.",
     "deckNotFoundTitle": "Deck not found",
     "deckNotFoundMessage": "No deck named '{{deckId}}' is available for the selected language.",
+    "cardNotFoundTitle": "Card not found",
+    "cardNotFoundMessage": "No card named '{{cardId}}' exists in {{deckTitle}}.",
     "backToDeckSelection": "Back to deck selection"
   },
   "toast": {

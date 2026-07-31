@@ -12,6 +12,8 @@
     "notFoundMessage": "La page demandée n’existe pas.",
     "deckNotFoundTitle": "Jeu de cartes introuvable",
     "deckNotFoundMessage": "Aucun jeu de cartes nommé « {{deckId}} » n’est disponible dans la langue sélectionnée.",
+    "cardNotFoundTitle": "Carte introuvable",
+    "cardNotFoundMessage": "Aucune carte nommée « {{cardId}} » n’existe dans {{deckTitle}}.",
     "backToDeckSelection": "Retour à la sélection des jeux de cartes"
   },
   "toast": {
