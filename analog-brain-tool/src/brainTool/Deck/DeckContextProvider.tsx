@@ -4,58 +4,54 @@ import { Stack } from '@datastructures-js/stack';
 import { CardId } from '../../types/Card/ICard';
 import { IDeck } from '../../types/Deck';
 import { DeckContext } from './DeckContext';
-import { Navigate, useNavigate, useParams } from 'react-router';
+import { useParams } from 'react-router';
 import { useBrainContext } from '../store/useBrainContext';
-import { toast } from 'sonner';
-import { BrainToolError, BrainToolErrorType } from '../error/BrainToolError';
+import { useDeckManager } from '../../deckManager/useDeckManager';
+import { useAppContext } from '../../appContext/useAppContext';
+import { RouteFallback } from '../routing/RouteFallback';
+import { useTranslation } from 'react-i18next';
 
-/* DeckContextProvider gives a unique deckContext depending on the given id in params.
- Specifically it handles the routing input, then delegates to DeckContextLoader.
- expects deckId as Router param
- Can Throw
-*/
+/**
+ * Resolves the route's deck against the active language before creating deck
+ * state. Missing decks remain a recoverable routing state and never enter the
+ * deck context.
+ */
 export const DeckContextProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const { deckId } = useParams<{ deckId: string }>();
+  const deckManager = useDeckManager();
+  const { language } = useAppContext();
+  const { t } = useTranslation();
+  const deck = deckId ? deckManager.getDeckById(language, deckId) : undefined;
 
-  if (!deckId) {
-    console.error('DeckContextProvider tried to load with no deck id provided.');
-    return <Navigate to="/" replace />;
+  if (!deck) {
+    return (
+      <RouteFallback title={t('routing.deckNotFoundTitle')}>
+        {t('routing.deckNotFoundMessage', { deckId })}
+      </RouteFallback>
+    );
   }
 
-  console.debug(`Rendering DeckContextProvider for deck ${deckId}`);
+  console.debug(`Rendering DeckContextProvider for deck ${deck.id}`);
 
-  return <DeckContextLoader deckId={deckId}>{children}</DeckContextLoader>;
+  return <DeckContextLoader deck={deck}>{children}</DeckContextLoader>;
 };
 
-// This one handles selecting the current deck
-const DeckContextLoader: React.FC<{ deckId: string; children: ReactNode }> = ({ deckId, children }) => {
-  const navigate = useNavigate();
+const DeckContextLoader: React.FC<{ deck: IDeck; children: ReactNode }> = ({ deck, children }) => {
   const brainContext = useBrainContext();
 
   useEffect(() => {
-    if (brainContext.currentDeckId != deckId) {
-      const success = brainContext.selectDeck(deckId, true);
-      if (!success)
-        throw new BrainToolError('Failed to select deck', BrainToolErrorType.DECK_FAILED_TO_SELECT);
+    if (brainContext.currentDeckId !== deck.id) {
+      brainContext.selectDeck(deck.id, true);
     }
-  });
+  }, [brainContext, deck.id]);
 
-  if (brainContext.currentDeckId != deckId) {
-    return null; // wait for refresh
-  }
-
-  const currentDeck = brainContext.currentDeck;
-  if (!currentDeck) {
-    navigate('/');
-    console.error(`DeckContextProvider tried to load deck id ${deckId} but brain context failed to load it?`);
-    toast.error('Failed to load deck'); //TODO translate
+  if (brainContext.currentDeckId !== deck.id) {
     return null;
   }
 
-  return <DeckContextCore deck={currentDeck}>{children}</DeckContextCore>;
+  return <DeckContextCore deck={deck}>{children}</DeckContextCore>;
 };
 
-// This one actually
 const DeckContextCore: React.FC<{
   children: ReactNode;
   deck: IDeck;

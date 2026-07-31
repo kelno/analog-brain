@@ -25,8 +25,6 @@ export const BrainToolErrorHandlerMessage: FC<BrainToolErrorHandlerProps> = ({ e
     case BrainToolErrorType.FAILED_TO_LOAD_DATA_VALIDATOR:
       errorMsg = t('tool.errors.generic');
       break;
-    case BrainToolErrorType.DECK_FAILED_TO_SELECT:
-      errorMsg = t('tool.errors.generic');
   }
 
   return (

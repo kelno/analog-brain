@@ -7,6 +7,13 @@
   "about": {
     "title": "À propos"
   },
+  "routing": {
+    "notFoundTitle": "Page introuvable",
+    "notFoundMessage": "La page demandée n’existe pas.",
+    "deckNotFoundTitle": "Jeu de cartes introuvable",
+    "deckNotFoundMessage": "Aucun jeu de cartes nommé « {{deckId}} » n’est disponible dans la langue sélectionnée.",
+    "backToDeckSelection": "Retour à la sélection des jeux de cartes"
+  },
   "toast": {
     "noDecksForLang": "Aucun jeu de cartes disponible pour la langue {{lang}}",
     "share": {
