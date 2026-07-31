@@ -3,10 +3,9 @@ import { toast } from 'sonner';
 import { useRef } from 'react';
 import { ErrorHelpers } from '../utils/ErrorHelpers';
 import { useAppContext } from '../appContext/useAppContext';
-import { DeckId } from '../types/Deck/IDeck';
-import { CardId } from '../types/Card/ICard';
 import { UrlManager } from '../utils/UrlManager/UrlManager';
 import { useSettings } from '../settings/settingsContext/useSettings';
+import { useLocation } from 'react-router';
 
 export const useShare = () => {
   const { t } = useTranslation();
@@ -14,6 +13,7 @@ export const useShare = () => {
 
   const { indexUrl, isDefaultUrl } = useSettings();
   const { language } = useAppContext();
+  const location = useLocation();
 
   const isRecentAttempt = () => {
     const now = Date.now();
@@ -32,10 +32,9 @@ export const useShare = () => {
     }
   };
 
-  const shareFromParams = (currentDeckId: DeckId | undefined, currentCardId: CardId | undefined) => {
+  const shareCurrentRoute = () => {
     const shareUrl = UrlManager.getShareURL(
-      currentDeckId,
-      currentCardId,
+      location.pathname,
       language,
       isDefaultUrl ? undefined : indexUrl,
     );
@@ -67,5 +66,5 @@ export const useShare = () => {
     }
   };
 
-  return { copy, shareFromParams };
+  return { copy, shareCurrentRoute };
 };

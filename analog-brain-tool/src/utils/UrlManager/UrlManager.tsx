@@ -1,6 +1,4 @@
 import { LangId } from '../../appContext/AppContextData';
-import { CardId } from '../../types/Card/ICard';
-import { DeckId } from '../../types/Deck/IDeck';
 import { UrlParams } from './UrlParams';
 
 /**
@@ -8,15 +6,17 @@ import { UrlParams } from './UrlParams';
  * owned by React Router and must not be changed here.
  */
 export class UrlManager {
-  public static getShareURL(deck?: DeckId, card?: CardId, lang?: LangId, deckUrl?: string): string {
+  public static getShareURL(routePath: string, lang?: LangId, deckUrl?: string): string {
     const params = new URLSearchParams();
-    if (deck) params.set(UrlParams.DECK, deck);
     if (lang) params.set(UrlParams.LANG, lang);
-    if (card) params.set(UrlParams.CARD, card);
     if (deckUrl) params.set(UrlParams.DECK_URL, deckUrl);
 
     const paramsString = params.toString();
-    return `${window.location.href}?${paramsString}`;
+    const routeSearch = paramsString ? `?${paramsString}` : '';
+    const shareUrl = new URL(this.getBaseURL());
+    shareUrl.hash = `${routePath}${routeSearch}`;
+
+    return shareUrl.toString();
   }
 
   // ending with a /

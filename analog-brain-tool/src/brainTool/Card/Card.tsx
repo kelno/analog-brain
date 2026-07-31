@@ -15,13 +15,13 @@ interface CardProps {
 }
 
 export const Card: FC<CardProps> = ({ card }) => {
-  const { shareFromParams } = useShare();
+  const { shareCurrentRoute } = useShare();
   const context = useDeckContext();
   const { t } = useTranslation();
   const navigate = useNavigate();
 
   const handleShare = () => {
-    shareFromParams(context.deck.id, context.currentCardId);
+    shareCurrentRoute();
   };
 
   const handleClickCard = (cardId: CardId) => {
