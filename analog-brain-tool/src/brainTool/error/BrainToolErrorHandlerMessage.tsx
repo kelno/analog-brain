@@ -29,8 +29,7 @@ export const BrainToolErrorHandlerMessage: FC<BrainToolErrorHandlerProps> = ({ e
 
   return (
     <div className="p-20">
-      {/* TODO translate */}
-      <div className="text-xl font-bold mb-2">Failed to load deck!</div>
+      <div className="text-xl font-bold mb-2">{t('tool.errors.errorIntro')}</div>
       {errorMsg && <div>{errorMsg}</div>}
     </div>
   );

@@ -48,7 +48,7 @@ export const Settings: React.FC = () => {
         </div>
       </div>
       <div>
-        <h2 className="text-2xl font-bold mb-4">About</h2> {/*TODO translate */}
+        <h2 className="text-2xl font-bold mb-4">{t('about.title')}</h2>
         <About />
       </div>
     </div>
