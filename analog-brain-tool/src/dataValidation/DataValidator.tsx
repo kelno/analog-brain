@@ -1,7 +1,6 @@
 import { IDeck, MINIMAL_CARD_DECK_FORMAT_VERSION } from '../types/Deck/IDeck';
-import { JSONSchemaType, ValidateFunction } from 'ajv';
-import { ajv } from './useAjv';
 import { DeckUtils } from '../types/Deck';
+import { DeckSchemaValidator } from './DeckSchemaValidator';
 
 interface ValidationResult {
   isValid: boolean;
@@ -9,11 +8,11 @@ interface ValidationResult {
 }
 
 export class DataValidator {
-  private _validate: ValidateFunction<IDeck>;
+  private _validate: DeckSchemaValidator;
 
-  public constructor(schemaJSON: JSONSchemaType<IDeck>) {
+  public constructor(validate: DeckSchemaValidator) {
     console.debug('Constructing new DataValidator');
-    this._validate = ajv.compile(schemaJSON);
+    this._validate = validate;
   }
 
   public validateDeckData = (deck: IDeck): ValidationResult => {
@@ -48,10 +47,10 @@ export class DataValidator {
       return { isValid: true };
     } else {
       console.error(`Validating failed for deck: ${JSON.stringify(deck)}`);
-      const ajvErrors: string[] | undefined = this._validate.errors?.map((ajvError) =>
-        JSON.stringify(ajvError),
+      const schemaErrors: string[] | undefined = this._validate.errors?.map((schemaError) =>
+        JSON.stringify(schemaError),
       );
-      return { isValid: false, errorMessages: [...errors, ...(ajvErrors ?? [])] }; // concat ajvErrors if any
+      return { isValid: false, errorMessages: [...errors, ...(schemaErrors ?? [])] };
     }
   };
 }

@@ -1,20 +1,7 @@
 import { DataValidator } from './DataValidator';
-import { UrlManager } from '../utils/UrlManager/UrlManager';
-import { useSuspenseQuery } from '@tanstack/react-query';
+import validateDeckSchema from './generated/deckValidator.js';
 
-// Suspension enabled hook
-export const useDataValidator = () => {
-  const schemaURL = `${UrlManager.getBaseURL()}decks/schema.json`; // fixed URL in public dir
+const dataValidator = new DataValidator(validateDeckSchema);
 
-  const dataValidator = useSuspenseQuery({
-    queryKey: ['dataValidator', schemaURL],
-    queryFn: async (): Promise<DataValidator> => {
-      const response = await fetch(schemaURL);
-      const schemaJson = await response.json();
-      const dataValidator = new DataValidator(schemaJson);
-      return dataValidator;
-    },
-  }).data; // useSuspenseQuery is guaranteed to succeed or throw.
-
-  return dataValidator;
-};
+// Retain the hook-shaped API used by DeckManager while validation is now ready synchronously.
+export const useDataValidator = () => dataValidator;
