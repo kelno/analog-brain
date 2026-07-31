@@ -1,7 +1,7 @@
 import { Card } from '../Card/Card';
 import { useDeckContext } from './useDeckContext';
 import { useTranslation } from 'react-i18next';
-import { RotateCcw, CircleX, ChevronLeft, ChevronRight } from 'lucide-react';
+import { RotateCcw, CircleX, ChevronLeft } from 'lucide-react';
 import { useBrainContext } from '../store/useBrainContext';
 import { SimpleIconButton } from '../../components/SimpleIconButton';
 import { useNavigate } from 'react-router';
@@ -35,12 +35,7 @@ export const Deck = () => {
     if (previousCardId) navigate(-1);
   };
 
-  const handleNext = () => {
-    //NYI
-  };
-
   const previousDisabled = !context.hasCardHistory;
-  const nextDisabled = true; //NYI
 
   return (
     <>
@@ -60,15 +55,9 @@ export const Deck = () => {
           disabled={previousDisabled}
           icon={ChevronLeft}
         />
-        <div className="flex-1">
+        <div className="flex-1 mr-2">
           <Card card={currentCardData} />
         </div>
-        <DeckNavigationButton
-          onClick={nextDisabled ? undefined : handleNext}
-          label={t('tool.deck.next')}
-          disabled={nextDisabled}
-          icon={ChevronRight}
-        />
       </div>
     </>
   );
