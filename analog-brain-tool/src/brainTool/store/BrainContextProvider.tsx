@@ -1,8 +1,6 @@
 import { useState, ReactNode } from 'react';
-import { BrainContextData, BrainContextState, LangId } from './BrainContextData';
+import { BrainContextData, BrainContextState } from './BrainContextData';
 import { BrainContext } from './BrainContext';
-import { UrlManager } from '../../utils/UrlManager/UrlManager';
-import { UrlParams } from '../../utils/UrlManager/UrlParams';
 import { AppContextData } from '../../appContext/AppContextData';
 import { useAppContext } from '../../appContext/useAppContext';
 import { useDeckManager } from '../../deckManager/useDeckManager';
@@ -37,26 +35,7 @@ export const BrainContextCore: React.FC<{
 
   console.debug('Rendering BrainContextCore');
 
-  const validateDeckFromUrl = (lang: LangId, urlDeckId: string) => {
-    if (urlDeckId) {
-      const deck = deckManager.getDeckById(lang, urlDeckId);
-      if (deck === undefined) {
-        console.error(
-          `BrainContextCore: Trying to load deck ${urlDeckId} from URL but couldn't find it for language ${lang}`,
-        );
-        return undefined;
-      }
-      return deck;
-    }
-    return undefined;
-  };
-
-  const getDeckFromURL = () => {
-    const urlDeckId = UrlManager.consumeParam(UrlParams.DECK);
-    return urlDeckId ? validateDeckFromUrl(lang, urlDeckId) : undefined;
-  };
-
-  const getLastExplicitelySelectedDeck = () => {
+  const getLastExplicitlySelectedDeck = () => {
     const lastSelectedDeckId = PersistentStorageManager.get(PersistentStorageTypes.CHOSEN_DECK);
     const lastSelectedDeck = lastSelectedDeckId
       ? deckManager.getDeckById(lang, lastSelectedDeckId)
@@ -65,9 +44,7 @@ export const BrainContextCore: React.FC<{
     return lastSelectedDeck;
   };
 
-  // Priority: URL > last selected deck > default deck
-  const deckFromURL = getDeckFromURL();
-  const currentDeck = deckFromURL ?? getLastExplicitelySelectedDeck() ?? null;
+  const currentDeck = getLastExplicitlySelectedDeck() ?? null;
 
   const [brainState, setBrainState] = useState<BrainContextState>({
     currentDeckId: currentDeck ? currentDeck.id : null,

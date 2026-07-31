@@ -4,30 +4,27 @@ import { Stack } from '@datastructures-js/stack';
 import { CardId } from '../../types/Card/ICard';
 import { IDeck } from '../../types/Deck';
 import { DeckContext } from './DeckContext';
-import { useNavigate, useParams } from 'react-router';
+import { Navigate, useNavigate, useParams } from 'react-router';
 import { useBrainContext } from '../store/useBrainContext';
 import { toast } from 'sonner';
 import { BrainToolError, BrainToolErrorType } from '../error/BrainToolError';
 
 /* DeckContextProvider gives a unique deckContext depending on the given id in params.
  Specifically it handles the routing input, then delegates to DeckContextLoader.
- expects id as Router param
+ expects deckId as Router param
  Can Throw
 */
 export const DeckContextProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
-  const { id } = useParams<{ id: string }>();
-  const navigate = useNavigate();
+  const { deckId } = useParams<{ deckId: string }>();
 
-  if (!id) {
-    // Instead of throwing, we navigate back to selection
-    navigate('/');
-    console.error('DeckContextProvider tried to load with no id provided.');
-    return null;
+  if (!deckId) {
+    console.error('DeckContextProvider tried to load with no deck id provided.');
+    return <Navigate to="/" replace />;
   }
 
-  console.debug(`Rendering DeckContextProvider for deck ${id}`);
+  console.debug(`Rendering DeckContextProvider for deck ${deckId}`);
 
-  return <DeckContextLoader deckId={id}>{children}</DeckContextLoader>;
+  return <DeckContextLoader deckId={deckId}>{children}</DeckContextLoader>;
 };
 
 // This one handles selecting the current deck

@@ -4,23 +4,15 @@ import { useTranslation } from 'react-i18next';
 import { RotateCcw, CircleX, ChevronLeft, ChevronRight } from 'lucide-react';
 import { useBrainContext } from '../store/useBrainContext';
 import { SimpleIconButton } from '../../components/SimpleIconButton';
-import { useNavigate, useParams } from 'react-router';
+import { useNavigate } from 'react-router';
 import { DeckNavigationButton } from './DeckNavigationButton';
 
 export const Deck = () => {
-  const { id } = useParams();
   const navigate = useNavigate();
 
   const context = useDeckContext();
   const brainContext = useBrainContext();
   const { t } = useTranslation();
-
-  if (!id) {
-    // Instead of throwing, we navigate back to selection
-    navigate('/');
-    console.error('No id provided for Deck');
-    return null;
-  }
 
   const currentCardData = context.deck.cards.find((card) => card.id === context.currentCardId);
   if (currentCardData === undefined) {

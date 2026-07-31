@@ -10,7 +10,7 @@ export const BrainTool = () => {
     <Routes>
       <Route path="/" element={<DeckSelection />} />
       <Route
-        path="/deck/:id"
+        path="/deck/:deckId"
         element={
           <DeckContextProvider>
             <Deck />
