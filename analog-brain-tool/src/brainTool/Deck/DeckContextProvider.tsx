@@ -1,24 +1,26 @@
-import { useEffect, useMemo, useState, ReactNode } from 'react';
-import { DeckContextData, DeckContextState } from './DeckContextData';
-import { Stack } from '@datastructures-js/stack';
+import { useEffect, useMemo, ReactNode } from 'react';
+import { DeckContextData } from './DeckContextData';
 import { CardId } from '../../types/Card/ICard';
 import { DeckUtils, IDeck } from '../../types/Deck';
 import { DeckContext } from './DeckContext';
-import { Navigate, useParams } from 'react-router';
+import { Navigate, useLocation, useParams } from 'react-router';
 import { useBrainContext } from '../store/useBrainContext';
 import { useDeckManager } from '../../deckManager/useDeckManager';
 import { useAppContext } from '../../appContext/useAppContext';
 import { RouteFallback } from '../routing/RouteFallback';
 import { useTranslation } from 'react-i18next';
 import { getCardPath } from '../routing/routePaths';
+import { getPreviousCardIds } from '../routing/cardRouteState';
 
 /**
  * Resolves the route's deck and card against the active language before
- * creating deck state. Deck-only routes start at the first card, while missing
- * route data remains a recoverable state outside the deck context.
+ * creating deck context. Deck-only routes start at the first card, browser
+ * history restores the decision trail, and missing route data remains a
+ * recoverable state outside the deck context.
  */
 export const DeckContextProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const { deckId, cardId } = useParams<{ deckId: string; cardId: string }>();
+  const location = useLocation();
   const deckManager = useDeckManager();
   const { language } = useAppContext();
   const { t } = useTranslation();
@@ -48,18 +50,27 @@ export const DeckContextProvider: React.FC<{ children: ReactNode }> = ({ childre
   console.debug(`Rendering DeckContextProvider for deck ${deck.id}, card ${card.id}`);
 
   return (
-    <DeckContextLoader deck={deck} cardId={card.id}>
+    <DeckContextLoader
+      deck={deck}
+      cardId={card.id}
+      previousCardIds={getPreviousCardIds(location.state)}
+    >
       {children}
     </DeckContextLoader>
   );
 };
 
-const DeckContextLoader: React.FC<{ deck: IDeck; cardId: CardId; children: ReactNode }> = ({
-  deck,
-  cardId,
-  children,
-}) => {
+const DeckContextLoader: React.FC<{
+  deck: IDeck;
+  cardId: CardId;
+  previousCardIds: readonly CardId[];
+  children: ReactNode;
+}> = ({ deck, cardId, previousCardIds, children }) => {
   const brainContext = useBrainContext();
+  const deckContext = useMemo(
+    () => new DeckContextData(deck, cardId, previousCardIds),
+    [cardId, deck, previousCardIds],
+  );
 
   useEffect(() => {
     if (brainContext.currentDeckId !== deck.id) {
@@ -70,33 +81,6 @@ const DeckContextLoader: React.FC<{ deck: IDeck; cardId: CardId; children: React
   if (brainContext.currentDeckId !== deck.id) {
     return null;
   }
-
-  return (
-    <DeckContextCore deck={deck} cardId={cardId}>
-      {children}
-    </DeckContextCore>
-  );
-};
-
-const DeckContextCore: React.FC<{
-  children: ReactNode;
-  deck: IDeck;
-  cardId: CardId;
-}> = ({ children, deck, cardId }) => {
-  console.debug('Rendering DeckContextCore');
-
-  const [deckState, setDeckState] = useState<DeckContextState>({
-    cardHistory: new Stack<CardId>([cardId]),
-  });
-
-  const deckContext = useMemo(
-    () => new DeckContextData(deckState, setDeckState, deck, cardId),
-    [cardId, deck, deckState],
-  );
-
-  useEffect(() => {
-    deckContext.syncCardHistory(cardId);
-  }, [cardId, deckContext]);
 
   return <DeckContext.Provider value={deckContext}>{children}</DeckContext.Provider>;
 };

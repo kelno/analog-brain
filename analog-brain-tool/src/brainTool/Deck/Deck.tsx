@@ -26,13 +26,11 @@ export const Deck = () => {
   };
 
   const handleClickReset = () => {
-    const firstCardId = context.resetHistory();
-    navigate(getCardPath(context.deck.id, firstCardId), { replace: true });
+    navigate(getCardPath(context.deck.id, context.deck.cards[0].id), { replace: true, state: null });
   };
 
   const handlePrevious = () => {
-    const previousCardId = context.popCurrentCard();
-    if (previousCardId) navigate(-1);
+    if (context.hasCardHistory) navigate(-1);
   };
 
   const previousDisabled = !context.hasCardHistory;

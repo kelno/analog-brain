@@ -9,6 +9,7 @@ import { processTextContent } from '../../utils/TextProcessing';
 import { useDeckContext } from '../Deck/useDeckContext';
 import { useNavigate } from 'react-router';
 import { getCardPath } from '../routing/routePaths';
+import { getNextCardRouteState } from '../routing/cardRouteState';
 
 interface CardProps {
   card: ICard | undefined;
@@ -25,8 +26,9 @@ export const Card: FC<CardProps> = ({ card }) => {
   };
 
   const handleClickCard = (cardId: CardId) => {
-    context.selectCard(cardId);
-    navigate(getCardPath(context.deck.id, cardId));
+    navigate(getCardPath(context.deck.id, cardId), {
+      state: getNextCardRouteState(context.previousCardIds, context.currentCardId),
+    });
   };
 
   return (
