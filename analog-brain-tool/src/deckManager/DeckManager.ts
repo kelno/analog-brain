@@ -48,7 +48,8 @@ export class DeckManager {
             parseError instanceof Error 
               ? parseError.message 
               : 'Unknown parsing error'
-          }`
+          }`,
+          { cause: parseError },
         );
       }
     })
@@ -57,7 +58,8 @@ export class DeckManager {
         error instanceof Error
           ? error.message
           : 'Unknown error',
-          errorType,
+        errorType,
+        { cause: error },
       );
     });
   }

@@ -7,8 +7,13 @@ export enum BrainToolErrorType {
 }
 
 export class BrainToolError extends Error {
-  constructor(message: string, public brainError: BrainToolErrorType, printToConsole: boolean = true) {
-    super(message);
+  constructor(
+    message: string,
+    public brainError: BrainToolErrorType,
+    options?: ErrorOptions,
+    printToConsole: boolean = true,
+  ) {
+    super(message, options);
     Object.setPrototypeOf(this, BrainToolError.prototype);
     if (printToConsole) console.error(message);
   }
