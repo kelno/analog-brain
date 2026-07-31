@@ -2,10 +2,29 @@
   "pageTitle": "Outil Cerveau Analogique",
   "tool": {
     "title": "L'outil - Commencez ici",
-    "deck": "Jeu de cartes"
+    "deck": "Jeu de cartes",
+    "errors": {
+      "noDecksForLanguage": "Aucun jeu de cartes disponible en {{lang}}",
+      "generic": "Erreur.",
+      "warnErrors": "Des erreurs sont survenues pendant le chargement des jeux de cartes. Certains jeux peuvent être manquants. Consultez la console pour plus d’informations.",
+      "errorIntro": "Impossible de charger les jeux de cartes !",
+      "noValidDecks": "Impossible de charger des jeux de cartes valides depuis l’index indiqué.",
+      "failedToFetchIndex": "Impossible de récupérer le fichier d’index des jeux de cartes.",
+      "failedToFetchDeck": "Impossible de récupérer un jeu de cartes.",
+      "noDeckForCurrentLang": "Aucun jeu de cartes disponible dans la langue actuelle."
+    }
   },
   "about": {
     "title": "À propos"
+  },
+  "routing": {
+    "notFoundTitle": "Page introuvable",
+    "notFoundMessage": "La page demandée n’existe pas.",
+    "deckNotFoundTitle": "Jeu de cartes introuvable",
+    "deckNotFoundMessage": "Aucun jeu de cartes nommé « {{deckId}} » n’est disponible dans la langue sélectionnée.",
+    "cardNotFoundTitle": "Carte introuvable",
+    "cardNotFoundMessage": "Aucune carte nommée « {{cardId}} » n’existe dans {{deckTitle}}.",
+    "backToDeckSelection": "Retour à la sélection des jeux de cartes"
   },
   "toast": {
     "noDecksForLang": "Aucun jeu de cartes disponible pour la langue {{lang}}",
