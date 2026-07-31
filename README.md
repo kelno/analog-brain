@@ -54,6 +54,23 @@ npm install
 npm run dev
 ```
 
+## End-to-end tests
+
+The Playwright suite builds the production app, starts a local preview server, and runs the tests in Chromium. Install the browser once on each development or CI machine:
+
+```bash
+cd analog-brain-tool
+npx playwright install chromium
+```
+
+Run the suite with:
+
+```bash
+npm run test:e2e
+```
+
+The HTML report is written to `analog-brain-tool/playwright-report`.
+
 # Deploy in GitHub pages
 
 1 - Make sure the base is correct in vite.config.js  
