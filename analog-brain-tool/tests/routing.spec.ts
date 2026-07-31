@@ -101,4 +101,25 @@ test.describe('routing', () => {
       .poll(() => page.evaluate(() => sessionStorage.getItem('sharedUrl')))
       .toBe(`http://127.0.0.1:4173/analog-brain/#${firstCardPath}?lang=en`);
   });
+
+  test('changing the deck source closes the active deck', async ({ page }) => {
+    await page.goto(`#${firstCardPath}?lang=en`);
+    await page.getByRole('button', { name: 'Other options' }).click();
+
+    const deckSourceInput = page.getByRole('textbox', { name: 'External deck data source:' });
+    const defaultIndexUrl = 'http://127.0.0.1:4173/analog-brain/decks/index.json';
+
+    await deckSourceInput.fill(defaultIndexUrl);
+    await page.getByRole('button', { name: 'Save' }).click();
+    await expect(page).toHaveURL(routeUrl(firstCardPath));
+
+    await deckSourceInput.fill(`${defaultIndexUrl}?source=alternate`);
+    await page.getByRole('button', { name: 'Save' }).click();
+
+    await expect(page).toHaveURL(/#\/$/);
+    await expect(page.getByRole('heading', { name: 'Original Analog Brain' })).toBeVisible();
+    await expect
+      .poll(() => page.evaluate(() => localStorage.getItem('chosenDeck')))
+      .toBeNull();
+  });
 });

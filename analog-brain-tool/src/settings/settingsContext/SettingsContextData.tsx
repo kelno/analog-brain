@@ -22,9 +22,21 @@ export class SettingsContextData {
     this._defaultUrl = defaultUrl;
   }
 
-  public setIndexUrl = (url: string) => {
-    PersistentStorageManager.set(PersistentStorageTypes.DECK_INDEX_URL, url);
+  private updateIndexUrl = (url: string): boolean => {
+    if (url === this._state.indexUrl) return false;
+
+    // A selected deck belongs to the source that provided it and must not be
+    // restored against a different index merely because the IDs happen to match.
+    PersistentStorageManager.remove(PersistentStorageTypes.CHOSEN_DECK);
     this._setState({ ...this._state, indexUrl: url });
+    return true;
+  };
+
+  public setIndexUrl = (url: string): boolean => {
+    if (url === this._state.indexUrl) return false;
+
+    PersistentStorageManager.set(PersistentStorageTypes.DECK_INDEX_URL, url);
+    return this.updateIndexUrl(url);
   };
 
   public get indexUrl(): string {
@@ -35,9 +47,9 @@ export class SettingsContextData {
     return this._state.indexUrl === this._defaultUrl;
   }
 
-  public resetIndexUrl = () => {
+  public resetIndexUrl = (): boolean => {
     PersistentStorageManager.remove(PersistentStorageTypes.DECK_INDEX_URL);
-    this._setState({ ...this._state, indexUrl: this.defaultUrl });
+    return this.updateIndexUrl(this.defaultUrl);
   };
 
   public get defaultUrl(): string {

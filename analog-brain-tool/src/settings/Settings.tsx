@@ -5,11 +5,13 @@ import { About } from '../components/About';
 import { Button } from '../components/Button';
 import { LanguageSwitcher } from './LanguageSwitcher';
 import { ThemeSwitcher } from './ThemeSwitcher';
+import { useNavigate } from 'react-router';
 
 export const Settings: React.FC = () => {
   const { indexUrl, defaultUrl, setIndexUrl, resetIndexUrl } = useSettings();
   const isDefaultUrl = indexUrl === defaultUrl;
   const [inputURL, setInputUrl] = useState(isDefaultUrl ? '' : indexUrl);
+  const navigate = useNavigate();
 
   const { t } = useTranslation();
 
@@ -18,12 +20,14 @@ export const Settings: React.FC = () => {
   };
 
   const handleSave = () => {
-    if (inputURL) setIndexUrl(inputURL);
+    const newIndexUrl = inputURL.trim();
+    if (newIndexUrl && setIndexUrl(newIndexUrl)) navigate('/', { replace: true });
   };
 
   const handleReset = () => {
-    resetIndexUrl();
+    const sourceChanged = resetIndexUrl();
     setInputUrl('');
+    if (sourceChanged) navigate('/', { replace: true });
   };
 
   return (
@@ -33,8 +37,11 @@ export const Settings: React.FC = () => {
       <ThemeSwitcher />
       <div className="space-y-4">
         <div className="flex flex-col">
-          <label className="text-sm font-medium mb-2">{t('settings.decksURL')}</label>
+          <label htmlFor="deck-index-url" className="text-sm font-medium mb-2">
+            {t('settings.decksURL')}
+          </label>
           <input
+            id="deck-index-url"
             type="text"
             value={inputURL}
             onChange={handleUrlChange}
