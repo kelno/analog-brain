@@ -2,12 +2,13 @@ import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import './index.css';
 import { App } from './App.tsx';
-import { BrowserRouter } from 'react-router';
+import { HashRouter } from 'react-router';
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <BrowserRouter basename={import.meta.env.BASE_URL}>
+    {/* Hash-based routes keep deep links client-side so static hosts only need to serve index.html. */}
+    <HashRouter>
       <App />
-    </BrowserRouter>
+    </HashRouter>
   </StrictMode>,
 );
