@@ -62,10 +62,7 @@ const DeckContextCore: React.FC<{
 }> = ({ children, deck }) => {
   console.debug('Rendering DeckContextCore');
 
-  const urlCurrentCard = null; //UrlManager.consumeParam(UrlParams.CARD);
-  // TODO: validate card from the URL
-
-  const defaultCardId = urlCurrentCard ?? deck.cards[0].id;
+  const defaultCardId = deck.cards[0].id;
 
   const [deckState, setDeckState] = useState<DeckContextState>({
     cardHistory: new Stack<CardId>([defaultCardId]),
