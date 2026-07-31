@@ -11,7 +11,34 @@ Implemented in React Typescript with Tailwind.
 
 # How to
 ## Managing Decks
-The default decks are located in `public/decks` directory. You can either edit those or load new decks from a different URL. This can be configured in the UI.  
+The default decks are located in the `public/decks` directory. You can either edit those or load decks from a different URL. This can be configured in the UI.
+
+### Loading decks with `deck_url`
+
+Use the `deck_url` query parameter to open the app with a specific deck index:
+
+```text
+https://your-app.example/#/?deck_url=https%3A%2F%2Fcards.example%2Fdecks%2Findex.json
+```
+
+Because the app uses hash-based routing, the parameter must appear after `#/`. URL-encode the value before adding it to the link. For example, the encoded value above represents:
+
+```text
+https://cards.example/decks/index.json
+```
+
+`deck_url` must point to an index JSON file, not directly to a deck. Its `files` entries are resolved relative to the index file:
+
+```json
+{
+  "files": [
+    "data/my_deck.jsonc",
+    "data/my_deck_fr.jsonc"
+  ]
+}
+```
+
+When the index is hosted on another origin, its server must allow cross-origin requests for both the index and its deck files. Opening a `deck_url` link saves that index as the browser's selected deck source; it can be changed or reset from the app settings. Share links include the selected `deck_url` when it differs from the built-in default.
 
 ## Add/Remove a language
 Available language are automatically computed from the decks.  
