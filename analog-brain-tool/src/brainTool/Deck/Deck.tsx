@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { Card } from '../Card/Card';
 import { useDeckContext } from './useDeckContext';
 import { useTranslation } from 'react-i18next';
@@ -19,6 +20,22 @@ export const Deck = () => {
   if (currentCardData === undefined) {
     console.error('Deck: Card not found in deck', context.currentCardId, context.deck.cards);
   }
+
+  const appTitle = t('pageTitle');
+  const cardTitle = currentCardData?.title;
+  const deckTitle = context.deck.title;
+
+  useEffect(() => {
+    if (!cardTitle) return;
+
+    // Content comes first because browser tabs and bookmark lists commonly
+    // truncate the end of long titles.
+    document.title = `${cardTitle} – ${deckTitle} – ${appTitle}`;
+
+    return () => {
+      document.title = appTitle;
+    };
+  }, [appTitle, cardTitle, deckTitle]);
 
   const handleClickClose = () => {
     brainContext.closeDeck();

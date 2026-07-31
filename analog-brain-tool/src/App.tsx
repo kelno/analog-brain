@@ -3,7 +3,7 @@ import { Toaster } from 'sonner';
 import './i18n';
 import { useTranslation } from 'react-i18next';
 import { ErrorBoundary } from './components/ErrorBoundary';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { BrainToolContainer } from './brainTool/BrainToolContainer';
 import { SettingsProvider } from './settings/settingsContext/SettingsProvider';
@@ -45,13 +45,11 @@ export function App() {
 
   themeManager.initialize();
 
-  const setPageTitle = () => {
-    document.title = t(`pageTitle`);
-  };
-
-  useEffect(() => {
-    setPageTitle();
-  });
+  const pageTitle = t('pageTitle');
+  // Establish the localized base before routed views refine it with content details.
+  useLayoutEffect(() => {
+    document.title = pageTitle;
+  }, [pageTitle]);
 
   useEffect(() => {
     // Query options only initialize app state; repeating this replacement after
