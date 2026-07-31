@@ -3,7 +3,7 @@ import { Toaster } from 'sonner';
 import './i18n';
 import { useTranslation } from 'react-i18next';
 import { ErrorBoundary } from './components/ErrorBoundary';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { BrainToolContainer } from './brainTool/BrainToolContainer';
 import { SettingsProvider } from './settings/settingsContext/SettingsProvider';
@@ -26,6 +26,7 @@ export function App() {
   const { t } = useTranslation();
   const themeManager = useThemeManager(); // make sure it's loaded already
   const [searchParams, setSearchParams] = useSearchParams();
+  const initialSearchWasCleared = useRef(false);
   const [initialUrlOptions] = useState(() => {
     const remainingSearchParams = new URLSearchParams(searchParams);
     const language = remainingSearchParams.get(UrlParams.LANG);
@@ -53,7 +54,10 @@ export function App() {
   });
 
   useEffect(() => {
-    if (initialUrlOptions.shouldReplaceSearch) {
+    // Query options only initialize app state; repeating this replacement after
+    // route changes would discard the decision trail stored on that history entry.
+    if (!initialSearchWasCleared.current && initialUrlOptions.shouldReplaceSearch) {
+      initialSearchWasCleared.current = true;
       setSearchParams(initialUrlOptions.remainingSearch, { replace: true });
     }
   }, [initialUrlOptions, setSearchParams]);

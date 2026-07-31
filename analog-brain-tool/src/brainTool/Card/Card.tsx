@@ -1,15 +1,11 @@
 import { FC } from 'react';
-import { ICard, CardId, ICardItem } from '../../types/Card/ICard';
+import { ICard, ICardItem } from '../../types/Card/ICard';
 import { CardItem } from './CardItem';
 import { useShare } from '../../share/useShare';
 import { SimpleIconButton } from '../../components/SimpleIconButton';
 import { useTranslation } from 'react-i18next';
 import { Share2 } from 'lucide-react';
 import { processTextContent } from '../../utils/TextProcessing';
-import { useDeckContext } from '../Deck/useDeckContext';
-import { useNavigate } from 'react-router';
-import { getCardPath } from '../routing/routePaths';
-import { getNextCardRouteState } from '../routing/cardRouteState';
 
 interface CardProps {
   card: ICard | undefined;
@@ -17,18 +13,10 @@ interface CardProps {
 
 export const Card: FC<CardProps> = ({ card }) => {
   const { shareCurrentRoute } = useShare();
-  const context = useDeckContext();
   const { t } = useTranslation();
-  const navigate = useNavigate();
 
   const handleShare = () => {
     shareCurrentRoute();
-  };
-
-  const handleClickCard = (cardId: CardId) => {
-    navigate(getCardPath(context.deck.id, cardId), {
-      state: getNextCardRouteState(context.previousCardIds, context.currentCardId),
-    });
   };
 
   return (
@@ -44,11 +32,7 @@ export const Card: FC<CardProps> = ({ card }) => {
             <ul className="mt-4 space-y-2">
               {/* Deck content is immutable at runtime, so position is stable until card items have IDs. */}
               {card.items.map((cardItem: ICardItem, index) => (
-                <CardItem
-                  key={`${card.id}-item-${index}`}
-                  cardItem={cardItem}
-                  handleClickCard={handleClickCard}
-                />
+                <CardItem key={`${card.id}-item-${index}`} cardItem={cardItem} />
               ))}
             </ul>
           </div>
