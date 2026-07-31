@@ -47,5 +47,3 @@ export interface IDeck {
   */
   cards: ICard[];
 }
-
-export default IDeck; 

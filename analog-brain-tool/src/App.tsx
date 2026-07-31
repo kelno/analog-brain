@@ -9,7 +9,7 @@ import { BrainToolContainer } from './brainTool/BrainToolContainer';
 import { SettingsProvider } from './settings/settingsContext/SettingsProvider';
 import { Header } from './header/Header';
 import { AppContextProvider } from './appContext/AppContextProvider';
-import useThemeManager from './theme/useThemeManager';
+import { useThemeManager } from './theme/useThemeManager';
 import { useSearchParams } from 'react-router';
 import { UrlParams } from './utils/UrlManager/UrlParams';
 

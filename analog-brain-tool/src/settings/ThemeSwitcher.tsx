@@ -1,6 +1,6 @@
 import { useTranslation } from 'react-i18next';
 import Switch from 'react-switch';
-import useThemeManager, { Theme } from '../theme/useThemeManager';
+import { Theme, useThemeManager } from '../theme/useThemeManager';
 
 // Doc for the react-switch API https://www.npmjs.com/package/react-switch
 

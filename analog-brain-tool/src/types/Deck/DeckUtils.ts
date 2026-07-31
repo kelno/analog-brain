@@ -1,5 +1,5 @@
 import { ICard } from "../Card";
-import IDeck from "./IDeck";
+import { IDeck } from './IDeck';
 
 export const DeckUtils = {
   findCard: (deck: IDeck, cardId: string): ICard | undefined => {

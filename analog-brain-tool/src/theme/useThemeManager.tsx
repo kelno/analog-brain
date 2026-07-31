@@ -13,7 +13,7 @@ export interface ThemeManager {
   initialize: () => void;
 }
 
-const useThemeManager = (): ThemeManager => {
+export const useThemeManager = (): ThemeManager => {
   // Get the browser's preferred color scheme
   const getBrowserColorScheme = (): Theme => {
     return window.matchMedia('(prefers-color-scheme: dark)').matches ? Theme.DARK : Theme.LIGHT;
@@ -68,5 +68,3 @@ const useThemeManager = (): ThemeManager => {
 
   return { theme, switchTheme, initialize };
 };
-
-export default useThemeManager;
